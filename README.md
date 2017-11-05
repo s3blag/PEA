@@ -4,7 +4,7 @@
 2. Przeszukanie wszystkich wierszy i znalezienie dla każdego najmniejszej wartości
 3. Odjęcie wartości od danych wierszy
 4. Krok 1 i 2 dla kolumn
-5. Zaktualizowanie najmniejszej wartości kresu dolnego
+5. Zaktualizowanie wartości kresu dolnego
 6. Określenie kolejnego wierzchołka względem którego będziemy dzielić macierz
 7. Wyliczenie najwyższego optymistycznego kosztu wyłączenia.
 8. Podział macierzy
