@@ -84,5 +84,52 @@ namespace Project_1
             return reductionLevel;
         }
 
+        private static int[] ExcludeNode(Tuple<int, int[]>[,] matrix)
+        {
+            int currentMaxCost = 0;
+            int[] currentSolution = new int[2];
+
+            for (int i = 0; i < matrix.GetLength(1); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(0); j++)
+                {
+                    if (matrix[i, j].Item1 == 0)
+                    {
+                        if (FindMaxExlusionCost(matrix, i, j) > currentMaxCost)
+                        {
+                            currentSolution[0] = i;
+                            currentSolution[1] = j;
+                        }
+                    }
+                }                 
+            }
+
+            return currentSolution;
+        }
+
+        private static int FindMaxExlusionCost(Tuple<int, int[]>[,] matrix, int row, int column)
+        {
+            int currentMinCost = INF;
+            int totalCost = 0;
+
+            for (int i = 0; i < matrix.GetLength(1); i++)
+            {
+                if (matrix[row, i].Item1 < currentMinCost)
+                    currentMinCost = matrix[row, i].Item1;
+            }
+
+            totalCost += currentMinCost;
+            currentMinCost = INF;
+
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                if (matrix[i, column].Item1 < currentMinCost)
+                    currentMinCost = matrix[i, column].Item1;
+            }
+
+            totalCost += currentMinCost;
+
+            return totalCost;
+        }
     }
 }
