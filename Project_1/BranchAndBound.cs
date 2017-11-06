@@ -10,13 +10,36 @@ namespace Project_1
     {
         private const int INF = Int32.MaxValue;
 
-        public static int[,] ReduceMatrix(int[,] matrix)
+        struct Node
+        {
+            Tuple<int, int[]>[,] matrix;
+            int lowerBound;
+            List<Tuple<int, int[]>> excludedCities;
+
+            public Node(Tuple<int, int[]>[,] newMatrix, int newLowerBound, List<Tuple<int, int[]>> newExcludedCities)
+            {
+                matrix = newMatrix;
+                lowerBound = newLowerBound;
+                excludedCities = newExcludedCities;
+            }
+        }
+
+        private static int[,] ReduceMatrix(int[,] matrix)
         {
             int reductionLevel = 0;
             reductionLevel += ReduceRow(matrix);
             reductionLevel += ReduceColumn(matrix);
             Console.WriteLine(reductionLevel);
             return matrix;
+        }
+
+        private static int GetLowerBound(int[,] matrix)
+        {
+            int reductionLevel = 0;
+            reductionLevel += ReduceRow(matrix);
+            reductionLevel += ReduceColumn(matrix);
+
+            return reductionLevel;
         }
 
         private static int ReduceRow(int[,] matrix)
@@ -84,7 +107,7 @@ namespace Project_1
             return reductionLevel;
         }
 
-        private static int[] ExcludeNode(Tuple<int, int[]>[,] matrix)
+        private static int[] ExcludeCity(Tuple<int, int[]>[,] matrix)
         {
             int currentMaxCost = 0;
             int[] currentSolution = new int[2];
@@ -131,5 +154,32 @@ namespace Project_1
 
             return totalCost;
         }
+
+        public static List<Tuple<int, int[]>> RunAlgorithm(int[,] matrix)
+        {
+            List<Tuple<int, int[]>> solution = new List<Tuple<int, int[]>>();
+            Node firstNode = new Node(PrepareMatrix(matrix), GetLowerBound(matrix), new List<Tuple<int, int[]>>());
+
+            return solution;
+        }
+
+        private static Tuple<int, int[]>[,] PrepareMatrix(int[,] matrix)
+        {
+            int matrixLength = matrix.GetLength(0);
+            Tuple<int, int[]>[,] preparedMatrix = new Tuple<int, int[]>[matrixLength, matrixLength];
+
+            for (int i = 0; i < matrixLength; i++)
+            {
+                for (int j = 0; i < matrixLength; j++)
+                {
+                    preparedMatrix[i, j] = new Tuple<int, int[]>(matrix[i, j], new int[2]);
+                    preparedMatrix[i, j].Item2[0] = i;
+                    preparedMatrix[i, j].Item2[0] = j;
+                }
+            }
+
+            return preparedMatrix;
+        }
+
     }
 }
