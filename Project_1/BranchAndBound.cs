@@ -12,15 +12,17 @@ namespace Project_1
 
         public static int[,] ReduceMatrix(int[,] matrix)
         {
-            ReduceRow(matrix);
-            ReduceColumn(matrix);
-
+            int reductionLevel = 0;
+            reductionLevel += ReduceRow(matrix);
+            reductionLevel += ReduceColumn(matrix);
+            Console.WriteLine(reductionLevel);
             return matrix;
         }
 
-        private static void ReduceRow(int[,] matrix)
+        private static int ReduceRow(int[,] matrix)
         {
             int min;
+            int reductionLevel = 0;
 
             for (int i = 0; i < 4; i++)
             {
@@ -36,17 +38,24 @@ namespace Project_1
                 }
 
                 if (min != 0)
+                {
                     for (int j = 0; j < 4; j++)
                     {
                         if (matrix[i, j] != INF)
                             matrix[i, j] -= min;
                     }
+
+                    reductionLevel += min;
+                }
+                    
             }
+            return reductionLevel;
         }
 
-        private static void ReduceColumn(int[,] matrix)
+        private static int ReduceColumn(int[,] matrix)
         {
             int min;
+            int reductionLevel = 0;
 
             for (int i = 0; i < 4; i++)
             {
@@ -62,12 +71,17 @@ namespace Project_1
                 }
 
                 if (min != 0)
+                {
                     for (int j = 0; j < 4; j++)
                     {
                         if (matrix[j, i] != INF)
                             matrix[j, i] -= min;
                     }
+
+                    reductionLevel += min;
+                }
             }
+            return reductionLevel;
         }
 
     }
