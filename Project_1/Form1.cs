@@ -35,7 +35,7 @@ namespace Project_1
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
-        {
+        {   
             stopWatch.Start();
             textBox1.Text = "Start! ";
 

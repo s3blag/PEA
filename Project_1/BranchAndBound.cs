@@ -8,6 +8,6 @@ namespace Project_1
 {
     abstract class BranchAndBound
     {
-
+      
     }
 }
