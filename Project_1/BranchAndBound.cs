@@ -28,7 +28,7 @@ namespace Project_1
             {
                 min = INF;
 
-                for (int j = 0; j < matrix.GetLength(0); j++)
+                for (int j = 0; j < matrix.GetLength(1); j++)
                 {
 
                     if (matrix[i, j] < min)
@@ -39,7 +39,7 @@ namespace Project_1
 
                 if (min != 0)
                 {
-                    for (int j = 0; j < matrix.GetLength(0); j++)
+                    for (int j = 0; j < matrix.GetLength(1); j++)
                     {
                         if (matrix[i, j] != INF)
                             matrix[i, j] -= min;
@@ -57,7 +57,7 @@ namespace Project_1
             int min;
             int reductionLevel = 0;
 
-            for (int i = 0; i < matrix.GetLength(0); i++)
+            for (int i = 0; i < matrix.GetLength(1); i++)
             {
                 min = INF;
 
