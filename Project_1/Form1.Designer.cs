@@ -38,6 +38,7 @@
             this.textBoxNumberOfCities = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.buttonTest = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonStart
@@ -125,11 +126,22 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Otwórz plik:";
             // 
+            // buttonTest
+            // 
+            this.buttonTest.Location = new System.Drawing.Point(112, 451);
+            this.buttonTest.Name = "buttonTest";
+            this.buttonTest.Size = new System.Drawing.Size(75, 23);
+            this.buttonTest.TabIndex = 7;
+            this.buttonTest.Text = "Test";
+            this.buttonTest.UseVisualStyleBackColor = true;
+            this.buttonTest.Click += new System.EventHandler(this.buttonTest_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(445, 553);
+            this.Controls.Add(this.buttonTest);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxNumberOfCities);
@@ -159,6 +171,7 @@
         private System.Windows.Forms.TextBox textBoxNumberOfCities;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button buttonTest;
     }
 }
 

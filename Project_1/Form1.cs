@@ -81,12 +81,42 @@ namespace Project_1
             catch (Exception exception)
             {
                 MessageBox.Show("Nie można wygenerować miast! Błąd: " + exception.Message);
-            }
-
-           
-           
+            }      
         }
 
-        
+        private void buttonTest_Click(object sender, EventArgs e)
+        {
+            int[,] testMatrix = new int[,] { { Int32.MaxValue, 2, 7, 3 },
+                                         { 7, Int32.MaxValue, 8, 5 },
+                                         { 9, 4, Int32.MaxValue, 6 },
+                                         { 3, 8, 5, Int32.MaxValue } };
+            try
+            {
+                BranchAndBound.ReduceMatrix(testMatrix);
+                Tuple<int, int[]>[,] preparedMatrix = BranchAndBound.PrepareMatrix(testMatrix);
+                int[] solution = BranchAndBound.ExcludeCity(preparedMatrix);
+                MessageBox.Show(solution[0].ToString() + " " + solution[1].ToString());
+                /* int[,] matrix = BranchAndBound.ReduceMatrix(testMatrix);
+                 string matrixString = "";
+                 for (int i = 0; i < matrix.GetLength(0); i++)
+                 {
+                     for (int j = 0; j < matrix.GetLength(1); j++)
+                     {
+                         if (matrix[i, j] != INF)
+                             matrixString += matrix[i, j].ToString();
+                         else
+                             matrixString += "INF";
+                         matrixString += "  ";
+                     }
+
+                     matrixString += Environment.NewLine;
+                 }
+                 this.textBox1.Text = matrixString; */
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Błąd: " + exception.Message);
+            }
+        }
     }
 }
