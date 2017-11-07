@@ -96,7 +96,7 @@ namespace Project_1
                 Tuple<int, int[]>[,] preparedMatrix = BranchAndBound.PrepareMatrix(testMatrix);
                 int[] solution = BranchAndBound.ExcludeCity(preparedMatrix);
                 MessageBox.Show(solution[0].ToString() + " " + solution[1].ToString());
-                /* int[,] matrix = BranchAndBound.ReduceMatrix(testMatrix);
+                int[,] matrix = BranchAndBound.ReduceMatrix(testMatrix);
                  string matrixString = "";
                  for (int i = 0; i < matrix.GetLength(0); i++)
                  {
@@ -111,7 +111,7 @@ namespace Project_1
 
                      matrixString += Environment.NewLine;
                  }
-                 this.textBox1.Text = matrixString; */
+                 this.textBox1.Text = matrixString; 
             }
             catch (Exception exception)
             {
