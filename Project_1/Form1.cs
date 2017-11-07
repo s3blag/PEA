@@ -92,22 +92,26 @@ namespace Project_1
                                          { 3, 8, 5, Int32.MaxValue } };
             try
             {
-                int[,] matrix = BranchAndBound.ReduceMatrix(testMatrix);
-                string matrixString = "";
-                for (int i = 0; i < matrix.GetLength(0); i++)
-                {
-                    for (int j = 0; j < matrix.GetLength(1); j++)
-                    {
-                        if (matrix[i, j] != INF)
-                            matrixString += matrix[i, j].ToString();
-                        else
-                            matrixString += "INF";
-                        matrixString += "  ";
-                    }
+                BranchAndBound.ReduceMatrix(testMatrix);
+                Tuple<int, int[]>[,] preparedMatrix = BranchAndBound.PrepareMatrix(testMatrix);
+                int[] solution = BranchAndBound.ExcludeCity(preparedMatrix);
+                MessageBox.Show(solution[0].ToString() + " " + solution[1].ToString());
+                /* int[,] matrix = BranchAndBound.ReduceMatrix(testMatrix);
+                 string matrixString = "";
+                 for (int i = 0; i < matrix.GetLength(0); i++)
+                 {
+                     for (int j = 0; j < matrix.GetLength(1); j++)
+                     {
+                         if (matrix[i, j] != INF)
+                             matrixString += matrix[i, j].ToString();
+                         else
+                             matrixString += "INF";
+                         matrixString += "  ";
+                     }
 
-                    matrixString += Environment.NewLine;
-                }
-                this.textBox1.Text = matrixString;
+                     matrixString += Environment.NewLine;
+                 }
+                 this.textBox1.Text = matrixString; */
             }
             catch (Exception exception)
             {
