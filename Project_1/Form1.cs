@@ -96,14 +96,14 @@ namespace Project_1
                 Tuple<int, int[]>[,] preparedMatrix = BranchAndBound.PrepareMatrix(testMatrix);
                 int[] solution = BranchAndBound.ExcludeCity(preparedMatrix);
                 MessageBox.Show(solution[0].ToString() + " " + solution[1].ToString());
-                int[,] matrix = BranchAndBound.ReduceMatrix(testMatrix);
+                BranchAndBound.ReduceMatrix(testMatrix);
                  string matrixString = "";
-                 for (int i = 0; i < matrix.GetLength(0); i++)
+                 for (int i = 0; i < testMatrix.GetLength(0); i++)
                  {
-                     for (int j = 0; j < matrix.GetLength(1); j++)
+                     for (int j = 0; j < testMatrix.GetLength(1); j++)
                      {
-                         if (matrix[i, j] != INF)
-                             matrixString += matrix[i, j].ToString();
+                         if (testMatrix[i, j] != INF)
+                             matrixString += testMatrix[i, j].ToString();
                          else
                              matrixString += "INF";
                          matrixString += "  ";

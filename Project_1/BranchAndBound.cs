@@ -23,17 +23,8 @@ namespace Project_1
                 excludedCities = newExcludedCities;
             }
         }
-
-        public static int[,] ReduceMatrix(int[,] matrix)
-        {
-            int reductionLevel = 0;
-            reductionLevel += ReduceRow(matrix);
-            reductionLevel += ReduceColumn(matrix);
-            Console.WriteLine(reductionLevel);
-            return matrix;
-        }
-
-        private static int GetLowerBound(int[,] matrix)
+        //zmienic potem na private
+        public static int ReduceMatrix(int[,] matrix)
         {
             int reductionLevel = 0;
             reductionLevel += ReduceRow(matrix);
@@ -112,9 +103,9 @@ namespace Project_1
             int currentMaxCost = 0;
             int[] currentSolution = new int[2];
 
-            for (int i = 0; i < matrix.GetLength(1); i++)
+            for (int i = 0; i < matrix.GetLength(0); i++)
             {
-                for (int j = 0; j < matrix.GetLength(0); j++)
+                for (int j = 0; j < matrix.GetLength(1); j++)
                 {
                     if (matrix[i, j].Item1 == 0)
                     {
@@ -164,7 +155,7 @@ namespace Project_1
         public static List<Tuple<int, int[]>> RunAlgorithm(int[,] matrix)
         {
             List<Tuple<int, int[]>> solution = new List<Tuple<int, int[]>>();
-            Node firstNode = new Node(PrepareMatrix(matrix), GetLowerBound(matrix), new List<Tuple<int, int[]>>());
+            Node firstNode = new Node(PrepareMatrix(matrix), ReduceMatrix(matrix), new List<Tuple<int, int[]>>());
 
             return solution;
         }
