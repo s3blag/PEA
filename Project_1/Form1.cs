@@ -86,31 +86,34 @@ namespace Project_1
 
         private void buttonTest_Click(object sender, EventArgs e)
         {
-            int[,] testMatrix = new int[,] { { Int32.MaxValue, 2, 7, 3 },
-                                         { 7, Int32.MaxValue, 8, 5 },
-                                         { 9, 4, Int32.MaxValue, 6 },
-                                         { 3, 8, 5, Int32.MaxValue } };
+            int[,] testMatrix = new int[,] { { INF, 2, 7, 3 },
+                                             { 7, INF, 8, 5 },
+                                             { 9, 4, INF, 6 },
+                                             { 3, 8, 5, INF}};
             try
-            {
-                BranchAndBound.ReduceMatrix(testMatrix);
-                Tuple<int, int[]>[,] preparedMatrix = BranchAndBound.PrepareMatrix(testMatrix);
-                int[] solution = BranchAndBound.ExcludeCity(preparedMatrix);
-                MessageBox.Show(solution[0].ToString() + " " + solution[1].ToString());
-                BranchAndBound.ReduceMatrix(testMatrix);
-                 string matrixString = "";
-                 for (int i = 0; i < testMatrix.GetLength(0); i++)
-                 {
-                     for (int j = 0; j < testMatrix.GetLength(1); j++)
-                     {
-                         if (testMatrix[i, j] != INF)
-                             matrixString += testMatrix[i, j].ToString();
-                         else
-                             matrixString += "INF";
-                         matrixString += "  ";
-                     }
+            {   
 
-                     matrixString += Environment.NewLine;
-                 }
+
+                BranchAndBound.Pair<int, int[]>[,] preparedMatrix = BranchAndBound.PrepareMatrix(testMatrix);
+                BranchAndBound.ReduceMatrix(preparedMatrix);
+                int[] solution = BranchAndBound.DivideMatrix(preparedMatrix);
+                MessageBox.Show(solution[0].ToString() + " " + solution[1].ToString());
+
+              
+                string matrixString = "";
+                for (int i = 0; i < preparedMatrix.GetLength(0); i++)
+                {
+                    for (int j = 0; j < preparedMatrix.GetLength(1); j++)
+                    {
+                        if (testMatrix[i, j] != INF)
+                            matrixString += preparedMatrix[i, j].First.ToString();
+                        else
+                            matrixString += "INF";
+                        matrixString += "  ";
+                    }
+
+                matrixString += Environment.NewLine;
+                }
                  this.textBox1.Text = matrixString; 
             }
             catch (Exception exception)

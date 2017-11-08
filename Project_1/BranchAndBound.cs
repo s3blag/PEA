@@ -6,25 +6,45 @@ using System.Threading.Tasks;
 
 namespace Project_1
 {
+   
     abstract class BranchAndBound
     {
         private const int INF = Int32.MaxValue;
-
-        struct Node
+       //na private
+        public struct Node
         {
-            Tuple<int, int[]>[,] matrix;
+            Pair<int, int[]>[,] matrix;
             int lowerBound;
-            List<Tuple<int, int[]>> excludedCities;
+            List<Pair<int, int[]>> excludedCities;
 
-            public Node(Tuple<int, int[]>[,] newMatrix, int newLowerBound, List<Tuple<int, int[]>> newExcludedCities)
+            public Node(Pair<int, int[]>[,] newMatrix, int newLowerBound, List<Pair<int, int[]>> newExcludedCities)
             {
                 matrix = newMatrix;
                 lowerBound = newLowerBound;
                 excludedCities = newExcludedCities;
             }
         }
+
+        //na private
+        public class Pair<T, U>
+        {
+            public Pair()
+            {
+            }
+
+            public Pair(T first, U second)
+            {
+                this.First = first;
+                this.Second = second;
+            }
+
+            public T First { get; set; }
+            public U Second { get; set; }
+        };
+
+
         //zmienic potem na private
-        public static int ReduceMatrix(int[,] matrix)
+        public static int ReduceMatrix(Pair<int, int[]>[,] matrix)
         {
             int reductionLevel = 0;
             reductionLevel += ReduceRow(matrix);
@@ -33,7 +53,7 @@ namespace Project_1
             return reductionLevel;
         }
 
-        private static int ReduceRow(int[,] matrix)
+        private static int ReduceRow(Pair<int, int[]>[,] matrix)
         {
             int min;
             int reductionLevel = 0;
@@ -45,9 +65,9 @@ namespace Project_1
                 for (int j = 0; j < matrix.GetLength(1); j++)
                 {
 
-                    if (matrix[i, j] < min)
+                    if (matrix[i, j].First < min)
                     {
-                        min = matrix[i, j];
+                        min = matrix[i, j].First;
                     }
                 }
 
@@ -55,8 +75,8 @@ namespace Project_1
                 {
                     for (int j = 0; j < matrix.GetLength(1); j++)
                     {
-                        if (matrix[i, j] != INF)
-                            matrix[i, j] -= min;
+                        if (matrix[i, j].First != INF)
+                            matrix[i, j].First -= min;
                     }
 
                     reductionLevel += min;
@@ -66,7 +86,7 @@ namespace Project_1
             return reductionLevel;
         }
 
-        private static int ReduceColumn(int[,] matrix)
+        private static int ReduceColumn(Pair<int, int[]>[,] matrix)
         {
             int min;
             int reductionLevel = 0;
@@ -78,9 +98,9 @@ namespace Project_1
                 for (int j = 0; j < matrix.GetLength(0); j++)
                 {
 
-                    if (matrix[j, i] < min)
+                    if (matrix[j, i].First < min)
                     {
-                        min = matrix[j, i];
+                        min = matrix[j, i].First;
                     }
                 }
 
@@ -88,8 +108,8 @@ namespace Project_1
                 {
                     for (int j = 0; j < matrix.GetLength(0); j++)
                     {
-                        if (matrix[j, i] != INF)
-                            matrix[j, i] -= min;
+                        if (matrix[j, i].First != INF)
+                            matrix[j, i].First -= min;
                     }
 
                     reductionLevel += min;
@@ -98,19 +118,21 @@ namespace Project_1
             return reductionLevel;
         }
 
-        public static int[] ExcludeCity(Tuple<int, int[]>[,] matrix)
+        //zmienic na private
+        public static int[] DivideMatrix(Pair<int, int[]>[,] matrix)
         {
             int currentMaxCost = 0;
             int[] currentSolution = new int[2];
+            int currentCost;
 
             for (int i = 0; i < matrix.GetLength(0); i++)
             {
                 for (int j = 0; j < matrix.GetLength(1); j++)
                 {
-                    if (matrix[i, j].Item1 == 0)
+                    if (matrix[i, j].First == 0)
                     {
-                        int currentCost = FindMaxExlusionCost(matrix, i, j);
-                        if (FindMaxExlusionCost(matrix, i, j) > currentMaxCost)
+                        currentCost = FindMaxExclusionCost(matrix, i, j);
+                        if (FindMaxExclusionCost(matrix, i, j) > currentMaxCost)
                         {
                             currentSolution[0] = i;
                             currentSolution[1] = j;
@@ -120,10 +142,46 @@ namespace Project_1
                 }                 
             }
 
+
+           // DeleteRoad(matrix, currentSolution);
+
             return currentSolution;
         }
 
-        private static int FindMaxExlusionCost(Tuple<int, int[]>[,] matrix, int row, int column)
+        //Wychodzi poza zakres
+        private static Node DeleteRoad(Pair<int, int[]>[,] matrix, int[] coordinatesToDelete)
+        {
+            Pair<int, int[]>[,] newMatrix = new Pair<int, int[]>[matrix.GetLength(0) - 1, matrix.GetLength(1) - 1];
+
+            int newi = 0, newj = 0;
+
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    if (i == coordinatesToDelete[0])
+                        break;
+
+                    newi = i;
+                    newj = j;
+                    if (i > coordinatesToDelete[0])
+                        newi = i - 1;
+                    if (j > coordinatesToDelete[1])
+                        newj = j - 1;
+
+                    newMatrix[newi, newj] = matrix[i, j];
+                }
+            }
+
+           return new Node(newMatrix,0,null);
+        }
+
+        public static void BlockCity(Pair<int, int[]>[,] matrix)
+        {
+
+        }
+
+        private static int FindMaxExclusionCost(Pair<int, int[]>[,] matrix, int row, int column)
         {
             int currentMinCost = INF;
             int totalCost = 0;
@@ -132,8 +190,8 @@ namespace Project_1
             {
                 if (i == column)
                     continue;
-                if (matrix[row, i].Item1 < currentMinCost)
-                    currentMinCost = matrix[row, i].Item1;
+                if (matrix[row, i].First < currentMinCost)
+                    currentMinCost = matrix[row, i].First;
             }
 
             totalCost += currentMinCost;
@@ -143,8 +201,8 @@ namespace Project_1
             {
                 if (i == row)
                     continue;
-                if (matrix[i, column].Item1 < currentMinCost)
-                    currentMinCost = matrix[i, column].Item1;
+                if (matrix[i, column].First < currentMinCost)
+                    currentMinCost = matrix[i, column].First;
             }
 
             totalCost += currentMinCost;
@@ -152,26 +210,27 @@ namespace Project_1
             return totalCost;
         }
 
-        public static List<Tuple<int, int[]>> RunAlgorithm(int[,] matrix)
+        public static List<Pair<int, int[]>> RunAlgorithm(int[,] matrix)
         {
-            List<Tuple<int, int[]>> solution = new List<Tuple<int, int[]>>();
-            Node firstNode = new Node(PrepareMatrix(matrix), ReduceMatrix(matrix), new List<Tuple<int, int[]>>());
+            List<Pair<int, int[]>> tree = new List<Pair<int, int[]>>();
+            Pair<int, int[]>[,] preparedMatrix;
+            Node firstNode = new Node(preparedMatrix = PrepareMatrix(matrix), ReduceMatrix(preparedMatrix), new List<Pair<int, int[]>>());
 
-            return solution;
+            return tree;
         }
 
-        public static Tuple<int, int[]>[,] PrepareMatrix(int[,] matrix)
+        public static Pair<int, int[]>[,] PrepareMatrix(int[,] matrix)
         {
             int matrixLength = matrix.GetLength(0);
-            Tuple<int, int[]>[,] preparedMatrix = new Tuple<int, int[]>[matrixLength, matrixLength];
+            Pair<int, int[]>[,] preparedMatrix = new Pair<int, int[]>[matrixLength, matrixLength];
 
             for (int i = 0; i < matrixLength; i++)
             {
                 for (int j = 0; j < matrixLength; j++)
                 {
-                    preparedMatrix[i, j] = new Tuple<int, int[]>(matrix[i, j], new int[2]);
-                    preparedMatrix[i, j].Item2[0] = i;
-                    preparedMatrix[i, j].Item2[0] = j;
+                    preparedMatrix[i, j] = new Pair<int, int[]>(matrix[i, j], new int[2]);
+                    preparedMatrix[i, j].Second[0] = i;
+                    preparedMatrix[i, j].Second[0] = j;
                 }
             }
            
