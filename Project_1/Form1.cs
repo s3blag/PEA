@@ -96,7 +96,7 @@ namespace Project_1
 
                 BranchAndBound.Pair<int, int[]>[,] preparedMatrix = BranchAndBound.PrepareMatrix(testMatrix);
                 BranchAndBound.ReduceMatrix(preparedMatrix);
-               // BranchAndBound.Node node = BranchAndBound.DivideMatrix(preparedMatrix);
+                BranchAndBound.Pair<BranchAndBound.Node, BranchAndBound.Node> node = BranchAndBound.DivideMatrix(preparedMatrix);
                 //MessageBox.Show(solution[0].ToString() + " " + solution[1].ToString());
 
                 
@@ -117,17 +117,18 @@ namespace Project_1
                 matrixString += Environment.NewLine;
                 this.textBox1.Text += matrixString;
 
-               
-                /*
-                 * Wyswietlenie nowo powstalego node-a z DivideMatrix -> DeleteRoad
-                preparedMatrix = node.matrix;
+
+
+                // Wyswietlenie nowo powstalego node-a z DivideMatrix -> DeleteRoad
+                BranchAndBound.Pair<int, int[]>[,] firstNode = node.First.matrix;
                 matrixString = "";
-                for (int i = 0; i < preparedMatrix.GetLength(0); i++)
+                matrixString += Environment.NewLine;
+                for (int i = 0; i < firstNode.GetLength(0); i++)
                 {
-                    for (int j = 0; j < preparedMatrix.GetLength(1); j++)
+                    for (int j = 0; j < firstNode.GetLength(1); j++)
                     {
-                        if (preparedMatrix[i, j].First != INF)
-                            matrixString += preparedMatrix[i, j].First.ToString();
+                        if (firstNode[i, j].First != INF)
+                            matrixString += firstNode[i, j].First.ToString();
                         else
                             matrixString += "INF";
                         matrixString += "  ";
@@ -136,7 +137,27 @@ namespace Project_1
                     matrixString += Environment.NewLine;
                 }
                 this.textBox1.Text += matrixString;
-                */
+
+
+                // Wyswietlenie nowo powstalego node-a z DivideMatrix -> BlockRoad
+                BranchAndBound.Pair<int, int[]>[,] secondNode = node.Second.matrix;
+                matrixString = "";
+                matrixString += Environment.NewLine;
+                for (int i = 0; i < secondNode.GetLength(0); i++)
+                {
+                    for (int j = 0; j < secondNode.GetLength(1); j++)
+                    {
+                        if (secondNode[i, j].First != INF)
+                            matrixString += secondNode[i, j].First.ToString();
+                        else
+                            matrixString += "INF";
+                        matrixString += "  ";
+                    }
+
+                    matrixString += Environment.NewLine;
+                }
+                this.textBox1.Text += matrixString;
+
             }
             catch (Exception exception)
             {

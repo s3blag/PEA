@@ -121,7 +121,8 @@ namespace Project_1
         }
 
         //zmienic na private
-        public static int[] DivideMatrix(Pair<int, int[]>[,] matrix)
+        //public static int[] DivideMatrix(Pair<int, int[]>[,] matrix)
+        public static Pair<Node, Node> DivideMatrix(Pair<int, int[]>[,] matrix)
         {
             int currentMaxCost = 0;
             int[] currentSolution = new int[2];
@@ -146,8 +147,12 @@ namespace Project_1
 
             //obcieta macierz
             Node newNode1 = DeleteRoad(matrix, currentSolution);
+            Node newNode2 = BlockRoad(matrix, currentSolution);
 
-            return currentSolution;
+            Pair<Node, Node> nodes = new Pair<Node, Node>(newNode1, newNode2);
+            nodes.First = newNode1;
+            nodes.Second = newNode2;
+            return nodes;
         }
 
 
@@ -157,7 +162,6 @@ namespace Project_1
             Console.Write(coordinatesToDelete[0]);
             Console.Write(coordinatesToDelete[1] + " ");
             Console.Write(Environment.NewLine);
-
 
             int newi = 0, newj = 0;
 
@@ -178,17 +182,31 @@ namespace Project_1
                     if (j > coordinatesToDelete[1])
                         newj = j - 1;
 
-                    newMatrix[newi, newj] = matrix[i, j];
+                    if (i == coordinatesToDelete[1] && j == coordinatesToDelete[0])
+                        newMatrix[newi, newj] = new Pair<int, int[]>(INF, matrix[i, j].Second);
+                    else
+                        newMatrix[newi, newj] = new Pair<int, int[]>(matrix[i, j].First, matrix[i, j].Second);
                 }
             }
 
             //trzeba zawrzeć w tym lowerBound, liste usunietych miast -> wejsc o poziom wyzej = przejsc z funkcjami by obrabialy node, a nie matrix
-            return new Node(newMatrix,0,null);
+            return new Node(newMatrix, 0, null);
         }
 
-        public static void BlockCity(Pair<int, int[]>[,] matrix)
+        private static Node BlockRoad(Pair<int, int[]>[,] matrix, int[] coordinatesToDelete)
         {
+            Pair<int, int[]>[,] newMatrix = new Pair<int, int[]>[matrix.GetLength(0), matrix.GetLength(1)];
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    newMatrix[i, j] = new Pair<int, int[]>(matrix[i, j].First, matrix[i, j].Second);
+                }
+            }
 
+            newMatrix[coordinatesToDelete[0], coordinatesToDelete[1]].First = INF;
+
+            return new Node(newMatrix, 0, null);
         }
 
         private static int FindMaxExclusionCost(Pair<int, int[]>[,] matrix, int row, int column)
