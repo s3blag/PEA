@@ -96,16 +96,16 @@ namespace Project_1
 
                 BranchAndBound.Pair<int, int[]>[,] preparedMatrix = BranchAndBound.PrepareMatrix(testMatrix);
                 BranchAndBound.ReduceMatrix(preparedMatrix);
-                int[] solution = BranchAndBound.DivideMatrix(preparedMatrix);
-                MessageBox.Show(solution[0].ToString() + " " + solution[1].ToString());
+               // BranchAndBound.Node node = BranchAndBound.DivideMatrix(preparedMatrix);
+                //MessageBox.Show(solution[0].ToString() + " " + solution[1].ToString());
 
-              
+                
                 string matrixString = "";
                 for (int i = 0; i < preparedMatrix.GetLength(0); i++)
                 {
                     for (int j = 0; j < preparedMatrix.GetLength(1); j++)
                     {
-                        if (testMatrix[i, j] != INF)
+                        if (preparedMatrix[i, j].First != INF)
                             matrixString += preparedMatrix[i, j].First.ToString();
                         else
                             matrixString += "INF";
@@ -114,7 +114,29 @@ namespace Project_1
 
                 matrixString += Environment.NewLine;
                 }
-                 this.textBox1.Text = matrixString; 
+                matrixString += Environment.NewLine;
+                this.textBox1.Text += matrixString;
+
+               
+                /*
+                 * Wyswietlenie nowo powstalego node-a z DivideMatrix -> DeleteRoad
+                preparedMatrix = node.matrix;
+                matrixString = "";
+                for (int i = 0; i < preparedMatrix.GetLength(0); i++)
+                {
+                    for (int j = 0; j < preparedMatrix.GetLength(1); j++)
+                    {
+                        if (preparedMatrix[i, j].First != INF)
+                            matrixString += preparedMatrix[i, j].First.ToString();
+                        else
+                            matrixString += "INF";
+                        matrixString += "  ";
+                    }
+
+                    matrixString += Environment.NewLine;
+                }
+                this.textBox1.Text += matrixString;
+                */
             }
             catch (Exception exception)
             {

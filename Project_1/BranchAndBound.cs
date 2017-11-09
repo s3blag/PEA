@@ -4,16 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Project_1
 {
    
     abstract class BranchAndBound
     {
         private const int INF = Int32.MaxValue;
+
        //na private
         public struct Node
         {
-            Pair<int, int[]>[,] matrix;
+            public Pair<int, int[]>[,] matrix;
             int lowerBound;
             List<Pair<int, int[]>> excludedCities;
 
@@ -43,7 +45,7 @@ namespace Project_1
         };
 
 
-        //zmienic potem na private
+        //zmienic na private
         public static int ReduceMatrix(Pair<int, int[]>[,] matrix)
         {
             int reductionLevel = 0;
@@ -142,16 +144,20 @@ namespace Project_1
                 }                 
             }
 
-
-           // DeleteRoad(matrix, currentSolution);
+            //obcieta macierz
+            Node newNode1 = DeleteRoad(matrix, currentSolution);
 
             return currentSolution;
         }
 
-        //Wychodzi poza zakres
+
         private static Node DeleteRoad(Pair<int, int[]>[,] matrix, int[] coordinatesToDelete)
         {
             Pair<int, int[]>[,] newMatrix = new Pair<int, int[]>[matrix.GetLength(0) - 1, matrix.GetLength(1) - 1];
+            Console.Write(coordinatesToDelete[0]);
+            Console.Write(coordinatesToDelete[1] + " ");
+            Console.Write(Environment.NewLine);
+
 
             int newi = 0, newj = 0;
 
@@ -161,9 +167,12 @@ namespace Project_1
                 {
                     if (i == coordinatesToDelete[0])
                         break;
+                    if (j == coordinatesToDelete[1])
+                        continue;
 
                     newi = i;
                     newj = j;
+
                     if (i > coordinatesToDelete[0])
                         newi = i - 1;
                     if (j > coordinatesToDelete[1])
@@ -173,7 +182,8 @@ namespace Project_1
                 }
             }
 
-           return new Node(newMatrix,0,null);
+            //trzeba zawrzeć w tym lowerBound, liste usunietych miast -> wejsc o poziom wyzej = przejsc z funkcjami by obrabialy node, a nie matrix
+            return new Node(newMatrix,0,null);
         }
 
         public static void BlockCity(Pair<int, int[]>[,] matrix)
