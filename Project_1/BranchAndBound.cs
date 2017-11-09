@@ -16,8 +16,8 @@ namespace Project_1
         public struct Node
         {
             public Pair<int, int[]>[,] matrix;
-            int lowerBound;
-            List<Pair<int, int[]>> excludedCities;
+            public int lowerBound;
+            public List<Pair<int, int[]>> excludedCities;
 
             public Node(Pair<int, int[]>[,] newMatrix, int newLowerBound, List<Pair<int, int[]>> newExcludedCities)
             {
@@ -46,13 +46,14 @@ namespace Project_1
 
 
         //zmienic na private
-        public static int ReduceMatrix(Pair<int, int[]>[,] matrix)
+        public static void ReduceMatrix(Node node)
         {
+            Pair<int, int[]>[,] matrix = node.matrix;
             int reductionLevel = 0;
             reductionLevel += ReduceRow(matrix);
             reductionLevel += ReduceColumn(matrix);
 
-            return reductionLevel;
+            node.lowerBound += reductionLevel;
         }
 
         private static int ReduceRow(Pair<int, int[]>[,] matrix)
@@ -122,8 +123,9 @@ namespace Project_1
 
         //zmienic na private
         //public static int[] DivideMatrix(Pair<int, int[]>[,] matrix)
-        public static Pair<Node, Node> DivideMatrix(Pair<int, int[]>[,] matrix)
+        public static Pair<Node, Node> DivideMatrix(Node node)
         {
+            Pair<int, int[]>[,] matrix = node.matrix;
             int currentMaxCost = 0;
             int[] currentSolution = new int[2];
             int currentCost;
@@ -145,9 +147,10 @@ namespace Project_1
                 }                 
             }
 
+            
             //obcieta macierz
-            Node newNode1 = DeleteRoads(matrix, currentSolution);
-            Node newNode2 = BlockRoad(matrix, currentSolution);
+            Node newNode1 = DeleteRoads(node, currentSolution);
+            Node newNode2 = BlockRoad(node, currentSolution);
 
             Pair<Node, Node> nodes = new Pair<Node, Node>(newNode1, newNode2);
             nodes.First = newNode1;
@@ -156,8 +159,9 @@ namespace Project_1
         }
 
 
-        private static Node DeleteRoads(Pair<int, int[]>[,] matrix, int[] coordinatesToDelete)
+        private static Node DeleteRoads(Node node, int[] coordinatesToDelete)
         {
+            Pair<int, int[]>[,] matrix = node.matrix;
             Pair<int, int[]>[,] newMatrix = new Pair<int, int[]>[matrix.GetLength(0) - 1, matrix.GetLength(1) - 1];
             Console.Write(coordinatesToDelete[0]);
             Console.Write(coordinatesToDelete[1] + " ");
@@ -195,12 +199,17 @@ namespace Project_1
                 }
             }
 
+            Node newNode = new Node(newMatrix, node.lowerBound, new List<Pair<int, int[]>>());
+            for (int i = 0; i < node.excludedCities.Count; i++)
+                newNode.excludedCities.Add(node.excludedCities[i]);
+            newNode.excludedCities.Add(matrix[coordinatesToDelete[0], coordinatesToDelete[1]]);
             //trzeba zawrzeć w tym lowerBound, liste usunietych miast -> wejsc o poziom wyzej = przejsc z funkcjami by obrabialy node, a nie matrix
-            return new Node(newMatrix, 0, null);
+            return newNode;
         }
 
-        private static Node BlockRoad(Pair<int, int[]>[,] matrix, int[] coordinatesToDelete)
+        private static Node BlockRoad(Node node, int[] coordinatesToDelete)
         {
+            Pair<int, int[]>[,] matrix = node.matrix;
             Pair<int, int[]>[,] newMatrix = new Pair<int, int[]>[matrix.GetLength(0), matrix.GetLength(1)];
             for (int i = 0; i < matrix.GetLength(0); i++)
             {
@@ -248,12 +257,12 @@ namespace Project_1
         {
             List<Pair<int, int[]>> tree = new List<Pair<int, int[]>>();
             Pair<int, int[]>[,] preparedMatrix;
-            Node firstNode = new Node(preparedMatrix = PrepareMatrix(matrix), ReduceMatrix(preparedMatrix), new List<Pair<int, int[]>>());
+            //Node firstNode = new Node(preparedMatrix = PrepareMatrix(matrix), ReduceMatrix(preparedMatrix), new List<Pair<int, int[]>>());
 
             return tree;
         }
 
-        public static Pair<int, int[]>[,] PrepareMatrix(int[,] matrix)
+        public static Node PrepareMatrix(int[,] matrix)
         {
             int matrixLength = matrix.GetLength(0);
             Pair<int, int[]>[,] preparedMatrix = new Pair<int, int[]>[matrixLength, matrixLength];
@@ -268,7 +277,7 @@ namespace Project_1
                 }
             }
            
-            return preparedMatrix;
+            return new Node(preparedMatrix, 0, new List<Pair<int, int[]>>());
         }
 
     }
