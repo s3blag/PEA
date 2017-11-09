@@ -146,7 +146,7 @@ namespace Project_1
             }
 
             //obcieta macierz
-            Node newNode1 = DeleteRoad(matrix, currentSolution);
+            Node newNode1 = DeleteRoads(matrix, currentSolution);
             Node newNode2 = BlockRoad(matrix, currentSolution);
 
             Pair<Node, Node> nodes = new Pair<Node, Node>(newNode1, newNode2);
@@ -156,7 +156,7 @@ namespace Project_1
         }
 
 
-        private static Node DeleteRoad(Pair<int, int[]>[,] matrix, int[] coordinatesToDelete)
+        private static Node DeleteRoads(Pair<int, int[]>[,] matrix, int[] coordinatesToDelete)
         {
             Pair<int, int[]>[,] newMatrix = new Pair<int, int[]>[matrix.GetLength(0) - 1, matrix.GetLength(1) - 1];
             Console.Write(coordinatesToDelete[0]);
@@ -258,7 +258,7 @@ namespace Project_1
                 {
                     preparedMatrix[i, j] = new Pair<int, int[]>(matrix[i, j], new int[2]);
                     preparedMatrix[i, j].Second[0] = i;
-                    preparedMatrix[i, j].Second[0] = j;
+                    preparedMatrix[i, j].Second[1] = j;
                 }
             }
            

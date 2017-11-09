@@ -92,8 +92,6 @@ namespace Project_1
                                              { 3, 8, 5, INF}};
             try
             {   
-
-
                 BranchAndBound.Pair<int, int[]>[,] preparedMatrix = BranchAndBound.PrepareMatrix(testMatrix);
                 BranchAndBound.ReduceMatrix(preparedMatrix);
                 BranchAndBound.Pair<BranchAndBound.Node, BranchAndBound.Node> node = BranchAndBound.DivideMatrix(preparedMatrix);
