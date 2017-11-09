@@ -146,7 +146,7 @@ namespace Project_1
             }
 
             //obcieta macierz
-            Node newNode1 = DeleteRoad(matrix, currentSolution);
+            Node newNode1 = DeleteRoads(matrix, currentSolution);
             Node newNode2 = BlockRoad(matrix, currentSolution);
 
             Pair<Node, Node> nodes = new Pair<Node, Node>(newNode1, newNode2);
@@ -156,14 +156,16 @@ namespace Project_1
         }
 
 
-        private static Node DeleteRoad(Pair<int, int[]>[,] matrix, int[] coordinatesToDelete)
+        private static Node DeleteRoads(Pair<int, int[]>[,] matrix, int[] coordinatesToDelete)
         {
             Pair<int, int[]>[,] newMatrix = new Pair<int, int[]>[matrix.GetLength(0) - 1, matrix.GetLength(1) - 1];
             Console.Write(coordinatesToDelete[0]);
             Console.Write(coordinatesToDelete[1] + " ");
             Console.Write(Environment.NewLine);
 
-            int newi = 0, newj = 0;
+            int newRowIndex = 0, newColumnIndex = 0, originalCurrentRowIndex = 0, originalCurrentColumnIndex = 0;
+            int originalDeletedColumnIndex = matrix[coordinatesToDelete[0], coordinatesToDelete[1]].Second[1];
+            int originalDeletedRowIndex = matrix[coordinatesToDelete[0], coordinatesToDelete[1]].Second[0];
 
             for (int i = 0; i < matrix.GetLength(0); i++)
             {
@@ -174,18 +176,22 @@ namespace Project_1
                     if (j == coordinatesToDelete[1])
                         continue;
 
-                    newi = i;
-                    newj = j;
+                    newRowIndex = i;
+                    newColumnIndex = j;
 
                     if (i > coordinatesToDelete[0])
-                        newi = i - 1;
+                        newRowIndex = i - 1;
                     if (j > coordinatesToDelete[1])
-                        newj = j - 1;
+                        newColumnIndex = j - 1;
 
-                    if (i == coordinatesToDelete[1] && j == coordinatesToDelete[0])
-                        newMatrix[newi, newj] = new Pair<int, int[]>(INF, matrix[i, j].Second);
+                    originalCurrentColumnIndex = matrix[i, j].Second[1];
+                    originalCurrentRowIndex = matrix[i, j].Second[0];
+                    
+
+                    if (originalCurrentRowIndex == originalDeletedColumnIndex && originalCurrentColumnIndex == originalDeletedRowIndex)
+                        newMatrix[newRowIndex, newColumnIndex] = new Pair<int, int[]>(INF, matrix[i, j].Second);
                     else
-                        newMatrix[newi, newj] = new Pair<int, int[]>(matrix[i, j].First, matrix[i, j].Second);
+                        newMatrix[newRowIndex, newColumnIndex] = new Pair<int, int[]>(matrix[i, j].First, matrix[i, j].Second);
                 }
             }
 
@@ -258,7 +264,7 @@ namespace Project_1
                 {
                     preparedMatrix[i, j] = new Pair<int, int[]>(matrix[i, j], new int[2]);
                     preparedMatrix[i, j].Second[0] = i;
-                    preparedMatrix[i, j].Second[0] = j;
+                    preparedMatrix[i, j].Second[1] = j;
                 }
             }
            
