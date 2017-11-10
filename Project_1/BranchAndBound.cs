@@ -253,8 +253,7 @@ namespace Project_1
             return totalCost;
         }
 
-        // public static List<Pair<int, int[]>> RunAlgorithm(int[,] matrix)
-        public static Node RunAlgorithm(int[,] matrix)
+        public static List<Pair<int, int[]>> RunAlgorithm(int[,] matrix)
         {
             List<Pair<int, int[]>> solution = new List<Pair<int, int[]>>();
             List<Node> tree = new List<Node>();
@@ -282,7 +281,14 @@ namespace Project_1
                 Console.Write(Environment.NewLine);
                 
             }
-            return currentNode;
+
+            foreach (Pair<int, int[]> edge in currentNode.excludedCities)
+            {
+                solution.Add(edge);
+            }
+            solution.Add(new Pair<int, int[]>(currentNode.matrix[0,0].First, currentNode.matrix[0,0].Second));
+
+            return solution;
         }
 
         private static int RefreshTree(List<Node> tree)
@@ -320,6 +326,8 @@ namespace Project_1
             Console.Write(Environment.NewLine);
             return node;
         }
+
+        
 
     }
 }

@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace Project_1
 {
@@ -92,7 +93,7 @@ namespace Project_1
                                              { 3, 8, 5, INF}};
             try
             {
-                BranchAndBound.Node solution = BranchAndBound.RunAlgorithm(testMatrix);
+                List<BranchAndBound.Pair<int, int[]>> solution = BranchAndBound.RunAlgorithm(testMatrix);
                 /*
                 BranchAndBound.Node node = BranchAndBound.PrepareMatrix(testMatrix);
                 BranchAndBound.Pair<int, int[]>[,] preparedMatrix = node.matrix;
@@ -101,9 +102,9 @@ namespace Project_1
                 //MessageBox.Show(solution[0].ToString() + " " + solution[1].ToString());
 
                 */
-                int matrix = solution.matrix.GetLength(1);
-                Console.WriteLine("Rozwiazanie " + matrix + "LowerBound " + solution.lowerBound);
-
+                //int matrix = solution.matrix.GetLength(1);
+                // Console.WriteLine("Rozwiazanie " + matrix + "LowerBound " + solution.lowerBound);
+                ShowSolution(solution);
                 /*
                 string matrixString = "";
                 for (int i = 0; i < preparedMatrix.GetLength(0); i++)
@@ -121,53 +122,25 @@ namespace Project_1
                 }
                 matrixString += Environment.NewLine;
                 this.textBox1.Text += matrixString;
-
-
-
-                // Wyswietlenie nowo powstalego node-a z DivideMatrix -> DeleteRoad
-                BranchAndBound.Pair<int, int[]>[,] firstNode = nodes.First.matrix;
-                matrixString = "";
-                matrixString += Environment.NewLine;
-                for (int i = 0; i < firstNode.GetLength(0); i++)
-                {
-                    for (int j = 0; j < firstNode.GetLength(1); j++)
-                    {
-                        if (firstNode[i, j].First != INF)
-                            matrixString += firstNode[i, j].First.ToString();
-                        else
-                            matrixString += "INF";
-                        matrixString += "  ";
-                    }
-
-                    matrixString += Environment.NewLine;
-                }
-                this.textBox1.Text += matrixString;
-
-
-                // Wyswietlenie nowo powstalego node-a z DivideMatrix -> BlockRoad
-                BranchAndBound.Pair<int, int[]>[,] secondNode = nodes.Second.matrix;
-                matrixString = "";
-                matrixString += Environment.NewLine;
-                for (int i = 0; i < secondNode.GetLength(0); i++)
-                {
-                    for (int j = 0; j < secondNode.GetLength(1); j++)
-                    {
-                        if (secondNode[i, j].First != INF)
-                            matrixString += secondNode[i, j].First.ToString();
-                        else
-                            matrixString += "INF";
-                        matrixString += "  ";
-                    }
-
-                    matrixString += Environment.NewLine;
-                }
-                this.textBox1.Text += matrixString;
                 */
+
             }
             catch (Exception exception)
             {
                 MessageBox.Show("Błąd: " + exception.Message);
             }
+        }
+
+        private void ShowSolution(List<BranchAndBound.Pair<int, int[]>> solutionList)
+        {
+            string solutionString = "";
+            foreach(BranchAndBound.Pair<int,int[]> edge in solutionList)
+            {
+                solutionString +="<" + edge.Second[0].ToString() + " ; " + edge.Second[1].ToString() + ">" + "(" + ((edge.First == INF) ? "INF" : edge.First.ToString()) + ")"+ "   - >   ";
+            }
+            //solutionString += solutionList[0]..ToString();
+
+            this.textBox1.Text += solutionString;
         }
     }
 }
