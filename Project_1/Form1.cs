@@ -91,10 +91,13 @@ namespace Project_1
                                              { 9, 4, INF, 6 },
                                              { 3, 8, 5, INF}};
             try
-            {   
-                BranchAndBound.Pair<int, int[]>[,] preparedMatrix = BranchAndBound.PrepareMatrix(testMatrix);
-                BranchAndBound.ReduceMatrix(preparedMatrix);
-                BranchAndBound.Pair<BranchAndBound.Node, BranchAndBound.Node> node = BranchAndBound.DivideMatrix(preparedMatrix);
+            {
+                BranchAndBound.RunAlgorithm(testMatrix);
+                /*
+                BranchAndBound.Node node = BranchAndBound.PrepareMatrix(testMatrix);
+                BranchAndBound.Pair<int, int[]>[,] preparedMatrix = node.matrix;
+                BranchAndBound.ReduceMatrix(node);
+                BranchAndBound.Pair<BranchAndBound.Node, BranchAndBound.Node> nodes = BranchAndBound.DivideMatrix(node);
                 //MessageBox.Show(solution[0].ToString() + " " + solution[1].ToString());
 
                 
@@ -118,7 +121,7 @@ namespace Project_1
 
 
                 // Wyswietlenie nowo powstalego node-a z DivideMatrix -> DeleteRoad
-                BranchAndBound.Pair<int, int[]>[,] firstNode = node.First.matrix;
+                BranchAndBound.Pair<int, int[]>[,] firstNode = nodes.First.matrix;
                 matrixString = "";
                 matrixString += Environment.NewLine;
                 for (int i = 0; i < firstNode.GetLength(0); i++)
@@ -138,7 +141,7 @@ namespace Project_1
 
 
                 // Wyswietlenie nowo powstalego node-a z DivideMatrix -> BlockRoad
-                BranchAndBound.Pair<int, int[]>[,] secondNode = node.Second.matrix;
+                BranchAndBound.Pair<int, int[]>[,] secondNode = nodes.Second.matrix;
                 matrixString = "";
                 matrixString += Environment.NewLine;
                 for (int i = 0; i < secondNode.GetLength(0); i++)
@@ -155,7 +158,7 @@ namespace Project_1
                     matrixString += Environment.NewLine;
                 }
                 this.textBox1.Text += matrixString;
-
+                */
             }
             catch (Exception exception)
             {
