@@ -92,7 +92,7 @@ namespace Project_1
                                              { 3, 8, 5, INF}};
             try
             {
-                BranchAndBound.RunAlgorithm(testMatrix);
+                BranchAndBound.Node solution = BranchAndBound.RunAlgorithm(testMatrix);
                 /*
                 BranchAndBound.Node node = BranchAndBound.PrepareMatrix(testMatrix);
                 BranchAndBound.Pair<int, int[]>[,] preparedMatrix = node.matrix;
@@ -100,7 +100,11 @@ namespace Project_1
                 BranchAndBound.Pair<BranchAndBound.Node, BranchAndBound.Node> nodes = BranchAndBound.DivideMatrix(node);
                 //MessageBox.Show(solution[0].ToString() + " " + solution[1].ToString());
 
-                
+                */
+                int matrix = solution.matrix.GetLength(1);
+                Console.WriteLine("Rozwiazanie " + matrix + "LowerBound " + solution.lowerBound);
+
+                /*
                 string matrixString = "";
                 for (int i = 0; i < preparedMatrix.GetLength(0); i++)
                 {

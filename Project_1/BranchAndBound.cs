@@ -236,8 +236,8 @@ namespace Project_1
                 if (matrix[row, i].First < currentMinCost)
                     currentMinCost = matrix[row, i].First;
             }
-
-            totalCost += currentMinCost;
+            if(currentMinCost!=INF)
+                totalCost += currentMinCost;
             currentMinCost = INF;
 
             for (int i = 0; i < matrix.GetLength(0); i++)
@@ -247,36 +247,42 @@ namespace Project_1
                 if (matrix[i, column].First < currentMinCost)
                     currentMinCost = matrix[i, column].First;
             }
-
-            totalCost += currentMinCost;
+            if (currentMinCost != INF)
+                totalCost += currentMinCost;
 
             return totalCost;
         }
 
-        public static List<Pair<int, int[]>> RunAlgorithm(int[,] matrix)
+        // public static List<Pair<int, int[]>> RunAlgorithm(int[,] matrix)
+        public static Node RunAlgorithm(int[,] matrix)
         {
             List<Pair<int, int[]>> solution = new List<Pair<int, int[]>>();
             List<Node> tree = new List<Node>();
             Node firstNode = PrepareMatrix(matrix);
             tree.Add(firstNode);
-            // Pętla for tylko na potrzeby testu, normalnie tu powinien być jakiś while
-            for(int i = 0; i < 3; i++)
+
+            Node currentNode = firstNode;
+
+            while (currentNode.matrix.GetLength(1) != 1)
             {
                 int currentNodeIndex = RefreshTree(tree);
-                Node currentNode = tree[currentNodeIndex];
+                currentNode = tree[currentNodeIndex];
                 Pair<Node, Node> newNodes = DivideMatrix(currentNode);
                 tree.RemoveAt(currentNodeIndex);
                 Node firstDividedNode = newNodes.First;
-                Node secontDividedNode = newNodes.Second;
+                Node secondDividedNode = newNodes.Second;
 
                 firstDividedNode.lowerBound = ReduceMatrix(firstDividedNode) + currentNode.lowerBound;
-                secontDividedNode.lowerBound = ReduceMatrix(secontDividedNode) + currentNode.lowerBound;
+                secondDividedNode.lowerBound = ReduceMatrix(secondDividedNode) + currentNode.lowerBound;
                 tree.Add(firstDividedNode);
-                tree.Add(secontDividedNode);
+                tree.Add(secondDividedNode);
+                //wyswietlanie lower boundow
+                Console.Write("Z ktorej tworzymy: " + currentNode.lowerBound + " ");
+                Console.Write("NowaPierwsza : " + firstDividedNode.lowerBound + " NowaDruga: " + secondDividedNode.lowerBound + " Rozmiar " + currentNode.matrix.GetLength(1));
+                Console.Write(Environment.NewLine);
+                
             }
-            //Node firstNode = new Node(preparedMatrix = PrepareMatrix(matrix), ReduceMatrix(preparedMatrix), new List<Pair<int, int[]>>());
-
-            return solution;
+            return currentNode;
         }
 
         private static int RefreshTree(List<Node> tree)
@@ -310,6 +316,8 @@ namespace Project_1
             }
             Node node = new Node(preparedMatrix, 0, new List<Pair<int, int[]>>());
             node.lowerBound = ReduceMatrix(node);
+            Console.Write("Startowa macierz: " + node.lowerBound + " ");
+            Console.Write(Environment.NewLine);
             return node;
         }
 
