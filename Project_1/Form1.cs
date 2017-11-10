@@ -92,7 +92,8 @@ namespace Project_1
                                              { 3, 8, 5, INF}};
             try
             {
-
+                BranchAndBound.RunAlgorithm(testMatrix);
+                /*
                 BranchAndBound.Node node = BranchAndBound.PrepareMatrix(testMatrix);
                 BranchAndBound.Pair<int, int[]>[,] preparedMatrix = node.matrix;
                 BranchAndBound.ReduceMatrix(node);
@@ -157,7 +158,7 @@ namespace Project_1
                     matrixString += Environment.NewLine;
                 }
                 this.textBox1.Text += matrixString;
-
+                */
             }
             catch (Exception exception)
             {

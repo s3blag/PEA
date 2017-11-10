@@ -18,12 +18,13 @@ namespace Project_1
             public Pair<int, int[]>[,] matrix;
             public int lowerBound;
             public List<Pair<int, int[]>> excludedCities;
-
+            public bool leaf;
             public Node(Pair<int, int[]>[,] newMatrix, int newLowerBound, List<Pair<int, int[]>> newExcludedCities)
             {
                 matrix = newMatrix;
                 lowerBound = newLowerBound;
                 excludedCities = newExcludedCities;
+                leaf = true;
             }
         }
 
@@ -147,11 +148,9 @@ namespace Project_1
                 }                 
             }
 
-            
             //obcieta macierz
             Node newNode1 = DeleteRoads(node, currentSolution);
             Node newNode2 = BlockRoad(node, currentSolution);
-
             Pair<Node, Node> nodes = new Pair<Node, Node>(newNode1, newNode2);
             nodes.First = newNode1;
             nodes.Second = newNode2;
@@ -220,8 +219,11 @@ namespace Project_1
             }
 
             newMatrix[coordinatesToDelete[0], coordinatesToDelete[1]].First = INF;
-
-            return new Node(newMatrix, 0, null);
+            Node newNode = new Node(newMatrix, 0, new List<Pair<int, int[]>>());
+            for (int i = 0; i < node.excludedCities.Count; i++)
+                newNode.excludedCities.Add(node.excludedCities[i]);
+            newNode.excludedCities.Add(matrix[coordinatesToDelete[0], coordinatesToDelete[1]]);
+            return newNode;
         }
 
         private static int FindMaxExclusionCost(Pair<int, int[]>[,] matrix, int row, int column)
@@ -255,11 +257,37 @@ namespace Project_1
 
         public static List<Pair<int, int[]>> RunAlgorithm(int[,] matrix)
         {
-            List<Pair<int, int[]>> tree = new List<Pair<int, int[]>>();
-            Pair<int, int[]>[,] preparedMatrix;
+            List<Pair<int, int[]>> solution = new List<Pair<int, int[]>>();
+            List<Node> tree = new List<Node>();
+            Node firstNode = PrepareMatrix(matrix);
+            tree.Add(firstNode);
+            // Pętla for tylko na potrzeby testu, normalnie tu powinien być jakiś while
+            for(int i = 0; i < 3; i++)
+            {
+                int currentNodeIndex = RefreshTree(tree);
+                Node currentNode = tree[currentNodeIndex];
+                Pair<Node, Node> newNodes = DivideMatrix(currentNode);
+                tree.RemoveAt(currentNodeIndex);
+                ReduceMatrix(newNodes.First);
+                ReduceMatrix(newNodes.Second);
+                tree.Add(newNodes.First);
+                tree.Add(newNodes.Second);
+            }
             //Node firstNode = new Node(preparedMatrix = PrepareMatrix(matrix), ReduceMatrix(preparedMatrix), new List<Pair<int, int[]>>());
 
-            return tree;
+            return solution;
+        }
+
+        private static int RefreshTree(List<Node> tree)
+        {
+            int currentMinLowerBound = INF;
+            int currentSolution = 0;
+            for(int currentNode = 0; currentNode < tree.Count; currentNode++)
+            {                
+                    if (tree[currentNode].lowerBound < currentMinLowerBound)
+                        currentSolution = tree[currentNode].lowerBound;                
+            }
+            return currentSolution;
         }
 
         public static Node PrepareMatrix(int[,] matrix)
@@ -276,8 +304,9 @@ namespace Project_1
                     preparedMatrix[i, j].Second[1] = j;
                 }
             }
-           
-            return new Node(preparedMatrix, 0, new List<Pair<int, int[]>>());
+            Node node = new Node(preparedMatrix, 0, new List<Pair<int, int[]>>());
+            ReduceMatrix(node);
+            return node;
         }
 
     }
