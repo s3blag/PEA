@@ -18,13 +18,11 @@ namespace Project_1
             public Pair<int, int[]>[,] matrix;
             public int lowerBound;
             public List<Pair<int, int[]>> excludedCities;
-            public bool leaf;
             public Node(Pair<int, int[]>[,] newMatrix, int newLowerBound, List<Pair<int, int[]>> newExcludedCities)
             {
                 matrix = newMatrix;
                 lowerBound = newLowerBound;
                 excludedCities = newExcludedCities;
-                leaf = true;
             }
         }
 
@@ -47,14 +45,14 @@ namespace Project_1
 
 
         //zmienic na private
-        public static void ReduceMatrix(Node node)
+        public static int ReduceMatrix(Node node)
         {
             Pair<int, int[]>[,] matrix = node.matrix;
             int reductionLevel = 0;
             reductionLevel += ReduceRow(matrix);
             reductionLevel += ReduceColumn(matrix);
 
-            node.lowerBound += reductionLevel;
+            return reductionLevel;
         }
 
         private static int ReduceRow(Pair<int, int[]>[,] matrix)
@@ -268,10 +266,13 @@ namespace Project_1
                 Node currentNode = tree[currentNodeIndex];
                 Pair<Node, Node> newNodes = DivideMatrix(currentNode);
                 tree.RemoveAt(currentNodeIndex);
-                ReduceMatrix(newNodes.First);
-                ReduceMatrix(newNodes.Second);
-                tree.Add(newNodes.First);
-                tree.Add(newNodes.Second);
+                Node firstDividedNode = newNodes.First;
+                Node secontDividedNode = newNodes.Second;
+
+                firstDividedNode.lowerBound = ReduceMatrix(firstDividedNode) + currentNode.lowerBound;
+                secontDividedNode.lowerBound = ReduceMatrix(secontDividedNode) + currentNode.lowerBound;
+                tree.Add(firstDividedNode);
+                tree.Add(secontDividedNode);
             }
             //Node firstNode = new Node(preparedMatrix = PrepareMatrix(matrix), ReduceMatrix(preparedMatrix), new List<Pair<int, int[]>>());
 
@@ -284,8 +285,11 @@ namespace Project_1
             int currentSolution = 0;
             for(int currentNode = 0; currentNode < tree.Count; currentNode++)
             {                
-                    if (tree[currentNode].lowerBound < currentMinLowerBound)
-                        currentSolution = tree[currentNode].lowerBound;                
+                if (tree[currentNode].lowerBound < currentMinLowerBound)
+                {
+                    currentMinLowerBound = tree[currentNode].lowerBound;
+                    currentSolution = currentNode;
+                }            
             }
             return currentSolution;
         }
@@ -305,7 +309,7 @@ namespace Project_1
                 }
             }
             Node node = new Node(preparedMatrix, 0, new List<Pair<int, int[]>>());
-            ReduceMatrix(node);
+            node.lowerBound = ReduceMatrix(node);
             return node;
         }
 
