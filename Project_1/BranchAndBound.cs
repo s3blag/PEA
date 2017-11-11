@@ -247,7 +247,6 @@ namespace Project_1
             Node newNode = new Node(newMatrix, 0, new List<Pair<int, int[]>>());
             for (int i = 0; i < node.excludedCities.Count; i++)
                 newNode.excludedCities.Add(node.excludedCities[i]);
-            newNode.excludedCities.Add(matrix[coordinatesToDelete[0], coordinatesToDelete[1]]);
             return newNode;
         }
 
@@ -294,9 +293,11 @@ namespace Project_1
             tree.Add(firstNode);
             Node lastNode = firstNode;
             Node currentNode = firstNode;
+            int debug = 0;
 
             while (currentNode.matrix.GetLength(1) != 2)
             {
+                
                 int currentNodeIndex = RefreshTree(tree);
                 currentNode = tree[currentNodeIndex];
                 Pair<Node, Node> newNodes = DivideMatrix(currentNode);
@@ -370,6 +371,7 @@ namespace Project_1
 
                 if (currentNode.matrix.GetLength(1) == 2)
                     lastNode = firstDividedNode;
+                debug++;
             }
             Node solutionNode = new Node(null, lastNode.lowerBound, lastNode.excludedCities);
             int solutionNodeReductionLevel = ReduceMatrix(lastNode);
@@ -435,7 +437,7 @@ namespace Project_1
         {
             Console.Write(Environment.NewLine);
             List<Pair<int, int[]>> List = solutionNode.excludedCities;
-            for (int i = 0; i <= matrix.GetLength(0); i++)
+            for (int i = 0; i < matrix.GetLength(0); i++)
             {
                 Console.Write("<" + List[i].Second[0].ToString() + " ; " + List[i].Second[1].ToString() + ">"  + "   - >   ");
                // if (i == matrix.GetLength(0) - 2)
