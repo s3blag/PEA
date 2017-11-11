@@ -26,6 +26,7 @@ namespace Project_1
             }
         }
 
+
         //na private
         public class Pair<T, U>
         {
@@ -45,7 +46,7 @@ namespace Project_1
 
 
         //zmienic na private
-        public static int ReduceMatrix(Node node)
+        private static int ReduceMatrix(Node node)
         {
             Pair<int, int[]>[,] matrix = node.matrix;
             int reductionLevel = 0;
@@ -54,6 +55,7 @@ namespace Project_1
 
             return reductionLevel;
         }
+
 
         private static int ReduceRow(Pair<int, int[]>[,] matrix)
         {
@@ -88,6 +90,7 @@ namespace Project_1
             return reductionLevel;
         }
 
+
         private static int ReduceColumn(Pair<int, int[]>[,] matrix)
         {
             int min;
@@ -121,7 +124,6 @@ namespace Project_1
         }
 
         //zmienic na private
-        //public static int[] DivideMatrix(Pair<int, int[]>[,] matrix)
         public static Pair<Node, Node> DivideMatrix(Node node)
         {
             Pair<int, int[]>[,] matrix = node.matrix;
@@ -146,27 +148,27 @@ namespace Project_1
                 }                 
             }
 
-            string matrixString = "";
-            for (int i = 0; i < matrix.GetLength(0); i++)
-            {
-                for (int j = 0; j < matrix.GetLength(1); j++)
-                {
-                    if (matrix[i, j].First != INF)
-                        matrixString += matrix[i, j].First.ToString();
-                    else
-                        matrixString += "INF";
-                    matrixString += "  ";
-                }
-                matrixString += Environment.NewLine;
-            }
-            Console.Write(Environment.NewLine);
-            Console.Write("------------------------------------------");
-            Console.Write(Environment.NewLine);
-            Console.WriteLine("Dzielona Macierz: ");
-            Console.WriteLine(matrixString);
-            int [] a = matrix[currentSolution[0], currentSolution[1]].Second;
-            Console.Write("Wybrany(stare nowe): <" + (a[0]+1).ToString() + " ; " + (a[1]+1).ToString() + ">");
-          
+            /*  string matrixString = "";
+              for (int i = 0; i < matrix.GetLength(0); i++)
+              {
+                  for (int j = 0; j < matrix.GetLength(1); j++)
+                  {
+                      if (matrix[i, j].First != INF)
+                          matrixString += matrix[i, j].First.ToString();
+                      else
+                          matrixString += "INF";
+                      matrixString += "  ";
+                  }
+                  matrixString += Environment.NewLine;
+              }
+              Console.Write(Environment.NewLine);
+              Console.Write("------------------------------------------");
+              Console.Write(Environment.NewLine);
+              Console.WriteLine("Dzielona Macierz: ");
+              Console.WriteLine(matrixString);
+              int [] a = matrix[currentSolution[0], currentSolution[1]].Second;
+              Console.Write("Wybrany(stare nowe): <" + (a[0]+1).ToString() + " ; " + (a[1]+1).ToString() + ">");
+            */
 
             Node newNode1 = DeleteRoads(node, currentSolution);
             Node newNode2 = BlockRoad(node, currentSolution);
@@ -184,8 +186,8 @@ namespace Project_1
         {
             Pair<int, int[]>[,] matrix = node.matrix;
             Pair<int, int[]>[,] newMatrix = new Pair<int, int[]>[matrix.GetLength(0) - 1, matrix.GetLength(1) - 1];
-            Console.Write("    <" + coordinatesToDelete[0] + " ; " + coordinatesToDelete[1] + ">");
-            Console.Write(Environment.NewLine);
+            //Console.Write("    <" + coordinatesToDelete[0] + " ; " + coordinatesToDelete[1] + ">");
+           // Console.Write(Environment.NewLine);
 
             int newRowIndex = 0, newColumnIndex = 0, originalCurrentRowIndex = 0, originalCurrentColumnIndex = 0;
             int originalDeletedColumnIndex = matrix[coordinatesToDelete[0], coordinatesToDelete[1]].Second[1];
@@ -228,6 +230,7 @@ namespace Project_1
             return newNode;
         }
 
+
         private static Node BlockRoad(Node node, int[] coordinatesToDelete)
         {
             Pair<int, int[]>[,] matrix = node.matrix;
@@ -247,6 +250,7 @@ namespace Project_1
             newNode.excludedCities.Add(matrix[coordinatesToDelete[0], coordinatesToDelete[1]]);
             return newNode;
         }
+
 
         private static int FindMaxExclusionCost(Pair<int, int[]>[,] matrix, int row, int column)
         {   
@@ -281,6 +285,7 @@ namespace Project_1
             return totalCost;
         }
 
+
         public static List<Pair<int, int[]>> RunAlgorithm(int[,] matrix)
         {
             List<Pair<int, int[]>> solution = new List<Pair<int, int[]>>();
@@ -312,56 +317,56 @@ namespace Project_1
                 else
                     secondDividedNode.lowerBound = INF;
 
-
+                /*
                 Pair<int, int[]>[,] tempMatrix;
-                tempMatrix = firstDividedNode.matrix;
-
-                string matrixString = "";
-                for (int i = 0; i < tempMatrix.GetLength(0); i++)
-                {
-                    for (int j = 0; j < tempMatrix.GetLength(1); j++)
-                    {
-                        if (tempMatrix[i, j].First != INF)
-                            matrixString += tempMatrix[i, j].First.ToString();
-                        else
-                            matrixString += "INF";
-                        matrixString += "  ";
-                    }
-                    matrixString += Environment.NewLine;
-                }
-
-
-                Console.Write("Z ktorej tworzymy: " + currentNode.lowerBound + " ");
-
-                Console.Write("NowaPierwsza : " + firstDividedNode.lowerBound + " NowaDruga: " + secondDividedNode.lowerBound + " Rozmiar " + currentNode.matrix.GetLength(1));
-                Console.WriteLine("Nowa Macierz(1): ");
-                Console.WriteLine(matrixString);
-
-                tempMatrix = secondDividedNode.matrix;
-                matrixString = "";
-                for (int i = 0; i < tempMatrix.GetLength(0); i++)
-                {
-                    for (int j = 0; j < tempMatrix.GetLength(1); j++)
-                    {
-                        if (tempMatrix[i, j].First != INF)
-                            matrixString += tempMatrix[i, j].First.ToString();
-                        else
-                            matrixString += "INF";
-                        matrixString += "  ";
-                    }
-                    matrixString += Environment.NewLine;
-                }
-                Console.WriteLine("Nowa Macierz(2): ");
-                Console.WriteLine(matrixString);
-
-
+               tempMatrix = firstDividedNode.matrix;
                 
+               string matrixString = "";
+               for (int i = 0; i < tempMatrix.GetLength(0); i++)
+               {
+                   for (int j = 0; j < tempMatrix.GetLength(1); j++)
+                   {
+                       if (tempMatrix[i, j].First != INF)
+                           matrixString += tempMatrix[i, j].First.ToString();
+                       else
+                           matrixString += "INF";
+                       matrixString += "  ";
+                   }
+                   matrixString += Environment.NewLine;
+               }
+
+
+               Console.Write("Z ktorej tworzymy: " + currentNode.lowerBound + " ");
+
+               Console.Write("NowaPierwsza : " + firstDividedNode.lowerBound + " NowaDruga: " + secondDividedNode.lowerBound + " Rozmiar " + currentNode.matrix.GetLength(1));
+               Console.WriteLine("Nowa Macierz(1): ");
+               Console.WriteLine(matrixString);
+
+               tempMatrix = secondDividedNode.matrix;
+               matrixString = "";
+               for (int i = 0; i < tempMatrix.GetLength(0); i++)
+               {
+                   for (int j = 0; j < tempMatrix.GetLength(1); j++)
+                   {
+                       if (tempMatrix[i, j].First != INF)
+                           matrixString += tempMatrix[i, j].First.ToString();
+                       else
+                           matrixString += "INF";
+                       matrixString += "  ";
+                   }
+                   matrixString += Environment.NewLine;
+               }
+               Console.WriteLine("Nowa Macierz(2): ");
+               Console.WriteLine(matrixString);
+               */
+
+
                 tree.Add(firstDividedNode);
                 tree.Add(secondDividedNode);
-                //wyswietlanie lower boundow
+               /* //wyswietlanie lower boundow
                 Console.Write("Z ktorej tworzymy: " + currentNode.lowerBound + " ");
                 Console.Write("NowaPierwsza : " + firstDividedNode.lowerBound + " NowaDruga: " + secondDividedNode.lowerBound + " Rozmiar " + currentNode.matrix.GetLength(1));
-                Console.Write(Environment.NewLine);
+                Console.Write(Environment.NewLine);*/
 
                 if (currentNode.matrix.GetLength(1) == 2)
                     lastNode = firstDividedNode;
@@ -374,23 +379,22 @@ namespace Project_1
                 solutionNode.lowerBound = INF;
             lastNode.excludedCities.Add(new Pair<int, int[]>(0, lastNode.matrix[0, 0].Second));
             tree.Add(solutionNode);
+            /*Console.Write(Environment.NewLine);
             Console.Write("LB: " + solutionNode.lowerBound);
-            foreach (Pair<int, int[]> edge in solutionNode.excludedCities)
-            {
-                solution.Add(edge);
-                Console.Write("<" + edge.Second[0].ToString() + " ; " + edge.Second[1].ToString() + ">" + "(" + ((edge.First == INF) ? "INF" : edge.First.ToString()) + ")" + "   - >   ");
-                Console.Write(Environment.NewLine);
-            }
-            solution.Add(new Pair<int, int[]>(currentNode.matrix[0,0].First, currentNode.matrix[0,0].Second));
+            Console.Write(Environment.NewLine);*/
 
-            return solution;
+
+            //  solution.Add(new Pair<int, int[]>(currentNode.matrix[0,0].First, currentNode.matrix[0,0].Second));
+            ShowSolution(solutionNode, matrix);
+            return null;
         }
+
 
         private static int RefreshTree(List<Node> tree)
         {
             int currentMinLowerBound = INF;
             int currentSolution = 0;
-            Console.Write("(Obecnie wszystkie LB: ");
+           // Console.Write("(Obecnie wszystkie LB: ");
             for (int currentNode = 0; currentNode < tree.Count; currentNode++)
             {                
                 if (tree[currentNode].lowerBound < currentMinLowerBound)
@@ -398,14 +402,15 @@ namespace Project_1
                     currentMinLowerBound = tree[currentNode].lowerBound;
                     currentSolution = currentNode;
                 }
-                Console.Write(" " + tree[currentNode].lowerBound);
+              //  Console.Write(" " + tree[currentNode].lowerBound);
             }
-            Console.Write(" Minimalny lower bound: " + currentMinLowerBound+ "[" +currentSolution+ "] ");
-            Console.Write(Environment.NewLine);
+            //Console.Write(" Minimalny lower bound: " + currentMinLowerBound+ "[" +currentSolution+ "] ");
+           // Console.Write(Environment.NewLine);
             return currentSolution;
         }
 
-        public static Node PrepareMatrix(int[,] matrix)
+
+        private static Node PrepareMatrix(int[,] matrix)
         {
             int matrixLength = matrix.GetLength(0);
             Pair<int, int[]>[,] preparedMatrix = new Pair<int, int[]>[matrixLength, matrixLength];
@@ -421,11 +426,25 @@ namespace Project_1
             }
             Node node = new Node(preparedMatrix, 0, new List<Pair<int, int[]>>());
             node.lowerBound = ReduceMatrix(node);
-            Console.Write("Startowa macierz: " + node.lowerBound + " ");
-            Console.Write(Environment.NewLine);
+            //Console.Write("Startowa macierz: " + node.lowerBound + " ");
+            //Console.Write(Environment.NewLine);
             return node;
         }
 
+        private static void ShowSolution(Node solutionNode, int[,] matrix)
+        {
+            Console.Write(Environment.NewLine);
+            List<Pair<int, int[]>> List = solutionNode.excludedCities;
+            for (int i = 0; i <= matrix.GetLength(0); i++)
+            {
+                Console.Write("<" + List[i].Second[0].ToString() + " ; " + List[i].Second[1].ToString() + ">"  + "   - >   ");
+               // if (i == matrix.GetLength(0) - 2)
+                //    Console.Write("<" + List[i].Second[1].ToString() + " ; " + List[0].Second[0].ToString() + ">");
+            }
+
+            Console.Write(Environment.NewLine);
+            Console.Write("Całkowity koszt: " + solutionNode.lowerBound);
+        }
         
 
     }

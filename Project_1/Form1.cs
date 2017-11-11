@@ -86,61 +86,30 @@ namespace Project_1
         }
 
         private void buttonTest_Click(object sender, EventArgs e)
-        {
-            int[,] testMatrix = new int[,] { { INF, 2, 7, 3 },
-                                             { 7, INF, 8, 5 },
-                                             { 9, 4, INF, 6 },
-                                             { 3, 8, 5, INF}};
+            {                                   //       0    1   2   3   4   5   6   7   8   9  10  11  12  13  14
+                   int[,] testMatrix=new int[,]{/* 0 */{INF, 29, 82, 46, 68, 52, 72, 42, 51, 55, 29, 74 ,23 ,72, 46},
+                                                /* 1 */{29, INF, 55 ,46 ,42 ,43 ,43 ,23 ,23 ,31 ,41 ,51, 11, 52, 21},
+                                                /* 2 */{82 , 55,INF, 68, 46, 55, 23, 43, 41 ,29, 79 ,21, 64, 31, 51},
+                                                /* 3 */{46 ,46, 68, INF ,82 ,15, 72, 31, 62, 42, 21, 51, 51, 43, 64},
+                                                /* 4 */{68 ,42 ,46 ,82, INF ,74, 23 ,52 ,21 ,46 ,82 ,58 ,46 ,65, 23},
+                                                /* 5 */{52 ,43, 55, 15, 74, INF ,61 ,23 ,55 ,31 ,33 ,37 ,51, 29, 59},
+                                                /* 6 */{72 ,43, 23 ,72, 23, 61 ,INF ,42 ,23 ,31, 77, 37 ,51 ,46 ,33},
+                                                /* 7 */{42 ,23 ,43 ,31 ,52 ,23 ,42 ,INF ,33, 15 ,37 ,33 ,33 ,31 ,37},
+                                                /* 8 */{51 ,23, 41 ,62, 21, 55 ,23 ,33, INF, 29 ,62 ,46, 29, 51 ,11},
+                                                /* 9 */{55 ,31 ,29 ,42 ,46 ,31 ,31, 15, 29 ,INF ,51 ,21 ,41 ,23 ,37},
+                                               /* 10 */{29 ,41, 79, 21, 82, 33, 77, 37, 62 ,51 ,INF, 65, 42, 59 ,61},
+                                               /* 11 */{74 ,51 ,21 ,51 ,58 ,37 ,37 ,33 ,46 ,21 ,65 ,INF, 61 ,11 ,55},
+                                               /* 12 */{23 ,11 ,64, 51, 46, 51, 51, 33, 29, 41 ,42 ,61 , INF, 62 ,23},
+                                               /* 13 */{72 ,52 ,31 ,43 ,65 ,29 ,46 ,31 ,51 ,23 , 59 ,11 ,62, INF, 59},
+                                               /* 14 */{46 ,21, 51, 64, 23 ,59 ,33 ,37, 11, 37,  61 ,55 ,23 ,59 ,INF}};
             try
             {
                 List<BranchAndBound.Pair<int, int[]>> solution = BranchAndBound.RunAlgorithm(testMatrix);
-                /*
-                BranchAndBound.Node node = BranchAndBound.PrepareMatrix(testMatrix);
-                BranchAndBound.Pair<int, int[]>[,] preparedMatrix = node.matrix;
-                BranchAndBound.ReduceMatrix(node);
-                BranchAndBound.Pair<BranchAndBound.Node, BranchAndBound.Node> nodes = BranchAndBound.DivideMatrix(node);
-                //MessageBox.Show(solution[0].ToString() + " " + solution[1].ToString());
-
-                */
-                //int matrix = solution.matrix.GetLength(1);
-                // Console.WriteLine("Rozwiazanie " + matrix + "LowerBound " + solution.lowerBound);
-                ShowSolution(solution);
-                /*
-                string matrixString = "";
-                for (int i = 0; i < preparedMatrix.GetLength(0); i++)
-                {
-                    for (int j = 0; j < preparedMatrix.GetLength(1); j++)
-                    {
-                        if (preparedMatrix[i, j].First != INF)
-                            matrixString += preparedMatrix[i, j].First.ToString();
-                        else
-                            matrixString += "INF";
-                        matrixString += "  ";
-                    }
-
-                matrixString += Environment.NewLine;
-                }
-                matrixString += Environment.NewLine;
-                this.textBox1.Text += matrixString;
-                */
-
             }
             catch (Exception exception)
             {
                 MessageBox.Show("Błąd: " + exception.Message);
             }
-        }
-
-        private void ShowSolution(List<BranchAndBound.Pair<int, int[]>> solutionList)
-        {
-            string solutionString = "";
-            foreach(BranchAndBound.Pair<int,int[]> edge in solutionList)
-            {
-                solutionString +="<" + edge.Second[0].ToString() + " ; " + edge.Second[1].ToString() + ">" + "(" + ((edge.First == INF) ? "INF" : edge.First.ToString()) + ")"+ "   - >   ";
-            }
-            //solutionString += solutionList[0]..ToString();
-            solutionString += Environment.NewLine;
-            this.textBox1.Text += solutionString;
         }
     }
 }
