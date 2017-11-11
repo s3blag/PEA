@@ -139,7 +139,7 @@ namespace Project_1
                 solutionString +="<" + edge.Second[0].ToString() + " ; " + edge.Second[1].ToString() + ">" + "(" + ((edge.First == INF) ? "INF" : edge.First.ToString()) + ")"+ "   - >   ";
             }
             //solutionString += solutionList[0]..ToString();
-
+            solutionString += Environment.NewLine;
             this.textBox1.Text += solutionString;
         }
     }
