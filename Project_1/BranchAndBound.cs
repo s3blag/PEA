@@ -435,7 +435,7 @@ namespace Project_1
         {
             Console.Write(Environment.NewLine);
             List<Pair<int, int[]>> List = solutionNode.excludedCities;
-            for (int i = 0; i <= matrix.GetLength(0); i++)
+            for (int i = 0; i < matrix.GetLength(0); i++)
             {
                 Console.Write("<" + List[i].Second[0].ToString() + " ; " + List[i].Second[1].ToString() + ">"  + "   - >   ");
                // if (i == matrix.GetLength(0) - 2)
