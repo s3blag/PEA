@@ -51,8 +51,8 @@ namespace Project_1
                 {
                     fileName = openFileDialog1.FileName;
                     cities = new Cities(fileName);
-                    DisplayCities(cities);
-                    
+                    textBox1.Text = cities.ShowCities();
+
                 }
             }
             catch (Exception ex)
@@ -65,8 +65,8 @@ namespace Project_1
         {
             try
             {
-                Cities cities = new Cities(Int32.Parse(textBoxNumberOfCities.Text));
-                DisplayCities(cities);
+                cities = new Cities(Int32.Parse(textBoxNumberOfCities.Text));
+                textBox1.Text = cities.ShowCities();
             }
             catch (Exception exception)
             {
@@ -152,26 +152,6 @@ namespace Project_1
                 MessageBox.Show("Błąd: " + exception.Message);
             }
         }
-
-        private void DisplayCities(Cities _cities)
-        {
-            string matrixString = "";
-            for (int i = 0; i < _cities.AdjacencyMatrix.GetLength(0); i++)
-            {
-                for (int j = 0; j < _cities.AdjacencyMatrix.GetLength(1); j++)
-                {
-                    if (_cities.AdjacencyMatrix[i, j] != INF)
-                        matrixString += _cities.AdjacencyMatrix[i, j].ToString();
-                    else
-                        matrixString += "INF";
-                    matrixString += "  ";
-                }
-
-                matrixString += Environment.NewLine;
-            }
-            this.textBox1.Text = matrixString;
-        }
-
         
     }
 }

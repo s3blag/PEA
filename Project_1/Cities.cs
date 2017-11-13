@@ -136,6 +136,25 @@ namespace Project_1
           
         }
 
+        public string ShowCities()
+        {
+            string matrixString = "";
+            for (int i = 0; i < AdjacencyMatrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < AdjacencyMatrix.GetLength(1); j++)
+                {
+                    if (AdjacencyMatrix[i, j] != INF)
+                        matrixString += AdjacencyMatrix[i, j].ToString();
+                    else
+                        matrixString += "INF";
+                    matrixString += "  ";
+                }
+
+                matrixString += Environment.NewLine;
+            }
+            return matrixString;
+        }
+
         
      
     }
