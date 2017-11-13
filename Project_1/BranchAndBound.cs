@@ -12,8 +12,8 @@ namespace Project_1
     {
         private const int INF = Int32.MaxValue;
 
-       //na private
-        public struct Node
+   
+        private struct Node
         {
             public Pair<int, int[]>[,] matrix;
             public int lowerBound;
@@ -44,8 +44,7 @@ namespace Project_1
             public U Second { get; set; }
         };
 
-
-        //zmienic na private
+        
         private static int ReduceMatrix(Node node)
         {
             Pair<int, int[]>[,] matrix = node.matrix;
@@ -123,8 +122,8 @@ namespace Project_1
             return reductionLevel;
         }
 
-        //zmienic na private
-        public static Pair<Node, Node> DivideMatrix(Node node)
+       
+        private static Pair<Node, Node> DivideMatrix(Node node)
         {
             Pair<int, int[]>[,] matrix = node.matrix;
             int currentMaxCost = 0;
@@ -172,8 +171,6 @@ namespace Project_1
 
             Node newNode1 = DeleteRoads(node, currentSolution);
             Node newNode2 = BlockRoad(node, currentSolution);
-
-            
 
             Pair<Node, Node> nodes = new Pair<Node, Node>(newNode1, newNode2);
             nodes.First = newNode1;
@@ -253,7 +250,6 @@ namespace Project_1
 
         private static int FindMaxExclusionCost(Pair<int, int[]>[,] matrix, int row, int column)
         {   
-
             int currentMinCost = INF;
             int totalCost = 0;
 
@@ -360,8 +356,6 @@ namespace Project_1
                Console.WriteLine("Nowa Macierz(2): ");
                Console.WriteLine(matrixString);
                */
-
-
                 tree.Add(firstDividedNode);
                 tree.Add(secondDividedNode);
                /* //wyswietlanie lower boundow
@@ -384,7 +378,6 @@ namespace Project_1
             /*Console.Write(Environment.NewLine);
             Console.Write("LB: " + solutionNode.lowerBound);
             Console.Write(Environment.NewLine);*/
-
 
             //  solution.Add(new Pair<int, int[]>(currentNode.matrix[0,0].First, currentNode.matrix[0,0].Second));
             ShowSolution(solutionNode, matrix);
