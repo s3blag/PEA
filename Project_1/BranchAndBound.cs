@@ -374,12 +374,12 @@ namespace Project_1
             else
                 solutionNode.lowerBound = INF;
             lastNode.excludedCities.Add(new Pair<int, int[]>(0, lastNode.matrix[0, 0].Second));
-            tree.Add(solutionNode);
+           // tree.Add(solutionNode);
             /*Console.Write(Environment.NewLine);
             Console.Write("LB: " + solutionNode.lowerBound);
             Console.Write(Environment.NewLine);*/
 
-            //  solution.Add(new Pair<int, int[]>(currentNode.matrix[0,0].First, currentNode.matrix[0,0].Second));
+            //solution.Add(new Pair<int, int[]>(currentNode.matrix[0,0].First, currentNode.matrix[0,0].Second));
             ShowSolution(solutionNode, matrix);
             return null;
         }
@@ -431,11 +431,8 @@ namespace Project_1
             Console.Write(Environment.NewLine);
             List<Pair<int, int[]>> List = solutionNode.excludedCities;
             for (int i = 0; i < matrix.GetLength(0); i++)
-            {
                 Console.Write("<" + List[i].Second[0].ToString() + " ; " + List[i].Second[1].ToString() + ">"  + "   - >   ");
-               // if (i == matrix.GetLength(0) - 2)
-                //    Console.Write("<" + List[i].Second[1].ToString() + " ; " + List[0].Second[0].ToString() + ">");
-            }
+              
 
             Console.Write(Environment.NewLine);
             Console.Write("Całkowity koszt: " + solutionNode.lowerBound);
