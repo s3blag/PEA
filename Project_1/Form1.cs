@@ -50,8 +50,7 @@ namespace Project_1
                 if (openFileDialog1.OpenFile() != null)
                 {
                     fileName = openFileDialog1.FileName;
-                    matrix = LoadMatrixFromFile(fileName);
-                    if (true) ;
+                    matrix = LoadMatrixFromFile(fileName);                   
                 }
             }
             catch (Exception ex)
@@ -215,7 +214,6 @@ namespace Project_1
                                 matrix[i, j] = currentWeight;
                             }
                             else
-                                if (character == 10)
                                 j--;
                         }
                     }
