@@ -10,7 +10,7 @@ namespace Project_1
     {
         Stopwatch stopWatch = new Stopwatch();
         Stream stream;
-
+        int[,] matrix;
         string fileName;
         static int INF = Int32.MaxValue;
 
@@ -50,6 +50,8 @@ namespace Project_1
                 if (openFileDialog1.OpenFile() != null)
                 {
                     fileName = openFileDialog1.FileName;
+                    matrix = LoadMatrixFromFile(fileName);
+                    if (true) ;
                 }
             }
             catch (Exception ex)
@@ -156,11 +158,74 @@ namespace Project_1
 
             try
             {
-                List<BranchAndBound.Pair<int, int[]>> solution = BranchAndBound.RunAlgorithm(testMatrix);
+                List<BranchAndBound.Pair<int, int[]>> solution = BranchAndBound.RunAlgorithm(matrix);
             }
             catch (Exception exception)
             {
                 MessageBox.Show("Błąd: " + exception.Message);
+            }
+        }
+
+        private int[,] LoadMatrixFromFile(string path)
+        {
+            try
+            {
+                using (StreamReader sr = new StreamReader(path))
+                {
+                    int numberOfCities = 0;
+                    string numberOfCitiesString = "";
+                    int[,] matrix;
+                    int character = sr.Read();
+                    while (character >= 48 && character <= 57)
+                    {
+                        numberOfCitiesString += (char)character;
+                        character = sr.Read();
+                    }
+
+                    if (!int.TryParse(numberOfCitiesString, out numberOfCities))
+                    {
+                        MessageBox.Show("Błędny format danych!");
+                        return null;
+                    }
+                    //  ASCII   symbol
+                    //  48      0
+                    //  57      9
+                    matrix = new int[numberOfCities, numberOfCities];
+                    for (int i = 0; i < numberOfCities; i++)
+                    {
+                        for (int j = 0; j < numberOfCities; j++)
+                        {
+                            string numberString = "";
+                            character = sr.Read();
+                            int currentWeight;
+                            while ((character >= 48 && character <= 57) || character == 45)
+                            {
+                                numberString += (char)character;
+                                character = sr.Read();
+                            }
+                            if (numberString != "")
+                            {
+                                if (!int.TryParse(numberString, out currentWeight))
+                                {
+                                    MessageBox.Show("Błędny format danych!");
+                                    return null;
+                                }
+                                if (i == j)
+                                    currentWeight = Int32.MaxValue;
+                                matrix[i, j] = currentWeight;
+                            }
+                            else
+                                if (character == 10)
+                                j--;
+                        }
+                    }
+                    return matrix;
+                }
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show(ex.ToString());
+                throw;
             }
         }
     }
