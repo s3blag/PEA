@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,6 +46,65 @@ namespace Project_1
             numberOfCities = _numberOfCities;
             GenerateCities(numberOfCities);
          }
+
+        public Cities(string path)
+        {
+            try
+            {
+                using (StreamReader sr = new StreamReader(path))
+                {
+                    numberOfCities = 0;
+                    string numberOfCitiesString = "";
+                    int character = sr.Read();
+                    while (character >= 48 && character <= 57)
+                    {
+                        numberOfCitiesString += (char)character;
+                        character = sr.Read();
+                    }
+
+                    if (!int.TryParse(numberOfCitiesString, out numberOfCities))
+                    {
+                        Console.WriteLine("Błędny format danych!");
+                        return;
+                    }
+                    
+                    adjacencyMatrix = new int[numberOfCities, numberOfCities];
+                    for (int i = 0; i < numberOfCities; i++)
+                    {
+                        for (int j = 0; j < numberOfCities; j++)
+                        {
+                            string numberString = "";
+                            character = sr.Read();
+                            int currentWeight;
+                            while ((character >= 48 && character <= 57) || character == 45)
+                            {
+                                numberString += (char)character;
+                                character = sr.Read();
+                            }
+                            if (numberString != "")
+                            {
+                                if (!int.TryParse(numberString, out currentWeight))
+                                {
+                                    Console.WriteLine("Błędny format danych!");
+                                    return;
+                                }
+                                if (i == j)
+                                    currentWeight = INF;
+                                adjacencyMatrix[i, j] = currentWeight;
+                            }
+                            else
+                                j--;
+                        }
+                    }
+                    
+                }
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine(ex.ToString());
+                throw;
+            }
+        }
 
         private void GenerateCities(int numberOfCities)
         {

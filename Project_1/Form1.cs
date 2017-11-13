@@ -10,7 +10,7 @@ namespace Project_1
     {
         Stopwatch stopWatch = new Stopwatch();
         Stream stream;
-        int[,] matrix;
+        Cities cities;
         string fileName;
         static int INF = Int32.MaxValue;
 
@@ -50,7 +50,9 @@ namespace Project_1
                 if (openFileDialog1.OpenFile() != null)
                 {
                     fileName = openFileDialog1.FileName;
-                    matrix = LoadMatrixFromFile(fileName);                   
+                    cities = new Cities(fileName);
+                    DisplayCities(cities);
+                    
                 }
             }
             catch (Exception ex)
@@ -64,21 +66,7 @@ namespace Project_1
             try
             {
                 Cities cities = new Cities(Int32.Parse(textBoxNumberOfCities.Text));
-                string matrixString = "";
-                for (int i = 0; i < cities.AdjacencyMatrix.GetLength(0); i++)
-                {
-                    for (int j = 0; j < cities.AdjacencyMatrix.GetLength(1); j++)
-                    {
-                        if (cities.AdjacencyMatrix[i, j] != INF)
-                            matrixString += cities.AdjacencyMatrix[i, j].ToString();
-                        else
-                            matrixString += "INF";
-                        matrixString += "  ";
-                    }
-
-                    matrixString += Environment.NewLine;
-                }
-                this.textBox1.Text = matrixString;
+                DisplayCities(cities);
             }
             catch (Exception exception)
             {
@@ -157,7 +145,7 @@ namespace Project_1
 
             try
             {
-                List<BranchAndBound.Pair<int, int[]>> solution = BranchAndBound.RunAlgorithm(matrix);
+                List<BranchAndBound.Pair<int, int[]>> solution = BranchAndBound.RunAlgorithm(cities.AdjacencyMatrix);
             }
             catch (Exception exception)
             {
@@ -165,66 +153,25 @@ namespace Project_1
             }
         }
 
-        private int[,] LoadMatrixFromFile(string path)
+        private void DisplayCities(Cities _cities)
         {
-            try
+            string matrixString = "";
+            for (int i = 0; i < _cities.AdjacencyMatrix.GetLength(0); i++)
             {
-                using (StreamReader sr = new StreamReader(path))
+                for (int j = 0; j < _cities.AdjacencyMatrix.GetLength(1); j++)
                 {
-                    int numberOfCities = 0;
-                    string numberOfCitiesString = "";
-                    int[,] matrix;
-                    int character = sr.Read();
-                    while (character >= 48 && character <= 57)
-                    {
-                        numberOfCitiesString += (char)character;
-                        character = sr.Read();
-                    }
-
-                    if (!int.TryParse(numberOfCitiesString, out numberOfCities))
-                    {
-                        MessageBox.Show("Błędny format danych!");
-                        return null;
-                    }
-                    //  ASCII   symbol
-                    //  48      0
-                    //  57      9
-                    matrix = new int[numberOfCities, numberOfCities];
-                    for (int i = 0; i < numberOfCities; i++)
-                    {
-                        for (int j = 0; j < numberOfCities; j++)
-                        {
-                            string numberString = "";
-                            character = sr.Read();
-                            int currentWeight;
-                            while ((character >= 48 && character <= 57) || character == 45)
-                            {
-                                numberString += (char)character;
-                                character = sr.Read();
-                            }
-                            if (numberString != "")
-                            {
-                                if (!int.TryParse(numberString, out currentWeight))
-                                {
-                                    MessageBox.Show("Błędny format danych!");
-                                    return null;
-                                }
-                                if (i == j)
-                                    currentWeight = Int32.MaxValue;
-                                matrix[i, j] = currentWeight;
-                            }
-                            else
-                                j--;
-                        }
-                    }
-                    return matrix;
+                    if (_cities.AdjacencyMatrix[i, j] != INF)
+                        matrixString += _cities.AdjacencyMatrix[i, j].ToString();
+                    else
+                        matrixString += "INF";
+                    matrixString += "  ";
                 }
+
+                matrixString += Environment.NewLine;
             }
-            catch (IOException ex)
-            {
-                MessageBox.Show(ex.ToString());
-                throw;
-            }
+            this.textBox1.Text = matrixString;
         }
+
+        
     }
 }
