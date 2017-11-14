@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Priority_Queue;
 
 namespace Project_1
 {
    
-    abstract class BranchAndBound
+    abstract internal class BranchAndBound
     {
         private const int INF = Int32.MaxValue;
 
-        //do poprawy chyba
-        public struct Node
+        struct Node
         {
             public Node(Pair<int, int[]>[,] newMatrix, int newLowerBound, List<Pair<int, int[]>> newExcludedCities)
             {
@@ -28,8 +27,7 @@ namespace Project_1
             
         }
 
-        //na private chyba
-        public class Pair<T, U>
+        class Pair<T, U>
         {
             public Pair()
             {
@@ -243,20 +241,23 @@ namespace Project_1
             return totalCost;
         }
 
-        public static void RunAlgorithm(int[,] matrix)
+        public static string RunAlgorithm(int[,] matrix)
         {
+            SimplePriorityQueue<Node> treeq = new SimplePriorityQueue<Node>();
             List<Node> tree = new List<Node>();
             Node firstNode = PrepareMatrix(matrix);
             Node lastNode = firstNode;
             Node currentNode = firstNode;
-            tree.Add(firstNode);
-
+            //tree.Add(firstNode);
+            treeq.Enqueue(firstNode, firstNode.lowerBound);
             while (currentNode.matrix.GetLength(1) != 2)
-            {
-                int currentNodeIndex = RefreshTree(tree);
-                currentNode = tree[currentNodeIndex];
+            {   
+
+               // int currentNodeIndex = RefreshTree(tree);
+                currentNode = treeq.Dequeue();//tree[currentNodeIndex];
                 Pair<Node, Node> newNodes = DivideMatrix(currentNode);
-                tree.RemoveAt(currentNodeIndex);
+                //tree.RemoveAt(currentNodeIndex);
+                
                 Node firstDividedNode = newNodes.First;
                 Node secondDividedNode = newNodes.Second;
 
@@ -272,8 +273,10 @@ namespace Project_1
                 else
                     secondDividedNode.lowerBound = INF;
 
-                tree.Add(firstDividedNode);
-                tree.Add(secondDividedNode);
+                treeq.Enqueue(firstDividedNode, firstDividedNode.lowerBound);
+                treeq.Enqueue(secondDividedNode, secondDividedNode.lowerBound);
+               // tree.Add(firstDividedNode);
+              //  tree.Add(secondDividedNode);
 
                 if (currentNode.matrix.GetLength(1) == 2)
                     lastNode = firstDividedNode;
@@ -286,10 +289,10 @@ namespace Project_1
                 solutionNode.lowerBound = INF;
             lastNode.excludedCities.Add(new Pair<int, int[]>(0, lastNode.matrix[0, 0].Second));
           
-            ShowSolution(solutionNode, matrix);
+            return ShowSolution(solutionNode, matrix);
         }
 
-        private static int RefreshTree(List<Node> tree)
+     /*   private static int RefreshTree(List<Node> tree)
         {
             int currentMinLowerBound = INF;
             int currentSolution = 0;
@@ -305,7 +308,7 @@ namespace Project_1
 
             return currentSolution;
         }
-
+        */
         private static Node PrepareMatrix(int[,] matrix)
         {
             int matrixLength = matrix.GetLength(0);
@@ -326,16 +329,22 @@ namespace Project_1
             return node;
         }
 
-        private static void ShowSolution(Node solutionNode, int[,] matrix)
+        private static string ShowSolution(Node solutionNode, int[,] matrix)
         {
-            Console.Write(Environment.NewLine);
-            List<Pair<int, int[]>> List = solutionNode.excludedCities;
+           
+            List<Pair<int, int[]>> list = solutionNode.excludedCities;
 
-            for (int i = 0; i < matrix.GetLength(0); i++)
-                Console.Write("<" + List[i].Second[0].ToString() + " ; " + List[i].Second[1].ToString() + ">"  + "   - >   ");
+            string solution = Environment.NewLine + "Rozwiązanie:" + Environment.NewLine;
 
-            Console.Write(Environment.NewLine);
-            Console.Write("Całkowity koszt: " + solutionNode.lowerBound);
+            foreach (var edge in list)
+            {   
+                solution += (" <" + edge.Second[0].ToString() + " ; " + edge.Second[1].ToString() + "> ");
+            }
+
+            solution += Environment.NewLine;
+            solution += "Całkowity koszt: " + solutionNode.lowerBound;
+
+            return solution;
         }
     }
 }

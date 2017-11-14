@@ -11,8 +11,7 @@ namespace Project_1
         Stopwatch stopWatch = new Stopwatch();
         Cities cities;
         string fileName;
-        static int INF = Int32.MaxValue;
-
+  
         public Form1()
         {
             InitializeComponent();
@@ -64,7 +63,7 @@ namespace Project_1
             {
                 cities = new Cities(Int32.Parse(textBoxNumberOfCities.Text),1,100, radioAsync.Checked);
                 textBox1.Text = cities.ShowCities();
-                BranchAndBound.RunAlgorithm(cities.AdjacencyMatrix);
+                textBox1.Text += BranchAndBound.RunAlgorithm(cities.AdjacencyMatrix);
             }
             catch (Exception exception)
             {
@@ -75,12 +74,12 @@ namespace Project_1
         private void buttonTest_Click(object sender, EventArgs e)
         {                                   
             try
-            {
-                BranchAndBound.RunAlgorithm(cities.AdjacencyMatrix);
+            {   
+                textBox1.Text += BranchAndBound.RunAlgorithm(cities.AdjacencyMatrix);
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                MessageBox.Show("Błąd: Źle podane wartości! " + exception );
+                MessageBox.Show("Błąd: Źle podane wartości! ");
             }
         }
 

@@ -21,7 +21,6 @@ namespace Project_1
             get
             {
                 return numberOfCities; 
-            
             }
 
         }
