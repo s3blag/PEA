@@ -8,7 +8,7 @@ using Priority_Queue;
 namespace Project_1
 {
    
-    abstract internal class BranchAndBound
+    static internal class BranchAndBound
     {
         private const int INF = Int32.MaxValue;
 

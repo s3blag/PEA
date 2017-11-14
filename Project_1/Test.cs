@@ -8,23 +8,25 @@ using System.Threading.Tasks;
 
 namespace Project_1
 {
-    abstract internal class Test
+    static internal class Test
     {
-        public static void RunTest(int size, int lowerWeight, int maxWeight, int numberOfTrials, string path)
+        public static void RunTest(int size, int minWeight, int maxWeight, int numberOfTrials, string path)
         {
             string output = "";
+            Cities initialCity = new Cities(10, 1, 30, true);
+            BranchAndBound.RunAlgorithm(initialCity.AdjacencyMatrix);
             Stopwatch stopWatch = new Stopwatch();
             for (int i = 0; i < numberOfTrials; i++)
             {                
-                Cities cities = new Cities(size, lowerWeight, maxWeight, true);
+                Cities cities = new Cities(size, minWeight, maxWeight, true);
                 Console.WriteLine("Próba: " + i.ToString());
 
                 stopWatch.Start();
                 BranchAndBound.RunAlgorithm(cities.AdjacencyMatrix);
                 stopWatch.Stop();
 
-                TimeSpan ts = stopWatch.Elapsed;
-                string elapsedTime = String.Format("{0:00}", ts.TotalMilliseconds);
+                
+                string elapsedTime = stopWatch.Elapsed.TotalMilliseconds.ToString();
                 output += elapsedTime + Environment.NewLine;
 
                 stopWatch.Reset();
