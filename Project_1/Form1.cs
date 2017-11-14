@@ -22,23 +22,6 @@ namespace Project_1
             textBoxTestPath.Text = Directory.GetCurrentDirectory() + "\\test.txt";
         }
 
-       /* private void buttonStop_Click(object sender, EventArgs e)
-        {
-            stopWatch.Stop();
-            TimeSpan ts = stopWatch.Elapsed;
-
-            // Format and display the TimeSpan value.
-            string elapsedTime = String.Format("{0:00}", ts.TotalMilliseconds);
-            textBox1.Text = "Czas: " + elapsedTime + "ms";
-            stopWatch.Reset();
-        }
-
-        private void buttonStart_Click(object sender, EventArgs e)
-        {   
-            stopWatch.Start();
-            textBox1.Text = "Start! ";
-        }*/
-
         private void buttonOpenFile_Click(object sender, EventArgs e)
         {
             openFileDialog1.ShowDialog();
@@ -71,18 +54,46 @@ namespace Project_1
             }      
         }
 
-
-        /*private void buttonTest_Click(object sender, EventArgs e)
-        {                                   
+        private void buttonStartTest_Click(object sender, EventArgs e)
+        {
+            int size = Int32.Parse(textBoxTestSize.Text);
+            int weightLow = Int32.Parse(textBoxWeightLow.Text);
+            int weightMax = Int32.Parse(textBoxWeightMax.Text);
+            int numberOfTrials = Int32.Parse(textBoxNumberOfTrials.Text);
+            string path = textBoxTestPath.Text;
             try
-            {   
+            {
+                Test.RunTest(size, weightLow, weightMax, numberOfTrials, path);
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
+        }
+
+        private void buttonSelectPath_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.ShowDialog();
+            try
+            {
+                textBoxTestPath.Text = saveFileDialog1.FileName;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void buttonRunAlgorithm_Click(object sender, EventArgs e)
+        {
+            try
+            {
                 textBox1.Text += BranchAndBound.RunAlgorithm(cities.AdjacencyMatrix);
             }
             catch (Exception)
             {
                 MessageBox.Show("Błąd: Źle podane wartości! ");
             }
-        }*/
-
+        }
     }
 }

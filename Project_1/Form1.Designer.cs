@@ -53,6 +53,9 @@
             this.buttonSelectPath = new System.Windows.Forms.Button();
             this.labelNumberOfTrials = new System.Windows.Forms.Label();
             this.textBoxNumberOfTrials = new System.Windows.Forms.TextBox();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.buttonRunAlgorithm = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -148,6 +151,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.buttonRunAlgorithm);
             this.tabPage1.Controls.Add(this.textBox1);
             this.tabPage1.Controls.Add(this.radioAsync);
             this.tabPage1.Controls.Add(this.label3);
@@ -268,15 +272,17 @@
             this.buttonStartTest.TabIndex = 9;
             this.buttonStartTest.Text = "Rozpocznij test";
             this.buttonStartTest.UseVisualStyleBackColor = true;
+            this.buttonStartTest.Click += new System.EventHandler(this.buttonStartTest_Click);
             // 
             // buttonSelectPath
             // 
-            this.buttonSelectPath.Location = new System.Drawing.Point(313, 197);
+            this.buttonSelectPath.Location = new System.Drawing.Point(317, 200);
             this.buttonSelectPath.Name = "buttonSelectPath";
             this.buttonSelectPath.Size = new System.Drawing.Size(75, 23);
             this.buttonSelectPath.TabIndex = 10;
             this.buttonSelectPath.Text = "Wybierz";
             this.buttonSelectPath.UseVisualStyleBackColor = true;
+            this.buttonSelectPath.Click += new System.EventHandler(this.buttonSelectPath_Click);
             // 
             // labelNumberOfTrials
             // 
@@ -293,6 +299,20 @@
             this.textBoxNumberOfTrials.Name = "textBoxNumberOfTrials";
             this.textBoxNumberOfTrials.Size = new System.Drawing.Size(100, 20);
             this.textBoxNumberOfTrials.TabIndex = 12;
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "txt";
+            // 
+            // buttonRunAlgorithm
+            // 
+            this.buttonRunAlgorithm.Location = new System.Drawing.Point(195, 341);
+            this.buttonRunAlgorithm.Name = "buttonRunAlgorithm";
+            this.buttonRunAlgorithm.Size = new System.Drawing.Size(114, 23);
+            this.buttonRunAlgorithm.TabIndex = 10;
+            this.buttonRunAlgorithm.Text = "Uruchom algorytm";
+            this.buttonRunAlgorithm.UseVisualStyleBackColor = true;
+            this.buttonRunAlgorithm.Click += new System.EventHandler(this.buttonRunAlgorithm_Click);
             // 
             // Form1
             // 
@@ -338,6 +358,9 @@
         private System.Windows.Forms.TextBox textBoxTestSize;
         private System.Windows.Forms.TextBox textBoxNumberOfTrials;
         private System.Windows.Forms.Label labelNumberOfTrials;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Button buttonRunAlgorithm;
+        private System.Windows.Forms.ColorDialog colorDialog1;
     }
 }
 
