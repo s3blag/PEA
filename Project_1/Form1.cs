@@ -83,5 +83,9 @@ namespace Project_1
             }
         }
 
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
