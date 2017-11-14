@@ -8,7 +8,7 @@ namespace Project_1
 {
     abstract internal class Test
     {
-        public void RunTest(int size, int numberOfTrials, )
+        public void RunTest(int size, int numberOfTrials)
         {
 
         }

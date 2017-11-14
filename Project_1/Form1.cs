@@ -19,10 +19,10 @@ namespace Project_1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            textBoxTestPath.Text = Directory.GetCurrentDirectory() + "\\test.txt";
         }
 
-        private void buttonStop_Click(object sender, EventArgs e)
+       /* private void buttonStop_Click(object sender, EventArgs e)
         {
             stopWatch.Stop();
             TimeSpan ts = stopWatch.Elapsed;
@@ -37,7 +37,7 @@ namespace Project_1
         {   
             stopWatch.Start();
             textBox1.Text = "Start! ";
-        }
+        }*/
 
         private void buttonOpenFile_Click(object sender, EventArgs e)
         {
@@ -71,7 +71,8 @@ namespace Project_1
             }      
         }
 
-        private void buttonTest_Click(object sender, EventArgs e)
+
+        /*private void buttonTest_Click(object sender, EventArgs e)
         {                                   
             try
             {   
@@ -81,11 +82,7 @@ namespace Project_1
             {
                 MessageBox.Show("Błąd: Źle podane wartości! ");
             }
-        }
+        }*/
 
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

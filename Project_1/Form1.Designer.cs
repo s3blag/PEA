@@ -28,45 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonStart = new System.Windows.Forms.Button();
-            this.buttonStop = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.buttonOpenFile = new System.Windows.Forms.Button();
             this.buttonGenShow = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.textBoxNumberOfCities = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.buttonTest = new System.Windows.Forms.Button();
             this.radioSync = new System.Windows.Forms.RadioButton();
             this.radioAsync = new System.Windows.Forms.RadioButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.labelPath = new System.Windows.Forms.Label();
+            this.labelWeightMax = new System.Windows.Forms.Label();
+            this.labelWeightLow = new System.Windows.Forms.Label();
+            this.labelWeight = new System.Windows.Forms.Label();
+            this.labelTestSize = new System.Windows.Forms.Label();
+            this.textBoxTestSize = new System.Windows.Forms.TextBox();
+            this.textBoxWeightLow = new System.Windows.Forms.TextBox();
+            this.textBoxWeightMax = new System.Windows.Forms.TextBox();
+            this.textBoxTestPath = new System.Windows.Forms.TextBox();
+            this.buttonStartTest = new System.Windows.Forms.Button();
+            this.buttonSelectPath = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // buttonStart
-            // 
-            this.buttonStart.Location = new System.Drawing.Point(205, 337);
-            this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(75, 25);
-            this.buttonStart.TabIndex = 0;
-            this.buttonStart.Text = "Start";
-            this.buttonStart.UseVisualStyleBackColor = true;
-            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
-            // 
-            // buttonStop
-            // 
-            this.buttonStop.Location = new System.Drawing.Point(286, 337);
-            this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(75, 25);
-            this.buttonStop.TabIndex = 0;
-            this.buttonStop.Text = "Stop";
-            this.buttonStop.UseVisualStyleBackColor = true;
-            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
             // textBox1
             // 
@@ -92,22 +80,13 @@
             // 
             // buttonGenShow
             // 
-            this.buttonGenShow.Location = new System.Drawing.Point(205, 368);
+            this.buttonGenShow.Location = new System.Drawing.Point(195, 382);
             this.buttonGenShow.Name = "buttonGenShow";
             this.buttonGenShow.Size = new System.Drawing.Size(156, 26);
             this.buttonGenShow.TabIndex = 3;
             this.buttonGenShow.Text = "Generuj oraz wyświetl";
             this.buttonGenShow.UseVisualStyleBackColor = true;
             this.buttonGenShow.Click += new System.EventHandler(this.buttonGenShow_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(202, 317);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Stoper:";
             // 
             // textBoxNumberOfCities
             // 
@@ -133,21 +112,11 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Otwórz plik:";
             // 
-            // buttonTest
-            // 
-            this.buttonTest.Location = new System.Drawing.Point(168, 424);
-            this.buttonTest.Name = "buttonTest";
-            this.buttonTest.Size = new System.Drawing.Size(75, 23);
-            this.buttonTest.TabIndex = 7;
-            this.buttonTest.Text = "Test";
-            this.buttonTest.UseVisualStyleBackColor = true;
-            this.buttonTest.Click += new System.EventHandler(this.buttonTest_Click);
-            // 
             // radioSync
             // 
             this.radioSync.AutoSize = true;
             this.radioSync.Checked = true;
-            this.radioSync.Location = new System.Drawing.Point(135, 368);
+            this.radioSync.Location = new System.Drawing.Point(135, 374);
             this.radioSync.Name = "radioSync";
             this.radioSync.Size = new System.Drawing.Size(49, 17);
             this.radioSync.TabIndex = 8;
@@ -158,7 +127,7 @@
             // radioAsync
             // 
             this.radioAsync.AutoSize = true;
-            this.radioAsync.Location = new System.Drawing.Point(135, 385);
+            this.radioAsync.Location = new System.Drawing.Point(135, 391);
             this.radioAsync.Name = "radioAsync";
             this.radioAsync.Size = new System.Drawing.Size(54, 17);
             this.radioAsync.TabIndex = 9;
@@ -172,19 +141,15 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 13);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(421, 489);
+            this.tabControl1.Size = new System.Drawing.Size(421, 445);
             this.tabControl1.TabIndex = 10;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.textBox1);
-            this.tabPage1.Controls.Add(this.buttonTest);
             this.tabPage1.Controls.Add(this.radioAsync);
-            this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.buttonStop);
             this.tabPage1.Controls.Add(this.radioSync);
-            this.tabPage1.Controls.Add(this.buttonStart);
             this.tabPage1.Controls.Add(this.buttonOpenFile);
             this.tabPage1.Controls.Add(this.textBoxNumberOfCities);
             this.tabPage1.Controls.Add(this.label2);
@@ -192,27 +157,128 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(413, 463);
+            this.tabPage1.Size = new System.Drawing.Size(413, 419);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "Branch And Bound";
             this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.buttonSelectPath);
+            this.tabPage2.Controls.Add(this.buttonStartTest);
+            this.tabPage2.Controls.Add(this.textBoxTestPath);
+            this.tabPage2.Controls.Add(this.textBoxWeightMax);
+            this.tabPage2.Controls.Add(this.textBoxWeightLow);
+            this.tabPage2.Controls.Add(this.textBoxTestSize);
+            this.tabPage2.Controls.Add(this.labelPath);
+            this.tabPage2.Controls.Add(this.labelWeightMax);
+            this.tabPage2.Controls.Add(this.labelWeightLow);
+            this.tabPage2.Controls.Add(this.labelWeight);
+            this.tabPage2.Controls.Add(this.labelTestSize);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(413, 463);
+            this.tabPage2.Size = new System.Drawing.Size(413, 419);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Test";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // labelPath
+            // 
+            this.labelPath.AutoSize = true;
+            this.labelPath.Location = new System.Drawing.Point(24, 122);
+            this.labelPath.Name = "labelPath";
+            this.labelPath.Size = new System.Drawing.Size(161, 13);
+            this.labelPath.TabIndex = 4;
+            this.labelPath.Text = "Podaj ścieżkę pliku wyjściowego";
+            // 
+            // labelWeightMax
+            // 
+            this.labelWeightMax.AutoSize = true;
+            this.labelWeightMax.Location = new System.Drawing.Point(164, 91);
+            this.labelWeightMax.Name = "labelWeightMax";
+            this.labelWeightMax.Size = new System.Drawing.Size(21, 13);
+            this.labelWeightMax.TabIndex = 3;
+            this.labelWeightMax.Text = "Do";
+            // 
+            // labelWeightLow
+            // 
+            this.labelWeightLow.AutoSize = true;
+            this.labelWeightLow.Location = new System.Drawing.Point(24, 91);
+            this.labelWeightLow.Name = "labelWeightLow";
+            this.labelWeightLow.Size = new System.Drawing.Size(21, 13);
+            this.labelWeightLow.TabIndex = 2;
+            this.labelWeightLow.Text = "Od";
+            // 
+            // labelWeight
+            // 
+            this.labelWeight.AutoSize = true;
+            this.labelWeight.Location = new System.Drawing.Point(24, 67);
+            this.labelWeight.Name = "labelWeight";
+            this.labelWeight.Size = new System.Drawing.Size(65, 13);
+            this.labelWeight.TabIndex = 1;
+            this.labelWeight.Text = "Zakres wagi";
+            // 
+            // labelTestSize
+            // 
+            this.labelTestSize.AutoSize = true;
+            this.labelTestSize.Location = new System.Drawing.Point(24, 21);
+            this.labelTestSize.Name = "labelTestSize";
+            this.labelTestSize.Size = new System.Drawing.Size(86, 13);
+            this.labelTestSize.TabIndex = 0;
+            this.labelTestSize.Text = "Rozmiar instancji";
+            // 
+            // textBoxTestSize
+            // 
+            this.textBoxTestSize.Location = new System.Drawing.Point(27, 37);
+            this.textBoxTestSize.Name = "textBoxTestSize";
+            this.textBoxTestSize.Size = new System.Drawing.Size(100, 20);
+            this.textBoxTestSize.TabIndex = 5;
+            // 
+            // textBoxWeightLow
+            // 
+            this.textBoxWeightLow.Location = new System.Drawing.Point(51, 88);
+            this.textBoxWeightLow.Name = "textBoxWeightLow";
+            this.textBoxWeightLow.Size = new System.Drawing.Size(100, 20);
+            this.textBoxWeightLow.TabIndex = 6;
+            // 
+            // textBoxWeightMax
+            // 
+            this.textBoxWeightMax.Location = new System.Drawing.Point(191, 88);
+            this.textBoxWeightMax.Name = "textBoxWeightMax";
+            this.textBoxWeightMax.Size = new System.Drawing.Size(100, 20);
+            this.textBoxWeightMax.TabIndex = 7;
+            // 
+            // textBoxTestPath
+            // 
+            this.textBoxTestPath.Location = new System.Drawing.Point(27, 139);
+            this.textBoxTestPath.Name = "textBoxTestPath";
+            this.textBoxTestPath.Size = new System.Drawing.Size(264, 20);
+            this.textBoxTestPath.TabIndex = 8;
+            // 
+            // buttonStartTest
+            // 
+            this.buttonStartTest.Location = new System.Drawing.Point(27, 232);
+            this.buttonStartTest.Name = "buttonStartTest";
+            this.buttonStartTest.Size = new System.Drawing.Size(100, 23);
+            this.buttonStartTest.TabIndex = 9;
+            this.buttonStartTest.Text = "Rozpocznij test";
+            this.buttonStartTest.UseVisualStyleBackColor = true;
+            // 
+            // buttonSelectPath
+            // 
+            this.buttonSelectPath.Location = new System.Drawing.Point(313, 136);
+            this.buttonSelectPath.Name = "buttonSelectPath";
+            this.buttonSelectPath.Size = new System.Drawing.Size(75, 23);
+            this.buttonSelectPath.TabIndex = 10;
+            this.buttonSelectPath.Text = "Wybierz";
+            this.buttonSelectPath.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(445, 514);
+            this.ClientSize = new System.Drawing.Size(445, 470);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -220,28 +286,36 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button buttonStart;
-        private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button buttonOpenFile;
         private System.Windows.Forms.Button buttonGenShow;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxNumberOfCities;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button buttonTest;
         private System.Windows.Forms.RadioButton radioSync;
         private System.Windows.Forms.RadioButton radioAsync;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Label labelWeight;
+        private System.Windows.Forms.Label labelTestSize;
+        private System.Windows.Forms.Label labelPath;
+        private System.Windows.Forms.Label labelWeightMax;
+        private System.Windows.Forms.Label labelWeightLow;
+        private System.Windows.Forms.Button buttonSelectPath;
+        private System.Windows.Forms.Button buttonStartTest;
+        private System.Windows.Forms.TextBox textBoxTestPath;
+        private System.Windows.Forms.TextBox textBoxWeightMax;
+        private System.Windows.Forms.TextBox textBoxWeightLow;
+        private System.Windows.Forms.TextBox textBoxTestSize;
     }
 }
 
