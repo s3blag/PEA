@@ -39,15 +39,23 @@ namespace Project_1
             }
         }
 
-
-        public Cities(int _numberOfCities)
+        public Cities(int numberOfCities, int min, int max, bool isAsync)
         {
             rand = new Random();
-            numberOfCities = _numberOfCities;
-            GenerateCities(numberOfCities);
-         }
+            this.numberOfCities = numberOfCities;
+
+            if (isAsync)
+                GenerateAsynchronousCities(numberOfCities, min, max);
+            else
+                GenerateSynchronousCities(numberOfCities, min, max);
+        }
 
         public Cities(string path)
+        {
+            ReadCitiesFromFile(path);
+        }
+
+        private void ReadCitiesFromFile(string path)
         {
             try
             {
@@ -67,7 +75,7 @@ namespace Project_1
                         Console.WriteLine("Błędny format danych!");
                         return;
                     }
-                    
+
                     adjacencyMatrix = new int[numberOfCities, numberOfCities];
                     for (int i = 0; i < numberOfCities; i++)
                     {
@@ -96,7 +104,6 @@ namespace Project_1
                                 j--;
                         }
                     }
-                    
                 }
             }
             catch (IOException ex)
@@ -106,34 +113,47 @@ namespace Project_1
             }
         }
 
-        private void GenerateCities(int numberOfCities)
+        //przy ilosc miast = 2 wychodzi poza zakres, to samo z sync
+        private void GenerateAsynchronousCities(int numberOfCities, int min, int max)
         {
             int randomDistance;
             adjacencyMatrix = new int[numberOfCities, numberOfCities];
 
-            //dopoki ilosc obecnych drog jest mniejsza od zadanej wielkosci grafu to generujemy kolejne drogi
             for (int i = 0; i < numberOfCities; i++)
             {
                 for (int j = 0; j < numberOfCities; j++)
                 {
-                    //sprawdzenie czy droga istnieje juz w grafie oraz czy losowa droga nie jest petla
                     if (i != j)
-                    {   //dodanie drogi
-                        randomDistance = rand.Next(1, (2 * numberOfCities));
+                    { 
+                        randomDistance = rand.Next(min, max);
                         adjacencyMatrix[i, j] = randomDistance;
                     }
                     else
-                    {
                         adjacencyMatrix[i, j] = INF;
-                    }
-
                 }
-
             }
-            //aktualizacja pól charakteryzujących symulacją sieci miast
+        }
 
-            this.numberOfCities = numberOfCities;
-          
+        private void GenerateSynchronousCities(int numberOfCities, int min, int max)
+        {
+            int randomDistance;
+            adjacencyMatrix = new int[numberOfCities, numberOfCities];
+
+            for (int i = 0; i < numberOfCities; i++)
+            {
+                for (int j = 0; j < numberOfCities; j++)
+                {
+                    if (adjacencyMatrix[i, j] == 0)
+                        if (i != j)
+                        {
+                            randomDistance = rand.Next(min, max);
+                            adjacencyMatrix[i, j] = randomDistance;
+                            adjacencyMatrix[j, i] = randomDistance;
+                        }
+                        else
+                            adjacencyMatrix[i, j] = INF;
+                }
+            }
         }
 
         public string ShowCities()
@@ -155,8 +175,5 @@ namespace Project_1
             return matrixString;
         }
 
-        
-     
     }
-
  }

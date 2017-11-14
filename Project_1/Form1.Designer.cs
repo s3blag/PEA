@@ -39,6 +39,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.buttonTest = new System.Windows.Forms.Button();
+            this.radioSync = new System.Windows.Forms.RadioButton();
+            this.radioAsync = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // buttonStart
@@ -85,9 +87,9 @@
             // 
             // buttonGenShow
             // 
-            this.buttonGenShow.Location = new System.Drawing.Point(185, 507);
+            this.buttonGenShow.Location = new System.Drawing.Point(244, 499);
             this.buttonGenShow.Name = "buttonGenShow";
-            this.buttonGenShow.Size = new System.Drawing.Size(215, 26);
+            this.buttonGenShow.Size = new System.Drawing.Size(156, 26);
             this.buttonGenShow.TabIndex = 3;
             this.buttonGenShow.Text = "Generuj oraz wyświetl";
             this.buttonGenShow.UseVisualStyleBackColor = true;
@@ -104,14 +106,14 @@
             // 
             // textBoxNumberOfCities
             // 
-            this.textBoxNumberOfCities.Location = new System.Drawing.Point(81, 511);
+            this.textBoxNumberOfCities.Location = new System.Drawing.Point(69, 505);
             this.textBoxNumberOfCities.Name = "textBoxNumberOfCities";
             this.textBoxNumberOfCities.Size = new System.Drawing.Size(82, 20);
             this.textBoxNumberOfCities.TabIndex = 5;
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(78, 495);
+            this.label2.Location = new System.Drawing.Point(78, 487);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(61, 13);
             this.label2.TabIndex = 0;
@@ -128,7 +130,7 @@
             // 
             // buttonTest
             // 
-            this.buttonTest.Location = new System.Drawing.Point(112, 451);
+            this.buttonTest.Location = new System.Drawing.Point(116, 426);
             this.buttonTest.Name = "buttonTest";
             this.buttonTest.Size = new System.Drawing.Size(75, 23);
             this.buttonTest.TabIndex = 7;
@@ -136,11 +138,35 @@
             this.buttonTest.UseVisualStyleBackColor = true;
             this.buttonTest.Click += new System.EventHandler(this.buttonTest_Click);
             // 
+            // radioSync
+            // 
+            this.radioSync.AutoSize = true;
+            this.radioSync.Checked = true;
+            this.radioSync.Location = new System.Drawing.Point(174, 499);
+            this.radioSync.Name = "radioSync";
+            this.radioSync.Size = new System.Drawing.Size(49, 17);
+            this.radioSync.TabIndex = 8;
+            this.radioSync.TabStop = true;
+            this.radioSync.Text = "Sync";
+            this.radioSync.UseVisualStyleBackColor = true;
+            // 
+            // radioAsync
+            // 
+            this.radioAsync.AutoSize = true;
+            this.radioAsync.Location = new System.Drawing.Point(174, 516);
+            this.radioAsync.Name = "radioAsync";
+            this.radioAsync.Size = new System.Drawing.Size(54, 17);
+            this.radioAsync.TabIndex = 9;
+            this.radioAsync.Text = "Async";
+            this.radioAsync.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(445, 553);
+            this.Controls.Add(this.radioAsync);
+            this.Controls.Add(this.radioSync);
             this.Controls.Add(this.buttonTest);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -172,6 +198,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonTest;
+        private System.Windows.Forms.RadioButton radioSync;
+        private System.Windows.Forms.RadioButton radioAsync;
     }
 }
 
