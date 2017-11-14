@@ -51,6 +51,8 @@
             this.textBoxTestPath = new System.Windows.Forms.TextBox();
             this.buttonStartTest = new System.Windows.Forms.Button();
             this.buttonSelectPath = new System.Windows.Forms.Button();
+            this.labelNumberOfTrials = new System.Windows.Forms.Label();
+            this.textBoxNumberOfTrials = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -164,6 +166,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.textBoxNumberOfTrials);
+            this.tabPage2.Controls.Add(this.labelNumberOfTrials);
             this.tabPage2.Controls.Add(this.buttonSelectPath);
             this.tabPage2.Controls.Add(this.buttonStartTest);
             this.tabPage2.Controls.Add(this.textBoxTestPath);
@@ -186,7 +190,7 @@
             // labelPath
             // 
             this.labelPath.AutoSize = true;
-            this.labelPath.Location = new System.Drawing.Point(24, 122);
+            this.labelPath.Location = new System.Drawing.Point(24, 183);
             this.labelPath.Name = "labelPath";
             this.labelPath.Size = new System.Drawing.Size(161, 13);
             this.labelPath.TabIndex = 4;
@@ -251,7 +255,7 @@
             // 
             // textBoxTestPath
             // 
-            this.textBoxTestPath.Location = new System.Drawing.Point(27, 139);
+            this.textBoxTestPath.Location = new System.Drawing.Point(27, 200);
             this.textBoxTestPath.Name = "textBoxTestPath";
             this.textBoxTestPath.Size = new System.Drawing.Size(264, 20);
             this.textBoxTestPath.TabIndex = 8;
@@ -267,12 +271,28 @@
             // 
             // buttonSelectPath
             // 
-            this.buttonSelectPath.Location = new System.Drawing.Point(313, 136);
+            this.buttonSelectPath.Location = new System.Drawing.Point(313, 197);
             this.buttonSelectPath.Name = "buttonSelectPath";
             this.buttonSelectPath.Size = new System.Drawing.Size(75, 23);
             this.buttonSelectPath.TabIndex = 10;
             this.buttonSelectPath.Text = "Wybierz";
             this.buttonSelectPath.UseVisualStyleBackColor = true;
+            // 
+            // labelNumberOfTrials
+            // 
+            this.labelNumberOfTrials.AutoSize = true;
+            this.labelNumberOfTrials.Location = new System.Drawing.Point(24, 122);
+            this.labelNumberOfTrials.Name = "labelNumberOfTrials";
+            this.labelNumberOfTrials.Size = new System.Drawing.Size(62, 13);
+            this.labelNumberOfTrials.TabIndex = 11;
+            this.labelNumberOfTrials.Text = "Liczba prób";
+            // 
+            // textBoxNumberOfTrials
+            // 
+            this.textBoxNumberOfTrials.Location = new System.Drawing.Point(27, 138);
+            this.textBoxNumberOfTrials.Name = "textBoxNumberOfTrials";
+            this.textBoxNumberOfTrials.Size = new System.Drawing.Size(100, 20);
+            this.textBoxNumberOfTrials.TabIndex = 12;
             // 
             // Form1
             // 
@@ -316,6 +336,8 @@
         private System.Windows.Forms.TextBox textBoxWeightMax;
         private System.Windows.Forms.TextBox textBoxWeightLow;
         private System.Windows.Forms.TextBox textBoxTestSize;
+        private System.Windows.Forms.TextBox textBoxNumberOfTrials;
+        private System.Windows.Forms.Label labelNumberOfTrials;
     }
 }
 
