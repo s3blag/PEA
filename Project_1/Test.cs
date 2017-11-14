@@ -13,10 +13,9 @@ namespace Project_1
         public static void RunTest(int size, int minWeight, int maxWeight, int numberOfTrials, string path)
         {
             string output = "";
-            Cities initialCity = new Cities(10, 1, 30, true);
-            BranchAndBound.RunAlgorithm(initialCity.AdjacencyMatrix);
+            string elapsedTime="";
             Stopwatch stopWatch = new Stopwatch();
-            for (int i = 0; i < numberOfTrials; i++)
+            for (int i = 0; i <= numberOfTrials; i++)
             {                
                 Cities cities = new Cities(size, minWeight, maxWeight, true);
                 Console.WriteLine("Próba: " + i.ToString());
@@ -25,9 +24,11 @@ namespace Project_1
                 BranchAndBound.RunAlgorithm(cities.AdjacencyMatrix);
                 stopWatch.Stop();
 
-                
-                string elapsedTime = stopWatch.Elapsed.TotalMilliseconds.ToString();
-                output += elapsedTime + Environment.NewLine;
+                if (i != 0)
+                {
+                    elapsedTime = stopWatch.Elapsed.TotalMilliseconds.ToString();
+                    output += elapsedTime + Environment.NewLine;
+                }
 
                 stopWatch.Reset();
             }
