@@ -95,5 +95,6 @@ namespace Project_1
                 MessageBox.Show("Błąd: Źle podane wartości! ");
             }
         }
+
     }
 }

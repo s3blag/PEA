@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Project_1
 {
-
     class Cities
     {
         public const int INF = Int32.MaxValue;
@@ -112,7 +111,6 @@ namespace Project_1
             }
         }
 
-        //przy ilosc miast = 2 wychodzi poza zakres, to samo z sync
         private void GenerateAsynchronousCities(int numberOfCities, int min, int max)
         {
             int randomDistance;
@@ -124,7 +122,7 @@ namespace Project_1
                 {
                     if (i != j)
                     { 
-                        randomDistance = rand.Next(min, max);
+                        randomDistance = rand.Next(min, max + 1);
                         adjacencyMatrix[i, j] = randomDistance;
                     }
                     else
@@ -145,7 +143,7 @@ namespace Project_1
                     if (adjacencyMatrix[i, j] == 0)
                         if (i != j)
                         {
-                            randomDistance = rand.Next(min, max);
+                            randomDistance = rand.Next(min, max + 1);
                             adjacencyMatrix[i, j] = randomDistance;
                             adjacencyMatrix[j, i] = randomDistance;
                         }

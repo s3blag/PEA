@@ -50,7 +50,6 @@
   <ItemGroup>
     <Compile Include="BranchAndBound.cs" />
     <Compile Include="Cities.cs" />
-    <Compile Include="Clock.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -244,17 +244,17 @@ namespace Project_1
         public static string RunAlgorithm(int[,] matrix)
         {
             SimplePriorityQueue<Node> treeq = new SimplePriorityQueue<Node>();
-            List<Node> tree = new List<Node>();
+            //List<Node> tree = new List<Node>();
             Node firstNode = PrepareMatrix(matrix);
             Node lastNode = firstNode;
             Node currentNode = firstNode;
             //tree.Add(firstNode);
             treeq.Enqueue(firstNode, firstNode.lowerBound);
             while (currentNode.matrix.GetLength(1) != 2)
-            {   
+            {
 
-               // int currentNodeIndex = RefreshTree(tree);
-                currentNode = treeq.Dequeue();//tree[currentNodeIndex];
+                //int currentNodeIndex = RefreshTree(tree);
+                currentNode = treeq.Dequeue(); //tree[currentNodeIndex];
                 Pair<Node, Node> newNodes = DivideMatrix(currentNode);
                 //tree.RemoveAt(currentNodeIndex);
                 
@@ -275,8 +275,8 @@ namespace Project_1
 
                 treeq.Enqueue(firstDividedNode, firstDividedNode.lowerBound);
                 treeq.Enqueue(secondDividedNode, secondDividedNode.lowerBound);
-               // tree.Add(firstDividedNode);
-              //  tree.Add(secondDividedNode);
+                //tree.Add(firstDividedNode);
+                //tree.Add(secondDividedNode);
 
                 if (currentNode.matrix.GetLength(1) == 2)
                     lastNode = firstDividedNode;
@@ -292,7 +292,7 @@ namespace Project_1
             return ShowSolution(solutionNode, matrix);
         }
 
-     /*   private static int RefreshTree(List<Node> tree)
+     /*private static int RefreshTree(List<Node> tree)
         {
             int currentMinLowerBound = INF;
             int currentSolution = 0;
