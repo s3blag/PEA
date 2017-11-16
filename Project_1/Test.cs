@@ -9,7 +9,15 @@ using System.Threading.Tasks;
 namespace Project_1
 {
     static internal class Test
-    {
+    {   
+        /// <summary>
+        /// Metoda odpowiedzialna za uruchomienie testów z zadanymi parametrami
+        /// </summary>
+        /// <param name="size"> Rozmiar instancji(ilość miast) </param>
+        /// <param name="minWeight"> Dolny zakres losowania wag </param>
+        /// <param name="maxWeight"> Górny zakres losowania wag </param>
+        /// <param name="numberOfTrials"> Ilość powtórzeń </param>
+        /// <param name="path"> Ścieżka pliku wyjściowego </param>
         public static void RunTest(int size, int minWeight, int maxWeight, int numberOfTrials, string path)
         {
             string output = "";
@@ -35,6 +43,11 @@ namespace Project_1
             WriteOutputToFile(path, output);
         }
 
+        /// <summary>
+        /// Zapis do pliku
+        /// </summary>
+        /// <param name="path"> Ścieżka pliku wyjściowego </param>
+        /// <param name="output"> Dane do zapisania </param>
         private static void WriteOutputToFile(string path, string output)
         {
             FileStream fs = new FileStream(path,

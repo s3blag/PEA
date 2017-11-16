@@ -15,6 +15,8 @@ namespace Project_1
         private Random rand;
         private int numberOfCities;
 
+
+        //akcesor
         public int NumberOfCities
         {
             get
@@ -24,6 +26,7 @@ namespace Project_1
 
         }
 
+        //akcesor
         public int[,] AdjacencyMatrix
         {
             get
@@ -36,7 +39,14 @@ namespace Project_1
                 adjacencyMatrix = value;
             }
         }
-
+        
+        /// <summary>
+        /// Konstruktor generujący instancję miast o losowych wagach i zadanym rozmiarze
+        /// </summary>
+        /// <param name="numberOfCities"> Ilość miast </param>
+        /// <param name="min"> Dolny zakres losowania wag </param>
+        /// <param name="max"> Górny zakres losowania wag </param>
+        /// <param name="isAsync"> Zmienna mówiąca dla jakiego problemu mamy generować miasta: asymetrycznego, bądź symetrycznego </param>
         public Cities(int numberOfCities, int min, int max, bool isAsync)
         {
             rand = new Random();
@@ -48,11 +58,19 @@ namespace Project_1
                 GenerateSynchronousCities(numberOfCities, min, max);
         }
 
+        /// <summary>
+        /// Konstruktor wczytujący miasta z zadanego pliku
+        /// </summary>
+        /// <param name="path"></param>
         public Cities(string path)
         {
             ReadCitiesFromFile(path);
         }
 
+        /// <summary>
+        /// Metoda wczytująca miasta z zadanego pliku
+        /// </summary>
+        /// <param name="path"> Ścieżka do pliku </param>
         private void ReadCitiesFromFile(string path)
         {
             try
@@ -111,6 +129,12 @@ namespace Project_1
             }
         }
 
+        /// <summary>
+        /// Metoda generująca miasta dla asynchronicznego problemu komiwojażera
+        /// </summary>
+        /// <param name="numberOfCities"> Ilość miast </param>
+        /// <param name="min"> Dolny zakres losowania wag </param>
+        /// <param name="max"> Górny zakres losowania wag </param>
         private void GenerateAsynchronousCities(int numberOfCities, int min, int max)
         {
             int randomDistance;
@@ -131,6 +155,12 @@ namespace Project_1
             }
         }
 
+        /// <summary>
+        /// Metoda generująca miasta dla synchronicznego problemu komiwojażera
+        /// </summary>
+        /// <param name="numberOfCities"> Ilość miast </param>
+        /// <param name="min"> Dolny zakres losowania wag </param>
+        /// <param name="max"> Górny zakres losowania wag </param>
         private void GenerateSynchronousCities(int numberOfCities, int min, int max)
         {
             int randomDistance;
@@ -153,6 +183,10 @@ namespace Project_1
             }
         }
 
+        /// <summary>
+        /// Metoda odpowiedzialna za wizualizację macierzy miast 
+        /// </summary>
+        /// <returns> string przechowujący zwizualizowaną macierz sąsiedztwa </returns>
         public string ShowCities()
         {
             string matrixString = "";

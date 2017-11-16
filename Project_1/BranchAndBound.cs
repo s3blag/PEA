@@ -12,18 +12,30 @@ namespace Project_1
     {
         private const int INF = Int32.MaxValue;
 
+        /// <summary>
+        /// Węzeł drzewa rozwiązań
+        /// </summary>
         struct Node
         {
             public Node(Pair<int, int[]>[,] newMatrix, int newLowerBound, List<Pair<int, int[]>> newExcludedCities)
             {
                 this.matrix = newMatrix;
                 this.lowerBound = newLowerBound;
-                this.excludedCities = newExcludedCities;
+                this.excludedPaths = newExcludedCities;
             }
 
+            /// <summary>
+            /// Macierz pary - (Waga na danej pozycji, oryginalne współrzędne)
+            /// </summary>
             public Pair<int, int[]>[,] matrix;
+            /// <summary>
+            /// Dolne ograniczenie danego węzła
+            /// </summary>
             public int lowerBound;
-            public List<Pair<int, int[]>> excludedCities;
+            /// <summary>
+            /// Lista wyłączonych miast - służy do odczytu ścieżki rozwiązania
+            /// </summary>
+            public List<Pair<int, int[]>> excludedPaths;
             
         }
 
@@ -43,6 +55,11 @@ namespace Project_1
             public U Second { get; set; }
         };
 
+        /// <summary>
+        /// Redukcja wierszy oraz kolumn macierzy
+        /// </summary>
+        /// <param name="node"> Węzeł, którego macierz chcemy zredukować</param>
+        /// <returns> Stopień redukcji </returns>
         private static int ReduceMatrix(Node node)
         {
             Pair<int, int[]>[,] matrix = node.matrix;
@@ -53,6 +70,11 @@ namespace Project_1
             return reductionLevel;
         }
 
+        /// <summary>
+        /// Redukcja wiersza macierzy
+        /// </summary>
+        /// <param name="matrix"> Macierz, której wiersz chcemy zredukować </param>
+        /// <returns> Stopień redukcji(Suma wartości, o które zredukowaliśmy kolumny) </returns>
         private static int ReduceRow(Pair<int, int[]>[,] matrix)
         {
             int min;
@@ -61,13 +83,14 @@ namespace Project_1
             for (int i = 0; i < matrix.GetLength(0); i++)
             {
                 min = INF;
-
+                //znalezienie wartości minimalnej dla danego wiersza
                 for (int j = 0; j < matrix.GetLength(1); j++)
                 {
                     if (matrix[i, j].First < min)
                         min = matrix[i, j].First;
                 }
 
+                //usunięcie min od wag wszystkich kolumn danego wiersza
                 if (min != 0)
                 {
                     for (int j = 0; j < matrix.GetLength(1); j++)
@@ -81,7 +104,11 @@ namespace Project_1
 
             return reductionLevel;
         }
-
+        /// <summary>
+        /// Redukcja kolumny macierzy
+        /// </summary>
+        /// <param name="matrix"> Macierz, której wiersz chcemy zredukować </param>
+        /// <returns> Stopień redukcji(Suma wartości, o które zredukowaliśmy wiersze) </returns>
         private static int ReduceColumn(Pair<int, int[]>[,] matrix)
         {
             int min;
@@ -90,13 +117,14 @@ namespace Project_1
             for (int i = 0; i < matrix.GetLength(1); i++)
             {
                 min = INF;
-
+                //znalezienie wartości minimalnej dla danej kolumny
                 for (int j = 0; j < matrix.GetLength(0); j++)
                 {
                     if (matrix[j, i].First < min)
                         min = matrix[j, i].First;
                 }
 
+                //usunięcie min od wag wszystkich wierszy danej kolumny
                 if (min != 0)
                 {
                     for (int j = 0; j < matrix.GetLength(0); j++)
@@ -111,6 +139,13 @@ namespace Project_1
             return reductionLevel;
         }
        
+        /// <summary>
+        /// Podział węzła na dwa nowe: 
+        /// 1. Ze zredukowaną macierzą
+        /// 2. Ze zmodyfikowaną macierzą
+        /// </summary>
+        /// <param name="node"> Węzeł, na którym chcemy wykonać podział </param>
+        /// <returns> Para nowych węzłów </returns>
         private static Pair<Node, Node> DivideMatrix(Node node)
         {
             Pair<int, int[]>[,] matrix = node.matrix;
@@ -124,8 +159,8 @@ namespace Project_1
                 {
                     if (matrix[i, j].First == 0)
                     {
-                        currentCost = FindMaxExclusionCost(matrix, i, j);
-                        if (FindMaxExclusionCost(matrix, i, j) > currentMaxCost)
+                        currentCost = FindExclusionCost(matrix, i, j);
+                        if (currentCost > currentMaxCost)
                         {
                             currentSolution[0] = i;
                             currentSolution[1] = j;
@@ -135,8 +170,9 @@ namespace Project_1
                 }                 
             }
 
-            Node newNode1 = DeleteRoads(node, currentSolution);
-            Node newNode2 = BlockRoad(node, currentSolution);
+            //Tworzenie dwóch nowych węzłów
+            Node newNode1 = DeleteSelectedPaths(node, currentSolution);
+            Node newNode2 = BlockPath(node, currentSolution);
 
             Pair<Node, Node> nodes = new Pair<Node, Node>(newNode1, newNode2);
             nodes.First = newNode1;
@@ -145,7 +181,13 @@ namespace Project_1
             return nodes;
         }
 
-        private static Node DeleteRoads(Node node, int[] coordinatesToDelete)
+        /// <summary>
+        /// Tworzenie nowego węzła ze zredukowaną ilością wierszy i kolumn macierzy
+        /// </summary>
+        /// <param name="node"> Węzeł, na podstawie którego tworzymy nowy, zredukowany węzeł </param>
+        /// <param name="coordinatesToDelete"> Współrzędne wiersza i kolumny do usunięcia (pominięcia przy kopiowaniu) </param>
+        /// <returns></returns>
+        private static Node DeleteSelectedPaths(Node node, int[] coordinatesToDelete)
         {
             Pair<int, int[]>[,] matrix = node.matrix;
             Pair<int, int[]>[,] newMatrix = new Pair<int, int[]>[matrix.GetLength(0) - 1, matrix.GetLength(1) - 1];
@@ -166,6 +208,7 @@ namespace Project_1
                     newRowIndex = i;
                     newColumnIndex = j;
 
+                    //obranie offsetu indeksu, w przypadku wcześniejszego usunięcia kolumny/wiersza
                     if (i > coordinatesToDelete[0])
                         newRowIndex = i - 1;
                     if (j > coordinatesToDelete[1])
@@ -182,14 +225,22 @@ namespace Project_1
             }
 
             Node newNode = new Node(newMatrix, node.lowerBound, new List<Pair<int, int[]>>());
-            for (int i = 0; i < node.excludedCities.Count; i++)
-                newNode.excludedCities.Add(node.excludedCities[i]);
-            newNode.excludedCities.Add(matrix[coordinatesToDelete[0], coordinatesToDelete[1]]);
+            //kopiowanie listy usuniętych ścieżek
+            for (int i = 0; i < node.excludedPaths.Count; i++)
+                newNode.excludedPaths.Add(node.excludedPaths[i]);
+            //dodanie usuniętej pary (wiersz,kolumna) do nowo powstałego węzła
+            newNode.excludedPaths.Add(matrix[coordinatesToDelete[0], coordinatesToDelete[1]]);
 
             return newNode;
         }
 
-        private static Node BlockRoad(Node node, int[] coordinatesToDelete)
+        /// <summary>
+        /// Tworzenie nowego węzła z zablokowaną wybraną ścieżką
+        /// </summary>
+        /// <param name="node"> Węzeł, na podstawie którego tworzymy nowy, zmodyfikowany węzeł </param>
+        /// <param name="coordinatesToDelete"> Ścieżka, którą mamy zablokować </param>
+        /// <returns> Nowy węzeł z zablokowaną ścieżką </returns>
+        private static Node BlockPath(Node node, int[] coordinatesToDelete)
         {
             Pair<int, int[]>[,] matrix = node.matrix;
             Pair<int, int[]>[,] newMatrix = new Pair<int, int[]>[matrix.GetLength(0), matrix.GetLength(1)];
@@ -203,13 +254,21 @@ namespace Project_1
 
             newMatrix[coordinatesToDelete[0], coordinatesToDelete[1]].First = INF;
             Node newNode = new Node(newMatrix, 0, new List<Pair<int, int[]>>());
-            for (int i = 0; i < node.excludedCities.Count; i++)
-                newNode.excludedCities.Add(node.excludedCities[i]);
+            //kopiowanie listy usuniętych ścieżek
+            for (int i = 0; i < node.excludedPaths.Count; i++)
+                newNode.excludedPaths.Add(node.excludedPaths[i]);
 
             return newNode;
         }
 
-        private static int FindMaxExclusionCost(Pair<int, int[]>[,] matrix, int row, int column)
+        /// <summary>
+        /// Znalezienie kosztu wyłączenia danej kolumny i wiersza macierzy
+        /// </summary>
+        /// <param name="matrix"> Macierz, którą będziemy badać </param>
+        /// <param name="row"> Wiersz, dla którego będziemy szukać kosztu wyłączenia </param>
+        /// <param name="column"> Kolumna, dla której będziemy szukać kosztu wyłączenia </param>
+        /// <returns> Koszt wyłączenia danej kolumny i wiersza </returns>
+        private static int FindExclusionCost(Pair<int, int[]>[,] matrix, int row, int column)
         {   
             int currentMinCost = INF;
             int totalCost = 0;
@@ -241,74 +300,67 @@ namespace Project_1
             return totalCost;
         }
 
+        /// <summary>
+        /// Metoda, w której wykonuje się całość algorytmu
+        /// </summary>
+        /// <param name="matrix"> Macierz miast, dla której zostanie uruchomiony algorytm </param>
+        /// <returns> Rozwiązanie problemu metodą podziału i ograniczeń </returns>
         public static string RunAlgorithm(int[,] matrix)
         {
             SimplePriorityQueue<Node> treeq = new SimplePriorityQueue<Node>();
-            //List<Node> tree = new List<Node>();
+            //Przygotowanie macierzy miast
             Node firstNode = PrepareMatrix(matrix);
             Node lastNode = firstNode;
             Node currentNode = firstNode;
-            //tree.Add(firstNode);
             treeq.Enqueue(firstNode, firstNode.lowerBound);
+
             while (currentNode.matrix.GetLength(1) != 2)
             {
-
-                //int currentNodeIndex = RefreshTree(tree);
-                currentNode = treeq.Dequeue(); //tree[currentNodeIndex];
+                currentNode = treeq.Dequeue();
                 Pair<Node, Node> newNodes = DivideMatrix(currentNode);
-                //tree.RemoveAt(currentNodeIndex);
                 
                 Node firstDividedNode = newNodes.First;
                 Node secondDividedNode = newNodes.Second;
 
+                //Redukcja węzła z macierzą zredukowaną oraz aktualizacja jego dolnego ograniczenia
                 int tempReductionLevel = ReduceMatrix(firstDividedNode);
                 if (tempReductionLevel != INF && currentNode.lowerBound != INF)
                     firstDividedNode.lowerBound = tempReductionLevel + currentNode.lowerBound;
                 else
                     firstDividedNode.lowerBound = INF;
 
+                //Redukcja węzła z macierzą o zablokowanej drodze oraz aktualizacja jego dolnego ograniczenia
                 tempReductionLevel = ReduceMatrix(secondDividedNode);
                 if (tempReductionLevel != INF && currentNode.lowerBound != INF)
                     secondDividedNode.lowerBound = tempReductionLevel + currentNode.lowerBound;
                 else
                     secondDividedNode.lowerBound = INF;
-
+                
+                //Dodanie obu węzłów do drzewa rozwiązań
                 treeq.Enqueue(firstDividedNode, firstDividedNode.lowerBound);
                 treeq.Enqueue(secondDividedNode, secondDividedNode.lowerBound);
-                //tree.Add(firstDividedNode);
-                //tree.Add(secondDividedNode);
 
                 if (currentNode.matrix.GetLength(1) == 2)
                     lastNode = firstDividedNode;
             }
-            Node solutionNode = new Node(null, lastNode.lowerBound, lastNode.excludedCities);
+            //Operacje na węźle o rozmiarze macierzy = 1
+            Node solutionNode = new Node(null, lastNode.lowerBound, lastNode.excludedPaths);
             int solutionNodeReductionLevel = ReduceMatrix(lastNode);
             if (solutionNodeReductionLevel != INF && lastNode.lowerBound != INF)
                 solutionNode.lowerBound = solutionNodeReductionLevel + lastNode.lowerBound;
             else
                 solutionNode.lowerBound = INF;
-            lastNode.excludedCities.Add(new Pair<int, int[]>(0, lastNode.matrix[0, 0].Second));
-          
-            return ShowSolution(solutionNode, matrix);
+            lastNode.excludedPaths.Add(new Pair<int, int[]>(0, lastNode.matrix[0, 0].Second));
+
+            //Zwrócenie wyniku działania algorytmu
+            return ShowSolution(solutionNode);
         }
 
-     /*private static int RefreshTree(List<Node> tree)
-        {
-            int currentMinLowerBound = INF;
-            int currentSolution = 0;
-
-            for (int currentNode = 0; currentNode < tree.Count; currentNode++)
-            {                
-                if (tree[currentNode].lowerBound < currentMinLowerBound)
-                {
-                    currentMinLowerBound = tree[currentNode].lowerBound;
-                    currentSolution = currentNode;
-                }
-            }
-
-            return currentSolution;
-        }
-        */
+        /// <summary>
+        /// Przygotowanie macierzy miast(sąsiedztwa) do pracy z algorytmem
+        /// </summary>
+        /// <param name="matrix"> Macierz sąsiedztwa </param>
+        /// <returns> Węzeł początkowy algorytmu </returns>
         private static Node PrepareMatrix(int[,] matrix)
         {
             int matrixLength = matrix.GetLength(0);
@@ -329,16 +381,22 @@ namespace Project_1
             return node;
         }
 
-        private static string ShowSolution(Node solutionNode, int[,] matrix)
+
+        /// <summary>
+        /// Generacja wizualizacji rozwiązania w postaci ścieżek będących rozwiązaniem
+        /// </summary>
+        /// <param name="solutionNode"> Węzeł będący rozwiązaniem </param>
+        /// <returns> Ciąg krawędzi będących rozwiązaniem oraz koszt podróży </returns>
+        private static string ShowSolution(Node solutionNode)
         {
            
-            List<Pair<int, int[]>> list = solutionNode.excludedCities;
+            List<Pair<int, int[]>> list = solutionNode.excludedPaths;
 
             string solution = Environment.NewLine + "Rozwiązanie:" + Environment.NewLine;
 
-            foreach (var edge in list)
+            foreach (var path in list)
             {   
-                solution += (" <" + edge.Second[0].ToString() + " ; " + edge.Second[1].ToString() + "> ");
+                solution += (" <" + path.Second[0].ToString() + " ; " + path.Second[1].ToString() + "> ");
             }
 
             solution += Environment.NewLine;
