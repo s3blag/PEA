@@ -57,5 +57,17 @@ namespace Project_1
 
             return solution;
         }
+
+        public static void ReduceTabu(int[,] tabu)
+        {
+            for(int currentRow = 0; currentRow < tabu.GetLength(0); currentRow++)
+            {
+                for(int currentColumn = 0; currentColumn < tabu.GetLength(0); currentColumn++)
+                {
+                    if (tabu[currentRow, currentColumn] > 0)
+                        tabu[currentRow, currentColumn]--;
+                }
+            }
+        }
     }
 }
