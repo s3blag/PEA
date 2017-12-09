@@ -1,5 +1,7 @@
 # PEA_1
-# ALGORYTM
+# ALGORYTM Tabu Search
+  DOC: https://docs.google.com/document/d/1Rr0BxtJoinHOcSY_GFVdm3YHKOfvbK3eekTxQpy1BJk/edit?usp=sharing
+# ALGORYTM Branch&Bound
 1. Wyszukanie macierzy/wierzchołka o najmniejszej wartości kresu dolnego - który nie był rozwinięty
 2. Przeszukanie wszystkich wierszy i znalezienie dla każdego najmniejszej wartości
 3. Odjęcie wartości od danych wierszy
