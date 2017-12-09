@@ -96,5 +96,43 @@ namespace Project_1
             }
         }
 
+        private void buttonTest_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                cities = new Cities(Int32.Parse(textBoxNumberOfCities.Text), 1, 100, radioAsync.Checked);
+                textBox1.Text = cities.ShowCities();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Nie można wygenerować miast! Błąd: " + exception.Message);
+            }
+            int[] solution = TabuSearch.GetGreedySolution(cities.AdjacencyMatrix, 0);
+
+            textBox1.Text += Environment.NewLine;
+
+            for (int i = 0; i < solution.GetLength(0); i++)
+            {
+                textBox1.Text += solution[i] + " ";              
+            }
+
+            textBox1.Text += Environment.NewLine;
+
+            textBox1.Text += TabuSearch.GetSolutionWeight(solution, cities.AdjacencyMatrix);
+
+            TabuSearch.SwapCities(2, 4, solution);
+
+            textBox1.Text += Environment.NewLine;
+
+            for (int i = 0; i < solution.GetLength(0); i++)
+            {
+                textBox1.Text += solution[i] + " ";
+            }
+
+            textBox1.Text += Environment.NewLine;
+
+            textBox1.Text += TabuSearch.GetSolutionWeight(solution, cities.AdjacencyMatrix);
+
+        }
     }
 }
