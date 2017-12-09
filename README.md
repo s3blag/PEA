@@ -1,6 +1,5 @@
 # PEA_1
 # ALGORYTM Tabu Search
-  To be continued ... 
   DOC: https://docs.google.com/document/d/1Rr0BxtJoinHOcSY_GFVdm3YHKOfvbK3eekTxQpy1BJk/edit?usp=sharing
 # ALGORYTM Branch&Bound
 1. Wyszukanie macierzy/wierzchołka o najmniejszej wartości kresu dolnego - który nie był rozwinięty
