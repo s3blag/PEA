@@ -20,5 +20,5 @@ namespace Project_1
 
         public T First { get; set; }
         public U Second { get; set; }
-    };
+    }
 }
