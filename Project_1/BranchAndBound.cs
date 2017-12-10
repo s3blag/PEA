@@ -49,7 +49,8 @@ namespace Project_1
             Pair<int, int[]>[,] matrix = node.matrix;
             int reductionLevel = 0;
             reductionLevel += ReduceRow(matrix);
-            reductionLevel += ReduceColumn(matrix);
+            if(reductionLevel != INF)
+                reductionLevel += ReduceColumn(matrix);
 
             return reductionLevel;
         }
@@ -82,7 +83,13 @@ namespace Project_1
                         if (matrix[i, j].First != INF)
                             matrix[i, j].First -= min;
                     }
-                    reductionLevel += min;
+                    if (min != INF)
+                        reductionLevel += min;
+                    else
+                    {
+                        reductionLevel = INF;
+                        break;
+                    }
                 }
             }
 
@@ -116,7 +123,13 @@ namespace Project_1
                         if (matrix[j, i].First != INF)
                             matrix[j, i].First -= min;
                     }
-                    reductionLevel += min;
+                    if(min != INF)
+                        reductionLevel += min;
+                    else
+                    {
+                        reductionLevel = INF;
+                        break;
+                    }
                 }
             }
 
@@ -136,7 +149,8 @@ namespace Project_1
             int currentMaxCost = 0;
             int[] currentSolution = new int[2];
             int currentCost;
-
+            currentSolution[0] = 0;
+            currentSolution[1] = 1;
             for (int i = 0; i < matrix.GetLength(0); i++)
             {
                 for (int j = 0; j < matrix.GetLength(1); j++)
@@ -297,9 +311,10 @@ namespace Project_1
             Node lastNode = firstNode;
             Node currentNode = firstNode;
             treeq.Enqueue(firstNode, firstNode.lowerBound);
-
+            int test = 0;
             while (currentNode.matrix.GetLength(1) != 2)
             {
+                
                 currentNode = treeq.Dequeue();
                 Pair<Node, Node> newNodes = DivideMatrix(currentNode);
                 
@@ -326,6 +341,7 @@ namespace Project_1
 
                 if (currentNode.matrix.GetLength(1) == 2)
                     lastNode = firstDividedNode;
+                test++;
             }
             //Operacje na węźle o rozmiarze macierzy = 1
             Node solutionNode = new Node(null, lastNode.lowerBound, lastNode.excludedPaths);
@@ -375,7 +391,6 @@ namespace Project_1
         {
            
             List<Pair<int, int[]>> list = solutionNode.excludedPaths;
-
             string solution = Environment.NewLine + "Rozwiązanie:" + Environment.NewLine;
 
             foreach (var path in list)
@@ -385,6 +400,7 @@ namespace Project_1
 
             solution += Environment.NewLine;
             solution += "Całkowity koszt: " + solutionNode.lowerBound;
+            
 
             return solution;
         }

@@ -98,22 +98,28 @@ namespace Project_1
 
         private void buttonTest_Click(object sender, EventArgs e)
         {
+
             
-            try
-            {
-                cities = new Cities(Int32.Parse(textBoxNumberOfCities.Text), 1, 100, radioAsync.Checked);
-                textBox1.Text = cities.ShowCities();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show("Nie można wygenerować miast! Błąd: " + exception.Message);
-            }
+                /*try
+                {
+                    cities = new Cities(Int32.Parse(textBoxNumberOfCities.Text), 1, 100, radioAsync.Checked);
+                    textBox1.Text = cities.ShowCities();
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show("Nie można wygenerować miast! Błąd: " + exception.Message);
+                }*/
 
-            textBox1.Text += Environment.NewLine +  "-------------------   TABU   ---------------------" + Environment.NewLine;
-            textBox1.Text += TabuSearch.RunAlgorithm(cities.AdjacencyMatrix, 10, 10000);
-            textBox1.Text += Environment.NewLine + "-------------------   Branch and Bound   ---------------------" + Environment.NewLine;
-            textBox1.Text += BranchAndBound.RunAlgorithm(cities.AdjacencyMatrix);
 
+                /*textBox1.Text += Environment.NewLine +  "-------------------   TABU   ---------------------" + Environment.NewLine;
+                textBox1.Text += TabuSearch.RunAlgorithm(cities.AdjacencyMatrix, 10, 10000);*/
+                textBox1.Text += Environment.NewLine + "-------------------   Branch and Bound   ---------------------" + Environment.NewLine;
+                textBox1.Text += BranchAndBound.RunAlgorithm(cities.AdjacencyMatrix);
+                textBox1.Text += Environment.NewLine + "-------------------   Brute Force   ---------------------" + Environment.NewLine;
+                textBox1.Text += Environment.NewLine;
+                textBox1.Text += BruteForce.RunAlgorithm(cities);
+                
+            
         }
     }
 }
