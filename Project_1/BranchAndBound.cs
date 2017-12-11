@@ -189,7 +189,7 @@ namespace Project_1
         {
             Pair<int, int[]>[,] matrix = node.matrix;
             Pair<int, int[]>[,] newMatrix = new Pair<int, int[]>[matrix.GetLength(0) - 1, matrix.GetLength(1) - 1];
-
+            
             int newRowIndex = 0, newColumnIndex = 0, originalCurrentRowIndex = 0, originalCurrentColumnIndex = 0;
             int originalDeletedColumnIndex = matrix[coordinatesToDelete[0], coordinatesToDelete[1]].Second[1];
             int originalDeletedRowIndex = matrix[coordinatesToDelete[0], coordinatesToDelete[1]].Second[0];
@@ -312,7 +312,7 @@ namespace Project_1
             Node currentNode = firstNode;
             treeq.Enqueue(firstNode, firstNode.lowerBound);
             int test = 0;
-            while (currentNode.matrix.GetLength(1) != 2)
+            while (currentNode.matrix.GetLength(1) != 2 || lastNode.lowerBound == INF)
             {
                 
                 currentNode = treeq.Dequeue();
