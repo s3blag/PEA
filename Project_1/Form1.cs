@@ -112,13 +112,13 @@ namespace Project_1
 
 
                 textBox1.Text += Environment.NewLine +  "-------------------   TABU   ---------------------" + Environment.NewLine;
-                textBox1.Text += TabuSearch.RunAlgorithm(cities.AdjacencyMatrix, 20, 10000);
-                /*textBox1.Text += Environment.NewLine + "-------------------   Branch and Bound   ---------------------" + Environment.NewLine;
-                textBox1.Text += BranchAndBound.RunAlgorithm(cities.AdjacencyMatrix);*/
+                textBox1.Text += TabuSearch.RunAlgorithm(cities.AdjacencyMatrix, 10, 1000);
+                //textBox1.Text += Environment.NewLine + "-------------------   Branch and Bound   ---------------------" + Environment.NewLine;
+               // textBox1.Text += BranchAndBound.RunAlgorithm(cities.AdjacencyMatrix);*/
                 textBox1.Text += Environment.NewLine + "-------------------   Brute Force   ---------------------" + Environment.NewLine;
                 textBox1.Text += Environment.NewLine;
                 textBox1.Text += BruteForce.RunAlgorithm(cities);
-                
+              
             
         }
     }

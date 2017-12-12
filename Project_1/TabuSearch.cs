@@ -152,7 +152,7 @@ namespace Project_1
         {
             int solutionLength = solution.GetLength(0);
             Pair<int, int> swappedCities = new Pair<int, int>();
-
+            int solutionWeight = GetSolutionWeight(solution, matrix);
             int currentSolutionWeight = GetSolutionWeight(solution, matrix);
             int bestSolutionWeight = currentSolutionWeight;
 
@@ -161,14 +161,10 @@ namespace Project_1
             Array.Copy(solution, currentSolution, solutionLength);
 
             int city1, city2;
-            int criticalEventCounter = 0;
+           
             for (int currentNumberOfIterations = 0; currentNumberOfIterations < numberOfIterations; currentNumberOfIterations++)
             {
-                if (criticalEventCounter == 50)
-                {
-                    currentSolution = GetRandomSolution(matrix.GetLength(0));
-                    ResetTabu(tabu);
-                }
+                
                 do
                 {
                     city1 = rand.Next(0, solutionLength);
@@ -182,44 +178,20 @@ namespace Project_1
 
                 if (currentSolutionWeight < bestSolutionWeight)
                 {
-                    Debug.WriteLine("Poprawa");
-                    bestSolution = currentSolution;
+                    Array.Copy(currentSolution, bestSolution, solutionLength);
                     bestSolutionWeight = currentSolutionWeight;
                     swappedCities.First = city1;
                     swappedCities.Second = city2;
+                    
                 }
-                else
-                    criticalEventCounter++;
 
                 Array.Copy(solution, currentSolution, solutionLength);
             }
-
+            if(bestSolutionWeight<solutionWeight)
+                Debug.WriteLine("Lepiej");
             return new Pair<Pair<int, int>, int[]>(swappedCities, bestSolution);
         }
 
-        /*private static List<Pair<int, int>> GetAllPossibleSwaps(int numberOfCities)
-        {
-            int GetFactorial(int number)
-            {
-                if (number == 1)
-                    return 1;
-                else
-                    return number * GetFactorial(number - 1);
-            }
-           
-            List<Pair<int, int>> possibleSwaps = new List<Pair<int, int>>(GetFactorial(numberOfCities));
-
-            for (int i = 0; i < numberOfCities; i++)
-            {
-                for (int j = i + 1; j < numberOfCities; j++)
-                {
-
-                }
-            }
-
-            return null;
-        }
-        */
         private static string ShowSolution(int[] solution, int solutionWeight)
         {
             string solutionString = "Rozwiązanie:" + Environment.NewLine;
@@ -232,22 +204,42 @@ namespace Project_1
 
         public static string RunAlgorithm(int[,] matrix, int timestamp, int maxNumberOfIterations)
         {   
-           // List<Pair<int, int>> possibleSwaps = GetAllPossibleSwaps(matrix.GetLength(0));
+          
             int[,] tabu = new int[matrix.GetLength(0), matrix.GetLength(0)];
             int numberOfIterations = 0;
+            int criticalEventCounter = 0;
             int[] solution = GetRandomSolution(matrix.GetLength(0));
             int[] bestSolution = solution;
+            int bestSolutionWeight = GetSolutionWeight(solution, matrix);
             Pair<Pair<int, int>, int[]> bestNeighbor;
             while(numberOfIterations<maxNumberOfIterations)
             {
-                bestNeighbor = GetBestNeighborRandomly(matrix, solution, tabu, INF);
+               
+                bestNeighbor = GetBestNeighborRandomly(matrix, solution, tabu, 50 * solution.GetLength(0));
                 solution = bestNeighbor.Second;
                 ReduceTabu(tabu);
                 AddToTabu(tabu, bestNeighbor.First, timestamp);
 
-                if (GetSolutionWeight(solution, matrix) < GetSolutionWeight(bestSolution, matrix))
-                    bestSolution = solution;
-                numberOfIterations++;
+                if (criticalEventCounter == 20)
+                {
+                    solution = GetRandomSolution(matrix.GetLength(0));
+                    ResetTabu(tabu);
+                    criticalEventCounter = 0;
+                }
+
+                int newWeight = GetSolutionWeight(solution, matrix);
+                if ( newWeight < bestSolutionWeight)
+                {
+                    Array.Copy(solution, bestSolution, solution.GetLength(0));
+                    bestSolutionWeight = GetSolutionWeight(bestSolution, matrix);
+                    criticalEventCounter = 0;
+                    //Debug.WriteLine(ShowSolution(solution, GetSolutionWeight(solution, matrix)));
+                    Debug.WriteLine("Główny - lepiej");
+                } 
+                else
+                    criticalEventCounter++;
+
+                numberOfIterations++; 
             }
 
             return ShowSolution(solution, GetSolutionWeight(solution, matrix));
