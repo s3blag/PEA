@@ -32,6 +32,17 @@ namespace Project_1
             return weight;
         }
 
+        private static int[] GetRandomSolution(int numberOfCities)
+        {
+            Random rnd = new Random();
+            int[] solution = new int[numberOfCities];
+            for (int i = 0; i < numberOfCities; i++)
+                solution[i] = i;
+
+            solution = solution.OrderBy(x => rnd.Next()).ToArray();
+
+            return solution;
+        }
         private static int[] GetGreedySolution(int[,] matrix, int startCity)
         {
             int[] solution = new int[matrix.GetLength(0)];
@@ -206,7 +217,7 @@ namespace Project_1
            // List<Pair<int, int>> possibleSwaps = GetAllPossibleSwaps(matrix.GetLength(0));
             int[,] tabu = new int[matrix.GetLength(0), matrix.GetLength(0)];
             int numberOfIterations = 0;
-            int[] solution = GetGreedySolution(matrix, rand.Next(0, matrix.GetLength(0)));
+            int[] solution = GetRandomSolution(matrix.GetLength(0));
             int[] bestSolution = solution;
             Pair<Pair<int, int>, int[]> bestNeighbor;
             while(numberOfIterations<maxNumberOfIterations)
