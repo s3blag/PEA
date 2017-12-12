@@ -227,7 +227,7 @@ namespace Project_1
             while(numberOfIterations<maxNumberOfIterations)
             {
 
-                bestNeighbor = GetBestNeighborRandomly(matrix, solution, tabu, 10 * solution.GetLength(0));
+                bestNeighbor = GetBestNeighborRandomly(matrix, solution, tabu, 10 * solution.GetLength(0), timestamp);
                 solution = bestNeighbor.Second;
                 ReduceTabu(tabu);
                 AddToTabu(tabu, bestNeighbor.First, timestamp);
