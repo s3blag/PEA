@@ -187,8 +187,6 @@ namespace Project_1
 
                 Array.Copy(solution, currentSolution, solutionLength);
             }
-            if(bestSolutionWeight<solutionWeight)
-                Debug.WriteLine("Lepiej");
             return new Pair<Pair<int, int>, int[]>(swappedCities, bestSolution);
         }
 
@@ -211,11 +209,12 @@ namespace Project_1
             int[] solution = GetRandomSolution(matrix.GetLength(0));
             int[] bestSolution = solution;
             int bestSolutionWeight = GetSolutionWeight(solution, matrix);
+            int newWeight;
             Pair<Pair<int, int>, int[]> bestNeighbor;
             while(numberOfIterations<maxNumberOfIterations)
             {
                
-                bestNeighbor = GetBestNeighborRandomly(matrix, solution, tabu, 50 * solution.GetLength(0));
+                bestNeighbor = GetBestNeighborRandomly(matrix, solution, tabu, 10 * solution.GetLength(0));
                 solution = bestNeighbor.Second;
                 ReduceTabu(tabu);
                 AddToTabu(tabu, bestNeighbor.First, timestamp);
@@ -227,14 +226,14 @@ namespace Project_1
                     criticalEventCounter = 0;
                 }
 
-                int newWeight = GetSolutionWeight(solution, matrix);
+                 newWeight = GetSolutionWeight(solution, matrix);
                 if ( newWeight < bestSolutionWeight)
                 {
                     Array.Copy(solution, bestSolution, solution.GetLength(0));
                     bestSolutionWeight = GetSolutionWeight(bestSolution, matrix);
                     criticalEventCounter = 0;
-                    //Debug.WriteLine(ShowSolution(solution, GetSolutionWeight(solution, matrix)));
-                    Debug.WriteLine("Główny - lepiej");
+                   // Debug.WriteLine(ShowSolution(solution, GetSolutionWeight(solution, matrix)));
+                  //  Debug.WriteLine("Główny - lepiej");
                 } 
                 else
                     criticalEventCounter++;
