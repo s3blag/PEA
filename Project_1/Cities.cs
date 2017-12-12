@@ -12,6 +12,7 @@ namespace Project_1
         public const int INF = Int32.MaxValue;
 
         private int[,] adjacencyMatrix;
+        private int bestDistance = -1;
         private Random rand;
         private int numberOfCities;
 
@@ -62,9 +63,12 @@ namespace Project_1
         /// Konstruktor wczytujący miasta z zadanego pliku
         /// </summary>
         /// <param name="path"></param>
-        public Cities(string path)
-        {
-            ReadCitiesFromFile(path);
+        public Cities(string path, bool isFromTSPLIB)
+        {   
+            if(isFromTSPLIB)
+                ReadCitiesFromTspFile(path);
+            else
+                ReadCitiesFromFile(path);
         }
 
         /// <summary>
@@ -120,6 +124,85 @@ namespace Project_1
                                 j--;
                         }
                     }
+                }
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine(ex.ToString());
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Metoda wczytująca miasta z zadanego pliku
+        /// </summary>
+        /// <param name="path"> Ścieżka do pliku </param>
+        private void ReadCitiesFromTspFile(string path)
+        {
+            try
+            {
+                using (StreamReader sr = new StreamReader(path))
+                {
+                    numberOfCities = 0;
+                    string numberOfCitiesString = "";
+                    string bestDistanceString = "";
+                    int character = sr.Read();
+                    while (character >= 48 && character <= 57)
+                    {
+                        numberOfCitiesString += (char)character;
+                        character = sr.Read();
+                    }
+
+                    if (!int.TryParse(numberOfCitiesString, out numberOfCities))
+                    {
+                        Console.WriteLine("Błędny format danych!");
+                        return;
+                    }
+
+                    character = sr.Read();
+
+                    while (character >= 48 && character <= 57)
+                    {
+                        bestDistanceString += (char)character;
+                        character = sr.Read();
+                    }
+
+                    if (!int.TryParse(bestDistanceString, out bestDistance))
+                    {
+                        Console.WriteLine("Błędny format danych!");
+                        return;
+                    }
+
+
+                    adjacencyMatrix = new int[numberOfCities, numberOfCities];
+                    for (int i = 0; i < numberOfCities; i++)
+                    {
+                        for (int j = 0; j < numberOfCities; j++)
+                        {
+                            string numberString = "";
+                            character = sr.Read();
+                            int currentWeight;
+                            while ((character >= 48 && character <= 57) || character == 45)
+                            {
+                                numberString += (char)character;
+                                character = sr.Read();
+                            }
+                            if (numberString != "")
+                            {
+                                if (!int.TryParse(numberString, out currentWeight))
+                                {
+                                    Console.WriteLine("Błędny format danych!");
+                                    return;
+                                }
+                                if (i == j)
+                                    currentWeight = INF;
+                                adjacencyMatrix[i, j] = currentWeight;
+                            }
+                            else
+                                j--;
+                        }
+                    }
+
                 }
             }
             catch (IOException ex)
@@ -203,6 +286,8 @@ namespace Project_1
 
                 matrixString += Environment.NewLine;
             }
+            if (bestDistance > 0)
+                matrixString += "Najlepsze rozwiązanie: " + bestDistance;
             return matrixString;
         }
 

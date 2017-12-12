@@ -39,6 +39,7 @@
             this.radioAsync = new System.Windows.Forms.RadioButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.buttonTest = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonRunAlgorithm = new System.Windows.Forms.Button();
@@ -58,7 +59,7 @@
             this.labelTestSize = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.buttonTest = new System.Windows.Forms.Button();
+            this.buttonTestTabu = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -169,6 +170,16 @@
             this.tabPage1.Text = "Branch And Bound";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // buttonTest
+            // 
+            this.buttonTest.Location = new System.Drawing.Point(309, 569);
+            this.buttonTest.Name = "buttonTest";
+            this.buttonTest.Size = new System.Drawing.Size(75, 23);
+            this.buttonTest.TabIndex = 12;
+            this.buttonTest.Text = "Test";
+            this.buttonTest.UseVisualStyleBackColor = true;
+            this.buttonTest.Click += new System.EventHandler(this.buttonTest_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.buttonGenShow);
@@ -185,6 +196,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.buttonTestTabu);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.buttonRunAlgorithm);
             this.groupBox1.Controls.Add(this.buttonOpenFile);
@@ -223,7 +235,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(421, 490);
+            this.tabPage2.Size = new System.Drawing.Size(421, 616);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Test";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -341,15 +353,15 @@
             // 
             this.saveFileDialog1.DefaultExt = "txt";
             // 
-            // buttonTest
+            // buttonTestTabu
             // 
-            this.buttonTest.Location = new System.Drawing.Point(12, 521);
-            this.buttonTest.Name = "buttonTest";
-            this.buttonTest.Size = new System.Drawing.Size(75, 23);
-            this.buttonTest.TabIndex = 12;
-            this.buttonTest.Text = "Test";
-            this.buttonTest.UseVisualStyleBackColor = true;
-            this.buttonTest.Click += new System.EventHandler(this.buttonTest_Click);
+            this.buttonTestTabu.Location = new System.Drawing.Point(283, 39);
+            this.buttonTestTabu.Name = "buttonTestTabu";
+            this.buttonTestTabu.Size = new System.Drawing.Size(75, 23);
+            this.buttonTestTabu.TabIndex = 11;
+            this.buttonTestTabu.Text = "TestTabu";
+            this.buttonTestTabu.UseVisualStyleBackColor = true;
+            this.buttonTestTabu.Click += new System.EventHandler(this.buttonTestTabu_Click);
             // 
             // Form1
             // 
@@ -405,6 +417,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button buttonTest;
+        private System.Windows.Forms.Button buttonTestTabu;
     }
 }
 
