@@ -43,6 +43,7 @@ namespace Project_1
 
             return solution;
         }
+
         private static int[] GetGreedySolution(int[,] matrix, int startCity)
         {
             int[] solution = new int[matrix.GetLength(0)];
@@ -138,6 +139,15 @@ namespace Project_1
             return new Pair<Pair<int, int>, int[]>(swappedCities,bestSolution);
         }
 
+        private static void ResetTabu(int[,] tabu)
+        {
+            for(int i = 0; i < tabu.GetLength(0); i++)
+            {
+                for (int j = 0; i < tabu.GetLength(0); i++)
+                    tabu[i, j] = 0;
+            }
+        }
+
         public static Pair<Pair<int, int>, int[]> GetBestNeighborRandomly(int[,] matrix, int[] solution, int[,] tabu, int numberOfIterations)
         {
             int solutionLength = solution.GetLength(0);
@@ -151,27 +161,35 @@ namespace Project_1
             Array.Copy(solution, currentSolution, solutionLength);
 
             int city1, city2;
-
+            int criticalEventCounter = 0;
             for (int currentNumberOfIterations = 0; currentNumberOfIterations < numberOfIterations; currentNumberOfIterations++)
             {
+                if (criticalEventCounter == 50)
+                {
+                    currentSolution = GetRandomSolution(matrix.GetLength(0));
+                    ResetTabu(tabu);
+                }
                 do
                 {
                     city1 = rand.Next(0, solutionLength);
                     city2 = rand.Next(0, solutionLength);
                 }
                 while (city1 == city2);
-                Debug.WriteLine("city1 {0}, city2 {1}, currentNumberOfIterations {2}", city1, city2, currentNumberOfIterations);
+                //Debug.WriteLine("city1 {0}, city2 {1}, currentNumberOfIterations {2}", city1, city2, currentNumberOfIterations);
 
                 SwapCities(city1, city2, currentSolution);
                 currentSolutionWeight = GetSolutionWeight(currentSolution, matrix);
 
                 if (currentSolutionWeight < bestSolutionWeight)
                 {
+                    Debug.WriteLine("Poprawa");
                     bestSolution = currentSolution;
                     bestSolutionWeight = currentSolutionWeight;
                     swappedCities.First = city1;
                     swappedCities.Second = city2;
                 }
+                else
+                    criticalEventCounter++;
 
                 Array.Copy(solution, currentSolution, solutionLength);
             }
@@ -222,7 +240,7 @@ namespace Project_1
             Pair<Pair<int, int>, int[]> bestNeighbor;
             while(numberOfIterations<maxNumberOfIterations)
             {
-                bestNeighbor = GetBestNeighbor(matrix, solution, tabu, INF);
+                bestNeighbor = GetBestNeighborRandomly(matrix, solution, tabu, INF);
                 solution = bestNeighbor.Second;
                 ReduceTabu(tabu);
                 AddToTabu(tabu, bestNeighbor.First, timestamp);
