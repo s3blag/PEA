@@ -43,8 +43,13 @@ namespace Project_1
 
         public static void RunTimeTest(Cities cities, int timestamp, int maxNumberOfIterations, int numberOfTrials, string path)
         {
-            string output = "|ZALEŻNOŚĆ CZASOWA|" + Environment.NewLine;
-            string elapsedTime = "";
+            string output = "|ZALEŻNOŚĆ CZASOWA|" + Environment.NewLine,
+                   elapsedTime = "",
+                   relativeError = "";
+
+            int tempDistance,
+                bestDistance = cities.BestDistance;
+            
             Stopwatch stopWatch = new Stopwatch();
             for (int i = 0; i <= numberOfTrials; i++)
             {
@@ -52,15 +57,16 @@ namespace Project_1
 
                 stopWatch.Start();
                 /////          DO DOBRANIA + wyłącz wyświetlanie wyniku
-                TabuSearch.RunAlgorithm(cities.AdjacencyMatrix, timestamp, maxNumberOfIterations);
+                tempDistance = Int32.Parse(TabuSearch.RunAlgorithm(cities.AdjacencyMatrix, timestamp, maxNumberOfIterations));
                 stopWatch.Stop();
 
                 if (i != 0)
                 {
+                    relativeError = ((tempDistance - bestDistance) / bestDistance).ToString();
                     elapsedTime = stopWatch.Elapsed.TotalMilliseconds.ToString();
-                    output += elapsedTime + Environment.NewLine;
+                    output += cities.AdjacencyMatrix.GetLength(0).ToString() + ";" + elapsedTime + ";" +relativeError + Environment.NewLine;
                 }
-
+                
                 stopWatch.Reset();
             }
             WriteOutputToFile(path, output);

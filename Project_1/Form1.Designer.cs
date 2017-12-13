@@ -49,24 +49,24 @@
             this.buttonLoadFileTabu = new System.Windows.Forms.Button();
             this.textBoxTabu = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.textBoxNumberOfTrials = new System.Windows.Forms.TextBox();
-            this.labelNumberOfTrials = new System.Windows.Forms.Label();
-            this.buttonSelectPath = new System.Windows.Forms.Button();
-            this.buttonStartTest = new System.Windows.Forms.Button();
-            this.textBoxTestPath = new System.Windows.Forms.TextBox();
-            this.textBoxWeightMax = new System.Windows.Forms.TextBox();
-            this.textBoxWeightLow = new System.Windows.Forms.TextBox();
-            this.textBoxTestSize = new System.Windows.Forms.TextBox();
-            this.labelPath = new System.Windows.Forms.Label();
-            this.labelWeightMax = new System.Windows.Forms.Label();
-            this.labelWeightLow = new System.Windows.Forms.Label();
-            this.labelWeight = new System.Windows.Forms.Label();
-            this.labelTestSize = new System.Windows.Forms.Label();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.tabControlTest = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.labelTestSize = new System.Windows.Forms.Label();
+            this.labelWeightMax = new System.Windows.Forms.Label();
+            this.buttonStartTest = new System.Windows.Forms.Button();
+            this.labelPath = new System.Windows.Forms.Label();
+            this.buttonSelectPath = new System.Windows.Forms.Button();
+            this.textBoxTestPath = new System.Windows.Forms.TextBox();
+            this.textBoxNumberOfTrials = new System.Windows.Forms.TextBox();
+            this.labelWeightLow = new System.Windows.Forms.Label();
+            this.textBoxWeightLow = new System.Windows.Forms.TextBox();
+            this.textBoxTestSize = new System.Windows.Forms.TextBox();
+            this.labelWeight = new System.Windows.Forms.Label();
+            this.labelNumberOfTrials = new System.Windows.Forms.Label();
+            this.textBoxWeightMax = new System.Windows.Forms.TextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -235,7 +235,7 @@
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.buttonRunTabu);
             this.groupBox3.Controls.Add(this.buttonLoadFileTabu);
-            this.groupBox3.Location = new System.Drawing.Point(10, 312);
+            this.groupBox3.Location = new System.Drawing.Point(6, 310);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(405, 77);
             this.groupBox3.TabIndex = 12;
@@ -273,7 +273,7 @@
             // 
             // textBoxTabu
             // 
-            this.textBoxTabu.Location = new System.Drawing.Point(8, 8);
+            this.textBoxTabu.Location = new System.Drawing.Point(6, 6);
             this.textBoxTabu.Multiline = true;
             this.textBoxTabu.Name = "textBoxTabu";
             this.textBoxTabu.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -290,119 +290,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Test";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // textBoxNumberOfTrials
-            // 
-            this.textBoxNumberOfTrials.Location = new System.Drawing.Point(24, 111);
-            this.textBoxNumberOfTrials.Name = "textBoxNumberOfTrials";
-            this.textBoxNumberOfTrials.Size = new System.Drawing.Size(100, 20);
-            this.textBoxNumberOfTrials.TabIndex = 12;
-            // 
-            // labelNumberOfTrials
-            // 
-            this.labelNumberOfTrials.AutoSize = true;
-            this.labelNumberOfTrials.Location = new System.Drawing.Point(21, 95);
-            this.labelNumberOfTrials.Name = "labelNumberOfTrials";
-            this.labelNumberOfTrials.Size = new System.Drawing.Size(62, 13);
-            this.labelNumberOfTrials.TabIndex = 11;
-            this.labelNumberOfTrials.Text = "Liczba prób";
-            // 
-            // buttonSelectPath
-            // 
-            this.buttonSelectPath.Location = new System.Drawing.Point(294, 151);
-            this.buttonSelectPath.Name = "buttonSelectPath";
-            this.buttonSelectPath.Size = new System.Drawing.Size(75, 23);
-            this.buttonSelectPath.TabIndex = 10;
-            this.buttonSelectPath.Text = "Wybierz";
-            this.buttonSelectPath.UseVisualStyleBackColor = true;
-            this.buttonSelectPath.Click += new System.EventHandler(this.buttonSelectPath_Click);
-            // 
-            // buttonStartTest
-            // 
-            this.buttonStartTest.Location = new System.Drawing.Point(130, 109);
-            this.buttonStartTest.Name = "buttonStartTest";
-            this.buttonStartTest.Size = new System.Drawing.Size(100, 23);
-            this.buttonStartTest.TabIndex = 9;
-            this.buttonStartTest.Text = "Rozpocznij test";
-            this.buttonStartTest.UseVisualStyleBackColor = true;
-            this.buttonStartTest.Click += new System.EventHandler(this.buttonStartTest_Click);
-            // 
-            // textBoxTestPath
-            // 
-            this.textBoxTestPath.Location = new System.Drawing.Point(24, 151);
-            this.textBoxTestPath.Name = "textBoxTestPath";
-            this.textBoxTestPath.Size = new System.Drawing.Size(264, 20);
-            this.textBoxTestPath.TabIndex = 8;
-            // 
-            // textBoxWeightMax
-            // 
-            this.textBoxWeightMax.Location = new System.Drawing.Point(181, 72);
-            this.textBoxWeightMax.Name = "textBoxWeightMax";
-            this.textBoxWeightMax.Size = new System.Drawing.Size(100, 20);
-            this.textBoxWeightMax.TabIndex = 7;
-            // 
-            // textBoxWeightLow
-            // 
-            this.textBoxWeightLow.Location = new System.Drawing.Point(48, 72);
-            this.textBoxWeightLow.Name = "textBoxWeightLow";
-            this.textBoxWeightLow.Size = new System.Drawing.Size(100, 20);
-            this.textBoxWeightLow.TabIndex = 6;
-            // 
-            // textBoxTestSize
-            // 
-            this.textBoxTestSize.Location = new System.Drawing.Point(24, 36);
-            this.textBoxTestSize.Name = "textBoxTestSize";
-            this.textBoxTestSize.Size = new System.Drawing.Size(100, 20);
-            this.textBoxTestSize.TabIndex = 5;
-            // 
-            // labelPath
-            // 
-            this.labelPath.AutoSize = true;
-            this.labelPath.Location = new System.Drawing.Point(21, 135);
-            this.labelPath.Name = "labelPath";
-            this.labelPath.Size = new System.Drawing.Size(161, 13);
-            this.labelPath.TabIndex = 4;
-            this.labelPath.Text = "Podaj ścieżkę pliku wyjściowego";
-            // 
-            // labelWeightMax
-            // 
-            this.labelWeightMax.AutoSize = true;
-            this.labelWeightMax.Location = new System.Drawing.Point(154, 79);
-            this.labelWeightMax.Name = "labelWeightMax";
-            this.labelWeightMax.Size = new System.Drawing.Size(21, 13);
-            this.labelWeightMax.TabIndex = 3;
-            this.labelWeightMax.Text = "Do";
-            // 
-            // labelWeightLow
-            // 
-            this.labelWeightLow.AutoSize = true;
-            this.labelWeightLow.Location = new System.Drawing.Point(21, 79);
-            this.labelWeightLow.Name = "labelWeightLow";
-            this.labelWeightLow.Size = new System.Drawing.Size(21, 13);
-            this.labelWeightLow.TabIndex = 2;
-            this.labelWeightLow.Text = "Od";
-            // 
-            // labelWeight
-            // 
-            this.labelWeight.AutoSize = true;
-            this.labelWeight.Location = new System.Drawing.Point(21, 59);
-            this.labelWeight.Name = "labelWeight";
-            this.labelWeight.Size = new System.Drawing.Size(65, 13);
-            this.labelWeight.TabIndex = 1;
-            this.labelWeight.Text = "Zakres wagi";
-            // 
-            // labelTestSize
-            // 
-            this.labelTestSize.AutoSize = true;
-            this.labelTestSize.Location = new System.Drawing.Point(21, 20);
-            this.labelTestSize.Name = "labelTestSize";
-            this.labelTestSize.Size = new System.Drawing.Size(86, 13);
-            this.labelTestSize.TabIndex = 0;
-            this.labelTestSize.Text = "Rozmiar instancji";
-            // 
-            // saveFileDialog1
-            // 
-            this.saveFileDialog1.DefaultExt = "txt";
             // 
             // tabControlTest
             // 
@@ -438,6 +325,115 @@
             this.tabPage4.Text = "Branch And Bound";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // labelTestSize
+            // 
+            this.labelTestSize.AutoSize = true;
+            this.labelTestSize.Location = new System.Drawing.Point(21, 20);
+            this.labelTestSize.Name = "labelTestSize";
+            this.labelTestSize.Size = new System.Drawing.Size(86, 13);
+            this.labelTestSize.TabIndex = 0;
+            this.labelTestSize.Text = "Rozmiar instancji";
+            // 
+            // labelWeightMax
+            // 
+            this.labelWeightMax.AutoSize = true;
+            this.labelWeightMax.Location = new System.Drawing.Point(154, 79);
+            this.labelWeightMax.Name = "labelWeightMax";
+            this.labelWeightMax.Size = new System.Drawing.Size(21, 13);
+            this.labelWeightMax.TabIndex = 3;
+            this.labelWeightMax.Text = "Do";
+            // 
+            // buttonStartTest
+            // 
+            this.buttonStartTest.Location = new System.Drawing.Point(130, 109);
+            this.buttonStartTest.Name = "buttonStartTest";
+            this.buttonStartTest.Size = new System.Drawing.Size(100, 23);
+            this.buttonStartTest.TabIndex = 9;
+            this.buttonStartTest.Text = "Rozpocznij test";
+            this.buttonStartTest.UseVisualStyleBackColor = true;
+            this.buttonStartTest.Click += new System.EventHandler(this.buttonStartTest_Click);
+            // 
+            // labelPath
+            // 
+            this.labelPath.AutoSize = true;
+            this.labelPath.Location = new System.Drawing.Point(21, 135);
+            this.labelPath.Name = "labelPath";
+            this.labelPath.Size = new System.Drawing.Size(161, 13);
+            this.labelPath.TabIndex = 4;
+            this.labelPath.Text = "Podaj ścieżkę pliku wyjściowego";
+            // 
+            // buttonSelectPath
+            // 
+            this.buttonSelectPath.Location = new System.Drawing.Point(294, 151);
+            this.buttonSelectPath.Name = "buttonSelectPath";
+            this.buttonSelectPath.Size = new System.Drawing.Size(75, 23);
+            this.buttonSelectPath.TabIndex = 10;
+            this.buttonSelectPath.Text = "Wybierz";
+            this.buttonSelectPath.UseVisualStyleBackColor = true;
+            this.buttonSelectPath.Click += new System.EventHandler(this.buttonSelectPath_Click);
+            // 
+            // textBoxTestPath
+            // 
+            this.textBoxTestPath.Location = new System.Drawing.Point(24, 151);
+            this.textBoxTestPath.Name = "textBoxTestPath";
+            this.textBoxTestPath.Size = new System.Drawing.Size(264, 20);
+            this.textBoxTestPath.TabIndex = 8;
+            // 
+            // textBoxNumberOfTrials
+            // 
+            this.textBoxNumberOfTrials.Location = new System.Drawing.Point(24, 111);
+            this.textBoxNumberOfTrials.Name = "textBoxNumberOfTrials";
+            this.textBoxNumberOfTrials.Size = new System.Drawing.Size(100, 20);
+            this.textBoxNumberOfTrials.TabIndex = 12;
+            // 
+            // labelWeightLow
+            // 
+            this.labelWeightLow.AutoSize = true;
+            this.labelWeightLow.Location = new System.Drawing.Point(21, 79);
+            this.labelWeightLow.Name = "labelWeightLow";
+            this.labelWeightLow.Size = new System.Drawing.Size(21, 13);
+            this.labelWeightLow.TabIndex = 2;
+            this.labelWeightLow.Text = "Od";
+            // 
+            // textBoxWeightLow
+            // 
+            this.textBoxWeightLow.Location = new System.Drawing.Point(48, 72);
+            this.textBoxWeightLow.Name = "textBoxWeightLow";
+            this.textBoxWeightLow.Size = new System.Drawing.Size(100, 20);
+            this.textBoxWeightLow.TabIndex = 6;
+            // 
+            // textBoxTestSize
+            // 
+            this.textBoxTestSize.Location = new System.Drawing.Point(24, 36);
+            this.textBoxTestSize.Name = "textBoxTestSize";
+            this.textBoxTestSize.Size = new System.Drawing.Size(100, 20);
+            this.textBoxTestSize.TabIndex = 5;
+            // 
+            // labelWeight
+            // 
+            this.labelWeight.AutoSize = true;
+            this.labelWeight.Location = new System.Drawing.Point(21, 59);
+            this.labelWeight.Name = "labelWeight";
+            this.labelWeight.Size = new System.Drawing.Size(65, 13);
+            this.labelWeight.TabIndex = 1;
+            this.labelWeight.Text = "Zakres wagi";
+            // 
+            // labelNumberOfTrials
+            // 
+            this.labelNumberOfTrials.AutoSize = true;
+            this.labelNumberOfTrials.Location = new System.Drawing.Point(21, 95);
+            this.labelNumberOfTrials.Name = "labelNumberOfTrials";
+            this.labelNumberOfTrials.Size = new System.Drawing.Size(62, 13);
+            this.labelNumberOfTrials.TabIndex = 11;
+            this.labelNumberOfTrials.Text = "Liczba prób";
+            // 
+            // textBoxWeightMax
+            // 
+            this.textBoxWeightMax.Location = new System.Drawing.Point(181, 72);
+            this.textBoxWeightMax.Name = "textBoxWeightMax";
+            this.textBoxWeightMax.Size = new System.Drawing.Size(100, 20);
+            this.textBoxWeightMax.TabIndex = 7;
+            // 
             // tabPage5
             // 
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
@@ -447,6 +443,10 @@
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "Tabu Search";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "txt";
             // 
             // Form1
             // 
