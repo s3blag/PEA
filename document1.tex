@@ -100,20 +100,25 @@
 %----------------------------------------------------------------------------------------
 \newpage
 \section{Opis algorytmu}
-\par Metoda podziału i ograniczeń polega na uporządkowanym przeszukiwaniu zbioru rozwiązań danego problemu i dzieleniu go na mniejsze podzbiory, a następnie wyliczeniu ich kresu dolnego. Kolejny podział dokonywany jest na zbiorze o najmniejszej wartości kresu dolnego. Algorytm kończy swój bieg w momencie gdy zostanie znalezione rozwiązanie, dla którego wartość nie jest większa od najmniejszego dolnego ograniczenia z wszystkich niepodzielonych podzbiorów.
+\par Tabu Search jest metaheurystyką do rozwiązywania problemów optymalizacyjnych, opartą na iteracyjnym przeszukiwaniu
+przestrzeni rozwiązań, wykorzystującą ich sąsiedztwo, zapamiętującą niektóre ruchy oraz odległość czasową ich wystąpienia, w celu unikania minimów lokalnych i poszukiwania rozwiązań globalnie optymalnych w rozsądnym czasie.
 \newline
 \newline
-W przypadku problemu komiwojażera i algorytmu Little’a wykonywane są działania na macierzy sąsiedztw. Pierwszym krokiem jest redukcja macierzy – polega ona na znalezieniu elementu minimalnego w każdym wierszu oraz kolumnie i odjęciu go od nich. Suma odjętych wartości jest stopniem redukcji macierzy i dodawana jest do dotychczasowej wartości dolnego ograniczenia. Kolejnym krokiem jest wybranie odcinka do wykonania podziału. Spośród krawędzi o koszcie równym 0 (po redukcji) wybierana jest ta o najwyższym optymistycznym koszcie wyłączenia. Dla krawędzi $<$\textit{a,b}$>$ optymistycznym kosztem wyłączenia jest suma minimalnych kosztów wyjścia z miasta \textit{a} do miasta innego niż \textit{b} oraz dotarcia do miasta \textit{b} z miasta innego niż \textit{a}. Następnym krokiem, jest generacja nowych podzbiorów przez podzielenie macierzy na:
+Algorytm Tabu Search dla problemu komiwojażera polega na iteracyjnym przeszukiwaniu sąsiedztwa obecnie najlepszego rozwiązania. Początkowo wybierane jest rozwiązanie przy pomocy algorytmu zachłannego, dla losowo wybranego miasta początkowego. Następnie przez określoną liczbę iteracji, wykonywane są kolejne kroki algorytmu: 
+	\begin{enumerate}
+	\item Przeszukiwanie sąsiedztwa obecnie rozpatrywanego rozwiązania poprzez wielokrotną zamianę kolejności odwiedzenia dwóch losowo wybranych miast oraz wybranie tej zamiany, która nie należy do tabu oraz dla której droga jest najkrótsza.
+	\item Dodanie do listy tabu zamiany prowadzącej do otrzymania najlepszego lokalnie rozwiązania.
+	\item Porównanie najlepszego lokalnie rozwiązania dla danej iteracji z rozwiązaniem najlepszym globalnie. Jeżeli rozwiązanie lokalne jest lepsze od globalnego, nowym rozwiązaniem globalnym staje się obecne rozwiązanie lokalne.
+\end{enumerate}
 
-	\begin{itemize}
-	\item Zredukowaną - niezawierającą wiersza a i kolumny b oraz z przypisaną do krawędzi $<$\textit{b,a}$>$ wartością nieskończoności
-	\item Zmodyfikowaną – z przypisaną do krawędzi $<$\textit{a,b}$>$ wartością nieskończoności.
-	\end{itemize}
-Do dalszego podziału wybierany jest podzbiór o najmniejszej wartości kresu dolnego. Kroki algorytmu wykonywane są do momentu stworzenia macierzy o rozmiarze 1 i włączenia jej jedynego elementu do zbioru usuniętych, do tej pory, wierszy oraz kolumn (oznaczających poszczególne ścieżki rozwiązania).
-\newline
-\newline
-W najgorszym przypadku konieczne jest sprawdzenie wszystkich możliwych rozwiązań, co wskazuje, iż złożoność obliczeniowa tej metody będzie wykładnicza.
-\newline
+\textbf{Elementy charakterystyczne metody}
+\begin{itemize}
+	\item \textit{Lista ruchów będących tabu}.
+	\item \textit{Zdarzenie krytyczne} - wywołanie określonej czynności, jeśli przez określony odstęp czasu rozwiązanie nie uległo poprawie.
+	\item \textit{Strategia dywersyfikacji} - wygenerowanie nowego rozwiązania początkowego, na którym będą dokonywane zmiany.Jest wywoływana przez zdarzenie krytyczne.
+	\item \textit{Strategia aspiracji} - ignorowanie danego ruchu na liście tabu, jeśli ma on szansę na przeniesienie poszukiwania na bardziej obiecujący obszar.
+\end{itemize}
+\newpage
 \section{Plan eksperymentu}
 \par
 \begin{itemize}
@@ -122,14 +127,13 @@ W najgorszym przypadku konieczne jest sprawdzenie wszystkich możliwych rozwiąz
 \item Dla każdego z typów pomiaru algorytm wykonywany był 30 razy, wyniki uśredniono.
 \end{itemize}
 
-\textbf{Metoda podziału i ograniczeń (Alg. Little’a)}
+\textbf{Metoda Tabu Search}
 \renewcommand\labelitemii{$\circ$}
 \begin{itemize}
-	\item Do przechowywania wierzchołków użyto kolejki priorytetowej.
-	\item Odległości między miastami losowane są  z zakresu:
-	\begin{itemize}
-	\item $<$1, 50$>$ dla ilości miast N = \{ 5, 10, 15, 20, 25, 30, 35 \}
-	\end{itemize}
+	\item Do przechowywania listy tabu użyto macierzy \textit{N}x\textit{N}, gdzie \textit{N} - liczba miast rozpatrywanego przypadku. Współrzędne \textit{[i, j]} oznaczają zamianę  kolejności elementu \textit{i} z elementem \textit{j}.
+	\item Zdarzenie krytyczne polega na obraniu nowego rozwiązania początkowego, na którym będą dokonywane zmiany. Jest ono wywoływane jeśli przez \textit{x} ostatnich iteracji głównej pętli nie nastąpiła poprawa najlepszego rozwiązania.
+	\item Dywersyfikacja realizowana jest w momencie wystąpienie powyższego zdarzenia krytycznego.
+	\item Kryterium aspiracji anuluje zakaz ruchu, jeśli spełniony jest warunek dla danego rozwiązania lokalnego: \textit{x} * \textit{1.05} $<$  \textit{y}, gdzie \textit{x} - waga obecnie rozpatrywanego rozwiązania lokalnego, \newline \textit{y} - waga obecnie najlepszego rozwiązania lokalnego.
 \end{itemize}
 \newpage
 

@@ -1,0 +1,5 @@
+\select@language {polish}
+\contentsline {section}{\numberline {1}Opis algorytmu}{2}
+\contentsline {section}{\numberline {2}Plan eksperymentu}{3}
+\contentsline {section}{\numberline {3}Wyniki}{4}
+\contentsline {section}{\numberline {4}Podsumowanie}{5}
