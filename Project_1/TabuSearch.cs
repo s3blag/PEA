@@ -218,7 +218,7 @@ namespace Project_1
             int[,] tabu = new int[matrix.GetLength(0), matrix.GetLength(0)];
             int numberOfIterations = 0;
             int criticalEventCounter = 0;
-            int[] solution = GetRandomSolution(matrix.GetLength(0));
+            int[] solution = GetGreedySolution(matrix, 0);
             int[] bestSolution = solution;
             int bestSolutionWeight = GetSolutionWeight(solution, matrix);
             int newWeight;
@@ -246,7 +246,7 @@ namespace Project_1
                     bestSolutionWeight = GetSolutionWeight(bestSolution, matrix);
                     criticalEventCounter = 0;
                    // Debug.WriteLine(ShowSolution(solution, GetSolutionWeight(solution, matrix)));
-                  //  Debug.WriteLine("Główny - lepiej");
+                    Debug.WriteLine("Główny - lepiej");
                 } 
                 else
                     criticalEventCounter++;
