@@ -208,7 +208,7 @@ namespace Project_1
             int[,] tabu = new int[matrix.GetLength(0), matrix.GetLength(0)];
             int numberOfIterations = 0;
             int criticalEventCounter = 0;
-            int[] solution = GetGreedySolution(matrix, 0);
+            int[] solution = GetGreedySolution(matrix, rand.Next(matrix.GetLength(0)));
             int[] bestSolution = solution;
             int bestSolutionWeight = GetSolutionWeight(solution, matrix);
             int newWeight;
