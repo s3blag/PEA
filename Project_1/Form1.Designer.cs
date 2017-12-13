@@ -64,6 +64,8 @@
             this.labelTestSize = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.groupBoxBnBTest = new System.Windows.Forms.GroupBox();
+            this.groupBoxTabuTest = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -71,6 +73,7 @@
             this.tabPage3.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBoxBnBTest.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
@@ -220,7 +223,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(421, 616);
+            this.tabPage3.Size = new System.Drawing.Size(421, 481);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Tabu Search";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -277,19 +280,8 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.textBoxNumberOfTrials);
-            this.tabPage2.Controls.Add(this.labelNumberOfTrials);
-            this.tabPage2.Controls.Add(this.buttonSelectPath);
-            this.tabPage2.Controls.Add(this.buttonStartTest);
-            this.tabPage2.Controls.Add(this.textBoxTestPath);
-            this.tabPage2.Controls.Add(this.textBoxWeightMax);
-            this.tabPage2.Controls.Add(this.textBoxWeightLow);
-            this.tabPage2.Controls.Add(this.textBoxTestSize);
-            this.tabPage2.Controls.Add(this.labelPath);
-            this.tabPage2.Controls.Add(this.labelWeightMax);
-            this.tabPage2.Controls.Add(this.labelWeightLow);
-            this.tabPage2.Controls.Add(this.labelWeight);
-            this.tabPage2.Controls.Add(this.labelTestSize);
+            this.tabPage2.Controls.Add(this.groupBoxTabuTest);
+            this.tabPage2.Controls.Add(this.groupBoxBnBTest);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -300,7 +292,7 @@
             // 
             // textBoxNumberOfTrials
             // 
-            this.textBoxNumberOfTrials.Location = new System.Drawing.Point(27, 138);
+            this.textBoxNumberOfTrials.Location = new System.Drawing.Point(17, 107);
             this.textBoxNumberOfTrials.Name = "textBoxNumberOfTrials";
             this.textBoxNumberOfTrials.Size = new System.Drawing.Size(100, 20);
             this.textBoxNumberOfTrials.TabIndex = 12;
@@ -308,7 +300,7 @@
             // labelNumberOfTrials
             // 
             this.labelNumberOfTrials.AutoSize = true;
-            this.labelNumberOfTrials.Location = new System.Drawing.Point(24, 122);
+            this.labelNumberOfTrials.Location = new System.Drawing.Point(14, 91);
             this.labelNumberOfTrials.Name = "labelNumberOfTrials";
             this.labelNumberOfTrials.Size = new System.Drawing.Size(62, 13);
             this.labelNumberOfTrials.TabIndex = 11;
@@ -316,7 +308,7 @@
             // 
             // buttonSelectPath
             // 
-            this.buttonSelectPath.Location = new System.Drawing.Point(317, 200);
+            this.buttonSelectPath.Location = new System.Drawing.Point(287, 147);
             this.buttonSelectPath.Name = "buttonSelectPath";
             this.buttonSelectPath.Size = new System.Drawing.Size(75, 23);
             this.buttonSelectPath.TabIndex = 10;
@@ -326,7 +318,7 @@
             // 
             // buttonStartTest
             // 
-            this.buttonStartTest.Location = new System.Drawing.Point(27, 232);
+            this.buttonStartTest.Location = new System.Drawing.Point(123, 105);
             this.buttonStartTest.Name = "buttonStartTest";
             this.buttonStartTest.Size = new System.Drawing.Size(100, 23);
             this.buttonStartTest.TabIndex = 9;
@@ -336,28 +328,28 @@
             // 
             // textBoxTestPath
             // 
-            this.textBoxTestPath.Location = new System.Drawing.Point(27, 200);
+            this.textBoxTestPath.Location = new System.Drawing.Point(17, 147);
             this.textBoxTestPath.Name = "textBoxTestPath";
             this.textBoxTestPath.Size = new System.Drawing.Size(264, 20);
             this.textBoxTestPath.TabIndex = 8;
             // 
             // textBoxWeightMax
             // 
-            this.textBoxWeightMax.Location = new System.Drawing.Point(191, 88);
+            this.textBoxWeightMax.Location = new System.Drawing.Point(174, 68);
             this.textBoxWeightMax.Name = "textBoxWeightMax";
             this.textBoxWeightMax.Size = new System.Drawing.Size(100, 20);
             this.textBoxWeightMax.TabIndex = 7;
             // 
             // textBoxWeightLow
             // 
-            this.textBoxWeightLow.Location = new System.Drawing.Point(51, 88);
+            this.textBoxWeightLow.Location = new System.Drawing.Point(41, 68);
             this.textBoxWeightLow.Name = "textBoxWeightLow";
             this.textBoxWeightLow.Size = new System.Drawing.Size(100, 20);
             this.textBoxWeightLow.TabIndex = 6;
             // 
             // textBoxTestSize
             // 
-            this.textBoxTestSize.Location = new System.Drawing.Point(27, 37);
+            this.textBoxTestSize.Location = new System.Drawing.Point(17, 32);
             this.textBoxTestSize.Name = "textBoxTestSize";
             this.textBoxTestSize.Size = new System.Drawing.Size(100, 20);
             this.textBoxTestSize.TabIndex = 5;
@@ -365,7 +357,7 @@
             // labelPath
             // 
             this.labelPath.AutoSize = true;
-            this.labelPath.Location = new System.Drawing.Point(24, 183);
+            this.labelPath.Location = new System.Drawing.Point(14, 131);
             this.labelPath.Name = "labelPath";
             this.labelPath.Size = new System.Drawing.Size(161, 13);
             this.labelPath.TabIndex = 4;
@@ -374,7 +366,7 @@
             // labelWeightMax
             // 
             this.labelWeightMax.AutoSize = true;
-            this.labelWeightMax.Location = new System.Drawing.Point(164, 91);
+            this.labelWeightMax.Location = new System.Drawing.Point(147, 75);
             this.labelWeightMax.Name = "labelWeightMax";
             this.labelWeightMax.Size = new System.Drawing.Size(21, 13);
             this.labelWeightMax.TabIndex = 3;
@@ -383,7 +375,7 @@
             // labelWeightLow
             // 
             this.labelWeightLow.AutoSize = true;
-            this.labelWeightLow.Location = new System.Drawing.Point(24, 91);
+            this.labelWeightLow.Location = new System.Drawing.Point(14, 75);
             this.labelWeightLow.Name = "labelWeightLow";
             this.labelWeightLow.Size = new System.Drawing.Size(21, 13);
             this.labelWeightLow.TabIndex = 2;
@@ -392,7 +384,7 @@
             // labelWeight
             // 
             this.labelWeight.AutoSize = true;
-            this.labelWeight.Location = new System.Drawing.Point(24, 67);
+            this.labelWeight.Location = new System.Drawing.Point(14, 55);
             this.labelWeight.Name = "labelWeight";
             this.labelWeight.Size = new System.Drawing.Size(65, 13);
             this.labelWeight.TabIndex = 1;
@@ -401,7 +393,7 @@
             // labelTestSize
             // 
             this.labelTestSize.AutoSize = true;
-            this.labelTestSize.Location = new System.Drawing.Point(24, 21);
+            this.labelTestSize.Location = new System.Drawing.Point(14, 16);
             this.labelTestSize.Name = "labelTestSize";
             this.labelTestSize.Size = new System.Drawing.Size(86, 13);
             this.labelTestSize.TabIndex = 0;
@@ -410,6 +402,37 @@
             // saveFileDialog1
             // 
             this.saveFileDialog1.DefaultExt = "txt";
+            // 
+            // groupBoxBnBTest
+            // 
+            this.groupBoxBnBTest.Controls.Add(this.labelTestSize);
+            this.groupBoxBnBTest.Controls.Add(this.buttonStartTest);
+            this.groupBoxBnBTest.Controls.Add(this.textBoxNumberOfTrials);
+            this.groupBoxBnBTest.Controls.Add(this.labelWeight);
+            this.groupBoxBnBTest.Controls.Add(this.labelNumberOfTrials);
+            this.groupBoxBnBTest.Controls.Add(this.labelWeightLow);
+            this.groupBoxBnBTest.Controls.Add(this.buttonSelectPath);
+            this.groupBoxBnBTest.Controls.Add(this.labelWeightMax);
+            this.groupBoxBnBTest.Controls.Add(this.labelPath);
+            this.groupBoxBnBTest.Controls.Add(this.textBoxTestPath);
+            this.groupBoxBnBTest.Controls.Add(this.textBoxTestSize);
+            this.groupBoxBnBTest.Controls.Add(this.textBoxWeightMax);
+            this.groupBoxBnBTest.Controls.Add(this.textBoxWeightLow);
+            this.groupBoxBnBTest.Location = new System.Drawing.Point(15, 6);
+            this.groupBoxBnBTest.Name = "groupBoxBnBTest";
+            this.groupBoxBnBTest.Size = new System.Drawing.Size(388, 191);
+            this.groupBoxBnBTest.TabIndex = 13;
+            this.groupBoxBnBTest.TabStop = false;
+            this.groupBoxBnBTest.Text = "BranchAndBound";
+            // 
+            // groupBoxTabuTest
+            // 
+            this.groupBoxTabuTest.Location = new System.Drawing.Point(15, 204);
+            this.groupBoxTabuTest.Name = "groupBoxTabuTest";
+            this.groupBoxTabuTest.Size = new System.Drawing.Size(388, 172);
+            this.groupBoxTabuTest.TabIndex = 14;
+            this.groupBoxTabuTest.TabStop = false;
+            this.groupBoxTabuTest.Text = "Tabu Search";
             // 
             // Form1
             // 
@@ -432,7 +455,8 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.groupBoxBnBTest.ResumeLayout(false);
+            this.groupBoxBnBTest.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -474,6 +498,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonRunTabu;
         private System.Windows.Forms.Button buttonLoadFileTabu;
+        private System.Windows.Forms.GroupBox groupBoxTabuTest;
+        private System.Windows.Forms.GroupBox groupBoxBnBTest;
     }
 }
 
