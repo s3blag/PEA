@@ -178,7 +178,7 @@ namespace Project_1
                 tempSwappedCities.Second = city2;
                 //AddToTabu(tabu, tempSwappedCities, timestamp);
 
-                if ((currentSolutionWeight < bestSolutionWeight && tabu[city1, city2] == 0) || currentSolutionWeight*0.9 < bestSolutionWeight)
+                if ((currentSolutionWeight < bestSolutionWeight && tabu[city1, city2] == 0) || currentSolutionWeight*1.05 < bestSolutionWeight)
                 {
                     Array.Copy(currentSolution, bestSolution, solutionLength);
                     bestSolutionWeight = currentSolutionWeight;
@@ -222,9 +222,9 @@ namespace Project_1
                 ReduceTabu(tabu);
                 AddToTabu(tabu, bestNeighbor.First, timestamp);
 
-                if (criticalEventCounter == 400)
+                if (criticalEventCounter == 20)
                 {
-                    solution = GetGreedySolution(matrix, rand.Next());
+                    solution = GetGreedySolution(matrix, rand.Next(solution.Length));
                     ResetTabu(tabu);
                     criticalEventCounter = 0;
                 }

@@ -31,7 +31,7 @@ namespace Project_1
                 {
                     fileName = openFileDialog1.FileName;
                     cities = new Cities(fileName, true);
-                    textBox1.Text = cities.ShowCities();
+                    //textBox1.Text = cities.ShowCities();
                 }
             }
             catch (Exception ex)
@@ -96,36 +96,29 @@ namespace Project_1
                 MessageBox.Show("Błąd: Źle podane wartości! ");
             }
         }
-
-        private void buttonTest_Click(object sender, EventArgs e)
+        
+        private void buttonLoadFileTabu_Click(object sender, EventArgs e)
         {
-
+            openFileDialog1.ShowDialog();
             try
             {
-                cities = new Cities(Int32.Parse(textBoxNumberOfCities.Text), 1, 100, radioAsync.Checked);
-                textBox1.Text = cities.ShowCities();
+                if (openFileDialog1.OpenFile() != null)
+                {
+                    fileName = openFileDialog1.FileName;
+                    cities = new Cities(fileName, true);
+                    //textBox1Tabu.Text = cities.ShowCities();
+                }
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Nie można wygenerować miast! Błąd: " + exception.Message);
+                MessageBox.Show("Nie można odczytać pliku! Błąd: " + ex.Message);
             }
-
-
-            textBox1.Text += Environment.NewLine +  "-------------------   TABU   ---------------------" + Environment.NewLine;
-            textBox1.Text += TabuSearch.RunAlgorithm(cities.AdjacencyMatrix, 10*(cities.AdjacencyMatrix.GetLength(0)/10), 100);
-            //textBox1.Text += Environment.NewLine + "-------------------   Branch and Bound   ---------------------" + Environment.NewLine;
-            // textBox1.Text += BranchAndBound.RunAlgorithm(cities.AdjacencyMatrix);*/
-            textBox1.Text += Environment.NewLine + "-------------------   Brute Force   ---------------------" + Environment.NewLine;
-            textBox1.Text += Environment.NewLine;
-        //  textBox1.Text += BruteForce.RunAlgorithm(cities);
-
-            
         }
 
-        private void buttonTestTabu_Click(object sender, EventArgs e)
+        private void buttonRunTabu_Click(object sender, EventArgs e)
         {
-            textBox1.Text += Environment.NewLine + "-------------------   TABU   ---------------------" + Environment.NewLine;
-            textBox1.Text += TabuSearch.RunAlgorithm(cities.AdjacencyMatrix, 10 * (cities.AdjacencyMatrix.GetLength(0) / 10), 100);
+            textBoxTabu.Text += Environment.NewLine + "-------------------   TABU   ---------------------" + Environment.NewLine;
+            textBoxTabu.Text += TabuSearch.RunAlgorithm(cities.AdjacencyMatrix, 10 * (cities.AdjacencyMatrix.GetLength(0) / 10), 100);
         }
     }
 }

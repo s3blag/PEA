@@ -39,10 +39,15 @@
             this.radioAsync = new System.Windows.Forms.RadioButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.buttonTest = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonRunAlgorithm = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.buttonRunTabu = new System.Windows.Forms.Button();
+            this.buttonLoadFileTabu = new System.Windows.Forms.Button();
+            this.textBoxTabu = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.textBoxNumberOfTrials = new System.Windows.Forms.TextBox();
             this.labelNumberOfTrials = new System.Windows.Forms.Label();
@@ -59,11 +64,12 @@
             this.labelTestSize = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.buttonTestTabu = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -148,37 +154,28 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.AccessibleDescription = "";
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(12, 13);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(429, 642);
+            this.tabControl1.Size = new System.Drawing.Size(429, 507);
             this.tabControl1.TabIndex = 10;
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.buttonTest);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.textBox1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(421, 616);
+            this.tabPage1.Size = new System.Drawing.Size(421, 481);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Branch And Bound";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // buttonTest
-            // 
-            this.buttonTest.Location = new System.Drawing.Point(309, 569);
-            this.buttonTest.Name = "buttonTest";
-            this.buttonTest.Size = new System.Drawing.Size(75, 23);
-            this.buttonTest.TabIndex = 12;
-            this.buttonTest.Text = "Test";
-            this.buttonTest.UseVisualStyleBackColor = true;
-            this.buttonTest.Click += new System.EventHandler(this.buttonTest_Click);
             // 
             // groupBox2
             // 
@@ -196,7 +193,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.buttonTestTabu);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.buttonRunAlgorithm);
             this.groupBox1.Controls.Add(this.buttonOpenFile);
@@ -217,6 +213,68 @@
             this.buttonRunAlgorithm.UseVisualStyleBackColor = true;
             this.buttonRunAlgorithm.Click += new System.EventHandler(this.buttonRunAlgorithm_Click);
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.groupBox3);
+            this.tabPage3.Controls.Add(this.textBoxTabu);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(421, 616);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Tabu Search";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.buttonRunTabu);
+            this.groupBox3.Controls.Add(this.buttonLoadFileTabu);
+            this.groupBox3.Location = new System.Drawing.Point(10, 312);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(405, 77);
+            this.groupBox3.TabIndex = 12;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Wczytanie z pliku:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(5, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(62, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Otwórz plik:";
+            // 
+            // buttonRunTabu
+            // 
+            this.buttonRunTabu.Location = new System.Drawing.Point(119, 39);
+            this.buttonRunTabu.Name = "buttonRunTabu";
+            this.buttonRunTabu.Size = new System.Drawing.Size(115, 23);
+            this.buttonRunTabu.TabIndex = 10;
+            this.buttonRunTabu.Text = "Uruchom algorytm";
+            this.buttonRunTabu.UseVisualStyleBackColor = true;
+            this.buttonRunTabu.Click += new System.EventHandler(this.buttonRunTabu_Click);
+            // 
+            // buttonLoadFileTabu
+            // 
+            this.buttonLoadFileTabu.Location = new System.Drawing.Point(6, 39);
+            this.buttonLoadFileTabu.Name = "buttonLoadFileTabu";
+            this.buttonLoadFileTabu.Size = new System.Drawing.Size(82, 23);
+            this.buttonLoadFileTabu.TabIndex = 2;
+            this.buttonLoadFileTabu.Text = "Wybierz Plik";
+            this.buttonLoadFileTabu.UseVisualStyleBackColor = true;
+            this.buttonLoadFileTabu.Click += new System.EventHandler(this.buttonLoadFileTabu_Click);
+            // 
+            // textBoxTabu
+            // 
+            this.textBoxTabu.Location = new System.Drawing.Point(8, 8);
+            this.textBoxTabu.Multiline = true;
+            this.textBoxTabu.Name = "textBoxTabu";
+            this.textBoxTabu.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxTabu.Size = new System.Drawing.Size(405, 298);
+            this.textBoxTabu.TabIndex = 2;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.textBoxNumberOfTrials);
@@ -235,7 +293,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(421, 616);
+            this.tabPage2.Size = new System.Drawing.Size(421, 481);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Test";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -353,21 +411,11 @@
             // 
             this.saveFileDialog1.DefaultExt = "txt";
             // 
-            // buttonTestTabu
-            // 
-            this.buttonTestTabu.Location = new System.Drawing.Point(283, 39);
-            this.buttonTestTabu.Name = "buttonTestTabu";
-            this.buttonTestTabu.Size = new System.Drawing.Size(75, 23);
-            this.buttonTestTabu.TabIndex = 11;
-            this.buttonTestTabu.Text = "TestTabu";
-            this.buttonTestTabu.UseVisualStyleBackColor = true;
-            this.buttonTestTabu.Click += new System.EventHandler(this.buttonTestTabu_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(450, 667);
+            this.ClientSize = new System.Drawing.Size(450, 529);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -379,6 +427,10 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
@@ -416,8 +468,12 @@
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button buttonTest;
-        private System.Windows.Forms.Button buttonTestTabu;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TextBox textBoxTabu;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonRunTabu;
+        private System.Windows.Forms.Button buttonLoadFileTabu;
     }
 }
 
