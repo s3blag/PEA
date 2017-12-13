@@ -156,11 +156,9 @@ namespace Project_1
             int solutionWeight = GetSolutionWeight(solution, matrix);
             int currentSolutionWeight = GetSolutionWeight(solution, matrix);
             int bestSolutionWeight = currentSolutionWeight;
-            bool aspiration = false;
             int[] bestSolution = solution;
             int[] currentSolution = new int[solutionLength];
             Array.Copy(solution, currentSolution, solutionLength);
-            int aspirationCounter = 0;
             int city1, city2;
            
             for (int currentNumberOfIterations = 0; currentNumberOfIterations < numberOfIterations; currentNumberOfIterations++)
@@ -180,20 +178,12 @@ namespace Project_1
                 tempSwappedCities.Second = city2;
                 //AddToTabu(tabu, tempSwappedCities, timestamp);
 
-                if ((currentSolutionWeight < bestSolutionWeight && tabu[city1, city2] == 0) || (currentSolutionWeight < bestSolutionWeight && aspiration))
+                if ((currentSolutionWeight < bestSolutionWeight && tabu[city1, city2] == 0) || currentSolutionWeight*0.9 < bestSolutionWeight)
                 {
                     Array.Copy(currentSolution, bestSolution, solutionLength);
                     bestSolutionWeight = currentSolutionWeight;
                     swappedCities.First = city1;
                     swappedCities.Second = city2;
-                    aspiration = false;
-                    aspirationCounter = 0;
-                }
-                else
-                {
-                    aspirationCounter++;
-                    if (aspirationCounter > numberOfIterations / 2)
-                        aspiration = true;
                 }
 
                     Array.Copy(solution, currentSolution, solutionLength);
@@ -234,7 +224,7 @@ namespace Project_1
 
                 if (criticalEventCounter == 400)
                 {
-                    solution = GetRandomSolution(matrix.GetLength(0));
+                    solution = GetGreedySolution(matrix, rand.Next());
                     ResetTabu(tabu);
                     criticalEventCounter = 0;
                 }
