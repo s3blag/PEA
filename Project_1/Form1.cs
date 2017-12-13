@@ -63,7 +63,7 @@ namespace Project_1
             string path = textBoxTestPath.Text;
             try
             {
-                Test.RunTest(size, weightLow, weightMax, numberOfTrials, path);
+                BnBTest.RunTest(size, weightLow, weightMax, numberOfTrials, path);
             }
             catch (Exception err)
             {
