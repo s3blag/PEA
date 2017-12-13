@@ -1,0 +1,223 @@
+\documentclass{article}
+\usepackage[table,xcdraw]{xcolor} % Dla tabel
+\usepackage{siunitx} % Provides the \SI{}{} and \si{} command for typesetting SI units
+\usepackage{graphicx} % Required for the inclusion of images
+\usepackage{natbib} % Required to change bibliography style to APA
+\usepackage{amsmath} % Required for some math elements 
+\setlength\parindent{12pt} % Removes all indentation from paragraphs
+%\usepackage{times} % Uncomment to use the Times New Roman font
+\usepackage{amsmath}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+
+\usepackage{pgfplots}
+\usepackage[utf8]{inputenc} % Język polski
+\usepackage{polski}
+\usepackage[polish]{babel}
+
+\usepackage[top=1in, bottom=1.25in, left=1.25in, right=1.25in]{geometry} % Marginesy
+\usepackage{listings} % Kod programu
+\usepackage{indentfirst} % Wcięcie przy pomocy \par
+\usepackage{multicol} % Kilka kolumn dla itemize
+\usepackage{color} % Kolorowanie tekstu
+\usepackage{float}
+
+%Projektowanie Efektywnych Algorytmów \\ {\normalsize Implementacja i analiza efektywności metody podziału i ograniczeń dla problemu komiwojażera}
+
+
+%\renewcommand{\labelenumi}{\alph{enumi}.} % Zamienia litery w enumerate na a, b, c, ...
+%----------------------------------------------------------------------------------------
+%	DOCUMENT INFORMATION
+%----------------------------------------------------------------------------------------
+\title{Projektowanie Efektywnych Algorytmów \\ {\normalsize Implementacja i analiza efektywności metody Tabu Search dla problemu komiwojażera}}
+\author{Sebastian Łągiewski 226173\\Łukasz Zatorski 226172 }
+
+% Title page layout (fold)
+\makeatletter
+\renewcommand{\maketitle}{
+	\begin{titlepage}
+		\begin{center}
+			\vspace*{3cm}
+			\LARGE \@title \par
+			\vspace{2cm}
+			\textit{\small Autorzy:}\par
+			\normalsize \@author\par \normalsize
+			\vspace{3cm}
+			Prowadzący : mgr inż. Radosław Idzikowski\\
+			\vspace{3cm}
+			Wydział Elektroniki\\ III rok \par
+			\vspace{3cm}
+			\small \@date
+		\end{center}
+	\end{titlepage}
+}
+\makeatother
+\begin{document}
+	\maketitle % Insert the title, author and date
+
+%\begin{center}
+%\begin{tabular}{l r}
+%Data: & Semestr letni, 2017 \\ % Date the experiment was performed
+
+%Prowadzący:  mgr inż. Radosław Idzikowski% Instructor/supervisor
+%\end{tabular}
+%\end{center}
+\tableofcontents
+
+
+% If you wish to include an abstract, uncomment the lines below
+% \begin{abstract}
+% Abstract text
+% \end{abstract}
+
+%----------------------------------------------------------------------------------------
+%	SECTION 0
+%----------------------------------------------------------------------------------------
+
+%\newpage
+%\section{Tytuł}} 
+%\subsection{Tytuł}
+%\par Tekst
+
+%\begin{itemize}
+%	\item\textit{Tekst} - Opis
+%\end{itemize}
+
+%\begin{enumerate}
+%	\item Opis
+%\end{enumerate}
+
+%\begin{center}
+%	\includegraphics[scale=0.6, center]{Screenshot_1.png}
+%\end{center}
+
+%\begin{lstlisting}[basicstyle=\small]
+%	kod programu;
+%\end{lstlisting}
+
+%----------------------------------------------------------------------------------------
+%	SECTION 1
+%----------------------------------------------------------------------------------------
+\newpage
+\section{Opis algorytmu}
+\par Metoda podziału i ograniczeń polega na uporządkowanym przeszukiwaniu zbioru rozwiązań danego problemu i dzieleniu go na mniejsze podzbiory, a następnie wyliczeniu ich kresu dolnego. Kolejny podział dokonywany jest na zbiorze o najmniejszej wartości kresu dolnego. Algorytm kończy swój bieg w momencie gdy zostanie znalezione rozwiązanie, dla którego wartość nie jest większa od najmniejszego dolnego ograniczenia z wszystkich niepodzielonych podzbiorów.
+\newline
+\newline
+W przypadku problemu komiwojażera i algorytmu Little’a wykonywane są działania na macierzy sąsiedztw. Pierwszym krokiem jest redukcja macierzy – polega ona na znalezieniu elementu minimalnego w każdym wierszu oraz kolumnie i odjęciu go od nich. Suma odjętych wartości jest stopniem redukcji macierzy i dodawana jest do dotychczasowej wartości dolnego ograniczenia. Kolejnym krokiem jest wybranie odcinka do wykonania podziału. Spośród krawędzi o koszcie równym 0 (po redukcji) wybierana jest ta o najwyższym optymistycznym koszcie wyłączenia. Dla krawędzi $<$\textit{a,b}$>$ optymistycznym kosztem wyłączenia jest suma minimalnych kosztów wyjścia z miasta \textit{a} do miasta innego niż \textit{b} oraz dotarcia do miasta \textit{b} z miasta innego niż \textit{a}. Następnym krokiem, jest generacja nowych podzbiorów przez podzielenie macierzy na:
+
+	\begin{itemize}
+	\item Zredukowaną - niezawierającą wiersza a i kolumny b oraz z przypisaną do krawędzi $<$\textit{b,a}$>$ wartością nieskończoności
+	\item Zmodyfikowaną – z przypisaną do krawędzi $<$\textit{a,b}$>$ wartością nieskończoności.
+	\end{itemize}
+Do dalszego podziału wybierany jest podzbiór o najmniejszej wartości kresu dolnego. Kroki algorytmu wykonywane są do momentu stworzenia macierzy o rozmiarze 1 i włączenia jej jedynego elementu do zbioru usuniętych, do tej pory, wierszy oraz kolumn (oznaczających poszczególne ścieżki rozwiązania).
+\newline
+\newline
+W najgorszym przypadku konieczne jest sprawdzenie wszystkich możliwych rozwiązań, co wskazuje, iż złożoność obliczeniowa tej metody będzie wykładnicza.
+\newline
+\section{Plan eksperymentu}
+\par
+\begin{itemize}
+\item Pomiar czasu został wykonany za pomocą klasy StopWatch(QueryPerformanceCounter).
+\item Do reprezentacji odległości między miastami użyto macierzy sąsiedztwa.
+\item Dla każdego z typów pomiaru algorytm wykonywany był 30 razy, wyniki uśredniono.
+\end{itemize}
+
+\textbf{Metoda podziału i ograniczeń (Alg. Little’a)}
+\renewcommand\labelitemii{$\circ$}
+\begin{itemize}
+	\item Do przechowywania wierzchołków użyto kolejki priorytetowej.
+	\item Odległości między miastami losowane są  z zakresu:
+	\begin{itemize}
+	\item $<$1, 50$>$ dla ilości miast N = \{ 5, 10, 15, 20, 25, 30, 35 \}
+	\end{itemize}
+\end{itemize}
+\newpage
+
+\section{Wyniki}
+
+
+\begin{table}[H]
+	\vspace{1cm}
+	\centering
+	%\label{my-label}
+	
+	\begin{tabular}{|c|c|}
+		\hline
+		\multicolumn{1}{|c|}{\textbf{Liczba miast}} & \textbf{Czas [ms]}  \\ \hline
+				{5}                                	& 0,066               \\ \hline
+				{10}                                & 0,44               \\ \hline
+				{15}                                & 0,55                 \\ \hline
+				{20}                                & 2,31                 \\ \hline
+				{25}                                & 5,60                 \\ \hline
+				{30}                                & 60,64                 \\ \hline
+				{35}                                & 99,69                 \\ \hline
+			
+	\end{tabular}
+	\caption{Zależność czasu wykonania się algorytmu od liczby miast}
+\end{table}	
+
+
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[scale=0.5, center]{Screenshot_1.png}
+%	\caption{Zależność czasu wykonania się algorytmu od liczby miast}
+%\end{figure}
+	%
+
+	\begin{figure}[H]
+		\vspace{2cm}	
+		\hspace*{-2cm}
+		\centering
+		\begin{tikzpicture}[scale=1.5]
+		\begin{axis}[
+		xlabel=Liczba miast,
+		ylabel=Czas ]
+		\addplot[color=red,mark=x] coordinates {
+			(5,0.066)
+			(10,0.44)
+			(15, 0.55)
+			(20,2.31)
+			(25,5.60)
+			(30,60.64)
+			(35,99.69)
+		};
+		\end{axis}    
+		\end{tikzpicture}
+		\caption{Wykres zależności czasu wykonania się algorytmu od liczby miast}
+	\end{figure}
+\newpage	
+	
+\section{Podsumowanie}
+\par	
+	Metoda podziałów i ograniczeń potrafi w znacznym stopniu poprawić czas rozwiązywania problemu komiwojażera. Warto jednak zaznaczyć, że najbardziej decydującym czynnikiem nie jest tutaj liczba miast, lecz konkretny przypadek wylosowanych wag krawędzi grafu. W przeprowadzonych testach przyjęto zakres wag od 1 do 50. Sytuacja staje się dużo bardziej skomplikowana, gdy zakres wag zostanie znacząco ograniczony, np.  do 5. W takim przypadku widać wadę tej metody - złożoność obliczeniowa będzie porównywalna z tą jaką ma przegląd zupełny, zapotrzebowanie na pamięć oraz czas wykonywania algorytmu będą większe tych przy wykonywaniu przeglądu zupełnego, ze względu na ilość działań jakie algorytm musi wykonać. Testy pokazały, że zaimplementowany przez nas algorytm ma złożoność obliczeniową w przybliżeniu wykładniczą, co pokrywa się z naszymi oczekiwaniami.
+	
+
+
+
+%----------------------------------------------------------------------------------------
+%	SECTION 3
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	SECTION 4
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+%\newpage
+%\bibliohystyle{apalike}
+%\begin{thebibliography}{9}
+%
+%\bibitem{wikipediacluster} 
+%Wikipedia: Computer cluster,
+%\\\texttt{https://en.wikipedia.org/wiki/Computer\_cluster}
+%	
+%\bibitem{wikipediasieve} 
+%Wikipedia: Sieve of Erastosthenes,
+%\\\texttt{https://en.wikipedia.org/wiki/Sieve\_of\_Eratosthenes}
+%
+%\end{thebibliography}
+
+%----------------------------------------------------------------------------------------
+\end{document}
