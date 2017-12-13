@@ -178,15 +178,13 @@ namespace Project_1
                 tempSwappedCities.Second = city2;
                 //AddToTabu(tabu, tempSwappedCities, timestamp);
 
-                if (currentSolutionWeight < bestSolutionWeight && tabu[city1, city2] == 0)
+                if ((currentSolutionWeight < bestSolutionWeight && tabu[city1, city2] == 0) || currentSolutionWeight*1.05 < bestSolutionWeight)
                 {
                     Array.Copy(currentSolution, bestSolution, solutionLength);
                     bestSolutionWeight = currentSolutionWeight;
                     swappedCities.First = city1;
                     swappedCities.Second = city2;
-
                 }
-               
 
                     Array.Copy(solution, currentSolution, solutionLength);
                 
@@ -210,7 +208,7 @@ namespace Project_1
             int[,] tabu = new int[matrix.GetLength(0), matrix.GetLength(0)];
             int numberOfIterations = 0;
             int criticalEventCounter = 0;
-            int[] solution = GetGreedySolution(matrix, rand.Next(0, matrix.GetLength(0)));
+            int[] solution = GetGreedySolution(matrix, 0);
             int[] bestSolution = solution;
             int bestSolutionWeight = GetSolutionWeight(solution, matrix);
             int newWeight;
@@ -226,12 +224,12 @@ namespace Project_1
 
                 if (criticalEventCounter == 20)
                 {
-                    solution = GetGreedySolution(matrix, rand.Next(0,matrix.GetLength(0)));
+                    solution = GetGreedySolution(matrix, rand.Next(solution.Length));
                     ResetTabu(tabu);
                     criticalEventCounter = 0;
                 }
 
-                newWeight = GetSolutionWeight(solution, matrix);
+                 newWeight = GetSolutionWeight(solution, matrix);
                 if ( newWeight < bestSolutionWeight)
                 {
                     Array.Copy(solution, bestSolution, solution.GetLength(0));
