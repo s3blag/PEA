@@ -31,7 +31,7 @@ namespace Project_1
                 {
                     fileName = openFileDialog1.FileName;
                     cities = new Cities(fileName, true);
-                    textBox1.Text = cities.ShowCities();
+                    //textBox1.Text = cities.ShowCities();
                 }
             }
             catch (Exception ex)
@@ -63,7 +63,7 @@ namespace Project_1
             string path = textBoxTestPath.Text;
             try
             {
-                Test.RunTest(size, weightLow, weightMax, numberOfTrials, path);
+                BnBTest.RunTest(size, weightLow, weightMax, numberOfTrials, path);
             }
             catch (Exception err)
             {
@@ -125,7 +125,7 @@ namespace Project_1
         private void buttonTestTabu_Click(object sender, EventArgs e)
         {
             textBox1.Text += Environment.NewLine + "-------------------   TABU   ---------------------" + Environment.NewLine;
-            textBox1.Text += TabuSearch.RunAlgorithm(cities.AdjacencyMatrix, 10 * (cities.AdjacencyMatrix.GetLength(0) / 10), 100);
+            textBox1.Text += TabuSearch.RunAlgorithm(cities.AdjacencyMatrix, cities.AdjacencyMatrix.GetLength(0), 100);
         }
     }
 }

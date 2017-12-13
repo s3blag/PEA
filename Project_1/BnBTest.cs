@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Project_1
 {
-    static internal class Test
+    static internal class BnBTest
     {   
         /// <summary>
         /// Metoda odpowiedzialna za uruchomienie testów z zadanymi parametrami

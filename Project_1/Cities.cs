@@ -16,6 +16,14 @@ namespace Project_1
         private Random rand;
         private int numberOfCities;
 
+        //akcesor
+        public int BestDistance
+        {
+            get
+            {
+                return bestDistance;
+            }
+        }
 
         //akcesor
         public int NumberOfCities
