@@ -238,7 +238,7 @@ namespace Project_1
         /// <param name="maxNumberOfIterations"></param> Maksymalna liczba iteracji
         /// <returns></returns>
         public static string RunAlgorithm(int[,] matrix, int timestamp, int maxNumberOfIterations)
-        {   
+        {
             // Deklaracja oraz definicja macierzy reprezentującej tabu
             int[,] tabu = new int[matrix.GetLength(0), matrix.GetLength(0)];
             // Licznik iteracji algorytmu
@@ -267,8 +267,6 @@ namespace Project_1
                 ReduceTabu(tabu);
                 // Dodanie do tabu wykonanej przed chwilą zamiany
                 AddToTabu(tabu, bestNeighbor.First, timestamp);
-                // Aktualizacja timestamp
-                timestamp = 1 / 5 * solution.Length;
                 // Jeżeli przez 20 iteracji nie nastąpiła poprawa obecnie najlepszego globalnie rozwiązania to 
                 // nastębuje wyzerowanie tabu oraz obliczenie nowego rozwiązania początkowego metodą zachłanną
                 // Rozwiązanie to zaczyna się od losowo wybranego miasta
