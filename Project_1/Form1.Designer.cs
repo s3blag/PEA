@@ -67,6 +67,16 @@
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.buttonSelectPathTabuTest = new System.Windows.Forms.Button();
+            this.labelLoadCities = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxNumberOfTrialsTabu = new System.Windows.Forms.TextBox();
+            this.labelSelectPathTabu = new System.Windows.Forms.Label();
+            this.textBoxOutputPath = new System.Windows.Forms.TextBox();
+            this.buttonSelectPathTabu = new System.Windows.Forms.Button();
+            this.buttonStartTestTabu = new System.Windows.Forms.Button();
+            this.labelTimestamp = new System.Windows.Forms.Label();
+            this.textBoxTimestamp = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -76,6 +86,7 @@
             this.tabPage2.SuspendLayout();
             this.tabControlTest.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
@@ -301,6 +312,7 @@
             this.tabControlTest.SelectedIndex = 0;
             this.tabControlTest.Size = new System.Drawing.Size(408, 239);
             this.tabControlTest.TabIndex = 13;
+            this.tabControlTest.SelectedIndexChanged += new System.EventHandler(this.tabControlTest_SelectedIndexChanged);
             // 
             // tabPage4
             // 
@@ -324,6 +336,7 @@
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "Branch And Bound";
             this.tabPage4.UseVisualStyleBackColor = true;
+            this.tabPage4.Click += new System.EventHandler(this.tabPage4_Click);
             // 
             // labelTestSize
             // 
@@ -345,7 +358,7 @@
             // 
             // buttonStartTest
             // 
-            this.buttonStartTest.Location = new System.Drawing.Point(130, 109);
+            this.buttonStartTest.Location = new System.Drawing.Point(21, 177);
             this.buttonStartTest.Name = "buttonStartTest";
             this.buttonStartTest.Size = new System.Drawing.Size(100, 23);
             this.buttonStartTest.TabIndex = 9;
@@ -361,6 +374,7 @@
             this.labelPath.Size = new System.Drawing.Size(161, 13);
             this.labelPath.TabIndex = 4;
             this.labelPath.Text = "Podaj ścieżkę pliku wyjściowego";
+            this.labelPath.Click += new System.EventHandler(this.labelPath_Click);
             // 
             // buttonSelectPath
             // 
@@ -378,6 +392,7 @@
             this.textBoxTestPath.Name = "textBoxTestPath";
             this.textBoxTestPath.Size = new System.Drawing.Size(264, 20);
             this.textBoxTestPath.TabIndex = 8;
+            this.textBoxTestPath.TextChanged += new System.EventHandler(this.textBoxTestPath_TextChanged);
             // 
             // textBoxNumberOfTrials
             // 
@@ -385,6 +400,7 @@
             this.textBoxNumberOfTrials.Name = "textBoxNumberOfTrials";
             this.textBoxNumberOfTrials.Size = new System.Drawing.Size(100, 20);
             this.textBoxNumberOfTrials.TabIndex = 12;
+            this.textBoxNumberOfTrials.TextChanged += new System.EventHandler(this.textBoxNumberOfTrials_TextChanged);
             // 
             // labelWeightLow
             // 
@@ -426,6 +442,7 @@
             this.labelNumberOfTrials.Size = new System.Drawing.Size(62, 13);
             this.labelNumberOfTrials.TabIndex = 11;
             this.labelNumberOfTrials.Text = "Liczba prób";
+            this.labelNumberOfTrials.Click += new System.EventHandler(this.labelNumberOfTrials_Click);
             // 
             // textBoxWeightMax
             // 
@@ -436,6 +453,16 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.textBoxTimestamp);
+            this.tabPage5.Controls.Add(this.labelTimestamp);
+            this.tabPage5.Controls.Add(this.buttonStartTestTabu);
+            this.tabPage5.Controls.Add(this.buttonSelectPathTabu);
+            this.tabPage5.Controls.Add(this.textBoxOutputPath);
+            this.tabPage5.Controls.Add(this.labelSelectPathTabu);
+            this.tabPage5.Controls.Add(this.textBoxNumberOfTrialsTabu);
+            this.tabPage5.Controls.Add(this.label4);
+            this.tabPage5.Controls.Add(this.labelLoadCities);
+            this.tabPage5.Controls.Add(this.buttonSelectPathTabuTest);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
@@ -447,6 +474,93 @@
             // saveFileDialog1
             // 
             this.saveFileDialog1.DefaultExt = "txt";
+            // 
+            // buttonSelectPathTabuTest
+            // 
+            this.buttonSelectPathTabuTest.Location = new System.Drawing.Point(7, 23);
+            this.buttonSelectPathTabuTest.Name = "buttonSelectPathTabuTest";
+            this.buttonSelectPathTabuTest.Size = new System.Drawing.Size(75, 23);
+            this.buttonSelectPathTabuTest.TabIndex = 0;
+            this.buttonSelectPathTabuTest.Text = "Wybierz";
+            this.buttonSelectPathTabuTest.UseVisualStyleBackColor = true;
+            this.buttonSelectPathTabuTest.Click += new System.EventHandler(this.buttonSelectPathTabuTest_Click);
+            // 
+            // labelLoadCities
+            // 
+            this.labelLoadCities.AutoSize = true;
+            this.labelLoadCities.Location = new System.Drawing.Point(7, 7);
+            this.labelLoadCities.Name = "labelLoadCities";
+            this.labelLoadCities.Size = new System.Drawing.Size(90, 13);
+            this.labelLoadCities.TabIndex = 1;
+            this.labelLoadCities.Text = "Wczytaj instancję";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 49);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(62, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Liczba prób";
+            // 
+            // textBoxNumberOfTrialsTabu
+            // 
+            this.textBoxNumberOfTrialsTabu.Location = new System.Drawing.Point(7, 65);
+            this.textBoxNumberOfTrialsTabu.Name = "textBoxNumberOfTrialsTabu";
+            this.textBoxNumberOfTrialsTabu.Size = new System.Drawing.Size(100, 20);
+            this.textBoxNumberOfTrialsTabu.TabIndex = 3;
+            // 
+            // labelSelectPathTabu
+            // 
+            this.labelSelectPathTabu.AutoSize = true;
+            this.labelSelectPathTabu.Location = new System.Drawing.Point(7, 92);
+            this.labelSelectPathTabu.Name = "labelSelectPathTabu";
+            this.labelSelectPathTabu.Size = new System.Drawing.Size(161, 13);
+            this.labelSelectPathTabu.TabIndex = 4;
+            this.labelSelectPathTabu.Text = "Podaj ścieżkę pliku wyjściowego";
+            // 
+            // textBoxOutputPath
+            // 
+            this.textBoxOutputPath.Location = new System.Drawing.Point(7, 108);
+            this.textBoxOutputPath.Name = "textBoxOutputPath";
+            this.textBoxOutputPath.Size = new System.Drawing.Size(244, 20);
+            this.textBoxOutputPath.TabIndex = 5;
+            // 
+            // buttonSelectPathTabu
+            // 
+            this.buttonSelectPathTabu.Location = new System.Drawing.Point(257, 105);
+            this.buttonSelectPathTabu.Name = "buttonSelectPathTabu";
+            this.buttonSelectPathTabu.Size = new System.Drawing.Size(75, 23);
+            this.buttonSelectPathTabu.TabIndex = 6;
+            this.buttonSelectPathTabu.Text = "Wybierz";
+            this.buttonSelectPathTabu.UseVisualStyleBackColor = true;
+            this.buttonSelectPathTabu.Click += new System.EventHandler(this.buttonSelectPathTabu_Click);
+            // 
+            // buttonStartTestTabu
+            // 
+            this.buttonStartTestTabu.Location = new System.Drawing.Point(7, 135);
+            this.buttonStartTestTabu.Name = "buttonStartTestTabu";
+            this.buttonStartTestTabu.Size = new System.Drawing.Size(158, 23);
+            this.buttonStartTestTabu.TabIndex = 7;
+            this.buttonStartTestTabu.Text = "Rozpocznij timestamp test";
+            this.buttonStartTestTabu.UseVisualStyleBackColor = true;
+            this.buttonStartTestTabu.Click += new System.EventHandler(this.buttonStartTestTabu_Click);
+            // 
+            // labelTimestamp
+            // 
+            this.labelTimestamp.AutoSize = true;
+            this.labelTimestamp.Location = new System.Drawing.Point(155, 49);
+            this.labelTimestamp.Name = "labelTimestamp";
+            this.labelTimestamp.Size = new System.Drawing.Size(58, 13);
+            this.labelTimestamp.TabIndex = 8;
+            this.labelTimestamp.Text = "Timestamp";
+            // 
+            // textBoxTimestamp
+            // 
+            this.textBoxTimestamp.Location = new System.Drawing.Point(155, 65);
+            this.textBoxTimestamp.Name = "textBoxTimestamp";
+            this.textBoxTimestamp.Size = new System.Drawing.Size(100, 20);
+            this.textBoxTimestamp.TabIndex = 9;
             // 
             // Form1
             // 
@@ -472,6 +586,8 @@
             this.tabControlTest.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -516,6 +632,16 @@
         private System.Windows.Forms.TabControl tabControlTest;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Label labelLoadCities;
+        private System.Windows.Forms.Button buttonSelectPathTabuTest;
+        private System.Windows.Forms.Button buttonStartTestTabu;
+        private System.Windows.Forms.Button buttonSelectPathTabu;
+        private System.Windows.Forms.TextBox textBoxOutputPath;
+        private System.Windows.Forms.Label labelSelectPathTabu;
+        private System.Windows.Forms.TextBox textBoxNumberOfTrialsTabu;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBoxTimestamp;
+        private System.Windows.Forms.Label labelTimestamp;
     }
 }
 

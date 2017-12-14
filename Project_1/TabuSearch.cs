@@ -194,10 +194,11 @@ namespace Project_1
 
         private static string ShowSolution(int[] solution, int solutionWeight)
         {
-            string solutionString = "Rozwiązanie:" + Environment.NewLine;
+            /*string solutionString = "Rozwiązanie:" + Environment.NewLine;
             foreach (var item in solution)
                 solutionString += item + " -> ";
-            solutionString += solution[0] + Environment.NewLine + "Koszt: " + solutionWeight;
+            solutionString += solution[0] + Environment.NewLine + "Koszt: " + solutionWeight;*/
+            string solutionString = solutionWeight.ToString();
 
             return solutionString;
         }
@@ -217,7 +218,7 @@ namespace Project_1
             while(numberOfIterations<maxNumberOfIterations)
             {
 
-                bestNeighbor = GetBestNeighborRandomly(matrix, solution, tabu, 10 * solution.GetLength(0), timestamp);
+                bestNeighbor = GetBestNeighborRandomly(matrix, solution, tabu, 10*solution.GetLength(0), timestamp);
                 solution = bestNeighbor.Second;
                 ReduceTabu(tabu);
                 AddToTabu(tabu, bestNeighbor.First, timestamp);
@@ -227,6 +228,7 @@ namespace Project_1
                     solution = GetGreedySolution(matrix, rand.Next(solution.Length));
                     ResetTabu(tabu);
                     criticalEventCounter = 0;
+                    Debug.WriteLine("Restart");
                 }
 
                  newWeight = GetSolutionWeight(solution, matrix);

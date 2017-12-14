@@ -20,6 +20,7 @@ namespace Project_1
         private void Form1_Load(object sender, EventArgs e)
         {
             textBoxTestPath.Text = Directory.GetCurrentDirectory() + "\\test.txt";
+            textBoxOutputPath.Text = Directory.GetCurrentDirectory() + "\\test.txt";
         }
 
         private void buttonOpenFile_Click(object sender, EventArgs e)
@@ -118,7 +119,73 @@ namespace Project_1
         private void buttonRunTabu_Click(object sender, EventArgs e)
         {
             textBoxTabu.Text += Environment.NewLine + "-------------------   TABU   ---------------------" + Environment.NewLine;
-            textBoxTabu.Text += TabuSearch.RunAlgorithm(cities.AdjacencyMatrix, 10 * (cities.AdjacencyMatrix.GetLength(0) / 10), 100);
+            textBoxTabu.Text += TabuSearch.RunAlgorithm(cities.AdjacencyMatrix, (cities.AdjacencyMatrix.GetLength(0) / 10), cities.AdjacencyMatrix.GetLength(0));
+        }
+
+        private void tabControlTest_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelPath_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxTestPath_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxNumberOfTrials_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelNumberOfTrials_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonSelectPathTabu_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.ShowDialog();
+            try
+            {
+                textBoxOutputPath.Text = saveFileDialog1.FileName;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void buttonStartTestTabu_Click(object sender, EventArgs e)
+        {
+            //public static void RunTimestampTest(Cities cities, int timestamp, int maxNumberOfIterations, int numberOfTrials, string path)
+            TabuTest.RunTimestampTest(cities, Int32.Parse(textBoxTimestamp.Text), cities.AdjacencyMatrix.GetLength(0), Int32.Parse(textBoxNumberOfTrialsTabu.Text), textBoxOutputPath.Text);
+        }
+
+        private void buttonSelectPathTabuTest_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
+            try
+            {
+                if (openFileDialog1.OpenFile() != null)
+                {
+                    fileName = openFileDialog1.FileName;
+                    cities = new Cities(fileName, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Nie można odczytać pliku! Błąd: " + ex.Message);
+            }
         }
     }
 }

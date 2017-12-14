@@ -22,18 +22,18 @@ namespace Project_1
         {
             string output = "|ZALEŻNOŚĆ OD TIMESTAMP|" + Environment.NewLine;
             string relativeError = "";
-            int bestDistance = cities.BestDistance;
-            int tempDistance;
+            float bestDistance = (float)cities.BestDistance;
+            float tempDistance;
             
             for (int i = 0; i <= numberOfTrials; i++)
             {
                 Console.WriteLine("Próba: " + i.ToString());
                 //Ilosc iteracji do dobrania
-                tempDistance = Int32.Parse(TabuSearch.RunAlgorithm(cities.AdjacencyMatrix,timestamp, maxNumberOfIterations));
+                tempDistance = float.Parse(TabuSearch.RunAlgorithm(cities.AdjacencyMatrix,timestamp, maxNumberOfIterations));
 
                 if (i != 0)
                 {
-                    relativeError = ( (tempDistance - bestDistance)/bestDistance).ToString();
+                    relativeError = ( ((tempDistance - bestDistance)/bestDistance)*100.0f).ToString();
                     output += relativeError + Environment.NewLine;
                 }
 
