@@ -87,10 +87,12 @@ namespace Project_1
 
         private static void AddToTabu(int[,] tabu, Pair<int, int> swappedCities, int timestamp)
         {
-            tabu[swappedCities.First, swappedCities.Second] += timestamp;
-            tabu[swappedCities.Second, swappedCities.First] += timestamp;
-            if(tabu[swappedCities.First, swappedCities.Second]>timestamp || tabu[swappedCities.Second, swappedCities.First]>timestamp)
-                new System.ArgumentException("Wybrano element będący już w tabu");
+            if (tabu[swappedCities.First, swappedCities.Second] == 0 || tabu[swappedCities.Second, swappedCities.First] == 0)
+            {
+                tabu[swappedCities.First, swappedCities.Second] += timestamp;
+                tabu[swappedCities.Second, swappedCities.First] += timestamp;
+            }
+                
         }
 
         private static Pair<Pair<int, int>, int[]> GetBestNeighbor(int[,] matrix, int[] solution, int[,] tabu, int numberOfIterations)
@@ -218,11 +220,11 @@ namespace Project_1
             while(numberOfIterations<maxNumberOfIterations)
             {
 
-                bestNeighbor = GetBestNeighborRandomly(matrix, solution, tabu, 10*solution.GetLength(0), timestamp);
+                bestNeighbor = GetBestNeighborRandomly(matrix, solution, tabu, 10*maxNumberOfIterations, timestamp);
                 solution = bestNeighbor.Second;
                 ReduceTabu(tabu);
                 AddToTabu(tabu, bestNeighbor.First, timestamp);
-
+                timestamp = 1 / 5 * solution.Length;
                 if (criticalEventCounter == 20)
                 {
                     solution = GetGreedySolution(matrix, rand.Next(solution.Length));
@@ -247,6 +249,62 @@ namespace Project_1
             }
 
             return ShowSolution(solution, GetSolutionWeight(solution, matrix));
+        }
+  
+        //po czasie
+        public static LinkedList<Pair<int, int>> AnalyzeAlgorithm(int[,] matrix, int time)
+        {
+            Stopwatch stopWatch = new Stopwatch();
+            int[,] tabu = new int[matrix.GetLength(0), matrix.GetLength(0)];
+            int[] solution = GetGreedySolution(matrix, rand.Next(matrix.GetLength(0))),
+                  bestSolution = solution;
+            int bestSolutionWeight = GetSolutionWeight(solution, matrix),
+                newWeight,
+                numberOfIterations = 0,
+                criticalEventCounter = 0,
+                timestamp = solution.Length / 5,
+                maxNumberOfIterations = solution.Length;
+            Pair<Pair<int, int>, int[]> bestNeighbor;
+            int elapsedTime = 0;
+            LinkedList<Pair<int, int>> results = new LinkedList<Pair<int, int>>();
+
+            while (stopWatch.Elapsed.TotalMilliseconds < time)
+            {
+                stopWatch.Start();   
+
+                bestNeighbor = GetBestNeighborRandomly(matrix, solution, tabu, 10 * maxNumberOfIterations, timestamp);
+                solution = bestNeighbor.Second;
+                ReduceTabu(tabu);
+                AddToTabu(tabu, bestNeighbor.First, timestamp);
+
+                if (criticalEventCounter == 25)
+                {
+                    solution = GetGreedySolution(matrix, rand.Next(solution.Length));
+                    ResetTabu(tabu);
+                    criticalEventCounter = 0;
+                    Debug.WriteLine("Restart");
+                }
+
+                newWeight = GetSolutionWeight(solution, matrix);
+                if (newWeight < bestSolutionWeight)
+                {
+                    Array.Copy(solution, bestSolution, solution.GetLength(0));
+                    bestSolutionWeight = GetSolutionWeight(bestSolution, matrix);
+                    criticalEventCounter = 0;
+                    // Debug.WriteLine(ShowSolution(solution, GetSolutionWeight(solution, matrix)));
+                    Debug.WriteLine("Główny - lepiej");
+                }
+                else
+                    criticalEventCounter++;
+
+                numberOfIterations++;
+
+                stopWatch.Stop();
+                elapsedTime = Convert.ToInt32(stopWatch.Elapsed.TotalMilliseconds);
+                results.AddLast(new Pair<int, int>(elapsedTime, bestSolutionWeight));
+            }
+            stopWatch.Reset();
+            return results;
         }
 
 

@@ -20,10 +20,10 @@ namespace Project_1
         /// <param name="path"> Ścieżka pliku wyjściowego </param>
         public static void RunTimestampTest(Cities cities, int timestamp, int maxNumberOfIterations, int numberOfTrials, string path)
         {
-            string output = "|ZALEŻNOŚĆ OD TIMESTAMP|" + Environment.NewLine;
-            string relativeError = "";
-            float bestDistance = (float)cities.BestDistance;
-            float tempDistance;
+            string output = "|ZALEŻNOŚĆ OD TIMESTAMP|" + Environment.NewLine,
+                   relativeError = "";
+            float bestDistance = (float)cities.BestDistance,
+                  tempDistance;
             
             for (int i = 0; i <= numberOfTrials; i++)
             {
@@ -72,7 +72,18 @@ namespace Project_1
             WriteOutputToFile(path, output);
         }
 
+        public static void RunImprovementByTimeTest(Cities cities,  string path)
+        {
+            StringBuilder algorithmResultsSB = new StringBuilder();
+            algorithmResultsSB.Append("|BADANIE PRZEBIEGU ALGORYTMU W ZALEŻNOŚCI OD CZASU|" + Environment.NewLine);
+            LinkedList<Pair<int, int>> algorithmResults = TabuSearch.AnalyzeAlgorithm(cities.AdjacencyMatrix, 120000);
 
+            foreach (var result in algorithmResults)
+            {
+                algorithmResultsSB.Append(result.First + ";" + result.Second + Environment.NewLine);
+            }
+            WriteOutputToFile(path, algorithmResultsSB.ToString());
+        }
 
         /// <summary>
         /// Zapis do pliku

@@ -65,18 +65,22 @@
             this.labelNumberOfTrials = new System.Windows.Forms.Label();
             this.textBoxWeightMax = new System.Windows.Forms.TextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.textBoxSaveImprovementByTimeTest = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.buttonImprovementByTimeTest = new System.Windows.Forms.Button();
+            this.textBoxTimestamp = new System.Windows.Forms.TextBox();
+            this.labelTimestamp = new System.Windows.Forms.Label();
+            this.buttonStartTestTabu = new System.Windows.Forms.Button();
+            this.buttonSelectPathTabu = new System.Windows.Forms.Button();
+            this.textBoxOutputPath = new System.Windows.Forms.TextBox();
+            this.labelSelectPathTabu = new System.Windows.Forms.Label();
+            this.textBoxNumberOfTrialsTabu = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.labelLoadCities = new System.Windows.Forms.Label();
+            this.buttonSelectPathTabuTest = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.buttonSelectPathTabuTest = new System.Windows.Forms.Button();
-            this.labelLoadCities = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBoxNumberOfTrialsTabu = new System.Windows.Forms.TextBox();
-            this.labelSelectPathTabu = new System.Windows.Forms.Label();
-            this.textBoxOutputPath = new System.Windows.Forms.TextBox();
-            this.buttonSelectPathTabu = new System.Windows.Forms.Button();
-            this.buttonStartTestTabu = new System.Windows.Forms.Button();
-            this.labelTimestamp = new System.Windows.Forms.Label();
-            this.textBoxTimestamp = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -87,6 +91,7 @@
             this.tabControlTest.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
@@ -310,7 +315,7 @@
             this.tabControlTest.Name = "tabControlTest";
             this.tabControlTest.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tabControlTest.SelectedIndex = 0;
-            this.tabControlTest.Size = new System.Drawing.Size(408, 239);
+            this.tabControlTest.Size = new System.Drawing.Size(408, 469);
             this.tabControlTest.TabIndex = 13;
             this.tabControlTest.SelectedIndexChanged += new System.EventHandler(this.tabControlTest_SelectedIndexChanged);
             // 
@@ -332,7 +337,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(400, 213);
+            this.tabPage4.Size = new System.Drawing.Size(400, 443);
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "Branch And Bound";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -453,6 +458,7 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.groupBox5);
             this.tabPage5.Controls.Add(this.textBoxTimestamp);
             this.tabPage5.Controls.Add(this.labelTimestamp);
             this.tabPage5.Controls.Add(this.buttonStartTestTabu);
@@ -466,75 +472,67 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(400, 213);
+            this.tabPage5.Size = new System.Drawing.Size(400, 443);
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "Tabu Search";
             this.tabPage5.UseVisualStyleBackColor = true;
+            this.tabPage5.Click += new System.EventHandler(this.tabPage5_Click);
             // 
-            // saveFileDialog1
+            // groupBox5
             // 
-            this.saveFileDialog1.DefaultExt = "txt";
+            this.groupBox5.Controls.Add(this.textBoxSaveImprovementByTimeTest);
+            this.groupBox5.Controls.Add(this.label6);
+            this.groupBox5.Controls.Add(this.buttonImprovementByTimeTest);
+            this.groupBox5.Location = new System.Drawing.Point(6, 247);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.groupBox5.Size = new System.Drawing.Size(388, 77);
+            this.groupBox5.TabIndex = 17;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Przebieg algorytmu od czasu";
             // 
-            // buttonSelectPathTabuTest
+            // textBoxSaveImprovementByTimeTest
             // 
-            this.buttonSelectPathTabuTest.Location = new System.Drawing.Point(7, 23);
-            this.buttonSelectPathTabuTest.Name = "buttonSelectPathTabuTest";
-            this.buttonSelectPathTabuTest.Size = new System.Drawing.Size(75, 23);
-            this.buttonSelectPathTabuTest.TabIndex = 0;
-            this.buttonSelectPathTabuTest.Text = "Wybierz";
-            this.buttonSelectPathTabuTest.UseVisualStyleBackColor = true;
-            this.buttonSelectPathTabuTest.Click += new System.EventHandler(this.buttonSelectPathTabuTest_Click);
+            this.textBoxSaveImprovementByTimeTest.Location = new System.Drawing.Point(6, 44);
+            this.textBoxSaveImprovementByTimeTest.Name = "textBoxSaveImprovementByTimeTest";
+            this.textBoxSaveImprovementByTimeTest.Size = new System.Drawing.Size(244, 20);
+            this.textBoxSaveImprovementByTimeTest.TabIndex = 16;
+            this.textBoxSaveImprovementByTimeTest.Text = "C:\\Users\\seblag-stacjonarny\\Desktop\\te.txt";
             // 
-            // labelLoadCities
+            // label6
             // 
-            this.labelLoadCities.AutoSize = true;
-            this.labelLoadCities.Location = new System.Drawing.Point(7, 7);
-            this.labelLoadCities.Name = "labelLoadCities";
-            this.labelLoadCities.Size = new System.Drawing.Size(90, 13);
-            this.labelLoadCities.TabIndex = 1;
-            this.labelLoadCities.Text = "Wczytaj instancję";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 28);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(161, 13);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Podaj ścieżkę pliku wyjściowego";
             // 
-            // label4
+            // buttonImprovementByTimeTest
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 49);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(62, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Liczba prób";
+            this.buttonImprovementByTimeTest.Location = new System.Drawing.Point(256, 42);
+            this.buttonImprovementByTimeTest.Name = "buttonImprovementByTimeTest";
+            this.buttonImprovementByTimeTest.Size = new System.Drawing.Size(75, 23);
+            this.buttonImprovementByTimeTest.TabIndex = 12;
+            this.buttonImprovementByTimeTest.Text = "Uruchom";
+            this.buttonImprovementByTimeTest.UseVisualStyleBackColor = true;
+            this.buttonImprovementByTimeTest.Click += new System.EventHandler(this.buttonImprovementByTimeTest_Click);
             // 
-            // textBoxNumberOfTrialsTabu
+            // textBoxTimestamp
             // 
-            this.textBoxNumberOfTrialsTabu.Location = new System.Drawing.Point(7, 65);
-            this.textBoxNumberOfTrialsTabu.Name = "textBoxNumberOfTrialsTabu";
-            this.textBoxNumberOfTrialsTabu.Size = new System.Drawing.Size(100, 20);
-            this.textBoxNumberOfTrialsTabu.TabIndex = 3;
+            this.textBoxTimestamp.Location = new System.Drawing.Point(155, 65);
+            this.textBoxTimestamp.Name = "textBoxTimestamp";
+            this.textBoxTimestamp.Size = new System.Drawing.Size(100, 20);
+            this.textBoxTimestamp.TabIndex = 9;
             // 
-            // labelSelectPathTabu
+            // labelTimestamp
             // 
-            this.labelSelectPathTabu.AutoSize = true;
-            this.labelSelectPathTabu.Location = new System.Drawing.Point(7, 92);
-            this.labelSelectPathTabu.Name = "labelSelectPathTabu";
-            this.labelSelectPathTabu.Size = new System.Drawing.Size(161, 13);
-            this.labelSelectPathTabu.TabIndex = 4;
-            this.labelSelectPathTabu.Text = "Podaj ścieżkę pliku wyjściowego";
-            // 
-            // textBoxOutputPath
-            // 
-            this.textBoxOutputPath.Location = new System.Drawing.Point(7, 108);
-            this.textBoxOutputPath.Name = "textBoxOutputPath";
-            this.textBoxOutputPath.Size = new System.Drawing.Size(244, 20);
-            this.textBoxOutputPath.TabIndex = 5;
-            // 
-            // buttonSelectPathTabu
-            // 
-            this.buttonSelectPathTabu.Location = new System.Drawing.Point(257, 105);
-            this.buttonSelectPathTabu.Name = "buttonSelectPathTabu";
-            this.buttonSelectPathTabu.Size = new System.Drawing.Size(75, 23);
-            this.buttonSelectPathTabu.TabIndex = 6;
-            this.buttonSelectPathTabu.Text = "Wybierz";
-            this.buttonSelectPathTabu.UseVisualStyleBackColor = true;
-            this.buttonSelectPathTabu.Click += new System.EventHandler(this.buttonSelectPathTabu_Click);
+            this.labelTimestamp.AutoSize = true;
+            this.labelTimestamp.Location = new System.Drawing.Point(155, 49);
+            this.labelTimestamp.Name = "labelTimestamp";
+            this.labelTimestamp.Size = new System.Drawing.Size(58, 13);
+            this.labelTimestamp.TabIndex = 8;
+            this.labelTimestamp.Text = "Timestamp";
             // 
             // buttonStartTestTabu
             // 
@@ -546,21 +544,70 @@
             this.buttonStartTestTabu.UseVisualStyleBackColor = true;
             this.buttonStartTestTabu.Click += new System.EventHandler(this.buttonStartTestTabu_Click);
             // 
-            // labelTimestamp
+            // buttonSelectPathTabu
             // 
-            this.labelTimestamp.AutoSize = true;
-            this.labelTimestamp.Location = new System.Drawing.Point(155, 49);
-            this.labelTimestamp.Name = "labelTimestamp";
-            this.labelTimestamp.Size = new System.Drawing.Size(58, 13);
-            this.labelTimestamp.TabIndex = 8;
-            this.labelTimestamp.Text = "Timestamp";
+            this.buttonSelectPathTabu.Location = new System.Drawing.Point(257, 105);
+            this.buttonSelectPathTabu.Name = "buttonSelectPathTabu";
+            this.buttonSelectPathTabu.Size = new System.Drawing.Size(75, 23);
+            this.buttonSelectPathTabu.TabIndex = 6;
+            this.buttonSelectPathTabu.Text = "Wybierz";
+            this.buttonSelectPathTabu.UseVisualStyleBackColor = true;
+            this.buttonSelectPathTabu.Click += new System.EventHandler(this.buttonSelectPathTabu_Click);
             // 
-            // textBoxTimestamp
+            // textBoxOutputPath
             // 
-            this.textBoxTimestamp.Location = new System.Drawing.Point(155, 65);
-            this.textBoxTimestamp.Name = "textBoxTimestamp";
-            this.textBoxTimestamp.Size = new System.Drawing.Size(100, 20);
-            this.textBoxTimestamp.TabIndex = 9;
+            this.textBoxOutputPath.Location = new System.Drawing.Point(7, 108);
+            this.textBoxOutputPath.Name = "textBoxOutputPath";
+            this.textBoxOutputPath.Size = new System.Drawing.Size(244, 20);
+            this.textBoxOutputPath.TabIndex = 5;
+            // 
+            // labelSelectPathTabu
+            // 
+            this.labelSelectPathTabu.AutoSize = true;
+            this.labelSelectPathTabu.Location = new System.Drawing.Point(7, 92);
+            this.labelSelectPathTabu.Name = "labelSelectPathTabu";
+            this.labelSelectPathTabu.Size = new System.Drawing.Size(161, 13);
+            this.labelSelectPathTabu.TabIndex = 4;
+            this.labelSelectPathTabu.Text = "Podaj ścieżkę pliku wyjściowego";
+            // 
+            // textBoxNumberOfTrialsTabu
+            // 
+            this.textBoxNumberOfTrialsTabu.Location = new System.Drawing.Point(7, 65);
+            this.textBoxNumberOfTrialsTabu.Name = "textBoxNumberOfTrialsTabu";
+            this.textBoxNumberOfTrialsTabu.Size = new System.Drawing.Size(100, 20);
+            this.textBoxNumberOfTrialsTabu.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 49);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(62, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Liczba prób";
+            // 
+            // labelLoadCities
+            // 
+            this.labelLoadCities.AutoSize = true;
+            this.labelLoadCities.Location = new System.Drawing.Point(7, 7);
+            this.labelLoadCities.Name = "labelLoadCities";
+            this.labelLoadCities.Size = new System.Drawing.Size(90, 13);
+            this.labelLoadCities.TabIndex = 1;
+            this.labelLoadCities.Text = "Wczytaj instancję";
+            // 
+            // buttonSelectPathTabuTest
+            // 
+            this.buttonSelectPathTabuTest.Location = new System.Drawing.Point(7, 23);
+            this.buttonSelectPathTabuTest.Name = "buttonSelectPathTabuTest";
+            this.buttonSelectPathTabuTest.Size = new System.Drawing.Size(75, 23);
+            this.buttonSelectPathTabuTest.TabIndex = 0;
+            this.buttonSelectPathTabuTest.Text = "Wybierz";
+            this.buttonSelectPathTabuTest.UseVisualStyleBackColor = true;
+            this.buttonSelectPathTabuTest.Click += new System.EventHandler(this.buttonSelectPathTabuTest_Click);
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "txt";
             // 
             // Form1
             // 
@@ -588,6 +635,8 @@
             this.tabPage4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -642,6 +691,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxTimestamp;
         private System.Windows.Forms.Label labelTimestamp;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.TextBox textBoxSaveImprovementByTimeTest;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button buttonImprovementByTimeTest;
     }
 }
 

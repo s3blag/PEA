@@ -187,5 +187,30 @@ namespace Project_1
                 MessageBox.Show("Nie można odczytać pliku! Błąd: " + ex.Message);
             }
         }
+
+        private void buttonImprovementByTimeTest_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
+            string fileName = "";
+            try
+            {
+                if (openFileDialog1.OpenFile() != null)
+                {
+                    fileName = openFileDialog1.FileName;
+                    cities = new Cities(fileName, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Nie można odczytać pliku! Błąd: " + ex.Message);
+            }
+
+            TabuTest.RunImprovementByTimeTest(cities, textBoxSaveImprovementByTimeTest.Text);
+        }
+
+        private void tabPage5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
