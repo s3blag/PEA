@@ -104,9 +104,9 @@
 przestrzeni rozwiązań, wykorzystującą ich sąsiedztwo, zapamiętującą niektóre ruchy oraz odległość czasową ich wystąpienia, w celu unikania minimów lokalnych i poszukiwania rozwiązań globalnie optymalnych w rozsądnym czasie.
 \newline
 \newline
-Algorytm Tabu Search dla problemu komiwojażera polega na iteracyjnym przeszukiwaniu sąsiedztwa obecnie najlepszego rozwiązania. Początkowo wybierane jest rozwiązanie przy pomocy algorytmu zachłannego, dla losowo wybranego miasta początkowego. Następnie przez określoną liczbę iteracji, wykonywane są kolejne kroki algorytmu: 
+Algorytm Tabu Search dla problemu komiwojażera polega na iteracyjnym przeszukiwaniu sąsiedztwa obecnie obecnie rozpatrywanego rozwiązania. Początkowe rozwiązanie generowane jest przy pomocy algorytmu zachłannego, dla losowo wybranego miasta początkowego. Następnie przez określoną liczbę iteracji, wykonywane są kolejne kroki algorytmu: 
 	\begin{enumerate}
-	\item Przeszukiwanie sąsiedztwa obecnie rozpatrywanego rozwiązania poprzez wielokrotną zamianę kolejności odwiedzenia dwóch losowo wybranych miast oraz wybranie tej zamiany, która nie należy do tabu oraz dla której droga jest najkrótsza.
+	\item Przeszukiwanie sąsiedztwa obecnie rozpatrywanego rozwiązania poprzez wielokrotną zamianę kolejności odwiedzenia dwóch losowo wybranych miast, a następnie wybranie tej zamiany, która nie należy do tabu oraz dla której droga jest najkrótsza.
 	\item Dodanie do listy tabu zamiany prowadzącej do otrzymania najlepszego lokalnie rozwiązania.
 	\item Porównanie najlepszego lokalnie rozwiązania dla danej iteracji z rozwiązaniem najlepszym globalnie. Jeżeli rozwiązanie lokalne jest lepsze od globalnego, nowym rozwiązaniem globalnym staje się obecne rozwiązanie lokalne.
 \end{enumerate}
@@ -115,8 +115,8 @@ Algorytm Tabu Search dla problemu komiwojażera polega na iteracyjnym przeszukiw
 \begin{itemize}
 	\item \textit{Lista ruchów będących tabu}.
 	\item \textit{Zdarzenie krytyczne} - wywołanie określonej czynności, jeśli przez określony odstęp czasu rozwiązanie nie uległo poprawie.
-	\item \textit{Strategia dywersyfikacji} - wygenerowanie nowego rozwiązania początkowego, na którym będą dokonywane zmiany.Jest wywoływana przez zdarzenie krytyczne.
-	\item \textit{Strategia aspiracji} - ignorowanie danego ruchu na liście tabu, jeśli ma on szansę na przeniesienie poszukiwania na bardziej obiecujący obszar.
+	\item \textit{Strategia dywersyfikacji} - wygenerowanie nowego rozwiązania początkowego, na którym będą dokonywane zmiany. Jest wywoływana przez zdarzenie krytyczne.
+	\item \textit{Strategia aspiracji} - ignorowanie ruchu znajdującego się na liście tabu, jeśli ma on szansę na przeniesienie poszukiwania na bardziej obiecujący obszar.
 \end{itemize}
 \newpage
 \section{Plan eksperymentu}
@@ -131,8 +131,8 @@ Algorytm Tabu Search dla problemu komiwojażera polega na iteracyjnym przeszukiw
 \renewcommand\labelitemii{$\circ$}
 \begin{itemize}
 	\item Do przechowywania listy tabu użyto macierzy \textit{N}x\textit{N}, gdzie \textit{N} - liczba miast rozpatrywanego przypadku. Współrzędne \textit{[i, j]} oznaczają zamianę  kolejności elementu \textit{i} z elementem \textit{j}.
-	\item Zdarzenie krytyczne polega na obraniu nowego rozwiązania początkowego, na którym będą dokonywane zmiany. Jest ono wywoływane jeśli przez \textit{x} ostatnich iteracji głównej pętli nie nastąpiła poprawa najlepszego rozwiązania.
-	\item Dywersyfikacja realizowana jest w momencie wystąpienie powyższego zdarzenia krytycznego.
+	\item Zdarzenie krytyczne polega na wywołaniu dywersyfikacji, jeśli przez \textit{x} ostatnich iteracji głównej pętli nie nastąpiła poprawa najlepszego rozwiązania.
+	\item Dywersyfikacja polega na obraniu nowego rozwiązania początkowego, na którym będą dokonywane zmiany. Rozwiązanie to jest generowane przy użyciu algorytmu zachłannego, dla losowo wybranego miasta początkowego.
 	\item Kryterium aspiracji anuluje zakaz ruchu, jeśli spełniony jest warunek dla danego rozwiązania lokalnego: \textit{x} * \textit{1.05} $<$  \textit{y}, gdzie \textit{x} - waga obecnie rozpatrywanego rozwiązania lokalnego, \newline \textit{y} - waga obecnie najlepszego rozwiązania lokalnego.
 \end{itemize}
 \newpage
