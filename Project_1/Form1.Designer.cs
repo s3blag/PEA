@@ -317,7 +317,6 @@
             this.tabControlTest.SelectedIndex = 0;
             this.tabControlTest.Size = new System.Drawing.Size(408, 469);
             this.tabControlTest.TabIndex = 13;
-            this.tabControlTest.SelectedIndexChanged += new System.EventHandler(this.tabControlTest_SelectedIndexChanged);
             // 
             // tabPage4
             // 
@@ -341,7 +340,6 @@
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "Branch And Bound";
             this.tabPage4.UseVisualStyleBackColor = true;
-            this.tabPage4.Click += new System.EventHandler(this.tabPage4_Click);
             // 
             // labelTestSize
             // 
@@ -379,7 +377,6 @@
             this.labelPath.Size = new System.Drawing.Size(161, 13);
             this.labelPath.TabIndex = 4;
             this.labelPath.Text = "Podaj ścieżkę pliku wyjściowego";
-            this.labelPath.Click += new System.EventHandler(this.labelPath_Click);
             // 
             // buttonSelectPath
             // 
@@ -397,7 +394,6 @@
             this.textBoxTestPath.Name = "textBoxTestPath";
             this.textBoxTestPath.Size = new System.Drawing.Size(264, 20);
             this.textBoxTestPath.TabIndex = 8;
-            this.textBoxTestPath.TextChanged += new System.EventHandler(this.textBoxTestPath_TextChanged);
             // 
             // textBoxNumberOfTrials
             // 
@@ -405,7 +401,6 @@
             this.textBoxNumberOfTrials.Name = "textBoxNumberOfTrials";
             this.textBoxNumberOfTrials.Size = new System.Drawing.Size(100, 20);
             this.textBoxNumberOfTrials.TabIndex = 12;
-            this.textBoxNumberOfTrials.TextChanged += new System.EventHandler(this.textBoxNumberOfTrials_TextChanged);
             // 
             // labelWeightLow
             // 
@@ -447,7 +442,6 @@
             this.labelNumberOfTrials.Size = new System.Drawing.Size(62, 13);
             this.labelNumberOfTrials.TabIndex = 11;
             this.labelNumberOfTrials.Text = "Liczba prób";
-            this.labelNumberOfTrials.Click += new System.EventHandler(this.labelNumberOfTrials_Click);
             // 
             // textBoxWeightMax
             // 
@@ -476,7 +470,6 @@
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "Tabu Search";
             this.tabPage5.UseVisualStyleBackColor = true;
-            this.tabPage5.Click += new System.EventHandler(this.tabPage5_Click);
             // 
             // groupBox5
             // 

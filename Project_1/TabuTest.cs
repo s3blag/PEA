@@ -13,11 +13,11 @@ namespace Project_1
         /// <summary>
         /// Metoda odpowiedzialna za uruchomienie testów z zadanymi parametrami
         /// </summary>
-        /// <param name="size"> Rozmiar instancji(ilość miast) </param>
-        /// <param name="minWeight"> Dolny zakres losowania wag </param>
-        /// <param name="maxWeight"> Górny zakres losowania wag </param>
-        /// <param name="numberOfTrials"> Ilość powtórzeń </param>
-        /// <param name="path"> Ścieżka pliku wyjściowego </param>
+        /// <param name="cities"></param> Obiekt reprezentujący dany przypadek TSP
+        /// <param name="timestamp"></param> Pojemność tabu
+        /// <param name="maxNumberOfIterations"></param> Maksymalna liczba iteracji
+        /// <param name="numberOfTrials"></param> Liczba prób
+        /// <param name="path"></param> Ścieżka dla danych wyjściowych
         public static void RunTimestampTest(Cities cities, int timestamp, int maxNumberOfIterations, int numberOfTrials, string path)
         {
             string output = "|ZALEŻNOŚĆ OD TIMESTAMP|" + Environment.NewLine,
@@ -41,6 +41,14 @@ namespace Project_1
             WriteOutputToFile(path, output);
         }
 
+        /// <summary>
+        /// Metoda wykonuje testy zależności czasowej
+        /// </summary>
+        /// <param name="cities"></param>
+        /// <param name="timestamp"></param>
+        /// <param name="maxNumberOfIterations"></param>
+        /// <param name="numberOfTrials"></param>
+        /// <param name="path"></param>
         public static void RunTimeTest(Cities cities, int timestamp, int maxNumberOfIterations, int numberOfTrials, string path)
         {
             string output = "|ZALEŻNOŚĆ CZASOWA|" + Environment.NewLine,
@@ -72,6 +80,11 @@ namespace Project_1
             WriteOutputToFile(path, output);
         }
 
+        /// <summary>
+        /// Funkcja wykonująca test - badanie przebiegu algorytmu w zależności od czasu
+        /// </summary>
+        /// <param name="cities"></param>
+        /// <param name="path"></param>
         public static void RunImprovementByTimeTest(Cities cities,  string path)
         {
             StringBuilder algorithmResultsSB = new StringBuilder();
