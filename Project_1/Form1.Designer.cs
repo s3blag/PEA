@@ -309,8 +309,8 @@
             // 
             // tabControlTest
             // 
-            this.tabControlTest.Controls.Add(this.tabPage4);
             this.tabControlTest.Controls.Add(this.tabPage5);
+            this.tabControlTest.Controls.Add(this.tabPage4);
             this.tabControlTest.Location = new System.Drawing.Point(6, 6);
             this.tabControlTest.Name = "tabControlTest";
             this.tabControlTest.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -483,7 +483,7 @@
             this.groupBox5.Controls.Add(this.textBoxSaveImprovementByTimeTest);
             this.groupBox5.Controls.Add(this.label6);
             this.groupBox5.Controls.Add(this.buttonImprovementByTimeTest);
-            this.groupBox5.Location = new System.Drawing.Point(6, 247);
+            this.groupBox5.Location = new System.Drawing.Point(6, 180);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.groupBox5.Size = new System.Drawing.Size(388, 77);

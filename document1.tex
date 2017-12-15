@@ -9,7 +9,8 @@
 \usepackage{amsmath}
 \usepackage[export]{adjustbox}
 \usepackage{tikz}
-
+\usepackage{adjustbox}
+\usepackage{caption}
 \usepackage{pgfplots}
 \usepackage[utf8]{inputenc} % Język polski
 \usepackage{polski}
@@ -22,8 +23,7 @@
 \usepackage{color} % Kolorowanie tekstu
 \usepackage{float}
 
-%Projektowanie Efektywnych Algorytmów \\ {\normalsize Implementacja i analiza efektywności metody podziału i ograniczeń dla problemu komiwojażera}
-
+\captionsetup{justification=centering}
 
 %\renewcommand{\labelenumi}{\alph{enumi}.} % Zamienia litery w enumerate na a, b, c, ...
 %----------------------------------------------------------------------------------------
@@ -139,26 +139,75 @@ Algorytm Tabu Search dla problemu komiwojażera polega na iteracyjnym przeszukiw
 
 \section{Wyniki}
 
+\subsection{Wpływ strategii dywersyfikacji na działanie algorytmu}
+\begin{figure}[H]
+\begin{adjustbox}{addcode={\begin{minipage}{\width}}{\caption{%
+					Wpływ strategii dywersyfikacji na działanie algorytmu.
+		}\end{minipage}},rotate=90,center}
+	\includegraphics[scale=.5]{NowyToBest.png}%
+\end{adjustbox}
+\end{figure}
+\newpage
+\par W celu zilustrowania wpływu strategii dywersyfikacji na działanie napisanego algorytmu, przyjęto, iż po zdarzeniu krytycznym nowym najlepszym rozwiązaniem zostanie nowo wygenerowane rozwiązanie startowe(za pomocą algorytmu zachłannego).
 
+\subsection{Zależność jakości rozwiązania od czasu(ilości iteracji) znajdowania się wybranych ruchów na liście tabu}
 \begin{table}[H]
-	\vspace{1cm}
+	%\vspace{cm}
 	\centering
 	%\label{my-label}
 	
 	\begin{tabular}{|c|c|}
 		\hline
-		\multicolumn{1}{|c|}{\textbf{Liczba miast}} & \textbf{Czas [ms]}  \\ \hline
-				{5}                                	& 0,066               \\ \hline
-				{10}                                & 0,44               \\ \hline
-				{15}                                & 0,55                 \\ \hline
-				{20}                                & 2,31                 \\ \hline
-				{25}                                & 5,60                 \\ \hline
-				{30}                                & 60,64                 \\ \hline
-				{35}                                & 99,69                 \\ \hline
-			
+		\multicolumn{1}{|c|}{\textbf{Timestamp}} & \textbf{Błąd względny wyniku (\%)}  \\ \hline
+		{10}                                	& 19,88               \\ \hline
+		{60}                                & 20,59               \\ \hline
+		{110}                                & 21,15                \\ \hline
+		{160}                                & 20,71                 \\ \hline
+		{210}                                & 22,07                 \\ \hline
 	\end{tabular}
-	\caption{Zależność czasu wykonania się algorytmu od liczby miast}
+	\caption{Zależność jakości rozwiązania od czasu(ilości iteracji) znajdowania się wybranych ruchów na liście tabu, dla instancji rbg323}
 \end{table}	
+
+\begin{figure}[h]
+	\centering
+	\vspace{0.75cm}
+	\hspace*{-0.8cm}
+	\includegraphics[scale=0.55]{wplywTimestamp.png}
+	\caption{Wpływ jakości rozwiązania od czasu(ilości iteracji) obecności wybranych ruchów na liście tabu, dla instancji rbg323.}
+	%\label{fig:obrazek k}
+\end{figure}
+
+\subsection{Zależność jakości rozwiązania od długości wykonywania się algorytmu}
+\subsubsection{rat783}
+\begin{figure}[H]
+	\begin{adjustbox}{addcode={\begin{minipage}{\width}}{\caption{%
+						Zależność błędu względnego rozwiązania od długości wykonywania algorytmu(ilości iteracji). Czas ograniczono do 2 minut.
+			}\end{minipage}},rotate=90,center}
+		\includegraphics[scale=.43]{rat783_odCzasu.png}%
+	\end{adjustbox}
+\end{figure}
+
+\newpage
+\subsubsection{pr1002}
+\begin{figure}[H]
+	\begin{adjustbox}{addcode={\begin{minipage}{\width}}{\caption{%
+						Zależność błędu względnego rozwiązania od długości wykonywania algorytmu(ilości iteracji). Czas ograniczono do 2 minut.
+			}\end{minipage}},rotate=90,center}
+		\includegraphics[scale=0.45]{pr1002_odCzasu.png}%
+	\end{adjustbox}
+\end{figure}
+
+\newpage
+\subsubsection{d2103}
+\begin{figure}[H]
+	\begin{adjustbox}{addcode={\begin{minipage}{\width}}{\caption{%
+						Zależność błędu względnego rozwiązania od długości wykonywania algorytmu(ilości iteracji). Czas ograniczono do 3 minut.
+			}\end{minipage}},rotate=90,center}
+		\includegraphics[scale=.45]{d2103_odCzasu.png}%
+	\end{adjustbox}
+\end{figure}
+
+
 
 
 %\begin{figure}[H]
@@ -168,32 +217,12 @@ Algorytm Tabu Search dla problemu komiwojażera polega na iteracyjnym przeszukiw
 %\end{figure}
 	%
 
-	\begin{figure}[H]
-		\vspace{2cm}	
-		\hspace*{-2cm}
-		\centering
-		\begin{tikzpicture}[scale=1.5]
-		\begin{axis}[
-		xlabel=Liczba miast,
-		ylabel=Czas ]
-		\addplot[color=red,mark=x] coordinates {
-			(5,0.066)
-			(10,0.44)
-			(15, 0.55)
-			(20,2.31)
-			(25,5.60)
-			(30,60.64)
-			(35,99.69)
-		};
-		\end{axis}    
-		\end{tikzpicture}
-		\caption{Wykres zależności czasu wykonania się algorytmu od liczby miast}
-	\end{figure}
+
 \newpage	
 	
 \section{Podsumowanie}
 \par	
-	Metoda podziałów i ograniczeń potrafi w znacznym stopniu poprawić czas rozwiązywania problemu komiwojażera. Warto jednak zaznaczyć, że najbardziej decydującym czynnikiem nie jest tutaj liczba miast, lecz konkretny przypadek wylosowanych wag krawędzi grafu. W przeprowadzonych testach przyjęto zakres wag od 1 do 50. Sytuacja staje się dużo bardziej skomplikowana, gdy zakres wag zostanie znacząco ograniczony, np.  do 5. W takim przypadku widać wadę tej metody - złożoność obliczeniowa będzie porównywalna z tą jaką ma przegląd zupełny, zapotrzebowanie na pamięć oraz czas wykonywania algorytmu będą większe tych przy wykonywaniu przeglądu zupełnego, ze względu na ilość działań jakie algorytm musi wykonać. Testy pokazały, że zaimplementowany przez nas algorytm ma złożoność obliczeniową w przybliżeniu wykładniczą, co pokrywa się z naszymi oczekiwaniami.
+	
 	
 
 

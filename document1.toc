@@ -2,4 +2,10 @@
 \contentsline {section}{\numberline {1}Opis algorytmu}{2}
 \contentsline {section}{\numberline {2}Plan eksperymentu}{3}
 \contentsline {section}{\numberline {3}Wyniki}{4}
-\contentsline {section}{\numberline {4}Podsumowanie}{5}
+\contentsline {subsection}{\numberline {3.1}Wp\IeC {\l }yw strategii dywersyfikacji na dzia\IeC {\l }anie algorytmu}{4}
+\contentsline {subsection}{\numberline {3.2}Zale\IeC {\.z}no\IeC {\'s}\IeC {\'c} jako\IeC {\'s}ci rozwi\IeC {\k a}zania od czasu(ilo\IeC {\'s}ci iteracji) znajdowania si\IeC {\k e} wybranych ruch\IeC {\'o}w na li\IeC {\'s}cie tabu}{5}
+\contentsline {subsection}{\numberline {3.3}Zale\IeC {\.z}no\IeC {\'s}\IeC {\'c} jako\IeC {\'s}ci rozwi\IeC {\k a}zania od d\IeC {\l }ugo\IeC {\'s}ci wykonywania si\IeC {\k e} algorytmu}{6}
+\contentsline {subsubsection}{\numberline {3.3.1}rat783}{6}
+\contentsline {subsubsection}{\numberline {3.3.2}pr1002}{7}
+\contentsline {subsubsection}{\numberline {3.3.3}d2103}{8}
+\contentsline {section}{\numberline {4}Podsumowanie}{9}

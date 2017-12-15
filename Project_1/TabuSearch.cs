@@ -262,7 +262,7 @@ namespace Project_1
                 newWeight,
                 numberOfIterations = 0,
                 criticalEventCounter = 0,
-                timestamp = solution.Length / 5,
+                timestamp = solution.Length / 20,
                 maxNumberOfIterations = solution.Length;
             Pair<Pair<int, int>, int[]> bestNeighbor;
             int elapsedTime = 0;
