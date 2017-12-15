@@ -113,10 +113,10 @@ Algorytm Tabu Search dla problemu komiwojażera polega na iteracyjnym przeszukiw
 
 \textbf{Elementy charakterystyczne metody}
 \begin{itemize}
-	\item \textit{Lista ruchów będących tabu}.
+	\item Lista ruchów będących\textit{ tabu}.
 	\item \textit{Zdarzenie krytyczne} - wywołanie określonej czynności, jeśli przez określony odstęp czasu rozwiązanie nie uległo poprawie.
 	\item \textit{Strategia dywersyfikacji} - wygenerowanie nowego rozwiązania początkowego, na którym będą dokonywane zmiany. Jest wywoływana przez zdarzenie krytyczne.
-	\item \textit{Strategia aspiracji} - ignorowanie ruchu znajdującego się na liście tabu, jeśli ma on szansę na przeniesienie poszukiwania na bardziej obiecujący obszar.
+	\item \textit{Kryterium aspiracji} - ignorowanie ruchu znajdującego się na liście tabu, jeśli ma on szansę na znaczące poprawienie wyniku.
 \end{itemize}
 \newpage
 \section{Plan eksperymentu}
@@ -131,7 +131,8 @@ Algorytm Tabu Search dla problemu komiwojażera polega na iteracyjnym przeszukiw
 \renewcommand\labelitemii{$\circ$}
 \begin{itemize}
 	\item Do przechowywania listy tabu użyto macierzy \textit{N}x\textit{N}, gdzie \textit{N} - liczba miast rozpatrywanego przypadku. Współrzędne \textit{[i, j]} oznaczają zamianę  kolejności elementu \textit{i} z elementem \textit{j}.
-	\item Zdarzenie krytyczne polega na wywołaniu dywersyfikacji, jeśli przez \textit{x} ostatnich iteracji głównej pętli nie nastąpiła poprawa najlepszego rozwiązania.
+	\item Długość listy tabu(ilość iteracji, przez którą ruch będzie na niej obecny) wyliczana jest według wzoru \textit{ceil(N/10)}, gdzie \textit{N} to liczba miast dla danej instancji problemu.
+	\item Zdarzenie krytyczne polega na wywołaniu dywersyfikacji, jeśli przez \textit{20} ostatnich iteracji głównej pętli nie nastąpiła poprawa najlepszego rozwiązania.
 	\item Dywersyfikacja polega na obraniu nowego rozwiązania początkowego, na którym będą dokonywane zmiany. Rozwiązanie to jest generowane przy użyciu algorytmu zachłannego, dla losowo wybranego miasta początkowego.
 	\item Kryterium aspiracji anuluje zakaz ruchu, jeśli spełniony jest warunek dla danego rozwiązania lokalnego: \textit{x} * \textit{1.05} $<$  \textit{y}, gdzie \textit{x} - waga obecnie rozpatrywanego rozwiązania lokalnego, \newline \textit{y} - waga obecnie najlepszego rozwiązania lokalnego.
 \end{itemize}
@@ -221,7 +222,10 @@ Algorytm Tabu Search dla problemu komiwojażera polega na iteracyjnym przeszukiw
 \newpage	
 	
 \section{Podsumowanie}
-\par	
+\par Na podstawie uzyskanych wyników, można stwierdzić, iż metodę Tabu Search z powodzeniem można wykorzystać jako modyfikację ulepszającą działanie innych algorytmów. W tym przypadku, z powodzeniem został ulepszony algorytm zachłanny. Wyniki uzyskane za jego pomocą zależą od parametrów(3.2), jakie zostały dobrane dla danej instancji problemu. Odpowiednie ich wyselekcjonowanie doprowadziło do uzyskania rezultatów poniżej poziomu 20\% błędu względnego, a dla pewnych instancji było to około 10\% przy rozsądnym czasie wykonywania. Niestety, nie udało się uzyskać lepszych rezultatów, jednak możliwe, iż algorytm, który zostanie zaimplementowany w ramach następnego zadania projektowego umożliwi poprawienie rezultatów.
+\\ \par Zaimplementowane przez ulepszenia algorytmu pomyślnie wpłynęły na uzyskane wyniki. Na rysunku 1. można zauważyć jak strategia dywersyfikacji pozwala przenieść poszukiwanie najlepszego rozwiązania na nowy obszar, co w zaprezentowanym przykładzie poprawiło rezultat (3. generacja nowego rozwiązania). Dodatkowo, kryterium aspiracji pozwala na złamanie tabu, jeśli potencjalny ruch może prowadzić do znacznie lepszego rozwiązania niż obecne.
+\\ \par Napisany podczas tego projektu algorytm, pozwala - w odróżnieniu od metody\textit{ podziału i ograniczeń} - na pewną elastyczność. To od użytkownika zależy, czy algorytm ma charakteryzować się skutecznością znajdowania lepszych rozwiązań, czy krótkim czasem działania. Pozwala on tym samym na uzyskanie wyników dla różnej wielkości instancji - metoda\textit{ branch and bound} mogła nie zapewnić rozwiązania w akceptowalnym czasie już dla \textit{17} miast, gdzie \textit{tabu search} z powodzeniem uzyskuje zadowalające wyniki(\textit{10}\% różnicy względem najlepszego rozwiązania) dla instancji o rozmiarze \textit{2100} miast.  
+
 	
 	
 
