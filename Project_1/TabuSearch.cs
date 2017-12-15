@@ -132,7 +132,7 @@ namespace Project_1
         /// <param name="timestamp"></param> Ilość iteracji na jaką dana zamiana zostaje dodana do tabu
         private static void AddToTabu(int[,] tabu, Pair<int, int> swappedCities, int timestamp)
         {
-            if (tabu[swappedCities.First, swappedCities.Second] == 0 || tabu[swappedCities.Second, swappedCities.First] == 0)
+            if ((tabu[swappedCities.First, swappedCities.Second] == 0 || tabu[swappedCities.Second, swappedCities.First] == 0) && swappedCities.First != swappedCities.Second)
             {
                 tabu[swappedCities.First, swappedCities.Second] += timestamp;
                 tabu[swappedCities.Second, swappedCities.First] += timestamp;
