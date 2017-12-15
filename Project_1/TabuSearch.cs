@@ -222,12 +222,13 @@ namespace Project_1
         /// <returns></returns>
         private static string ShowSolution(int[] solution, int solutionWeight)
         {
-            string solutionString = "Rozwiązanie:" + Environment.NewLine;
+            StringBuilder solutionStringBuilder = new StringBuilder();
+            solutionStringBuilder.Append("Rozwiązanie:" + Environment.NewLine);
             foreach (var item in solution)
-                solutionString += item + " -> ";
-            solutionString += solution[0] + Environment.NewLine + "Koszt: " + solutionWeight;
+                solutionStringBuilder.Append(item + " -> ");
+            solutionStringBuilder.Append(solution[0] + Environment.NewLine + "Koszt: " + solutionWeight);
 
-            return solutionString;
+            return solutionStringBuilder.ToString();
         }
 
         /// <summary>
