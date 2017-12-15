@@ -281,7 +281,7 @@ namespace Project_1
         public string ShowCities()
         {
             string matrixString = "";
-            for (int i = 0; i < AdjacencyMatrix.GetLength(0); i++)
+            /*for (int i = 0; i < AdjacencyMatrix.GetLength(0); i++)
             {
                 for (int j = 0; j < AdjacencyMatrix.GetLength(1); j++)
                 {
@@ -293,7 +293,7 @@ namespace Project_1
                 }
 
                 matrixString += Environment.NewLine;
-            }
+            }*/
             if (bestDistance > 0)
                 matrixString += "Najlepsze rozwiązanie: " + bestDistance;
             return matrixString;
