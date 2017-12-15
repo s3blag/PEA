@@ -119,37 +119,7 @@ namespace Project_1
         private void buttonRunTabu_Click(object sender, EventArgs e)
         {
             textBoxTabu.Text += Environment.NewLine + "-------------------   TABU   ---------------------" + Environment.NewLine;
-            textBoxTabu.Text += TabuSearch.RunAlgorithm(cities.AdjacencyMatrix, (cities.AdjacencyMatrix.GetLength(0) / 10), cities.AdjacencyMatrix.GetLength(0));
-        }
-
-        private void tabControlTest_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelPath_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBoxTestPath_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBoxNumberOfTrials_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelNumberOfTrials_Click(object sender, EventArgs e)
-        {
-
+            textBoxTabu.Text += TabuSearch.RunAlgorithm(cities.AdjacencyMatrix, (int)Math.Ceiling((double)cities.AdjacencyMatrix.GetLength(0) / 10), cities.AdjacencyMatrix.GetLength(0));
         }
 
         private void buttonSelectPathTabu_Click(object sender, EventArgs e)
@@ -206,11 +176,6 @@ namespace Project_1
             }
 
             TabuTest.RunImprovementByTimeTest(cities, textBoxSaveImprovementByTimeTest.Text);
-        }
-
-        private void tabPage5_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

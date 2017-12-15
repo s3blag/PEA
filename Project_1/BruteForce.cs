@@ -15,9 +15,7 @@ namespace Project_1
             int[,] adjacencyMatrix = cities.AdjacencyMatrix;
             int numberOfCities = cities.AdjacencyMatrix.GetLength(0);
             int tempDistance = 0;
-            int j = 0;
             int shortestDistance = INF;
-            int startingCity = 0;
             List<int> indexes = new List<int>(numberOfCities - 1);
             List<int> bestPath = new List<int>(numberOfCities - 1);
 
