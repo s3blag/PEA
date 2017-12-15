@@ -118,6 +118,8 @@ namespace Project_1
 
         private void buttonRunTabu_Click(object sender, EventArgs e)
         {
+            textBoxTabu.Text = "";
+            textBoxTabu.Text += cities.ShowCities() + Environment.NewLine;
             textBoxTabu.Text += Environment.NewLine + "-------------------   TABU   ---------------------" + Environment.NewLine;
             textBoxTabu.Text += TabuSearch.RunAlgorithm(cities.AdjacencyMatrix, (int)Math.Ceiling((double)cities.AdjacencyMatrix.GetLength(0) / 10), cities.AdjacencyMatrix.GetLength(0));
         }
