@@ -17,9 +17,9 @@ namespace Project_1
         /// <summary>
         /// Funkcja SwapCities zamienia kolejność danych miast w danym rozwiązaniu
         /// </summary>
-        /// <param name="firstCity"></param> Pierwsze miasto które zamieniamy
-        /// <param name="secondCity"></param> Drugie miasto które zamieniamy
-        /// <param name="solution"></param> Rozwiązanie w którym zamieniamy miasta
+        /// <param name="firstCity"> Pierwsze miasto które zamieniamy</param> 
+        /// <param name="secondCity"> Drugie miasto które zamieniamy</param> 
+        /// <param name="solution"> Rozwiązanie w którym zamieniamy miasta</param> 
         private static void SwapCities(int firstCity, int secondCity, int[] solution)
         {
             int temp = solution[firstCity];
@@ -30,8 +30,8 @@ namespace Project_1
         /// <summary>
         /// Funkcja ta oblicza wagę danego rozwiązania dla danej macierzy reprezentującej graf
         /// </summary>
-        /// <param name="solution"></param> Rozwiązanie
-        /// <param name="matrix"></param> Macierz reprezentująca graf
+        /// <param name="solution"> Rozwiązanie</param> 
+        /// <param name="matrix"> Macierz reprezentująca graf</param> 
         /// <returns></returns>
         private static int GetSolutionWeight(int[] solution, int[,] matrix)
         {
@@ -49,7 +49,7 @@ namespace Project_1
         /// <summary>
         /// Funkcja generuje losowe rozwiązanie dla danej liczby miast
         /// </summary>
-        /// <param name="numberOfCities"></param> Liczba miast
+        /// <param name="numberOfCities"> Liczba miast</param> 
         /// <returns></returns>
         private static int[] GetRandomSolution(int numberOfCities)
         {
@@ -69,8 +69,8 @@ namespace Project_1
         /// <summary>
         /// Funkcja ta zwraca rozwiązanie, które obliczane jest metodą zachłanną
         /// </summary>
-        /// <param name="matrix"></param> Macierz reprezentująca graf
-        /// <param name="startCity"></param> Miasto od którego zaczynamy losowanie
+        /// <param name="matrix"> Macierz reprezentująca graf</param> 
+        /// <param name="startCity"> Miasto od którego zaczynamy losowanie</param> 
         /// <returns></returns>
         private static int[] GetGreedySolution(int[,] matrix, int startCity)
         {
@@ -111,7 +111,7 @@ namespace Project_1
         /// <summary>
         /// Funkcja ta redukuje wartości tabu o 1, jeśli te są większe od 0
         /// </summary>
-        /// <param name="tabu"></param> Macierz reprezentująca tabu
+        /// <param name="tabu"> Macierz reprezentująca tabu</param> 
         private static void ReduceTabu(int[,] tabu)
         {
             for (int currentRow = 0; currentRow < tabu.GetLength(0); currentRow++)
@@ -127,9 +127,9 @@ namespace Project_1
         /// <summary>
         /// Funkcja dodająca daną zamianę miast do tabu, na określoną liczbę iteracji
         /// </summary>
-        /// <param name="tabu"></param> Macierz reprezentująca tabu
-        /// <param name="swappedCities"></param> Zamiana miast która zostanie dodana do tabu
-        /// <param name="timestamp"></param> Ilość iteracji na jaką dana zamiana zostaje dodana do tabu
+        /// <param name="tabu"> Macierz reprezentująca tabu</param> 
+        /// <param name="swappedCities"> Zamiana miast która zostanie dodana do tabu</param> 
+        /// <param name="timestamp"> Ilość iteracji na jaką dana zamiana zostaje dodana do tabu</param> 
         private static void AddToTabu(int[,] tabu, Pair<int, int> swappedCities, int timestamp)
         {
             if ((tabu[swappedCities.First, swappedCities.Second] == 0 || tabu[swappedCities.Second, swappedCities.First] == 0) && swappedCities.First != swappedCities.Second)
@@ -139,11 +139,11 @@ namespace Project_1
             }
                 
         }
-        
+
         /// <summary>
         /// Funkcja ta zeruje daną macierz tabu
         /// </summary>
-        /// <param name="tabu"></param> Macierz reprezentująca tabu
+        /// <param name="tabu"> Macierz reprezentująca tabu</param> 
         private static void ResetTabu(int[,] tabu)
         {
             for(int i = 0; i < tabu.GetLength(0); i++)
@@ -157,10 +157,10 @@ namespace Project_1
         /// Funkcja ta przeszukuje sąsiedztwo danego rozwiązania w poszukiwaniu jego poprawy.
         /// Wybór rozpatrywanej zamiany odbywa się losowo
         /// </summary>
-        /// <param name="matrix"></param> Macierz reprezentująca graf
-        /// <param name="solution"></param> Rozwiązanie którego sąsiedztwo jest przeszukiwane
-        /// <param name="tabu"></param> Macierz reprezentująca tabu
-        /// <param name="numberOfIterations"></param> Liczba iteracji poszukiwania
+        /// <param name="matrix"> Macierz reprezentująca graf</param> 
+        /// <param name="solution"> Rozwiązanie którego sąsiedztwo jest przeszukiwane</param> 
+        /// <param name="tabu"> Macierz reprezentująca tabu</param> 
+        /// <param name="numberOfIterations"> Liczba iteracji poszukiwania</param> 
         /// <returns></returns>
         public static Pair<Pair<int, int>, int[]> GetBestNeighborRandomly(int[,] matrix, int[] solution, int[,] tabu, int numberOfIterations)
         {
@@ -217,8 +217,8 @@ namespace Project_1
         /// <summary>
         /// Funkcja wyświetlająca rozwiązanie
         /// </summary>
-        /// <param name="solution"></param> Rozwiązanie które zostanie wyświetlone
-        /// <param name="solutionWeight"></param> Waga rozwiązania
+        /// <param name="solution"> Rozwiązanie które zostanie wyświetlone</param> 
+        /// <param name="solutionWeight"> Waga rozwiązania</param> 
         /// <returns></returns>
         private static string ShowSolution(int[] solution, int solutionWeight)
         {
@@ -233,9 +233,9 @@ namespace Project_1
         /// <summary>
         /// Główna funkcja wykonująca algorytm
         /// </summary>
-        /// <param name="matrix"></param> Macierz reprezentująca graf
-        /// <param name="timestamp"></param> Przez ile iteracji trzymane są elementy w tabu
-        /// <param name="maxNumberOfIterations"></param> Maksymalna liczba iteracji
+        /// <param name="matrix"> Macierz reprezentująca graf</param> 
+        /// <param name="timestamp"> Przez ile iteracji trzymane są elementy w tabu</param> 
+        /// <param name="maxNumberOfIterations"> Maksymalna liczba iteracji</param> 
         /// <returns></returns>
         public static string RunAlgorithm(int[,] matrix, int timestamp, int maxNumberOfIterations)
         {
@@ -296,12 +296,12 @@ namespace Project_1
 
             return ShowSolution(solution, GetSolutionWeight(solution, matrix));
         }
-  
+
         /// <summary>
         /// Funkcja wykorzystywana jedynie do testów. Funkcja ta bada zależność jakości rozwiązania od czasu.
         /// </summary>
-        /// <param name="matrix"></param> Macierz reprezentująca graf
-        /// <param name="time"></param> Czas pomiaru
+        /// <param name="matrix"> Macierz reprezentująca graf</param> 
+        /// <param name="time"> Czas pomiaru</param> 
         /// <returns></returns>
         public static LinkedList<Pair<int, int>> AnalyzeAlgorithm(int[,] matrix, int time)
         {
