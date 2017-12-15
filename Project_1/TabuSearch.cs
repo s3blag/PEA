@@ -74,7 +74,7 @@ namespace Project_1
         /// <returns></returns>
         private static int[] GetGreedySolution(int[,] matrix, int startCity)
         {
-            // Deklaracja oraz definicja zmiennych przechowujących kolejno: rozwiązanie, 
+            //Deklaracja oraz definicja zmiennych przechowujących kolejno: rozwiązanie, 
             //informację czy dane miasto było odwiedzone oraz obecne miasto z którego wychodzi krawędź
             int[] solution = new int[matrix.GetLength(0)];
             bool[] visitedCities = new bool[matrix.GetLength(0)];
@@ -245,7 +245,7 @@ namespace Project_1
             int numberOfIterations = 0;
             // Licznik odliczający do zdarzenia krytycznego - wymagane dla dywersyfikacji
             int criticalEventCounter = 0;
-            // Obliczenie startowego rozwiązania metodą zachłanną
+            // Obliczenie startowego rozwiązania metodą zachłanną od losowo wybranego miasta początkowego
             int[] solution = GetGreedySolution(matrix, rand.Next(matrix.GetLength(0)));
             // Na początku początkowe rozwiązanie jest obecnie najlepszym globalnie rozwiązaniem
             int[] bestSolution = solution;
@@ -253,13 +253,13 @@ namespace Project_1
             int bestSolutionWeight = GetSolutionWeight(solution, matrix);
             // Waga nowo znalezionego rozwiązania
             int newWeight;
-            // Zmienna przechowująca najlepszego sąsiada obecnie najlepszego lokalnie rozwiązania
+            // Zmienna przechowująca najlepszego sąsiada obecnie obecnie rozpatrywanego rozwiązania
             Pair<Pair<int, int>, int[]> bestNeighbor;
 
             // Pętla wykonująca algorytm
             while(numberOfIterations<maxNumberOfIterations)
             {
-                // Wyznaczenie najlepszego sąsiada, obecnie najlepszego lokalnie rozwiązania
+                // Wyznaczenie najlepszego sąsiada, obecnie rozpatrywanego rozwiązania
                 bestNeighbor = GetBestNeighborRandomly(matrix, solution, tabu, 10*maxNumberOfIterations);
                 // Przypisanie rozwiązania najlepszego sąsiada
                 solution = bestNeighbor.Second;
@@ -268,7 +268,7 @@ namespace Project_1
                 // Dodanie do tabu wykonanej przed chwilą zamiany
                 AddToTabu(tabu, bestNeighbor.First, timestamp);
                 // Jeżeli przez 20 iteracji nie nastąpiła poprawa obecnie najlepszego globalnie rozwiązania to 
-                // nastębuje wyzerowanie tabu oraz obliczenie nowego rozwiązania początkowego metodą zachłanną
+                // następuje wyzerowanie tabu oraz obliczenie nowego rozwiązania początkowego metodą zachłanną
                 // Rozwiązanie to zaczyna się od losowo wybranego miasta
                 if (criticalEventCounter == 20)
                 {
@@ -278,7 +278,7 @@ namespace Project_1
                     Debug.WriteLine("Restart");
                 }
                 // Obliczenie wagi znalezionego rozwiązania
-                 newWeight = GetSolutionWeight(solution, matrix);
+                newWeight = GetSolutionWeight(solution, matrix);
                 // Jeżeli waga ta jest mniejsza od rozwiązania najlepszego globalnie,
                 // to znalezione rozwiązanie staje się najlepszym globalnym rozwiązaniem
                 if ( newWeight < bestSolutionWeight)
@@ -313,7 +313,7 @@ namespace Project_1
                 newWeight,
                 numberOfIterations = 0,
                 criticalEventCounter = 0,
-                timestamp = solution.Length / 20,
+                timestamp = solution.Length / 10,
                 maxNumberOfIterations = solution.Length;
             Pair<Pair<int, int>, int[]> bestNeighbor;
             int elapsedTime = 0;
@@ -333,7 +333,7 @@ namespace Project_1
                     solution = GetGreedySolution(matrix, rand.Next(solution.Length));
                     ResetTabu(tabu);
                     criticalEventCounter = 0;
-                    Debug.WriteLine("Restart");
+                    Debug.WriteLine("Nastąpił restart");
                 }
 
                 newWeight = GetSolutionWeight(solution, matrix);
@@ -342,7 +342,7 @@ namespace Project_1
                     Array.Copy(solution, bestSolution, solution.GetLength(0));
                     bestSolutionWeight = GetSolutionWeight(bestSolution, matrix);
                     criticalEventCounter = 0;
-                    Debug.WriteLine("Główny - lepiej");
+                    Debug.WriteLine("Polepszenie najlepszego globalnego wyniku");
                 }
                 else
                     criticalEventCounter++;
