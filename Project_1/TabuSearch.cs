@@ -9,11 +9,13 @@ namespace Project_1
 {
     static internal class TabuSearch
     {
+
         // Wartość reprezentująca nieskończoność
         private const int INF = Int32.MaxValue;
         // Generator liczb losowych
         private static Random rand = new Random();
 
+        #region Metody wykorzystywane w algorytmie
         /// <summary>
         /// Funkcja SwapCities zamienia kolejność danych miast w danym rozwiązaniu
         /// </summary>
@@ -41,29 +43,10 @@ namespace Project_1
             {
                 weight += matrix[solution[currentCity], solution[currentCity + 1]];
             }
+            // Powrót z ostaniego miasta do pierwszego
             weight += matrix[solution[solution.GetLength(0) - 1], solution[0]];
 
             return weight;
-        }
-
-        /// <summary>
-        /// Funkcja generuje losowe rozwiązanie dla danej liczby miast
-        /// </summary>
-        /// <param name="numberOfCities"> Liczba miast</param> 
-        /// <returns></returns>
-        private static int[] GetRandomSolution(int numberOfCities)
-        {
-            // Utworzenie generatora liczb losowych
-            Random rnd = new Random();
-            // Inicjalizacja nowego rozwiązania
-            int[] solution = new int[numberOfCities];
-            for (int i = 0; i < numberOfCities; i++)
-                solution[i] = i;
-
-            // Losowe pomieszanie kolejności miast w rozwiązaniu
-            solution = solution.OrderBy(x => rnd.Next()).ToArray();
-
-            return solution;
         }
 
         /// <summary>
@@ -207,8 +190,9 @@ namespace Project_1
                     swappedCities.First = city1;
                     swappedCities.Second = city2;
                 }
-                    // Na końcu każdej iteracji przekazane do funkcji rozwiązanie staje się rozwiązaniem tymczasowym
-                    Array.Copy(solution, currentSolution, solutionLength);
+                
+                // Na końcu każdej iteracji przekazane do funkcji rozwiązanie staje się rozwiązaniem tymczasowym
+                Array.Copy(solution, currentSolution, solutionLength);
                 
             }
             return new Pair<Pair<int, int>, int[]>(swappedCities, bestSolution);
@@ -230,6 +214,8 @@ namespace Project_1
 
             return solutionStringBuilder.ToString();
         }
+
+        #endregion
 
         /// <summary>
         /// Główna funkcja wykonująca algorytm
@@ -298,6 +284,7 @@ namespace Project_1
             return ShowSolution(solution, GetSolutionWeight(solution, matrix));
         }
 
+        #region Funkcja testująca uzyskiwane wyniki od czasu.
         /// <summary>
         /// Funkcja wykorzystywana jedynie do testów. Funkcja ta bada zależność jakości rozwiązania od czasu.
         /// </summary>
@@ -358,6 +345,6 @@ namespace Project_1
             return results;
         }
 
-
+        #endregion
     }
 }
