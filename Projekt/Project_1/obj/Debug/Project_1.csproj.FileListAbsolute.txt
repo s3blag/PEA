@@ -25,10 +25,8 @@ C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt\P
 C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt\Project\PEA\Projekt\Project_1\bin\Debug\Project_1.exe
 C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt\Project\PEA\Projekt\Project_1\bin\Debug\Project_1.pdb
 C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt\Project\PEA\Projekt\Project_1\bin\Debug\Priority Queue.dll
-C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt\Project\PEA\Projekt\Project_1\bin\Debug\TspLibNet.dll
 C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt\Project\PEA\Projekt\Project_1\bin\Debug\Priority Queue.pdb
 C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt\Project\PEA\Projekt\Project_1\bin\Debug\Priority Queue.xml
-C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt\Project\PEA\Projekt\Project_1\bin\Debug\TspLibNet.xml
 C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt\Project\PEA\Projekt\Project_1\obj\Debug\Project_1.csprojResolveAssemblyReference.cache
 C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt\Project\PEA\Projekt\Project_1\obj\Debug\Project_1.Form1.resources
 C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt\Project\PEA\Projekt\Project_1\obj\Debug\Project_1.Properties.Resources.resources

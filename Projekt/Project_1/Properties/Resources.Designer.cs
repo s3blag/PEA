@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Project_1.Properties
+namespace TSP.Properties
 {
 
 

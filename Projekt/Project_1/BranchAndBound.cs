@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Priority_Queue;
 
-namespace Project_1
+namespace TSP
 {
    
     static internal class BranchAndBound
