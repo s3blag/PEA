@@ -1,0 +1,23 @@
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\Project_1\bin\Release\Project_1.exe.config
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\Project_1\bin\Release\Project_1.exe
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\Project_1\bin\Release\Project_1.pdb
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\Project_1\obj\Release\Project_1.csprojResolveAssemblyReference.cache
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\Project_1\obj\Release\Project_1.Form1.resources
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\Project_1\obj\Release\Project_1.Properties.Resources.resources
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\Project_1\obj\Release\Project_1.csproj.GenerateResource.Cache
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\Project_1\obj\Release\Project_1.exe
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\Project_1\obj\Release\Project_1.pdb
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\PEA_1\Project_1\bin\Release\Project_1.exe.config
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\PEA_1\Project_1\bin\Release\Project_1.exe
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\PEA_1\Project_1\bin\Release\Project_1.pdb
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\PEA_1\Project_1\obj\Release\Project_1.Form1.resources
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\PEA_1\Project_1\obj\Release\Project_1.Properties.Resources.resources
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\PEA_1\Project_1\obj\Release\Project_1.csproj.GenerateResource.Cache
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\PEA_1\Project_1\obj\Release\Project_1.exe
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\PEA_1\Project_1\obj\Release\Project_1.pdb
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\PEA_1\Project_1\bin\Release\Priority Queue.dll
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\PEA_1\Project_1\bin\Release\Priority Queue.pdb
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\PEA_1\Project_1\bin\Release\Priority Queue.xml
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\PEA_1\Project_1\obj\Release\Project_1.csprojResolveAssemblyReference.cache
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\PEA_1\Project_1\bin\Release\TspLibNet.dll
+C:\Users\seblag-stacjonarny\Dysk Google\Studia- Materiały\III rok\PEA\Projekt 1\Project_1\PEA_1\Project_1\bin\Release\TspLibNet.xml
