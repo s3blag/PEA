@@ -1,21 +1,90 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace TSP
+namespace TSP.Algorithms
 {
     static internal class TabuSearch
     {
+        #region Fields
 
         // Wartość reprezentująca nieskończoność
         private const int INF = Int32.MaxValue;
         // Generator liczb losowych
         private static Random rand = new Random();
+        #endregion
+        
+        #region Public Methods
+        /// <summary>
+        /// Główna funkcja wykonująca algorytm
+        /// </summary>
+        /// <param name="matrix"> Macierz reprezentująca graf</param> 
+        /// <param name="timestamp"> Przez ile iteracji trzymane są elementy w tabu</param> 
+        /// <param name="maxNumberOfIterations"> Maksymalna liczba iteracji</param> 
+        /// <returns></returns>
+        public static string RunAlgorithm(int[,] matrix, int timestamp, int maxNumberOfIterations)
+        {
+            // Deklaracja oraz definicja macierzy reprezentującej tabu
+            int[,] tabu = new int[matrix.GetLength(0), matrix.GetLength(0)];
+            // Licznik iteracji algorytmu
+            int numberOfIterations = 0;
+            // Licznik odliczający do zdarzenia krytycznego - wymagane dla dywersyfikacji
+            int criticalEventCounter = 0;
+            // Obliczenie startowego rozwiązania metodą zachłanną od losowo wybranego miasta początkowego
+            int[] solution = GetGreedySolution(matrix, rand.Next(matrix.GetLength(0)));
+            // Na początku początkowe rozwiązanie jest obecnie najlepszym globalnie rozwiązaniem
+            int[] bestSolution = solution;
+            // Obliczenie wagi obecnie najlepszego rozwiązania
+            int bestSolutionWeight = GetSolutionWeight(solution, matrix);
+            // Waga nowo znalezionego rozwiązania
+            int newWeight;
+            // Zmienna przechowująca najlepszego sąsiada obecnie obecnie rozpatrywanego rozwiązania
+            Pair<Pair<int, int>, int[]> bestNeighbor;
 
-        #region Metody wykorzystywane w algorytmie
+            // Pętla wykonująca algorytm
+            while (numberOfIterations < maxNumberOfIterations)
+            {
+                // Wyznaczenie najlepszego sąsiada, obecnie rozpatrywanego rozwiązania
+                bestNeighbor = GetBestNeighborRandomly(matrix, solution, tabu, 10 * maxNumberOfIterations);
+                // Przypisanie rozwiązania najlepszego sąsiada
+                solution = bestNeighbor.Second;
+                // Redukcja tabu
+                ReduceTabu(tabu);
+                // Dodanie do tabu wykonanej przed chwilą zamiany
+                AddToTabu(tabu, bestNeighbor.First, timestamp);
+                // Jeżeli przez 20 iteracji nie nastąpiła poprawa obecnie najlepszego globalnie rozwiązania to 
+                // następuje wyzerowanie tabu oraz obliczenie nowego rozwiązania początkowego metodą zachłanną
+                // Rozwiązanie to zaczyna się od losowo wybranego miasta
+                if (criticalEventCounter == 20)
+                {
+                    solution = GetGreedySolution(matrix, rand.Next(solution.Length));
+                    ResetTabu(tabu);
+                    criticalEventCounter = 0;
+                    Debug.WriteLine("Restart");
+                }
+                // Obliczenie wagi znalezionego rozwiązania
+                newWeight = GetSolutionWeight(solution, matrix);
+                // Jeżeli waga ta jest mniejsza od rozwiązania najlepszego globalnie,
+                // to znalezione rozwiązanie staje się najlepszym globalnym rozwiązaniem
+                if (newWeight < bestSolutionWeight)
+                {
+                    Array.Copy(solution, bestSolution, solution.GetLength(0));
+                    bestSolutionWeight = GetSolutionWeight(bestSolution, matrix);
+                    criticalEventCounter = 0;
+                }
+                else
+                    // Jeżeli nie znaleziono lepszego rozwiązania to licznik zdarzenia krytycznego zwiększa się
+                    criticalEventCounter++;
+
+                numberOfIterations++;
+            }
+
+            return ShowSolution(solution, GetSolutionWeight(solution, matrix));
+        }
+        #endregion
+
+        #region Private Methods
         /// <summary>
         /// Funkcja SwapCities zamienia kolejność danych miast w danym rozwiązaniu
         /// </summary>
@@ -217,74 +286,7 @@ namespace TSP
 
         #endregion
 
-        /// <summary>
-        /// Główna funkcja wykonująca algorytm
-        /// </summary>
-        /// <param name="matrix"> Macierz reprezentująca graf</param> 
-        /// <param name="timestamp"> Przez ile iteracji trzymane są elementy w tabu</param> 
-        /// <param name="maxNumberOfIterations"> Maksymalna liczba iteracji</param> 
-        /// <returns></returns>
-        public static string RunAlgorithm(int[,] matrix, int timestamp, int maxNumberOfIterations)
-        {
-            // Deklaracja oraz definicja macierzy reprezentującej tabu
-            int[,] tabu = new int[matrix.GetLength(0), matrix.GetLength(0)];
-            // Licznik iteracji algorytmu
-            int numberOfIterations = 0;
-            // Licznik odliczający do zdarzenia krytycznego - wymagane dla dywersyfikacji
-            int criticalEventCounter = 0;
-            // Obliczenie startowego rozwiązania metodą zachłanną od losowo wybranego miasta początkowego
-            int[] solution = GetGreedySolution(matrix, rand.Next(matrix.GetLength(0)));
-            // Na początku początkowe rozwiązanie jest obecnie najlepszym globalnie rozwiązaniem
-            int[] bestSolution = solution;
-            // Obliczenie wagi obecnie najlepszego rozwiązania
-            int bestSolutionWeight = GetSolutionWeight(solution, matrix);
-            // Waga nowo znalezionego rozwiązania
-            int newWeight;
-            // Zmienna przechowująca najlepszego sąsiada obecnie obecnie rozpatrywanego rozwiązania
-            Pair<Pair<int, int>, int[]> bestNeighbor;
-
-            // Pętla wykonująca algorytm
-            while(numberOfIterations<maxNumberOfIterations)
-            {
-                // Wyznaczenie najlepszego sąsiada, obecnie rozpatrywanego rozwiązania
-                bestNeighbor = GetBestNeighborRandomly(matrix, solution, tabu, 10*maxNumberOfIterations);
-                // Przypisanie rozwiązania najlepszego sąsiada
-                solution = bestNeighbor.Second;
-                // Redukcja tabu
-                ReduceTabu(tabu);
-                // Dodanie do tabu wykonanej przed chwilą zamiany
-                AddToTabu(tabu, bestNeighbor.First, timestamp);
-                // Jeżeli przez 20 iteracji nie nastąpiła poprawa obecnie najlepszego globalnie rozwiązania to 
-                // następuje wyzerowanie tabu oraz obliczenie nowego rozwiązania początkowego metodą zachłanną
-                // Rozwiązanie to zaczyna się od losowo wybranego miasta
-                if (criticalEventCounter == 20)
-                {
-                    solution = GetGreedySolution(matrix, rand.Next(solution.Length));
-                    ResetTabu(tabu);
-                    criticalEventCounter = 0;
-                    Debug.WriteLine("Restart");
-                }
-                // Obliczenie wagi znalezionego rozwiązania
-                newWeight = GetSolutionWeight(solution, matrix);
-                // Jeżeli waga ta jest mniejsza od rozwiązania najlepszego globalnie,
-                // to znalezione rozwiązanie staje się najlepszym globalnym rozwiązaniem
-                if ( newWeight < bestSolutionWeight)
-                {
-                    Array.Copy(solution, bestSolution, solution.GetLength(0));
-                    bestSolutionWeight = GetSolutionWeight(bestSolution, matrix);
-                    criticalEventCounter = 0;
-                } 
-                else
-                    // Jeżeli nie znaleziono lepszego rozwiązania to licznik zdarzenia krytycznego zwiększa się
-                    criticalEventCounter++;
-
-                numberOfIterations++; 
-            }
-
-            return ShowSolution(solution, GetSolutionWeight(solution, matrix));
-        }
-
-        #region Funkcja testująca uzyskiwane wyniki od czasu.
+        #region Algorithm Test Methods
         /// <summary>
         /// Funkcja wykorzystywana jedynie do testów. Funkcja ta bada zależność jakości rozwiązania od czasu.
         /// </summary>

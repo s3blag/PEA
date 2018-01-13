@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace TSP
+namespace TSP.Algorithms
 {
     static internal class BruteForce
     {
-        private const int INF = Int32.MaxValue;
+        #region Fields
 
+        private const int INF = Int32.MaxValue;
+        
+        #endregion
+
+        #region Public Methods
         public static string RunAlgorithm(Cities cities)
         {
             int[,] adjacencyMatrix = cities.AdjacencyMatrix;
@@ -47,14 +50,16 @@ namespace TSP
                 }
 
                 tempDistance = 0;
-                
+
             } while (next_permutation(perm));
 
             return GetResults(bestPath, shortestDistance);
 
         }
+        #endregion
 
-        public static string GetResults(List<int> shortestPath, int distance)
+        #region Private Methods
+        private static string GetResults(List<int> shortestPath, int distance)
         {
             string solution = "";
             
@@ -67,57 +72,36 @@ namespace TSP
             return solution;
         }
 
-        static public bool next_permutation(int[] perm)
-
+        private static bool next_permutation(int[] perm)
         {
-
             int n = perm.Length;
-
             int k = -1;
 
             for (int i = 1; i < n; i++)
-
                 if (perm[i - 1] < perm[i])
-
                     k = i - 1;
 
             if (k == -1)
-
             {
-
                 for (int i = 0; i < n; i++)
-
                     perm[i] = i;
-
                 return false;
-
             }
 
-
-
             int l = k + 1;
-
             for (int i = l; i < n; i++)
-
                 if (perm[k] < perm[i])
-
                     l = i;
 
-
-
             int t = perm[k];
-
             perm[k] = perm[l];
-
             perm[l] = t;
 
-
-
             Array.Reverse(perm, k + 1, perm.Length - (k + 1));
-
 
             return true;
 
         }
+        #endregion
     }
 }

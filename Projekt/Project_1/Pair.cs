@@ -8,6 +8,15 @@ namespace TSP
 {
     class Pair<T, U>
     {
+        #region Fields and Properties
+
+        public T First { get; set; }
+        public U Second { get; set; }
+
+        #endregion
+
+        #region Constructors
+
         public Pair()
         {
         }
@@ -18,7 +27,6 @@ namespace TSP
             this.Second = second;
         }
 
-        public T First { get; set; }
-        public U Second { get; set; }
+        #endregion
     }
 }

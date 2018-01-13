@@ -1,54 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TSP
 {
-    class Cities
+    internal class Cities
     {
+        #region Fields and Properties
         public const int INF = Int32.MaxValue;
 
-        private int[,] adjacencyMatrix;
-        private int bestDistance = -1;
-        private Random rand;
-        private int numberOfCities;
+        public int[,] AdjacencyMatrix { get; set; }
+        private int _bestDistance = -1;
+        private Random _rand;
+        private int _numberOfCities;
+      
+        public int BestDistance{ get; set; }
+        #endregion
 
-        //akcesor
-        public int BestDistance
-        {
-            get
-            {
-                return bestDistance;
-            }
-        }
-
-        //akcesor
-        public int NumberOfCities
-        {
-            get
-            {
-                return numberOfCities; 
-            }
-
-        }
-
-        //akcesor
-        public int[,] AdjacencyMatrix
-        {
-            get
-            {
-                return adjacencyMatrix;
-            }
-
-            set
-            {
-                adjacencyMatrix = value;
-            }
-        }
-        
+        #region Constructors
         /// <summary>
         /// Konstruktor generujący instancję miast o losowych wagach i zadanym rozmiarze
         /// </summary>
@@ -58,8 +26,8 @@ namespace TSP
         /// <param name="isAsync"> Zmienna mówiąca dla jakiego problemu mamy generować miasta: asymetrycznego, bądź symetrycznego </param>
         public Cities(int numberOfCities, int min, int max, bool isAsync)
         {
-            rand = new Random();
-            this.numberOfCities = numberOfCities;
+            _rand = new Random();
+            _numberOfCities = numberOfCities;
 
             if (isAsync)
                 GenerateAsynchronousCities(numberOfCities, min, max);
@@ -78,7 +46,36 @@ namespace TSP
             else
                 ReadCitiesFromFile(path);
         }
+        #endregion
 
+        #region Public Methods
+        /// <summary>
+        /// Metoda odpowiedzialna za wizualizację macierzy miast 
+        /// </summary>
+        /// <returns> string przechowujący zwizualizowaną macierz sąsiedztwa </returns>
+        public string ShowCities()
+        {
+            string matrixString = "";
+            /*for (int i = 0; i < AdjacencyMatrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < AdjacencyMatrix.GetLength(1); j++)
+                {
+                    if (AdjacencyMatrix[i, j] != INF)
+                        matrixString += AdjacencyMatrix[i, j].ToString();
+                    else
+                        matrixString += "INF";
+                    matrixString += "  ";
+                }
+
+                matrixString += Environment.NewLine;
+            }*/
+            if (_bestDistance > 0)
+                matrixString += "Najlepsze rozwiązanie: " + _bestDistance;
+            return matrixString;
+        }
+        #endregion
+
+        #region Private Methods
         /// <summary>
         /// Metoda wczytująca miasta z zadanego pliku
         /// </summary>
@@ -89,7 +86,7 @@ namespace TSP
             {
                 using (StreamReader sr = new StreamReader(path))
                 {
-                    numberOfCities = 0;
+                    _numberOfCities = 0;
                     string numberOfCitiesString = "";
                     int character = sr.Read();
                     while (character >= 48 && character <= 57)
@@ -98,16 +95,16 @@ namespace TSP
                         character = sr.Read();
                     }
 
-                    if (!int.TryParse(numberOfCitiesString, out numberOfCities))
+                    if (!int.TryParse(numberOfCitiesString, out _numberOfCities))
                     {
                         Console.WriteLine("Błędny format danych!");
                         return;
                     }
 
-                    adjacencyMatrix = new int[numberOfCities, numberOfCities];
-                    for (int i = 0; i < numberOfCities; i++)
+                    AdjacencyMatrix = new int[_numberOfCities, _numberOfCities];
+                    for (int i = 0; i < _numberOfCities; i++)
                     {
-                        for (int j = 0; j < numberOfCities; j++)
+                        for (int j = 0; j < _numberOfCities; j++)
                         {
                             string numberString = "";
                             character = sr.Read();
@@ -126,7 +123,7 @@ namespace TSP
                                 }
                                 if (i == j)
                                     currentWeight = INF;
-                                adjacencyMatrix[i, j] = currentWeight;
+                                AdjacencyMatrix[i, j] = currentWeight;
                             }
                             else
                                 j--;
@@ -151,7 +148,7 @@ namespace TSP
             {
                 using (StreamReader sr = new StreamReader(path))
                 {
-                    numberOfCities = 0;
+                    _numberOfCities = 0;
                     string numberOfCitiesString = "";
                     string bestDistanceString = "";
                     int character = sr.Read();
@@ -161,7 +158,7 @@ namespace TSP
                         character = sr.Read();
                     }
 
-                    if (!int.TryParse(numberOfCitiesString, out numberOfCities))
+                    if (!int.TryParse(numberOfCitiesString, out _numberOfCities))
                     {
                         Console.WriteLine("Błędny format danych!");
                         return;
@@ -175,17 +172,17 @@ namespace TSP
                         character = sr.Read();
                     }
 
-                    if (!int.TryParse(bestDistanceString, out bestDistance))
+                    if (!int.TryParse(bestDistanceString, out _bestDistance))
                     {
                         Console.WriteLine("Błędny format danych!");
                         return;
                     }
 
 
-                    adjacencyMatrix = new int[numberOfCities, numberOfCities];
-                    for (int i = 0; i < numberOfCities; i++)
+                    AdjacencyMatrix = new int[_numberOfCities, _numberOfCities];
+                    for (int i = 0; i < _numberOfCities; i++)
                     {
-                        for (int j = 0; j < numberOfCities; j++)
+                        for (int j = 0; j < _numberOfCities; j++)
                         {
                             string numberString = "";
                             character = sr.Read();
@@ -204,7 +201,7 @@ namespace TSP
                                 }
                                 if (i == j)
                                     currentWeight = INF;
-                                adjacencyMatrix[i, j] = currentWeight;
+                                AdjacencyMatrix[i, j] = currentWeight;
                             }
                             else
                                 j--;
@@ -229,7 +226,7 @@ namespace TSP
         private void GenerateAsynchronousCities(int numberOfCities, int min, int max)
         {
             int randomDistance;
-            adjacencyMatrix = new int[numberOfCities, numberOfCities];
+            AdjacencyMatrix = new int[numberOfCities, numberOfCities];
 
             for (int i = 0; i < numberOfCities; i++)
             {
@@ -237,11 +234,11 @@ namespace TSP
                 {
                     if (i != j)
                     { 
-                        randomDistance = rand.Next(min, max + 1);
-                        adjacencyMatrix[i, j] = randomDistance;
+                        randomDistance = _rand.Next(min, max + 1);
+                        AdjacencyMatrix[i, j] = randomDistance;
                     }
                     else
-                        adjacencyMatrix[i, j] = INF;
+                        AdjacencyMatrix[i, j] = INF;
                 }
             }
         }
@@ -255,49 +252,26 @@ namespace TSP
         private void GenerateSynchronousCities(int numberOfCities, int min, int max)
         {
             int randomDistance;
-            adjacencyMatrix = new int[numberOfCities, numberOfCities];
+            AdjacencyMatrix = new int[numberOfCities, numberOfCities];
 
             for (int i = 0; i < numberOfCities; i++)
             {
                 for (int j = 0; j < numberOfCities; j++)
                 {
-                    if (adjacencyMatrix[i, j] == 0)
+                    if (AdjacencyMatrix[i, j] == 0)
                         if (i != j)
                         {
-                            randomDistance = rand.Next(min, max + 1);
-                            adjacencyMatrix[i, j] = randomDistance;
-                            adjacencyMatrix[j, i] = randomDistance;
+                            randomDistance = _rand.Next(min, max + 1);
+                            AdjacencyMatrix[i, j] = randomDistance;
+                            AdjacencyMatrix[j, i] = randomDistance;
                         }
                         else
-                            adjacencyMatrix[i, j] = INF;
+                            AdjacencyMatrix[i, j] = INF;
                 }
             }
         }
+        #endregion
 
-        /// <summary>
-        /// Metoda odpowiedzialna za wizualizację macierzy miast 
-        /// </summary>
-        /// <returns> string przechowujący zwizualizowaną macierz sąsiedztwa </returns>
-        public string ShowCities()
-        {
-            string matrixString = "";
-            /*for (int i = 0; i < AdjacencyMatrix.GetLength(0); i++)
-            {
-                for (int j = 0; j < AdjacencyMatrix.GetLength(1); j++)
-                {
-                    if (AdjacencyMatrix[i, j] != INF)
-                        matrixString += AdjacencyMatrix[i, j].ToString();
-                    else
-                        matrixString += "INF";
-                    matrixString += "  ";
-                }
-
-                matrixString += Environment.NewLine;
-            }*/
-            if (bestDistance > 0)
-                matrixString += "Najlepsze rozwiązanie: " + bestDistance;
-            return matrixString;
-        }
-
+        
     }
- }
+}

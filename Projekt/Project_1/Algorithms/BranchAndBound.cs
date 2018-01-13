@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Priority_Queue;
 
-namespace TSP
+namespace TSP.Algorithms
 {
-   
     static internal class BranchAndBound
     {
+        #region Fields and Structs
+
         private const int INF = Int32.MaxValue;
 
         /// <summary>
@@ -38,7 +36,69 @@ namespace TSP
             public List<Pair<int, int[]>> excludedPaths;
             
         }
+        #endregion
+        
+        #region Public Methods
+        /// <summary>
+        /// Metoda, w której wykonuje się całość algorytmu
+        /// </summary>
+        /// <param name="matrix"> Macierz miast, dla której zostanie uruchomiony algorytm </param>
+        /// <returns> Rozwiązanie problemu metodą podziału i ograniczeń </returns>
+        public static string RunAlgorithm(int[,] matrix)
+        {
+            SimplePriorityQueue<Node> treeq = new SimplePriorityQueue<Node>();
+            //Przygotowanie macierzy miast
+            Node firstNode = PrepareMatrix(matrix);
+            Node lastNode = firstNode;
+            Node currentNode = firstNode;
+            treeq.Enqueue(firstNode, firstNode.lowerBound);
+            int test = 0;
+            while (currentNode.matrix.GetLength(1) != 2 || lastNode.lowerBound == INF)
+            {
+                
+                currentNode = treeq.Dequeue();
+                Pair<Node, Node> newNodes = DivideMatrix(currentNode);
+                
+                Node firstDividedNode = newNodes.First;
+                Node secondDividedNode = newNodes.Second;
 
+                //Redukcja węzła z macierzą zredukowaną oraz aktualizacja jego dolnego ograniczenia
+                int tempReductionLevel = ReduceMatrix(firstDividedNode);
+                if (tempReductionLevel != INF && currentNode.lowerBound != INF)
+                    firstDividedNode.lowerBound = tempReductionLevel + currentNode.lowerBound;
+                else
+                    firstDividedNode.lowerBound = INF;
+
+                //Redukcja węzła z macierzą o zablokowanej drodze oraz aktualizacja jego dolnego ograniczenia
+                tempReductionLevel = ReduceMatrix(secondDividedNode);
+                if (tempReductionLevel != INF && currentNode.lowerBound != INF)
+                    secondDividedNode.lowerBound = tempReductionLevel + currentNode.lowerBound;
+                else
+                    secondDividedNode.lowerBound = INF;
+                
+                //Dodanie obu węzłów do drzewa rozwiązań
+                treeq.Enqueue(firstDividedNode, firstDividedNode.lowerBound);
+                treeq.Enqueue(secondDividedNode, secondDividedNode.lowerBound);
+
+                if (currentNode.matrix.GetLength(1) == 2)
+                    lastNode = firstDividedNode;
+                test++;
+            }
+            //Operacje na węźle o rozmiarze macierzy = 1
+            Node solutionNode = new Node(null, lastNode.lowerBound, lastNode.excludedPaths);
+            int solutionNodeReductionLevel = ReduceMatrix(lastNode);
+            if (solutionNodeReductionLevel != INF && lastNode.lowerBound != INF)
+                solutionNode.lowerBound = solutionNodeReductionLevel + lastNode.lowerBound;
+            else
+                solutionNode.lowerBound = INF;
+            lastNode.excludedPaths.Add(new Pair<int, int[]>(0, lastNode.matrix[0, 0].Second));
+
+            //Zwrócenie wyniku działania algorytmu
+            return ShowSolution(solutionNode);
+        }
+        #endregion
+
+        #region Private Methods
         /// <summary>
         /// Redukcja wierszy oraz kolumn macierzy
         /// </summary>
@@ -299,64 +359,6 @@ namespace TSP
         }
 
         /// <summary>
-        /// Metoda, w której wykonuje się całość algorytmu
-        /// </summary>
-        /// <param name="matrix"> Macierz miast, dla której zostanie uruchomiony algorytm </param>
-        /// <returns> Rozwiązanie problemu metodą podziału i ograniczeń </returns>
-        public static string RunAlgorithm(int[,] matrix)
-        {
-            SimplePriorityQueue<Node> treeq = new SimplePriorityQueue<Node>();
-            //Przygotowanie macierzy miast
-            Node firstNode = PrepareMatrix(matrix);
-            Node lastNode = firstNode;
-            Node currentNode = firstNode;
-            treeq.Enqueue(firstNode, firstNode.lowerBound);
-            int test = 0;
-            while (currentNode.matrix.GetLength(1) != 2 || lastNode.lowerBound == INF)
-            {
-                
-                currentNode = treeq.Dequeue();
-                Pair<Node, Node> newNodes = DivideMatrix(currentNode);
-                
-                Node firstDividedNode = newNodes.First;
-                Node secondDividedNode = newNodes.Second;
-
-                //Redukcja węzła z macierzą zredukowaną oraz aktualizacja jego dolnego ograniczenia
-                int tempReductionLevel = ReduceMatrix(firstDividedNode);
-                if (tempReductionLevel != INF && currentNode.lowerBound != INF)
-                    firstDividedNode.lowerBound = tempReductionLevel + currentNode.lowerBound;
-                else
-                    firstDividedNode.lowerBound = INF;
-
-                //Redukcja węzła z macierzą o zablokowanej drodze oraz aktualizacja jego dolnego ograniczenia
-                tempReductionLevel = ReduceMatrix(secondDividedNode);
-                if (tempReductionLevel != INF && currentNode.lowerBound != INF)
-                    secondDividedNode.lowerBound = tempReductionLevel + currentNode.lowerBound;
-                else
-                    secondDividedNode.lowerBound = INF;
-                
-                //Dodanie obu węzłów do drzewa rozwiązań
-                treeq.Enqueue(firstDividedNode, firstDividedNode.lowerBound);
-                treeq.Enqueue(secondDividedNode, secondDividedNode.lowerBound);
-
-                if (currentNode.matrix.GetLength(1) == 2)
-                    lastNode = firstDividedNode;
-                test++;
-            }
-            //Operacje na węźle o rozmiarze macierzy = 1
-            Node solutionNode = new Node(null, lastNode.lowerBound, lastNode.excludedPaths);
-            int solutionNodeReductionLevel = ReduceMatrix(lastNode);
-            if (solutionNodeReductionLevel != INF && lastNode.lowerBound != INF)
-                solutionNode.lowerBound = solutionNodeReductionLevel + lastNode.lowerBound;
-            else
-                solutionNode.lowerBound = INF;
-            lastNode.excludedPaths.Add(new Pair<int, int[]>(0, lastNode.matrix[0, 0].Second));
-
-            //Zwrócenie wyniku działania algorytmu
-            return ShowSolution(solutionNode);
-        }
-
-        /// <summary>
         /// Przygotowanie macierzy miast(sąsiedztwa) do pracy z algorytmem
         /// </summary>
         /// <param name="matrix"> Macierz sąsiedztwa </param>
@@ -377,7 +379,7 @@ namespace TSP
             }
             Node node = new Node(preparedMatrix, 0, new List<Pair<int, int[]>>());
             node.lowerBound = ReduceMatrix(node);
-            
+
             return node;
         }
 
@@ -389,20 +391,22 @@ namespace TSP
         /// <returns> Ciąg krawędzi będących rozwiązaniem oraz koszt podróży </returns>
         private static string ShowSolution(Node solutionNode)
         {
-           
+
             List<Pair<int, int[]>> list = solutionNode.excludedPaths;
             string solution = Environment.NewLine + "Rozwiązanie:" + Environment.NewLine;
 
             foreach (var path in list)
-            {   
+            {
                 solution += (" <" + path.Second[0].ToString() + " ; " + path.Second[1].ToString() + "> ");
             }
 
             solution += Environment.NewLine;
             solution += "Całkowity koszt: " + solutionNode.lowerBound;
-            
+
 
             return solution;
         }
+        #endregion
+   
     }
 }

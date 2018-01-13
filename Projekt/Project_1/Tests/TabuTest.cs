@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using TSP.Algorithms;
 
-namespace TSP
+namespace TSP.Tests
 {
     class TabuTest
     {
+        #region Public Methods
         /// <summary>
         /// Metoda odpowiedzialna za uruchomienie testów z zadanymi parametrami
         /// </summary>
@@ -97,7 +97,9 @@ namespace TSP
             }
             WriteOutputToFile(path, algorithmResultsSB.ToString());
         }
+        #endregion
 
+        #region Private Methods
         /// <summary>
         /// Zapis do pliku
         /// </summary>
@@ -119,5 +121,6 @@ namespace TSP
                 Console.WriteLine(e.ToString());
             }
         }
+        #endregion
     }
 }

@@ -3,15 +3,20 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using TSP.Algorithms;
+using TSP.Tests;
 
 namespace TSP
 {
     public partial class Form1 : Form
     {
+        #region Fields
         Stopwatch stopWatch = new Stopwatch();
         Cities cities;
         string fileName;
-  
+        #endregion
+
+        #region Constructors
         public Form1()
         {
             InitializeComponent();
@@ -19,18 +24,25 @@ namespace TSP
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            textBoxTestPath.Text = Directory.GetCurrentDirectory() + "\\test.txt";
-            textBoxOutputPath.Text = Directory.GetCurrentDirectory() + "\\test.txt";
+            textBoxOutputPathBnBTest.Text = Directory.GetCurrentDirectory() + "\\test.txt";
+            textBoxOutputPathTimestampTabuTest.Text = Directory.GetCurrentDirectory() + "\\test.txt";
+            buttonLoadFileGenetic.Click += OpenTSPFile;
+            buttonLoadFileTimestampTabuTest.Click += OpenTSPFile;
+            buttonStartImprovementByTimeTabuTest.Click += OpenTSPFile;
+            buttonSelectOutputPathTimeStampTabuTest.Click += SelectOutputPath;
+            buttonSelectOutputPathBnBTest.Click += SelectOutputPath;
         }
+        #endregion
 
-        private void buttonOpenFile_Click(object sender, EventArgs e)
+        #region I/O
+        private void OpenFile(object sender, EventArgs e)
         {
-            openFileDialog1.ShowDialog();
+            openFileDialog.ShowDialog();
             try
             {
-                if (openFileDialog1.OpenFile() != null)
+                if (openFileDialog.OpenFile() != null)
                 {
-                    fileName = openFileDialog1.FileName;
+                    fileName = openFileDialog.FileName;
                     cities = new Cities(fileName, true);
                     //textBox1.Text = cities.ShowCities();
                 }
@@ -41,13 +53,90 @@ namespace TSP
             }
         }
 
-        private void buttonGenShow_Click(object sender, EventArgs e)
+        private void OpenTSPFile(object sender, EventArgs e)
+        {
+            openFileDialog.ShowDialog();
+            try
+            {
+                if (openFileDialog.OpenFile() != null)
+                {
+                    fileName = openFileDialog.FileName;
+                    cities = new Cities(fileName, true);
+                    switch (tabControl.SelectedTab.Text)
+                    {
+                        case "Tabu Search":
+                            textBoxTabu.Text = cities.ShowCities();
+                            break;
+                        case "Genetic":
+                            textBoxGenetic.Text = cities.ShowCities();
+                            break;
+                    }
+
+                    var button = (Button)sender;
+                    switch (button.Name)
+                    {
+                        case "buttonImprovementByTimeTabuTest":
+                            buttonStartImprovementByTimeTabuTest_FileOpened();
+                            break;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Nie można odczytać pliku! Błąd: " + ex.Message);
+            }
+        }
+
+        private void SelectOutputPath(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            TextBox textBox;
+
+            switch (button.Name)
+            {
+                case "buttonSelectOutputPathTimeStampTabuTest":
+                    textBox = textBoxOutputPathTimestampTabuTest;
+                    break;
+                case "buttonSelectOutputPathBnBTest":
+                    textBox = textBoxOutputPathBnBTest;
+                    break;
+                default:
+                    return;
+            }
+
+            saveFileDialog.ShowDialog();
+            try
+            {
+                textBox.Text = saveFileDialog.FileName;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region Run Algorithm
+        private void buttonRunBnB_Click(object sender, EventArgs e)
         {
             try
             {
-                cities = new Cities(Int32.Parse(textBoxNumberOfCities.Text),1,100, radioAsync.Checked);
-                textBox1.Text = cities.ShowCities();
-                textBox1.Text += BranchAndBound.RunAlgorithm(cities.AdjacencyMatrix);
+                textBoxBnB.Text += Algorithms.BranchAndBound.RunAlgorithm(cities.AdjacencyMatrix);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Błąd: Źle podane wartości! ");
+            }
+        }
+
+        private void buttonRunRandomCitiesBnB_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                cities = new Cities(Int32.Parse(textBoxNumberOfCitiesBnB.Text),1,100, radioBnBAsync.Checked);
+                textBoxBnB.Text = cities.ShowCities();
+                textBoxBnB.Text += Algorithms.BranchAndBound.RunAlgorithm(cities.AdjacencyMatrix);
             }
             catch (Exception exception)
             {
@@ -55,13 +144,23 @@ namespace TSP
             }      
         }
 
-        private void buttonStartTest_Click(object sender, EventArgs e)
+        private void buttonRunTabu_Click(object sender, EventArgs e)
         {
-            int size = Int32.Parse(textBoxTestSize.Text);
-            int weightLow = Int32.Parse(textBoxWeightLow.Text);
-            int weightMax = Int32.Parse(textBoxWeightMax.Text);
-            int numberOfTrials = Int32.Parse(textBoxNumberOfTrials.Text);
-            string path = textBoxTestPath.Text;
+            textBoxTabu.Text = "";
+            textBoxTabu.Text += cities.ShowCities() + Environment.NewLine;
+            textBoxTabu.Text += Environment.NewLine + "-------------------   TABU   ---------------------" + Environment.NewLine;
+            textBoxTabu.Text += TabuSearch.RunAlgorithm(cities.AdjacencyMatrix, (int)Math.Ceiling((double)cities.AdjacencyMatrix.GetLength(0) / 10), cities.AdjacencyMatrix.GetLength(0));
+        }
+        #endregion
+
+        #region Algorithms Tests
+        private void buttonStartBnBTest_Click(object sender, EventArgs e)
+        {
+            int size = Int32.Parse(textBoxSeizeBnBTest.Text);
+            int weightLow = Int32.Parse(textBoxWeightLowBnBTest.Text);
+            int weightMax = Int32.Parse(textBoxWeightMaxBnBTest.Text);
+            int numberOfTrials = Int32.Parse(textBoxNumberOfTrialsBnBTest.Text);
+            string path = textBoxOutputPathBnBTest.Text;
             try
             {
                 BnBTest.RunTest(size, weightLow, weightMax, numberOfTrials, path);
@@ -72,112 +171,15 @@ namespace TSP
             }
         }
 
-        private void buttonSelectPath_Click(object sender, EventArgs e)
+        private void buttonStartTimestampTabuTest_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.ShowDialog();
-            try
-            {
-                textBoxTestPath.Text = saveFileDialog1.FileName;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            TabuTest.RunTimestampTest(cities, Int32.Parse(textBoxTimestampTabuTest.Text), cities.AdjacencyMatrix.GetLength(0), Int32.Parse(textBoxNumberOfTrialsTimestampTabuTest.Text), textBoxOutputPathTimestampTabuTest.Text);
         }
 
-        private void buttonRunAlgorithm_Click(object sender, EventArgs e)
+        private void buttonStartImprovementByTimeTabuTest_FileOpened()
         {
-            try
-            {
-                textBox1.Text += BranchAndBound.RunAlgorithm(cities.AdjacencyMatrix);
-
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Błąd: Źle podane wartości! ");
-            }
+            TabuTest.RunImprovementByTimeTest(cities, textBoxOutputPathImprovementByTimeTabuTest.Text);
         }
-        
-        private void buttonLoadFileTabu_Click(object sender, EventArgs e)
-        {
-            openFileDialog1.ShowDialog();
-            try
-            {
-                if (openFileDialog1.OpenFile() != null)
-                {
-                    fileName = openFileDialog1.FileName;
-                    cities = new Cities(fileName, true);
-                    //textBox1Tabu.Text = cities.ShowCities();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Nie można odczytać pliku! Błąd: " + ex.Message);
-            }
-        }
-
-        private void buttonRunTabu_Click(object sender, EventArgs e)
-        {
-            textBoxTabu.Text = "";
-            textBoxTabu.Text += cities.ShowCities() + Environment.NewLine;
-            textBoxTabu.Text += Environment.NewLine + "-------------------   TABU   ---------------------" + Environment.NewLine;
-            textBoxTabu.Text += TabuSearch.RunAlgorithm(cities.AdjacencyMatrix, (int)Math.Ceiling((double)cities.AdjacencyMatrix.GetLength(0) / 10), cities.AdjacencyMatrix.GetLength(0));
-        }
-
-        private void buttonSelectPathTabu_Click(object sender, EventArgs e)
-        {
-            saveFileDialog1.ShowDialog();
-            try
-            {
-                textBoxOutputPath.Text = saveFileDialog1.FileName;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void buttonStartTestTabu_Click(object sender, EventArgs e)
-        {
-            //public static void RunTimestampTest(Cities cities, int timestamp, int maxNumberOfIterations, int numberOfTrials, string path)
-            TabuTest.RunTimestampTest(cities, Int32.Parse(textBoxTimestamp.Text), cities.AdjacencyMatrix.GetLength(0), Int32.Parse(textBoxNumberOfTrialsTabu.Text), textBoxOutputPath.Text);
-        }
-
-        private void buttonSelectPathTabuTest_Click(object sender, EventArgs e)
-        {
-            openFileDialog1.ShowDialog();
-            try
-            {
-                if (openFileDialog1.OpenFile() != null)
-                {
-                    fileName = openFileDialog1.FileName;
-                    cities = new Cities(fileName, true);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Nie można odczytać pliku! Błąd: " + ex.Message);
-            }
-        }
-
-        private void buttonImprovementByTimeTest_Click(object sender, EventArgs e)
-        {
-            openFileDialog1.ShowDialog();
-            string fileName = "";
-            try
-            {
-                if (openFileDialog1.OpenFile() != null)
-                {
-                    fileName = openFileDialog1.FileName;
-                    cities = new Cities(fileName, true);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Nie można odczytać pliku! Błąd: " + ex.Message);
-            }
-
-            TabuTest.RunImprovementByTimeTest(cities, textBoxSaveImprovementByTimeTest.Text);
-        }
+        #endregion
     }
 }
