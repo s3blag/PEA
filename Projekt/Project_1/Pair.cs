@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TSP
 {
-    class Pair<T, U>
+    public class Pair<T, U>
     {
         #region Fields and Properties
 

@@ -3,7 +3,7 @@ using System.IO;
 
 namespace TSP
 {
-    internal class Cities
+    public class Cities
     {
         #region Fields and Properties
         public const int INF = Int32.MaxValue;
@@ -272,6 +272,5 @@ namespace TSP
         }
         #endregion
 
-        
     }
 }
