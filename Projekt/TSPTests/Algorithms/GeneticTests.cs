@@ -38,7 +38,22 @@ namespace TSP.Algorithms.Tests
             CollectionAssert.AreEqual(expected2, actual2);
         }
 
+        [TestMethod()]
+        public void MutateTest()
+        {
+            var indexes1 = new Pair<int, int>(3, 6);
+            var indexes2 = new Pair<int, int>(1, 3);
+            var child1 = new int[] { 9, 2, 5, 4, 1, 6, 3, 7, 8 };
+            var child2 = new int[] { 8, 1, 6, 7, 2, 9, 4, 5, 3 };
+            var expected1 = new int[] { 9, 2, 5, 3, 6, 1, 4, 7, 8 };
+            var expected2 = new int[] { 8, 7, 6, 1, 2, 9, 4, 5, 3 };
 
+            //Genetic.Mutate(child1, indexes1);
+            ///Genetic.Mutate(child2, indexes2);
+
+            CollectionAssert.AreEqual(expected1, child1);
+            CollectionAssert.AreEqual(expected2, child2);
+        }
 
     }
 }

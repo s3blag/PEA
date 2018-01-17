@@ -6,6 +6,12 @@ namespace TSP.Algorithms
 {
     static public class Genetic
     {
+        #region Fields
+
+        private static Random rand = new Random();
+        
+        #endregion
+
         #region Public Methods
         public static string RunAlgorithm(Cities cities, int populationSize)
         {
@@ -64,6 +70,21 @@ namespace TSP.Algorithms
 
             return children;
         }
+
+        public static void Mutate(int[] child)
+        {
+            //var i = indexes.First;
+            //var j = indexes.Second;
+
+            var probability = rand.Next(1001);
+            if(probability<10)
+            {
+                var i = rand.Next(child.Length - 1);
+                var j = rand.Next(i + 1, child.Length);
+                Array.Reverse(child, i, j - i + 1);
+            }  
+        }
+
         #endregion
     }
 }
