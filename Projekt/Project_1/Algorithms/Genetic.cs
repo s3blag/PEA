@@ -234,7 +234,7 @@ namespace TSP.Algorithms
             void FillChild(int[] child, int[] parent)
             {                                    
                 for (int counter = 0, childCurrentIndex = indexes.Second + 1, parentCurrentIndex = indexes.Second + 1;
-                    counter < solutionSize - matchingSectionLength - 1;
+                    counter < solutionSize - matchingSectionLength;
                     counter++, childCurrentIndex++)
                 {
                     if (childCurrentIndex >= solutionSize)
@@ -258,10 +258,9 @@ namespace TSP.Algorithms
 
                 }
             }
-
-           
+       
             //kopiowanie sekcji dopasowania
-            for (int i = indexes.First; i <= indexes.Second; i++)
+            for (int i = 0; i < solutionSize; i++)
             {   
                 if(i >= indexes.First && i <= indexes.Second)
                 {
