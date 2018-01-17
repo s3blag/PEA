@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
+using System.Text;
 
 namespace TSP.Algorithms
 {
@@ -16,9 +17,29 @@ namespace TSP.Algorithms
         #endregion
 
         #region Public Methods
+        /// <summary>
+        /// Metoda uruchamiająca algorytm
+        /// </summary>
+        /// <param name="cities"> Mapa miast, na której zostanie wykonany algorytm</param>
+        /// <param name="populationSize"> Rozmiar populacji</param>
+        /// <returns> Rozwiązanie w postaci łańcucha znaków</returns>
         public static string RunAlgorithm(Cities cities, int populationSize)
         {
-            throw new NotImplementedException();
+            //prawdopodobnie do wywalenia
+            //int probabilityUpperBound = 100;
+
+            var population = GenerateRandomPopulation(populationSize, cities.AdjacencyMatrix.GetLength(0));
+            Pair<int[], int> currentBestSolution = GetPopulationBestWeight(population, cities.AdjacencyMatrix);
+            for (int i = 0; i < 1000; i++)
+            {
+                var matingPool = Tournament(population, 3, cities.AdjacencyMatrix, populationSize / 2);
+                var newPopulation = Crossover(matingPool, populationSize, 100);
+                Mutate(newPopulation);
+                currentBestSolution = GetPopulationBestWeight(newPopulation, cities.AdjacencyMatrix);
+                population = newPopulation;
+            }
+            
+            return GetSolutionString(currentBestSolution);
         }
 
         public static void RunTest(Cities cities, int populationSize)
@@ -29,7 +50,7 @@ namespace TSP.Algorithms
             {
                 for (int j = 0; j < cities.AdjacencyMatrix.GetLength(0); j++)
                     Debug.Write(population[i][j] + " ");
-                Debug.Write("  Waga: " + GetSolutionWeight(population[i], cities.AdjacencyMatrix));
+                Debug.Write("  Waga: " + GetIndividualWeight(population[i], cities.AdjacencyMatrix));
                 Debug.Write(Environment.NewLine);
             }
             Debug.WriteLine("Populacja rodzicielska: ");
@@ -38,7 +59,7 @@ namespace TSP.Algorithms
             {
                 for (int j = 0; j < cities.AdjacencyMatrix.GetLength(0); j++)
                     Debug.Write(tournamentPopulation[i][j] + " ");
-                Debug.Write("  Waga: " + GetSolutionWeight(tournamentPopulation[i], cities.AdjacencyMatrix));
+                Debug.Write("  Waga: " + GetIndividualWeight(tournamentPopulation[i], cities.AdjacencyMatrix));
                 Debug.Write(Environment.NewLine);
             }
 
@@ -47,7 +68,15 @@ namespace TSP.Algorithms
 
         #region Private Methods
 
-        private static List<int[]> Tournament(List<int[]> population, int tournamentSize, int[,] matrix, int matingPoolSize)
+        /// <summary>
+        /// Funkcja przeprowadzająca selekcję turniejową - generująca nową populację
+        /// </summary>
+        /// <param name="population"> Populacja, która zostanie poddana krzyżowaniu</param>
+        /// <param name="tournamentSize"> Rozmiar turnieju</param>
+        /// <param name="cities"> Macierz miast</param>
+        /// <param name="matingPoolSize"> Rozmiar populacji macierzystej</param>
+        /// <returns> Nowa populacja</returns>
+        private static List<int[]> Tournament(List<int[]> population, int tournamentSize, int[,] cities, int matingPoolSize)
         {
             var matingPool = new List<int[]>(matingPoolSize);    
 
@@ -59,7 +88,7 @@ namespace TSP.Algorithms
                 int currentBestSolutionIndex = INF;
                 for (int j = 0; j < tournamentSize; j++)
                 {
-                    int currentWeight = GetSolutionWeight(population[solutionOrder[j]], matrix);
+                    int currentWeight = GetIndividualWeight(population[solutionOrder[j]], cities);
                     if (currentWeight < currentBestSolutionWeight)
                     {
                         currentBestSolutionIndex = solutionOrder[j];
@@ -76,7 +105,7 @@ namespace TSP.Algorithms
         /// </summary>
         /// <param name="populationSize"> Rozmiar generowanej populacji</param>
         /// <param name="numberOfCities"> Liczba miast</param>
-        /// <returns></returns>
+        /// <returns> Wygenerowana populacja losowa</returns>
         private static List<int[]> GenerateRandomPopulation(int populationSize, int numberOfCities)
         {
             var population = new List<int[]>(populationSize);
@@ -90,10 +119,10 @@ namespace TSP.Algorithms
         }
 
         /// <summary>
-        /// Funkcja generuje losowe rozwiązanie
+        /// Funkcja generuje losowe rozwiązanie - osobnik
         /// </summary>
-        /// <param name="numberOfCities"> Liczba miast instancji problemu</param>
-        /// <returns></returns>
+        /// <param name="numberOfCities"> Liczba miast</param>
+        /// <returns> Wygenerowany osobnik</returns>
         private static int[] GenerateRandomSolution(int numberOfCities)
         {
             // Definicja oraz inicjalizacja listy dostępnych miast
@@ -110,34 +139,103 @@ namespace TSP.Algorithms
         }
 
         /// <summary>
-        /// Funkcja ta oblicza wagę danego rozwiązania dla danej macierzy reprezentującej graf
+        /// Funkcja ta oblicza wagę danego rozwiązania dla danej macierzy reprezentującej miasta
         /// </summary>
         /// <param name="solution"> Rozwiązanie</param> 
-        /// <param name="matrix"> Macierz reprezentująca graf</param> 
-        /// <returns></returns>
-        private static int GetSolutionWeight(int[] solution, int[,] matrix)
+        /// <param name="cities"> Macierz reprezentująca graf</param> 
+        /// <returns> Długość trasy osobnika</returns>
+        private static int GetIndividualWeight(int[] solution, int[,] cities)
         {
             int weight = 0;
             // Pętla dodająca wagi kolejnych krawędzi
             for (int currentCity = 0; currentCity < solution.Length - 1; currentCity++)
             {
-                weight += matrix[solution[currentCity], solution[currentCity + 1]];
+                weight += cities[solution[currentCity], solution[currentCity + 1]];
             }
             // Powrót z ostaniego miasta do pierwszego
-            weight += matrix[solution[solution.GetLength(0) - 1], solution[0]];
+            weight += cities[solution[solution.GetLength(0) - 1], solution[0]];
 
             return weight;
         }
 
-        public static Pair<int[], int[]> Crossover(Pair<int, int> indexes, Pair<int[], int[]> parents)
+        /// <summary>
+        /// Metoda znajdująca najlepsze rozwiązanie w populacji
+        /// </summary>
+        /// <param name="population"> Badana populacja</param>
+        /// <param name="cities"> Reprezentacja miast</param>
+        /// <returns>Para najlepszy osobnik, długość trasy</najlepszy></returns>
+        private static Pair<int[], int> GetPopulationBestWeight(List<int[]> population, int[,] cities)
         {
-            var solutionSize = parents.First.Length;
-            var matchingSectionLength = indexes.Second - indexes.First + 1;
+            int bestWeight = INF;
+            int weight;
+            int index = 0;
+
+            for (int i = 0; i < population.Count; i++)
+            {
+                weight = GetIndividualWeight(population[i], cities);
+                if (weight < bestWeight)
+                {
+                    bestWeight = weight;
+                    index = i;
+                }
+            }
+            return new Pair<int[], int>(population[index], bestWeight);
+        }
+
+        /// <summary>
+        /// Metoda wykonująca krzyżowanie OX na całej populacji macierzystej
+        /// </summary>
+        /// <param name="matingPool"> Zadana populacja macierzysta</param>
+        /// <param name="populationSize"> Rozmiar populacji docelowej</param>
+        /// <param name="probabilityUpperBound"> Górna granica prawdopodobieństwa z jakim krzyżowanie zostanie wykonane</param>
+        /// <returns> Nowa populacja</returns>
+        private static List<int[]> Crossover(List<int[]> matingPool, int populationSize, int probabilityUpperBound)
+        {
+            var newPopulation = new List<int[]>(populationSize);
+            int probability;
+
+            for (int i = 0; i < populationSize/2; i++)
+            {
+                int firstParent, secondParent;
+                do
+                {
+                    firstParent = rand.Next(matingPool.Count);
+                    secondParent = rand.Next(matingPool.Count);
+                    probability = rand.Next(101);
+                }
+                while (probability > probabilityUpperBound);
+
+                int firstIndex = rand.Next(matingPool[0].Length - 1),
+                    secondIndex = rand.Next(firstIndex + 1, matingPool[0].Length);
+
+                var pairOfChildren = CrossoverPair(new Pair<int, int>(firstIndex, secondIndex),
+                                                   new Pair<int[], int[]>(matingPool[firstParent], matingPool[secondParent]));
+                newPopulation.Add(pairOfChildren.First);
+                newPopulation.Add(pairOfChildren.Second);
+            }
+
+            return newPopulation;
+        }
+
+
+        /// <summary>
+        /// Funkcja ta odpowiada za krzyzowanie dwóch osobników
+        /// </summary>
+        /// <param name="indexes"> Zakres sekcji dopasowania</param>
+        /// <param name="parents"> Rodzice, na których zostanie wykonane krzyżowanie</param>
+        /// <returns> Para nowo utworzonych osobników - dzieci</returns>
+        public static Pair<int[], int[]> CrossoverPair(Pair<int, int> indexes, Pair<int[], int[]> parents)
+        {
+            int solutionSize = parents.First.Length;
+            int matchingSectionLength = indexes.Second - indexes.First + 1;
             var children = new Pair<int[], int[]>(new int[solutionSize], new int[solutionSize]);
 
             //Kopiuje elementy, które nie wystepują w już skopiowanej sekcji dopasowania
             void FillChild(int[] child, int[] parent)
             {
+                for (int i = 0; i < solutionSize; i++)
+                    child[i] = -1;
+                                    
                 for (int counter = 0, childCurrentIndex = indexes.Second + 1, parentCurrentIndex = indexes.Second + 1;
                     counter < solutionSize - matchingSectionLength;
                     counter++, childCurrentIndex++)
@@ -177,18 +275,41 @@ namespace TSP.Algorithms
             return children;
         }
 
-        public static void Mutate(int[] child)
+        /// <summary>
+        /// Funkcja odpowiadająca za mutację osobnika
+        /// </summary>
+        /// <param name="child"> Nowy osobnik, na którym zostanie przeprowadzone mutowanie</param>
+        public static void Mutate(List<int[]> population)
         {
-            //var i = indexes.First;
-            //var j = indexes.Second;
-
-            var probability = rand.Next(1001);
-            if(probability<10)
+            foreach(var individual in population)
             {
-                var i = rand.Next(child.Length - 1);
-                var j = rand.Next(i + 1, child.Length);
-                Array.Reverse(child, i, j - i + 1);
-            }  
+                var probability = rand.Next(1001);
+                if (probability < 10)
+                {
+                    var i = rand.Next(individual.Length - 1);
+                    var j = rand.Next(i + 1, individual.Length);
+                    Array.Reverse(individual, i, j - i + 1);
+                }
+            }
+            
+        }
+
+        /// <summary>
+        /// Generuje rozwiązanie w postaci łańcucha znaków
+        /// </summary>
+        /// <param name="solution"> Rozwiązanie</param>
+        /// <returns> Rozwiązabue w postaci łańcucha znaków</returns>
+        private static string GetSolutionString(Pair<int[], int> solution)
+        {
+            var solutionSB = new StringBuilder();
+
+            foreach (var element in solution.First)
+                solutionSB.Append(element + " -> ");
+
+            solutionSB.Append(solution.First[0]
+                            + Environment.NewLine + "Rozwiązanie: " + solution.Second);
+
+            return solutionSB.ToString();
         }
 
         #endregion

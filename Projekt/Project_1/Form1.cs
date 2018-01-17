@@ -184,8 +184,9 @@ namespace TSP
 
         private void buttonRunGenetic_Click(object sender, EventArgs e)
         {
-            Cities city = new Cities(5, 0, 10, false);
-            Genetic.RunTest(city, 20);
+            Cities cities = new Cities(10, 0, 100, false);
+            textBoxGenetic.Text = cities.ShowCities();
+            Genetic.RunAlgorithm(cities, 10);
         }
     }
 }

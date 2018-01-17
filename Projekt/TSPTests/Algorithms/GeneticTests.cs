@@ -31,8 +31,8 @@ namespace TSP.Algorithms.Tests
             var expected1 = new int[] { 1, 6, 3, 7, 2, 9, 4, 8, 5 };
             var expected2 = new int[] { 7, 2, 9, 4, 1, 6, 3, 5, 8 };
 
-            var actual1 = Genetic.Crossover(indexes, parents).First;
-            var actual2 = Genetic.Crossover(indexes, parents).Second;
+            var actual1 = Genetic.CrossoverPair(indexes, parents).First;
+            var actual2 = Genetic.CrossoverPair(indexes, parents).Second;
 
             CollectionAssert.AreEqual(expected1, actual1);
             CollectionAssert.AreEqual(expected2, actual2);

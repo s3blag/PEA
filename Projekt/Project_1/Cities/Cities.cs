@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 namespace TSP
 {
@@ -55,23 +56,23 @@ namespace TSP
         /// <returns> string przechowujący zwizualizowaną macierz sąsiedztwa </returns>
         public string ShowCities()
         {
-            string matrixString = "";
-            /*for (int i = 0; i < AdjacencyMatrix.GetLength(0); i++)
+            StringBuilder matrixSB = new StringBuilder();
+            for (int i = 0; i < AdjacencyMatrix.GetLength(0); i++)
             {
                 for (int j = 0; j < AdjacencyMatrix.GetLength(1); j++)
                 {
                     if (AdjacencyMatrix[i, j] != INF)
-                        matrixString += AdjacencyMatrix[i, j].ToString();
+                        matrixSB.Append(AdjacencyMatrix[i, j].ToString());
                     else
-                        matrixString += "INF";
-                    matrixString += "  ";
+                        matrixSB.Append("INF");
+                    matrixSB.Append("  ");
                 }
 
-                matrixString += Environment.NewLine;
-            }*/
+                matrixSB.Append(Environment.NewLine);
+            }
             if (_bestDistance > 0)
-                matrixString += "Najlepsze rozwiązanie: " + _bestDistance;
-            return matrixString;
+                matrixSB.Append("Najlepsze rozwiązanie: " + _bestDistance);
+            return matrixSB.ToString();
         }
         #endregion
 
