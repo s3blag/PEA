@@ -232,12 +232,9 @@ namespace TSP.Algorithms
 
             //Kopiuje elementy, które nie wystepują w już skopiowanej sekcji dopasowania
             void FillChild(int[] child, int[] parent)
-            {
-                for (int i = 0; i < solutionSize; i++)
-                    child[i] = -1;
-                                    
+            {                                    
                 for (int counter = 0, childCurrentIndex = indexes.Second + 1, parentCurrentIndex = indexes.Second + 1;
-                    counter < solutionSize - matchingSectionLength;
+                    counter < solutionSize - matchingSectionLength - 1;
                     counter++, childCurrentIndex++)
                 {
                     if (childCurrentIndex >= solutionSize)
@@ -262,11 +259,20 @@ namespace TSP.Algorithms
                 }
             }
 
+           
             //kopiowanie sekcji dopasowania
             for (int i = indexes.First; i <= indexes.Second; i++)
-            {
-                children.First[i] = parents.Second[i];
-                children.Second[i] = parents.First[i];
+            {   
+                if(i >= indexes.First && i <= indexes.Second)
+                {
+                    children.First[i] = parents.Second[i];
+                    children.Second[i] = parents.First[i];
+                }
+                else
+                {
+                    children.First[i] = INF;
+                    children.Second[i] = INF;
+                }
             }
 
             FillChild(children.First, parents.First);
