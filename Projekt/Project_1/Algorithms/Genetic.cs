@@ -50,33 +50,25 @@ namespace TSP.Algorithms
 
         private static List<int[]> Tournament(List<int[]> population, int tournamentSize, int[,] matrix, int parentPopulationSize)
         {
-            var tournamentList = new List<int[]>();
             var parents = new List<int[]>();
-
-            int[] solutionOrder = GenerateRandomSolution(population.Count - 1);
-
-            
+            int[] solutionOrder;            
 
             for (int i = 0; i < parentPopulationSize; i++)
             {
-                tournamentList = new List<int[]>();
-                for (int k = 0; k < tournamentSize; k++)
-                {
-                    tournamentList.Add(population[solutionOrder[i]]);
-                }
+                solutionOrder = GenerateRandomSolution(population.Count - 1);
 
                 int currentBestSolutionWeight = INF;
                 int currentBestSolutionIndex = INF;
                 for (int j = 0; j < tournamentSize; j++)
                 {
-                    int currentWeight = GetSolutionWeight(tournamentList[j], matrix);
+                    int currentWeight = GetSolutionWeight(population[solutionOrder[j]], matrix);
                     if (currentWeight < currentBestSolutionWeight)
                     {
-                        currentBestSolutionIndex = j;
+                        currentBestSolutionIndex = solutionOrder[j];
                         currentBestSolutionWeight = currentWeight;
                     }
                 }
-                parents.Add(tournamentList[currentBestSolutionIndex]);
+                parents.Add(population[currentBestSolutionIndex]);
             }
             return parents;
         }
