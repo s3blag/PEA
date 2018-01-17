@@ -18,7 +18,6 @@ namespace TSP.Algorithms
         #region Public Methods
         public static string RunAlgorithm(Cities cities, int populationSize)
         {
-            
             throw new NotImplementedException();
         }
 
@@ -48,14 +47,13 @@ namespace TSP.Algorithms
 
         #region Private Methods
 
-        private static List<int[]> Tournament(List<int[]> population, int tournamentSize, int[,] matrix, int parentPopulationSize)
+        private static List<int[]> Tournament(List<int[]> population, int tournamentSize, int[,] matrix, int matingPoolSize)
         {
-            var parents = new List<int[]>();
-            int[] solutionOrder;            
+            var matingPool = new List<int[]>(matingPoolSize);    
 
-            for (int i = 0; i < parentPopulationSize; i++)
+            for (int i = 0; i < matingPoolSize; i++)
             {
-                solutionOrder = GenerateRandomSolution(population.Count - 1);
+                var solutionOrder = GenerateRandomSolution(population.Count - 1);
 
                 int currentBestSolutionWeight = INF;
                 int currentBestSolutionIndex = INF;
@@ -68,9 +66,9 @@ namespace TSP.Algorithms
                         currentBestSolutionWeight = currentWeight;
                     }
                 }
-                parents.Add(population[currentBestSolutionIndex]);
+                matingPool.Add(population[currentBestSolutionIndex]);
             }
-            return parents;
+            return matingPool;
         }
 
         /// <summary>
@@ -81,7 +79,7 @@ namespace TSP.Algorithms
         /// <returns></returns>
         private static List<int[]> GenerateRandomPopulation(int populationSize, int numberOfCities)
         {
-            var population = new List<int[]>();
+            var population = new List<int[]>(populationSize);
 
             for(int i = 0; i < populationSize; i++)
             {
@@ -99,14 +97,14 @@ namespace TSP.Algorithms
         private static int[] GenerateRandomSolution(int numberOfCities)
         {
             // Definicja oraz inicjalizacja listy dostępnych miast
-            int[] cities = new int[numberOfCities];
+            var cities = new int[numberOfCities];
             for(int i = 0; i < numberOfCities; i++)
             {
                 cities[i] = i;
             }
 
             // Losowe przemieszanie miast
-            int[] solution = cities.OrderBy(x => rand.Next()).ToArray();
+            var solution = cities.OrderBy(x => rand.Next()).ToArray();
 
             return solution;
         }
@@ -141,8 +139,8 @@ namespace TSP.Algorithms
             void FillChild(int[] child, int[] parent)
             {
                 for (int counter = 0, childCurrentIndex = indexes.Second + 1, parentCurrentIndex = indexes.Second + 1;
-                counter < solutionSize - matchingSectionLength;
-                counter++, childCurrentIndex++)
+                    counter < solutionSize - matchingSectionLength;
+                    counter++, childCurrentIndex++)
                 {
                     if (childCurrentIndex >= solutionSize)
                         childCurrentIndex = 0;
