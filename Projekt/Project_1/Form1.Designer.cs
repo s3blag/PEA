@@ -345,6 +345,7 @@
             this.buttonRunGenetic.TabIndex = 10;
             this.buttonRunGenetic.Text = "Uruchom algorytm";
             this.buttonRunGenetic.UseVisualStyleBackColor = true;
+            this.buttonRunGenetic.Click += new System.EventHandler(this.buttonRunGenetic_Click);
             // 
             // buttonLoadFileGenetic
             // 

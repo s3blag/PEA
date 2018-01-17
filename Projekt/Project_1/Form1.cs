@@ -181,5 +181,11 @@ namespace TSP
             TabuTest.RunImprovementByTimeTest(cities, textBoxOutputPathImprovementByTimeTabuTest.Text);
         }
         #endregion
+
+        private void buttonRunGenetic_Click(object sender, EventArgs e)
+        {
+            Cities city = new Cities(5, 0, 10, false);
+            Genetic.RunTest(city, 20);
+        }
     }
 }
