@@ -31,6 +31,7 @@ namespace TSP
             buttonStartImprovementByTimeTabuTest.Click += OpenTSPFile;
             buttonSelectOutputPathTimeStampTabuTest.Click += SelectOutputPath;
             buttonSelectOutputPathBnBTest.Click += SelectOutputPath;
+            buttonLoadFileGeneticTest.Click += OpenTSPFile;
         }
         #endregion
 
@@ -184,9 +185,31 @@ namespace TSP
 
         private void buttonRunGenetic_Click(object sender, EventArgs e)
         {
-          
             textBoxGenetic.Text = cities.ShowCities();
-            textBoxGenetic.Text += Environment.NewLine + Genetic.RunAlgorithm(cities, 1000, 2, 5, 1);
+            textBoxGenetic.Text += Environment.NewLine + Genetic.RunAlgorithm(cities, 120, 1000, 1000/2, 20, 1, 0);
+        }
+
+        private void buttonStartGeneticAnalyzeTest_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int time = Int32.Parse(textBoxTimeGeneticTest.Text);
+                int populationSize = Int32.Parse(textBoxPopulationSizeGeneticTest.Text);
+                int matingPoolSize = Int32.Parse(textBoxMatingPoolSizeGeneticTest.Text);
+                int tournamentSize = Int32.Parse(textBoxTournamentSizeGeneticTest.Text);
+                int mutationProbability = Int32.Parse(textBoxMutationProbabilityGeneticTest.Text);
+                int mutationType = RadioButtonInvertGeneticTest.Checked == true ? 0 : 1;
+            }
+            catch
+            {
+                MessageBox.Show("Błędne dane!");
+                return;
+            }
+            
+
+
+
+
         }
     }
 }

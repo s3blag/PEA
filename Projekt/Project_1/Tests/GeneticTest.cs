@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using TSP;
+using TSP.Algorithms;
 
 namespace Project_1.Tests
 {
@@ -11,6 +12,26 @@ namespace Project_1.Tests
     {
         #region Public Methods
         #endregion
+
+        public static void RunTournamentSizeTest(Cities cities, int time, int populationSize, int matingPoolSize, 
+                                                int tournamentSize, int mutationProbability, int mutationType,
+                                                string path)
+        {
+            path += "Genetic_" + time + "s_" + populationSize + "os_" + matingPoolSize + "mat_" + tournamentSize +
+                    "trnm_" + mutationProbability + "%_" + (mutationType == 0 ? "invert" : "swap");
+
+            StringBuilder algorithmResultsSB = new StringBuilder();
+            algorithmResultsSB.Append("|BADANIE PRZEBIEGU ALGORYTMU W ZALEŻNOŚCI OD CZASU|" + Environment.NewLine);
+            LinkedList<Pair<int, int>> algorithmResults = Genetic.AnalyzePerformance(cities, time, populationSize, 
+                                                                                     matingPoolSize, tournamentSize, 
+                                                                                     mutationProbability, mutationType);
+
+            foreach (var result in algorithmResults)
+            {
+                algorithmResultsSB.Append(result.First + ";" + result.Second + Environment.NewLine);
+            }
+            WriteOutputToFile(path, algorithmResultsSB.ToString());
+        }
 
         #region Private Methods
 
