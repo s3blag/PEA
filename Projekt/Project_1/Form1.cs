@@ -201,7 +201,7 @@ namespace TSP
                 int mutationProbability = Int32.Parse(textBoxMutationProbabilityGeneticTest.Text);
                 int mutationType = RadioButtonInvertGeneticTest.Checked == true ? 0 : 1;
                 string path = textBoxOutputPathGeneticTest.Text;
-                GeneticTest.RunTournamentSizeTest(cities, time, populationSize, matingPoolSize, 
+                GeneticTest.RunPerformanceOverTimeTest(cities, time, populationSize, matingPoolSize, 
                                        tournamentSize, mutationProbability, mutationType, path);
             }
             catch

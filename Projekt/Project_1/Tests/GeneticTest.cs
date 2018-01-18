@@ -12,35 +12,37 @@ namespace TSP.Tests
     {
         #region Public Methods
         static public void RunParameterTest(Cities cities, int time, int populationSize, int matingPoolSize,
-                                                int tournamentSize, int mutationProbability, int mutationType,
-                                                string path)
+                                           int tournamentSize, int mutationProbability, int mutationType,
+                                           string path)
         {
-            int bestDistance = cities.BestDistance;
-            int distance = Genetic.AnalyzeWeight(cities, time, populationSize, matingPoolSize, tournamentSize, mutationProbability, mutationType);            
+            float bestDistance = (float)cities.BestDistance;
+            float distance = (float)Genetic.AnalyzeWeight(cities, time, populationSize, matingPoolSize, tournamentSize, mutationProbability, mutationType);            
             string relativeError = (((distance - bestDistance) / bestDistance) * 100.0f).ToString();
 
-            path += "Genetic_" + time + "s_" + populationSize + "os_" + matingPoolSize + "mat_" + tournamentSize +
+            path += cities.AdjacencyMatrix.GetLength(0) + "_Genetic_" + time + "s_" + populationSize + "os_" + matingPoolSize + "mat_" + tournamentSize +
                     "trnm_" + mutationProbability + "%_" + (mutationType == 0 ? "invert" : "swap") + ".txt";
 
             WriteOutputToFile(path, relativeError);
         }
 
-        public static void RunTournamentSizeTest(Cities cities, int time, int populationSize, int matingPoolSize, 
-                                                int tournamentSize, int mutationProbability, int mutationType,
-                                                string path)
+        public static void RunPerformanceOverTimeTest(Cities cities, int time, int populationSize, int matingPoolSize, 
+                                                 int tournamentSize, int mutationProbability, int mutationType,
+                                                 string path)
         {
-            path += "Genetic_" + time + "s_" + populationSize + "os_" + matingPoolSize + "mat_" + tournamentSize +
+            path += cities.AdjacencyMatrix.GetLength(0) + "_Genetic_" + time + "s_" + populationSize + "os_" + matingPoolSize + "mat_" + tournamentSize +
                     "trnm_" + mutationProbability + "%_" + (mutationType == 0 ? "invert" : "swap") + ".txt";
-
             StringBuilder algorithmResultsSB = new StringBuilder();
             algorithmResultsSB.Append("|BADANIE PRZEBIEGU ALGORYTMU W ZALEŻNOŚCI OD CZASU|" + Environment.NewLine);
             LinkedList<Pair<int, int>> algorithmResults = Genetic.AnalyzePerformance(cities, time, populationSize,
                                                                                      matingPoolSize, tournamentSize,
                                                                                      mutationProbability, mutationType);
+            float bestDistance = (float)cities.BestDistance;
 
             foreach (var result in algorithmResults)
             {
-                algorithmResultsSB.Append(result.First + ";" + result.Second + Environment.NewLine);
+                
+                string relativeError = ((((float)result.Second - bestDistance) / bestDistance) * 100.0f).ToString();
+                algorithmResultsSB.Append(result.First + ";" + relativeError + Environment.NewLine);
             }
             WriteOutputToFile(path, algorithmResultsSB.ToString());
         }

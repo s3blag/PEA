@@ -86,6 +86,9 @@
             this.labelNumberOfTrials = new System.Windows.Forms.Label();
             this.textBoxWeightMaxBnBTest = new System.Windows.Forms.TextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.buttonStartGeneticAnalyzeWeight = new System.Windows.Forms.Button();
+            this.labelParametersTime = new System.Windows.Forms.Label();
+            this.labelQualityTime = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.textBoxOutputPathGeneticTest = new System.Windows.Forms.TextBox();
             this.buttonStartGeneticAnalyzeTest = new System.Windows.Forms.Button();
@@ -106,9 +109,6 @@
             this.textBoxTimeGeneticTest = new System.Windows.Forms.TextBox();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.labelQualityTime = new System.Windows.Forms.Label();
-            this.labelParametersTime = new System.Windows.Forms.Label();
-            this.buttonStartGeneticAnalyzeWeight = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabBranchAndBound.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -717,6 +717,34 @@
             this.tabPage1.Text = "Genetic";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // buttonStartGeneticAnalyzeWeight
+            // 
+            this.buttonStartGeneticAnalyzeWeight.Location = new System.Drawing.Point(15, 221);
+            this.buttonStartGeneticAnalyzeWeight.Name = "buttonStartGeneticAnalyzeWeight";
+            this.buttonStartGeneticAnalyzeWeight.Size = new System.Drawing.Size(75, 23);
+            this.buttonStartGeneticAnalyzeWeight.TabIndex = 21;
+            this.buttonStartGeneticAnalyzeWeight.Text = "Uruchom";
+            this.buttonStartGeneticAnalyzeWeight.UseVisualStyleBackColor = true;
+            this.buttonStartGeneticAnalyzeWeight.Click += new System.EventHandler(this.buttonStartGeneticAnalyzeWeight_Click);
+            // 
+            // labelParametersTime
+            // 
+            this.labelParametersTime.AutoSize = true;
+            this.labelParametersTime.Location = new System.Drawing.Point(15, 205);
+            this.labelParametersTime.Name = "labelParametersTime";
+            this.labelParametersTime.Size = new System.Drawing.Size(114, 13);
+            this.labelParametersTime.TabIndex = 20;
+            this.labelParametersTime.Text = "Jakość od parametrów";
+            // 
+            // labelQualityTime
+            // 
+            this.labelQualityTime.AutoSize = true;
+            this.labelQualityTime.Location = new System.Drawing.Point(15, 162);
+            this.labelQualityTime.Name = "labelQualityTime";
+            this.labelQualityTime.Size = new System.Drawing.Size(130, 13);
+            this.labelQualityTime.TabIndex = 19;
+            this.labelQualityTime.Text = "Przebieg jakości od czasu";
+            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -884,34 +912,6 @@
             // saveFileDialog
             // 
             this.saveFileDialog.DefaultExt = "txt";
-            // 
-            // labelQualityTime
-            // 
-            this.labelQualityTime.AutoSize = true;
-            this.labelQualityTime.Location = new System.Drawing.Point(15, 162);
-            this.labelQualityTime.Name = "labelQualityTime";
-            this.labelQualityTime.Size = new System.Drawing.Size(130, 13);
-            this.labelQualityTime.TabIndex = 19;
-            this.labelQualityTime.Text = "Przebieg jakości od czasu";
-            // 
-            // labelParametersTime
-            // 
-            this.labelParametersTime.AutoSize = true;
-            this.labelParametersTime.Location = new System.Drawing.Point(15, 205);
-            this.labelParametersTime.Name = "labelParametersTime";
-            this.labelParametersTime.Size = new System.Drawing.Size(87, 13);
-            this.labelParametersTime.TabIndex = 20;
-            this.labelParametersTime.Text = "Jakość od czasu";
-            // 
-            // buttonStartGeneticAnalyzeWeight
-            // 
-            this.buttonStartGeneticAnalyzeWeight.Location = new System.Drawing.Point(15, 221);
-            this.buttonStartGeneticAnalyzeWeight.Name = "buttonStartGeneticAnalyzeWeight";
-            this.buttonStartGeneticAnalyzeWeight.Size = new System.Drawing.Size(75, 23);
-            this.buttonStartGeneticAnalyzeWeight.TabIndex = 21;
-            this.buttonStartGeneticAnalyzeWeight.Text = "Uruchom";
-            this.buttonStartGeneticAnalyzeWeight.UseVisualStyleBackColor = true;
-            this.buttonStartGeneticAnalyzeWeight.Click += new System.EventHandler(this.buttonStartGeneticAnalyzeWeight_Click);
             // 
             // Form1
             // 
