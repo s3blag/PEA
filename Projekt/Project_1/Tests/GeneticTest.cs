@@ -10,6 +10,10 @@ namespace Project_1.Tests
     static internal class GeneticTest
     {
         #region Public Methods
+        static public void PopulationTest(TSP.Cities cities, int populationSize, int tournamentSize, int mutationProbability, int mutationType)
+        {
+            
+        }
         #endregion
 
         #region Private Methods

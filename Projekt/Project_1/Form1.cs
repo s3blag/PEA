@@ -186,7 +186,7 @@ namespace TSP
         {
           
             textBoxGenetic.Text = cities.ShowCities();
-            textBoxGenetic.Text += Environment.NewLine + Genetic.RunAlgorithm(cities, 1000, 2, 5, 1);
+            textBoxGenetic.Text += Environment.NewLine + Genetic.RunAlgorithm(cities, 250, 2, 5, 1);
         }
     }
 }
