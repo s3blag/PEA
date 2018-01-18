@@ -35,7 +35,7 @@ namespace TSP.Algorithms
                 Debug.WriteLine(i);
                 var matingPool = Tournament(population, 20, cities.AdjacencyMatrix, populationSize / 2);
                 var newPopulation = Crossover(matingPool, populationSize, 100);
-                Mutate(newPopulation);
+                Mutate(newPopulation, 0, 1);
                 currentBestSolution = GetPopulationBestWeight(newPopulation, cities.AdjacencyMatrix);
                 Debug.WriteLine(GetSolutionString(currentBestSolution));
                 population = newPopulation;
@@ -287,23 +287,54 @@ namespace TSP.Algorithms
         /// Funkcja odpowiadająca za mutację osobnika
         /// </summary>
         /// <param name="child"> Nowy osobnik, na którym zostanie przeprowadzone mutowanie</param>
-        public static void Mutate(List<int[]> population)
+        public static void Mutate(List<int[]> population, int probabilityUpperBound, int mutationType)
         {
-           
-            foreach (var individual in population)
+           switch(mutationType)
             {
-                var probability = rand.Next(1001);
-                if (probability < 10)
-                {
-                    
-
-                    var i = rand.Next(individual.Length - 1);
-                    var j = rand.Next(i + 1, individual.Length);
-                    Array.Reverse(individual, i, j - i + 1);
-                }
+                case 0:
+                    InvertMutation(population, probabilityUpperBound);
+                    break;
+                case 1:
+                    SwapMutation(population, probabilityUpperBound);
+                    break;
+                default:
+                    Console.WriteLine("Brak mutacji!");
+                    break;
             }
             
         }
+
+        public static void InvertMutation(List<int[]> population, int probabilityUpperBound)
+        {
+            foreach (var individual in population)
+            {
+                int probability = rand.Next(1001);
+                if (probability < 10)
+                {
+                    int i = rand.Next(individual.Length - 1);
+                    int j = rand.Next(i + 1, individual.Length);
+                    Array.Reverse(individual, i, j - i + 1);
+                }
+            }
+
+        }
+        public static void SwapMutation(List<int[]> population, int probabilityUpperBound)
+        {
+            foreach (var individual in population)
+            {
+                int probability = rand.Next(1001);
+                if (probability < 10)
+                {
+                    int i = rand.Next(individual.Length - 1);
+                    int j = rand.Next(i + 1, individual.Length);
+                    int temp = individual[i];
+                    individual[i] = individual[j];
+                    individual[j] = temp;
+                }
+            }
+
+        }
+
 
         /// <summary>
         /// Generuje rozwiązanie w postaci łańcucha znaków
