@@ -11,7 +11,21 @@ namespace TSP.Tests
     static internal class GeneticTest
     {
         #region Public Methods
-        public static void RunTournamentSizeTest(Cities cities, int time, int populationSize, int matingPoolSize,
+        static public void RunParameterTest(Cities cities, int time, int populationSize, int matingPoolSize,
+                                                int tournamentSize, int mutationProbability, int mutationType,
+                                                string path)
+        {
+            int bestDistance = cities.BestDistance;
+            int distance = Genetic.AnalyzeWeight(cities, time, populationSize, matingPoolSize, tournamentSize, mutationProbability, mutationType);            
+            string relativeError = (((distance - bestDistance) / bestDistance) * 100.0f).ToString();
+
+            path += "Genetic_" + time + "s_" + populationSize + "os_" + matingPoolSize + "mat_" + tournamentSize +
+                    "trnm_" + mutationProbability + "%_" + (mutationType == 0 ? "invert" : "swap") + ".txt";
+
+            WriteOutputToFile(path, relativeError);
+        }
+
+        public static void RunTournamentSizeTest(Cities cities, int time, int populationSize, int matingPoolSize, 
                                                 int tournamentSize, int mutationProbability, int mutationType,
                                                 string path)
         {

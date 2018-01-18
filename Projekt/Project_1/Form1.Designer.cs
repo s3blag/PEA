@@ -86,26 +86,29 @@
             this.labelNumberOfTrials = new System.Windows.Forms.Label();
             this.textBoxWeightMaxBnBTest = new System.Windows.Forms.TextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
+            this.textBoxOutputPathGeneticTest = new System.Windows.Forms.TextBox();
+            this.buttonStartGeneticAnalyzeTest = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.RadioButtonInvertGeneticTest = new System.Windows.Forms.RadioButton();
+            this.radioButtonSwapGeneticTest = new System.Windows.Forms.RadioButton();
+            this.textBoxMutationProbabilityGeneticTest = new System.Windows.Forms.TextBox();
+            this.textBoxTournamentSizeGeneticTest = new System.Windows.Forms.TextBox();
+            this.textBoxMatingPoolSizeGeneticTest = new System.Windows.Forms.TextBox();
+            this.textBoxPopulationSizeGeneticTest = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.buttonLoadFileGeneticTest = new System.Windows.Forms.Button();
             this.textBoxTimeGeneticTest = new System.Windows.Forms.TextBox();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.textBoxPopulationSizeGeneticTest = new System.Windows.Forms.TextBox();
-            this.textBoxMatingPoolSizeGeneticTest = new System.Windows.Forms.TextBox();
-            this.textBoxTournamentSizeGeneticTest = new System.Windows.Forms.TextBox();
-            this.textBoxMutationProbabilityGeneticTest = new System.Windows.Forms.TextBox();
-            this.radioButtonSwapGeneticTest = new System.Windows.Forms.RadioButton();
-            this.RadioButtonInvertGeneticTest = new System.Windows.Forms.RadioButton();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.buttonStartGeneticAnalyzeTest = new System.Windows.Forms.Button();
-            this.textBoxOutputPathGeneticTest = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
+            this.labelQualityTime = new System.Windows.Forms.Label();
+            this.labelParametersTime = new System.Windows.Forms.Label();
+            this.buttonStartGeneticAnalyzeWeight = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabBranchAndBound.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -686,6 +689,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.buttonStartGeneticAnalyzeWeight);
+            this.tabPage1.Controls.Add(this.labelParametersTime);
+            this.tabPage1.Controls.Add(this.labelQualityTime);
             this.tabPage1.Controls.Add(this.label14);
             this.tabPage1.Controls.Add(this.textBoxOutputPathGeneticTest);
             this.tabPage1.Controls.Add(this.buttonStartGeneticAnalyzeTest);
@@ -710,6 +716,145 @@
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Genetic";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(12, 56);
+            this.label14.Name = "label14";
+            this.label14.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label14.Size = new System.Drawing.Size(81, 13);
+            this.label14.TabIndex = 18;
+            this.label14.Text = "Ścieżka zapisu:";
+            // 
+            // textBoxOutputPathGeneticTest
+            // 
+            this.textBoxOutputPathGeneticTest.Location = new System.Drawing.Point(12, 72);
+            this.textBoxOutputPathGeneticTest.Name = "textBoxOutputPathGeneticTest";
+            this.textBoxOutputPathGeneticTest.Size = new System.Drawing.Size(139, 20);
+            this.textBoxOutputPathGeneticTest.TabIndex = 17;
+            // 
+            // buttonStartGeneticAnalyzeTest
+            // 
+            this.buttonStartGeneticAnalyzeTest.Location = new System.Drawing.Point(15, 178);
+            this.buttonStartGeneticAnalyzeTest.Name = "buttonStartGeneticAnalyzeTest";
+            this.buttonStartGeneticAnalyzeTest.Size = new System.Drawing.Size(75, 23);
+            this.buttonStartGeneticAnalyzeTest.TabIndex = 16;
+            this.buttonStartGeneticAnalyzeTest.Text = "Uruchom test";
+            this.buttonStartGeneticAnalyzeTest.UseVisualStyleBackColor = true;
+            this.buttonStartGeneticAnalyzeTest.Click += new System.EventHandler(this.buttonStartGeneticAnalyzeTest_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(269, 126);
+            this.label13.Name = "label13";
+            this.label13.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label13.Size = new System.Drawing.Size(48, 13);
+            this.label13.TabIndex = 15;
+            this.label13.Text = "Mutacja:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(272, 54);
+            this.label12.Name = "label12";
+            this.label12.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label12.Size = new System.Drawing.Size(61, 13);
+            this.label12.TabIndex = 14;
+            this.label12.Text = "Pmutacji(%)";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(272, 15);
+            this.label11.Name = "label11";
+            this.label11.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label11.Size = new System.Drawing.Size(85, 13);
+            this.label11.TabIndex = 13;
+            this.label11.Text = "Rozmiar turnieju:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(154, 97);
+            this.label10.Name = "label10";
+            this.label10.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label10.Size = new System.Drawing.Size(118, 13);
+            this.label10.TabIndex = 12;
+            this.label10.Text = "Rozmiar puli rozrodczej:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(154, 54);
+            this.label9.Name = "label9";
+            this.label9.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label9.Size = new System.Drawing.Size(93, 13);
+            this.label9.TabIndex = 11;
+            this.label9.Text = "Rozmiar populacji:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(154, 15);
+            this.label8.Name = "label8";
+            this.label8.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label8.Size = new System.Drawing.Size(44, 13);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "Czas(s):";
+            // 
+            // RadioButtonInvertGeneticTest
+            // 
+            this.RadioButtonInvertGeneticTest.AutoSize = true;
+            this.RadioButtonInvertGeneticTest.Checked = true;
+            this.RadioButtonInvertGeneticTest.Location = new System.Drawing.Point(323, 113);
+            this.RadioButtonInvertGeneticTest.Name = "RadioButtonInvertGeneticTest";
+            this.RadioButtonInvertGeneticTest.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.RadioButtonInvertGeneticTest.Size = new System.Drawing.Size(52, 17);
+            this.RadioButtonInvertGeneticTest.TabIndex = 9;
+            this.RadioButtonInvertGeneticTest.TabStop = true;
+            this.RadioButtonInvertGeneticTest.Text = "Invert";
+            this.RadioButtonInvertGeneticTest.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonSwapGeneticTest
+            // 
+            this.radioButtonSwapGeneticTest.AutoSize = true;
+            this.radioButtonSwapGeneticTest.Location = new System.Drawing.Point(323, 136);
+            this.radioButtonSwapGeneticTest.Name = "radioButtonSwapGeneticTest";
+            this.radioButtonSwapGeneticTest.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.radioButtonSwapGeneticTest.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonSwapGeneticTest.TabIndex = 8;
+            this.radioButtonSwapGeneticTest.Text = "Swap";
+            this.radioButtonSwapGeneticTest.UseVisualStyleBackColor = true;
+            // 
+            // textBoxMutationProbabilityGeneticTest
+            // 
+            this.textBoxMutationProbabilityGeneticTest.Location = new System.Drawing.Point(275, 72);
+            this.textBoxMutationProbabilityGeneticTest.Name = "textBoxMutationProbabilityGeneticTest";
+            this.textBoxMutationProbabilityGeneticTest.Size = new System.Drawing.Size(100, 20);
+            this.textBoxMutationProbabilityGeneticTest.TabIndex = 7;
+            // 
+            // textBoxTournamentSizeGeneticTest
+            // 
+            this.textBoxTournamentSizeGeneticTest.Location = new System.Drawing.Point(275, 31);
+            this.textBoxTournamentSizeGeneticTest.Name = "textBoxTournamentSizeGeneticTest";
+            this.textBoxTournamentSizeGeneticTest.Size = new System.Drawing.Size(100, 20);
+            this.textBoxTournamentSizeGeneticTest.TabIndex = 6;
+            // 
+            // textBoxMatingPoolSizeGeneticTest
+            // 
+            this.textBoxMatingPoolSizeGeneticTest.Location = new System.Drawing.Point(157, 113);
+            this.textBoxMatingPoolSizeGeneticTest.Name = "textBoxMatingPoolSizeGeneticTest";
+            this.textBoxMatingPoolSizeGeneticTest.Size = new System.Drawing.Size(100, 20);
+            this.textBoxMatingPoolSizeGeneticTest.TabIndex = 5;
+            // 
+            // textBoxPopulationSizeGeneticTest
+            // 
+            this.textBoxPopulationSizeGeneticTest.Location = new System.Drawing.Point(157, 72);
+            this.textBoxPopulationSizeGeneticTest.Name = "textBoxPopulationSizeGeneticTest";
+            this.textBoxPopulationSizeGeneticTest.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPopulationSizeGeneticTest.TabIndex = 4;
             // 
             // label7
             // 
@@ -740,145 +885,33 @@
             // 
             this.saveFileDialog.DefaultExt = "txt";
             // 
-            // textBoxPopulationSizeGeneticTest
+            // labelQualityTime
             // 
-            this.textBoxPopulationSizeGeneticTest.Location = new System.Drawing.Point(157, 72);
-            this.textBoxPopulationSizeGeneticTest.Name = "textBoxPopulationSizeGeneticTest";
-            this.textBoxPopulationSizeGeneticTest.Size = new System.Drawing.Size(100, 20);
-            this.textBoxPopulationSizeGeneticTest.TabIndex = 4;
+            this.labelQualityTime.AutoSize = true;
+            this.labelQualityTime.Location = new System.Drawing.Point(15, 162);
+            this.labelQualityTime.Name = "labelQualityTime";
+            this.labelQualityTime.Size = new System.Drawing.Size(130, 13);
+            this.labelQualityTime.TabIndex = 19;
+            this.labelQualityTime.Text = "Przebieg jakości od czasu";
             // 
-            // textBoxMatingPoolSizeGeneticTest
+            // labelParametersTime
             // 
-            this.textBoxMatingPoolSizeGeneticTest.Location = new System.Drawing.Point(157, 113);
-            this.textBoxMatingPoolSizeGeneticTest.Name = "textBoxMatingPoolSizeGeneticTest";
-            this.textBoxMatingPoolSizeGeneticTest.Size = new System.Drawing.Size(100, 20);
-            this.textBoxMatingPoolSizeGeneticTest.TabIndex = 5;
+            this.labelParametersTime.AutoSize = true;
+            this.labelParametersTime.Location = new System.Drawing.Point(15, 205);
+            this.labelParametersTime.Name = "labelParametersTime";
+            this.labelParametersTime.Size = new System.Drawing.Size(87, 13);
+            this.labelParametersTime.TabIndex = 20;
+            this.labelParametersTime.Text = "Jakość od czasu";
             // 
-            // textBoxTournamentSizeGeneticTest
+            // buttonStartGeneticAnalyzeWeight
             // 
-            this.textBoxTournamentSizeGeneticTest.Location = new System.Drawing.Point(275, 31);
-            this.textBoxTournamentSizeGeneticTest.Name = "textBoxTournamentSizeGeneticTest";
-            this.textBoxTournamentSizeGeneticTest.Size = new System.Drawing.Size(100, 20);
-            this.textBoxTournamentSizeGeneticTest.TabIndex = 6;
-            // 
-            // textBoxMutationProbabilityGeneticTest
-            // 
-            this.textBoxMutationProbabilityGeneticTest.Location = new System.Drawing.Point(275, 72);
-            this.textBoxMutationProbabilityGeneticTest.Name = "textBoxMutationProbabilityGeneticTest";
-            this.textBoxMutationProbabilityGeneticTest.Size = new System.Drawing.Size(100, 20);
-            this.textBoxMutationProbabilityGeneticTest.TabIndex = 7;
-            // 
-            // radioButtonSwapGeneticTest
-            // 
-            this.radioButtonSwapGeneticTest.AutoSize = true;
-            this.radioButtonSwapGeneticTest.Location = new System.Drawing.Point(323, 136);
-            this.radioButtonSwapGeneticTest.Name = "radioButtonSwapGeneticTest";
-            this.radioButtonSwapGeneticTest.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.radioButtonSwapGeneticTest.Size = new System.Drawing.Size(52, 17);
-            this.radioButtonSwapGeneticTest.TabIndex = 8;
-            this.radioButtonSwapGeneticTest.Text = "Swap";
-            this.radioButtonSwapGeneticTest.UseVisualStyleBackColor = true;
-            // 
-            // RadioButtonInvertGeneticTest
-            // 
-            this.RadioButtonInvertGeneticTest.AutoSize = true;
-            this.RadioButtonInvertGeneticTest.Checked = true;
-            this.RadioButtonInvertGeneticTest.Location = new System.Drawing.Point(323, 113);
-            this.RadioButtonInvertGeneticTest.Name = "RadioButtonInvertGeneticTest";
-            this.RadioButtonInvertGeneticTest.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.RadioButtonInvertGeneticTest.Size = new System.Drawing.Size(52, 17);
-            this.RadioButtonInvertGeneticTest.TabIndex = 9;
-            this.RadioButtonInvertGeneticTest.TabStop = true;
-            this.RadioButtonInvertGeneticTest.Text = "Invert";
-            this.RadioButtonInvertGeneticTest.UseVisualStyleBackColor = true;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(154, 15);
-            this.label8.Name = "label8";
-            this.label8.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label8.Size = new System.Drawing.Size(44, 13);
-            this.label8.TabIndex = 10;
-            this.label8.Text = "Czas(s):";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(154, 54);
-            this.label9.Name = "label9";
-            this.label9.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label9.Size = new System.Drawing.Size(93, 13);
-            this.label9.TabIndex = 11;
-            this.label9.Text = "Rozmiar populacji:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(154, 97);
-            this.label10.Name = "label10";
-            this.label10.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label10.Size = new System.Drawing.Size(118, 13);
-            this.label10.TabIndex = 12;
-            this.label10.Text = "Rozmiar puli rozrodczej:";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(272, 15);
-            this.label11.Name = "label11";
-            this.label11.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label11.Size = new System.Drawing.Size(85, 13);
-            this.label11.TabIndex = 13;
-            this.label11.Text = "Rozmiar turnieju:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(272, 54);
-            this.label12.Name = "label12";
-            this.label12.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label12.Size = new System.Drawing.Size(61, 13);
-            this.label12.TabIndex = 14;
-            this.label12.Text = "Pmutacji(%)";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(269, 126);
-            this.label13.Name = "label13";
-            this.label13.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label13.Size = new System.Drawing.Size(48, 13);
-            this.label13.TabIndex = 15;
-            this.label13.Text = "Mutacja:";
-            // 
-            // buttonStartGeneticAnalyzeTest
-            // 
-            this.buttonStartGeneticAnalyzeTest.Location = new System.Drawing.Point(36, 113);
-            this.buttonStartGeneticAnalyzeTest.Name = "buttonStartGeneticAnalyzeTest";
-            this.buttonStartGeneticAnalyzeTest.Size = new System.Drawing.Size(75, 23);
-            this.buttonStartGeneticAnalyzeTest.TabIndex = 16;
-            this.buttonStartGeneticAnalyzeTest.Text = "Uruchom";
-            this.buttonStartGeneticAnalyzeTest.UseVisualStyleBackColor = true;
-            this.buttonStartGeneticAnalyzeTest.Click += new System.EventHandler(this.buttonStartGeneticAnalyzeTest_Click);
-            // 
-            // textBoxOutputPathGeneticTest
-            // 
-            this.textBoxOutputPathGeneticTest.Location = new System.Drawing.Point(12, 72);
-            this.textBoxOutputPathGeneticTest.Name = "textBoxOutputPathGeneticTest";
-            this.textBoxOutputPathGeneticTest.Size = new System.Drawing.Size(139, 20);
-            this.textBoxOutputPathGeneticTest.TabIndex = 17;
-            this.textBoxOutputPathGeneticTest.Text = "C:\\Users\\seblag-stacjonarny\\Desktop\\";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(12, 56);
-            this.label14.Name = "label14";
-            this.label14.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label14.Size = new System.Drawing.Size(81, 13);
-            this.label14.TabIndex = 18;
-            this.label14.Text = "Ścieżka zapisu:";
+            this.buttonStartGeneticAnalyzeWeight.Location = new System.Drawing.Point(15, 221);
+            this.buttonStartGeneticAnalyzeWeight.Name = "buttonStartGeneticAnalyzeWeight";
+            this.buttonStartGeneticAnalyzeWeight.Size = new System.Drawing.Size(75, 23);
+            this.buttonStartGeneticAnalyzeWeight.TabIndex = 21;
+            this.buttonStartGeneticAnalyzeWeight.Text = "Uruchom";
+            this.buttonStartGeneticAnalyzeWeight.UseVisualStyleBackColor = true;
+            this.buttonStartGeneticAnalyzeWeight.Click += new System.EventHandler(this.buttonStartGeneticAnalyzeWeight_Click);
             // 
             // Form1
             // 
@@ -997,6 +1030,9 @@
         private System.Windows.Forms.TextBox textBoxPopulationSizeGeneticTest;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox textBoxOutputPathGeneticTest;
+        private System.Windows.Forms.Button buttonStartGeneticAnalyzeWeight;
+        private System.Windows.Forms.Label labelParametersTime;
+        private System.Windows.Forms.Label labelQualityTime;
     }
 }
 

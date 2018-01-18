@@ -26,6 +26,7 @@ namespace TSP
         {
             textBoxOutputPathBnBTest.Text = Directory.GetCurrentDirectory() + "\\test.txt";
             textBoxOutputPathTimestampTabuTest.Text = Directory.GetCurrentDirectory() + "\\test.txt";
+            textBoxOutputPathGeneticTest.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Badania\\";
             buttonLoadFileGenetic.Click += OpenTSPFile;
             buttonLoadFileTimestampTabuTest.Click += OpenTSPFile;
             buttonStartImprovementByTimeTabuTest.Click += OpenTSPFile;
@@ -213,6 +214,27 @@ namespace TSP
 
 
 
+        }
+
+        private void buttonStartGeneticAnalyzeWeight_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int time = Int32.Parse(textBoxTimeGeneticTest.Text);
+                int populationSize = Int32.Parse(textBoxPopulationSizeGeneticTest.Text);
+                int matingPoolSize = Int32.Parse(textBoxMatingPoolSizeGeneticTest.Text);
+                int tournamentSize = Int32.Parse(textBoxTournamentSizeGeneticTest.Text);
+                int mutationProbability = Int32.Parse(textBoxMutationProbabilityGeneticTest.Text);
+                int mutationType = RadioButtonInvertGeneticTest.Checked == true ? 0 : 1;
+                string path = textBoxOutputPathGeneticTest.Text;
+                GeneticTest.RunParameterTest(cities, time, populationSize, matingPoolSize,
+                                       tournamentSize, mutationProbability, mutationType, path);
+            }
+            catch
+            {
+                MessageBox.Show("Błędne dane!");
+                return;
+            }
         }
     }
 }

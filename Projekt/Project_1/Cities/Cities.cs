@@ -13,7 +13,7 @@ namespace TSP
         private int _bestDistance = -1;
         private Random _rand;
         private int _numberOfCities;
-      
+
         public int BestDistance
         {
             get
