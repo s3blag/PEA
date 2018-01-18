@@ -55,22 +55,28 @@ namespace TSP.Algorithms
             return GetSolutionString(currentBestSolution);
         }
 
-        public static int AnalyzeWeight(Cities cities, int populationSize, int tournamentSize, int mutationProbability, int mutationType)
+        public static int AnalyzeWeight(Cities cities, int time, int populationSize, int matingPoolSize
+                                         , int tournamentSize, int mutationProbability, int mutationType)
         {
             //prawdopodobnie do wywalenia
             //int probabilityUpperBound = 100;
-
+            var stopWatch = new Stopwatch();
             var population = GenerateRandomPopulation(populationSize, cities.AdjacencyMatrix.GetLength(0));
-            Pair<int[], int> currentBestSolution = GetPopulationBestWeight(population, cities.AdjacencyMatrix);
-            for (int i = 0; i < 500; i++)
+            var currentBestSolution = GetPopulationBestWeight(population, cities.AdjacencyMatrix);
+            time *= 1000;
+            mutationProbability *= 10;
+
+            stopWatch.Start();
+            while (stopWatch.Elapsed.TotalMilliseconds < time)
             {
-                Debug.WriteLine(i);
-                var matingPool = Tournament(population, tournamentSize, cities.AdjacencyMatrix, populationSize / 2);
+                var matingPool = Tournament(population, tournamentSize, cities.AdjacencyMatrix, matingPoolSize);
                 var newPopulation = Crossover(matingPool, populationSize, 100);
                 Mutate(newPopulation, mutationProbability, mutationType);
                 currentBestSolution = GetPopulationBestWeight(newPopulation, cities.AdjacencyMatrix);
                 Debug.WriteLine(GetSolutionString(currentBestSolution));
                 population = newPopulation;
+                Debug.WriteLine("Rozmiar @@@ " + population.Count);
+
             }
 
             return currentBestSolution.Second;
