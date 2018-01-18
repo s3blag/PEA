@@ -14,7 +14,17 @@ namespace TSP
         private Random _rand;
         private int _numberOfCities;
       
-        public int BestDistance{ get; set; }
+        public int BestDistance
+        {
+            get
+            {
+                return _bestDistance;
+            }
+            set
+            {
+                _bestDistance = value;
+            }
+        }
         #endregion
 
         #region Constructors
