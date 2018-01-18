@@ -104,6 +104,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.buttonStartGeneticAnalyzeTest = new System.Windows.Forms.Button();
+            this.textBoxOutputPathGeneticTest = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabBranchAndBound.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -684,6 +686,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label14);
+            this.tabPage1.Controls.Add(this.textBoxOutputPathGeneticTest);
             this.tabPage1.Controls.Add(this.buttonStartGeneticAnalyzeTest);
             this.tabPage1.Controls.Add(this.label13);
             this.tabPage1.Controls.Add(this.label12);
@@ -727,7 +731,7 @@
             // 
             // textBoxTimeGeneticTest
             // 
-            this.textBoxTimeGeneticTest.Location = new System.Drawing.Point(129, 31);
+            this.textBoxTimeGeneticTest.Location = new System.Drawing.Point(157, 31);
             this.textBoxTimeGeneticTest.Name = "textBoxTimeGeneticTest";
             this.textBoxTimeGeneticTest.Size = new System.Drawing.Size(100, 20);
             this.textBoxTimeGeneticTest.TabIndex = 0;
@@ -738,14 +742,14 @@
             // 
             // textBoxPopulationSizeGeneticTest
             // 
-            this.textBoxPopulationSizeGeneticTest.Location = new System.Drawing.Point(129, 72);
+            this.textBoxPopulationSizeGeneticTest.Location = new System.Drawing.Point(157, 72);
             this.textBoxPopulationSizeGeneticTest.Name = "textBoxPopulationSizeGeneticTest";
             this.textBoxPopulationSizeGeneticTest.Size = new System.Drawing.Size(100, 20);
             this.textBoxPopulationSizeGeneticTest.TabIndex = 4;
             // 
             // textBoxMatingPoolSizeGeneticTest
             // 
-            this.textBoxMatingPoolSizeGeneticTest.Location = new System.Drawing.Point(129, 113);
+            this.textBoxMatingPoolSizeGeneticTest.Location = new System.Drawing.Point(157, 113);
             this.textBoxMatingPoolSizeGeneticTest.Name = "textBoxMatingPoolSizeGeneticTest";
             this.textBoxMatingPoolSizeGeneticTest.Size = new System.Drawing.Size(100, 20);
             this.textBoxMatingPoolSizeGeneticTest.TabIndex = 5;
@@ -791,7 +795,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(126, 15);
+            this.label8.Location = new System.Drawing.Point(154, 15);
             this.label8.Name = "label8";
             this.label8.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label8.Size = new System.Drawing.Size(44, 13);
@@ -801,7 +805,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(126, 54);
+            this.label9.Location = new System.Drawing.Point(154, 54);
             this.label9.Name = "label9";
             this.label9.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label9.Size = new System.Drawing.Size(93, 13);
@@ -811,7 +815,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(126, 97);
+            this.label10.Location = new System.Drawing.Point(154, 97);
             this.label10.Name = "label10";
             this.label10.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label10.Size = new System.Drawing.Size(118, 13);
@@ -850,13 +854,31 @@
             // 
             // buttonStartGeneticAnalyzeTest
             // 
-            this.buttonStartGeneticAnalyzeTest.Location = new System.Drawing.Point(12, 72);
+            this.buttonStartGeneticAnalyzeTest.Location = new System.Drawing.Point(36, 113);
             this.buttonStartGeneticAnalyzeTest.Name = "buttonStartGeneticAnalyzeTest";
             this.buttonStartGeneticAnalyzeTest.Size = new System.Drawing.Size(75, 23);
             this.buttonStartGeneticAnalyzeTest.TabIndex = 16;
             this.buttonStartGeneticAnalyzeTest.Text = "Uruchom";
             this.buttonStartGeneticAnalyzeTest.UseVisualStyleBackColor = true;
             this.buttonStartGeneticAnalyzeTest.Click += new System.EventHandler(this.buttonStartGeneticAnalyzeTest_Click);
+            // 
+            // textBoxOutputPathGeneticTest
+            // 
+            this.textBoxOutputPathGeneticTest.Location = new System.Drawing.Point(12, 72);
+            this.textBoxOutputPathGeneticTest.Name = "textBoxOutputPathGeneticTest";
+            this.textBoxOutputPathGeneticTest.Size = new System.Drawing.Size(139, 20);
+            this.textBoxOutputPathGeneticTest.TabIndex = 17;
+            this.textBoxOutputPathGeneticTest.Text = "C:\\Users\\seblag-stacjonarny\\Desktop\\";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(12, 56);
+            this.label14.Name = "label14";
+            this.label14.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label14.Size = new System.Drawing.Size(81, 13);
+            this.label14.TabIndex = 18;
+            this.label14.Text = "Ścieżka zapisu:";
             // 
             // Form1
             // 
@@ -973,6 +995,8 @@
         private System.Windows.Forms.TextBox textBoxTournamentSizeGeneticTest;
         private System.Windows.Forms.TextBox textBoxMatingPoolSizeGeneticTest;
         private System.Windows.Forms.TextBox textBoxPopulationSizeGeneticTest;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox textBoxOutputPathGeneticTest;
     }
 }
 
