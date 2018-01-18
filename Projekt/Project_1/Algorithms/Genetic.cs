@@ -23,7 +23,7 @@ namespace TSP.Algorithms
         /// <param name="cities"> Mapa miast, na której zostanie wykonany algorytm</param>
         /// <param name="populationSize"> Rozmiar populacji</param>
         /// <returns> Rozwiązanie w postaci łańcucha znaków</returns>
-        public static string RunAlgorithm(Cities cities, int populationSize)
+        public static string RunAlgorithm(Cities cities, int populationSize, int tournamentSize, int mutationProbability, int mutationType)
         {
             //prawdopodobnie do wywalenia
             //int probabilityUpperBound = 100;
@@ -33,9 +33,9 @@ namespace TSP.Algorithms
             for (int i = 0; i < 500; i++)
             {
                 Debug.WriteLine(i);
-                var matingPool = Tournament(population, 20, cities.AdjacencyMatrix, populationSize / 2);
+                var matingPool = Tournament(population, tournamentSize, cities.AdjacencyMatrix, populationSize / 2);
                 var newPopulation = Crossover(matingPool, populationSize, 100);
-                Mutate(newPopulation, 0, 1);
+                Mutate(newPopulation, mutationProbability, mutationType);
                 currentBestSolution = GetPopulationBestWeight(newPopulation, cities.AdjacencyMatrix);
                 Debug.WriteLine(GetSolutionString(currentBestSolution));
                 population = newPopulation;
@@ -309,7 +309,7 @@ namespace TSP.Algorithms
             foreach (var individual in population)
             {
                 int probability = rand.Next(1001);
-                if (probability < 10)
+                if (probability < probabilityUpperBound)
                 {
                     int i = rand.Next(individual.Length - 1);
                     int j = rand.Next(i + 1, individual.Length);
@@ -323,7 +323,7 @@ namespace TSP.Algorithms
             foreach (var individual in population)
             {
                 int probability = rand.Next(1001);
-                if (probability < 10)
+                if (probability < probabilityUpperBound)
                 {
                     int i = rand.Next(individual.Length - 1);
                     int j = rand.Next(i + 1, individual.Length);
