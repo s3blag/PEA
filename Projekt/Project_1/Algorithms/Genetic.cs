@@ -53,7 +53,26 @@ namespace TSP.Algorithms
             return GetSolutionString(currentBestSolution);
         }
 
+        public static int AnalyzeWeight(Cities cities, int populationSize, int tournamentSize, int mutationProbability, int mutationType)
+        {
+            //prawdopodobnie do wywalenia
+            //int probabilityUpperBound = 100;
 
+            var population = GenerateRandomPopulation(populationSize, cities.AdjacencyMatrix.GetLength(0));
+            Pair<int[], int> currentBestSolution = GetPopulationBestWeight(population, cities.AdjacencyMatrix);
+            for (int i = 0; i < 500; i++)
+            {
+                Debug.WriteLine(i);
+                var matingPool = Tournament(population, tournamentSize, cities.AdjacencyMatrix, populationSize / 2);
+                var newPopulation = Crossover(matingPool, populationSize, 100);
+                Mutate(newPopulation, mutationProbability, mutationType);
+                currentBestSolution = GetPopulationBestWeight(newPopulation, cities.AdjacencyMatrix);
+                Debug.WriteLine(GetSolutionString(currentBestSolution));
+                population = newPopulation;
+            }
+
+            return currentBestSolution.Second;
+        }
 
         public static LinkedList<Pair<int, int>> AnalyzePerformance(Cities cities, int time, int populationSize, int matingPoolSize
                                                                    , int tournamentSize, int mutationProbability, int mutationType)
