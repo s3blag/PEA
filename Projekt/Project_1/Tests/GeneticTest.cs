@@ -6,7 +6,7 @@ using System.Text;
 using TSP;
 using TSP.Algorithms;
 
-namespace Project_1.Tests
+namespace TSP.Tests
 {
     static internal class GeneticTest
     {
@@ -31,12 +31,12 @@ namespace Project_1.Tests
                                                 string path)
         {
             path += "Genetic_" + time + "s_" + populationSize + "os_" + matingPoolSize + "mat_" + tournamentSize +
-                    "trnm_" + mutationProbability + "%_" + (mutationType == 0 ? "invert" : "swap");
+                    "trnm_" + mutationProbability + "%_" + (mutationType == 0 ? "invert" : "swap") + ".txt";
 
             StringBuilder algorithmResultsSB = new StringBuilder();
             algorithmResultsSB.Append("|BADANIE PRZEBIEGU ALGORYTMU W ZALEŻNOŚCI OD CZASU|" + Environment.NewLine);
-            LinkedList<Pair<int, int>> algorithmResults = Genetic.AnalyzePerformance(cities, time, populationSize, 
-                                                                                     matingPoolSize, tournamentSize, 
+            LinkedList<Pair<int, int>> algorithmResults = Genetic.AnalyzePerformance(cities, time, populationSize,
+                                                                                     matingPoolSize, tournamentSize,
                                                                                      mutationProbability, mutationType);
 
             foreach (var result in algorithmResults)
@@ -45,6 +45,10 @@ namespace Project_1.Tests
             }
             WriteOutputToFile(path, algorithmResultsSB.ToString());
         }
+
+        #endregion
+
+
 
         #region Private Methods
 

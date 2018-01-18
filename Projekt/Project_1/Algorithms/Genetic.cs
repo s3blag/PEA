@@ -45,11 +45,9 @@ namespace TSP.Algorithms
                 var matingPool = Tournament(population, tournamentSize, cities.AdjacencyMatrix, matingPoolSize);
                 var newPopulation = Crossover(matingPool, populationSize, 100);
                 Mutate(newPopulation, mutationProbability, mutationType);
-                currentBestSolution = GetPopulationBestWeight(newPopulation, cities.AdjacencyMatrix);
-                Debug.WriteLine(GetSolutionString(currentBestSolution));
+                //currentBestSolution = GetPopulationBestWeight(newPopulation, cities.AdjacencyMatrix);
+                //Debug.WriteLine(GetSolutionString(currentBestSolution));
                 population = newPopulation;
-                Debug.WriteLine("Rozmiar @@@ " + population.Count);
-
             }
             
             return GetSolutionString(currentBestSolution);
