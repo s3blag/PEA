@@ -30,17 +30,21 @@ namespace TSP.Algorithms
 
             var population = GenerateRandomPopulation(populationSize, cities.AdjacencyMatrix.GetLength(0));
             Pair<int[], int> currentBestSolution = GetPopulationBestWeight(population, cities.AdjacencyMatrix);
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 500; i++)
             {
-                var matingPool = Tournament(population, 3, cities.AdjacencyMatrix, populationSize / 2);
+                Debug.WriteLine(i);
+                var matingPool = Tournament(population, 20, cities.AdjacencyMatrix, populationSize / 2);
                 var newPopulation = Crossover(matingPool, populationSize, 100);
                 Mutate(newPopulation);
                 currentBestSolution = GetPopulationBestWeight(newPopulation, cities.AdjacencyMatrix);
+                Debug.WriteLine(GetSolutionString(currentBestSolution));
                 population = newPopulation;
             }
             
             return GetSolutionString(currentBestSolution);
         }
+
+
 
         public static void RunTest(Cities cities, int populationSize)
         {
@@ -67,7 +71,6 @@ namespace TSP.Algorithms
         #endregion
 
         #region Private Methods
-
         /// <summary>
         /// Funkcja przeprowadzająca selekcję turniejową - generująca nową populację
         /// </summary>
@@ -286,11 +289,14 @@ namespace TSP.Algorithms
         /// <param name="child"> Nowy osobnik, na którym zostanie przeprowadzone mutowanie</param>
         public static void Mutate(List<int[]> population)
         {
-            foreach(var individual in population)
+           
+            foreach (var individual in population)
             {
                 var probability = rand.Next(1001);
                 if (probability < 10)
                 {
+                    
+
                     var i = rand.Next(individual.Length - 1);
                     var j = rand.Next(i + 1, individual.Length);
                     Array.Reverse(individual, i, j - i + 1);
