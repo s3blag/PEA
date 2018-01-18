@@ -13,32 +13,43 @@ namespace TSP.Algorithms
         // Wartość reprezentująca nieskończoność
         private const int INF = Int32.MaxValue;
         private static Random rand = new Random();
-        
+
         #endregion
 
         #region Public Methods
+
         /// <summary>
         /// Metoda uruchamiająca algorytm
         /// </summary>
         /// <param name="cities"> Mapa miast, na której zostanie wykonany algorytm</param>
+        /// /// <param name="time"> Czas wykonywania się algorytmu w sekundach</param>
         /// <param name="populationSize"> Rozmiar populacji</param>
+        /// <param name="tournamentSize"> Rozmiar turnieju</param> 
+        /// <param name="mutationProbability"> Prawdopodobieństwo wystąpienia mutacji wyrażone w %</param>
+        /// <param name="mutationType"> Rodzaj mutacji: 0-invert, 1-swap </param>
         /// <returns> Rozwiązanie w postaci łańcucha znaków</returns>
-        public static string RunAlgorithm(Cities cities, int populationSize, int tournamentSize, int mutationProbability, int mutationType)
+        public static string RunAlgorithm(Cities cities, int time, int populationSize, int matingPoolSize
+                                         ,int tournamentSize, int mutationProbability, int mutationType)
         {
             //prawdopodobnie do wywalenia
             //int probabilityUpperBound = 100;
-
+            var stopWatch = new Stopwatch();
             var population = GenerateRandomPopulation(populationSize, cities.AdjacencyMatrix.GetLength(0));
-            Pair<int[], int> currentBestSolution = GetPopulationBestWeight(population, cities.AdjacencyMatrix);
-            for (int i = 0; i < 500; i++)
+            var currentBestSolution = GetPopulationBestWeight(population, cities.AdjacencyMatrix);
+            time *= 1000;
+            mutationProbability *= 10;
+
+            stopWatch.Start();
+            while (stopWatch.Elapsed.TotalMilliseconds < time)
             {
-                Debug.WriteLine(i);
-                var matingPool = Tournament(population, tournamentSize, cities.AdjacencyMatrix, populationSize / 2);
+                var matingPool = Tournament(population, tournamentSize, cities.AdjacencyMatrix, matingPoolSize);
                 var newPopulation = Crossover(matingPool, populationSize, 100);
                 Mutate(newPopulation, mutationProbability, mutationType);
                 currentBestSolution = GetPopulationBestWeight(newPopulation, cities.AdjacencyMatrix);
                 Debug.WriteLine(GetSolutionString(currentBestSolution));
                 population = newPopulation;
+                Debug.WriteLine("Rozmiar @@@ " + population.Count);
+
             }
             
             return GetSolutionString(currentBestSolution);
@@ -65,26 +76,35 @@ namespace TSP.Algorithms
             return currentBestSolution.Second;
         }
 
-        public static void RunTest(Cities cities, int populationSize)
+        public static LinkedList<Pair<int, int>> AnalyzePerformance(Cities cities, int time, int populationSize, int matingPoolSize
+                                                                   , int tournamentSize, int mutationProbability, int mutationType)
         {
+            //prawdopodobnie do wywalenia
+            //int probabilityUpperBound = 100;
+            var stopWatch = new Stopwatch();
             var population = GenerateRandomPopulation(populationSize, cities.AdjacencyMatrix.GetLength(0));
-            Debug.WriteLine("Populacja: ");
-            for (int i = 0; i < populationSize; i++)
+            var currentBestSolution = GetPopulationBestWeight(population, cities.AdjacencyMatrix);
+            var results = new LinkedList<Pair<int, int>>();
+            int elapsedTime = 0;
+            time *= 1000;
+            mutationProbability *= 10;
+
+            while (stopWatch.Elapsed.TotalMilliseconds < time)
             {
-                for (int j = 0; j < cities.AdjacencyMatrix.GetLength(0); j++)
-                    Debug.Write(population[i][j] + " ");
-                Debug.Write("  Waga: " + GetIndividualWeight(population[i], cities.AdjacencyMatrix));
-                Debug.Write(Environment.NewLine);
+                stopWatch.Start();
+                var matingPool = Tournament(population, tournamentSize, cities.AdjacencyMatrix, matingPoolSize);
+                var newPopulation = Crossover(matingPool, populationSize, 100);
+                Mutate(newPopulation, mutationProbability, mutationType);
+                currentBestSolution = GetPopulationBestWeight(newPopulation, cities.AdjacencyMatrix);
+                Debug.WriteLine(GetSolutionString(currentBestSolution));
+                population = newPopulation;
+
+                stopWatch.Stop();
+                elapsedTime = Convert.ToInt32(stopWatch.Elapsed.TotalMilliseconds);
+                results.AddLast(new Pair<int, int>(elapsedTime, currentBestSolution.Second));
             }
-            Debug.WriteLine("Populacja rodzicielska: ");
-            var tournamentPopulation = Tournament(population, 2, cities.AdjacencyMatrix, 3);
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < cities.AdjacencyMatrix.GetLength(0); j++)
-                    Debug.Write(tournamentPopulation[i][j] + " ");
-                Debug.Write("  Waga: " + GetIndividualWeight(tournamentPopulation[i], cities.AdjacencyMatrix));
-                Debug.Write(Environment.NewLine);
-            }
+            stopWatch.Reset();
+            return results;
 
         }
         #endregion
