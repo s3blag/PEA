@@ -31,8 +31,6 @@ namespace TSP.Algorithms
         public static string RunAlgorithm(Cities cities, int time, int populationSize, int matingPoolSize
                                          ,int tournamentSize, int mutationProbability, int mutationType)
         {
-            //prawdopodobnie do wywalenia
-            //int probabilityUpperBound = 100;
             var stopWatch = new Stopwatch();
             var population = GenerateRandomPopulation(populationSize, cities.AdjacencyMatrix.GetLength(0));
             var currentBestSolution = GetPopulationBestWeight(population, cities.AdjacencyMatrix);
@@ -71,10 +69,7 @@ namespace TSP.Algorithms
                 var newPopulation = Crossover(matingPool, populationSize, 100);
                 Mutate(newPopulation, mutationProbability, mutationType);
                 currentBestSolution = GetPopulationBestWeight(newPopulation, cities.AdjacencyMatrix);
-                Debug.WriteLine(GetSolutionString(currentBestSolution));
                 population = newPopulation;
-                Debug.WriteLine("Rozmiar @@@ " + population.Count);
-
             }
 
             return currentBestSolution.Second;
@@ -83,8 +78,6 @@ namespace TSP.Algorithms
         public static LinkedList<Pair<int, int>> AnalyzePerformance(Cities cities, int time, int populationSize, int matingPoolSize
                                                                    , int tournamentSize, int mutationProbability, int mutationType)
         {
-            //prawdopodobnie do wywalenia
-            //int probabilityUpperBound = 100;
             var stopWatch = new Stopwatch();
             var population = GenerateRandomPopulation(populationSize, cities.AdjacencyMatrix.GetLength(0));
             var currentBestSolution = GetPopulationBestWeight(population, cities.AdjacencyMatrix);
@@ -270,7 +263,7 @@ namespace TSP.Algorithms
         /// <param name="indexes"> Zakres sekcji dopasowania</param>
         /// <param name="parents"> Rodzice, na których zostanie wykonane krzyżowanie</param>
         /// <returns> Para nowo utworzonych osobników - dzieci</returns>
-        public static Pair<int[], int[]> CrossoverPair(Pair<int, int> indexes, Pair<int[], int[]> parents)
+        private static Pair<int[], int[]> CrossoverPair(Pair<int, int> indexes, Pair<int[], int[]> parents)
         {
             int solutionSize = parents.First.Length;
             int matchingSectionLength = indexes.Second - indexes.First + 1;
@@ -330,7 +323,7 @@ namespace TSP.Algorithms
         /// Funkcja odpowiadająca za mutację osobnika
         /// </summary>
         /// <param name="child"> Nowy osobnik, na którym zostanie przeprowadzone mutowanie</param>
-        public static void Mutate(List<int[]> population, int probabilityUpperBound, int mutationType)
+        private static void Mutate(List<int[]> population, int probabilityUpperBound, int mutationType)
         {
            switch(mutationType)
             {
@@ -347,7 +340,7 @@ namespace TSP.Algorithms
             
         }
 
-        public static void InvertMutation(List<int[]> population, int probabilityUpperBound)
+        private static void InvertMutation(List<int[]> population, int probabilityUpperBound)
         {
             foreach (var individual in population)
             {
@@ -361,7 +354,7 @@ namespace TSP.Algorithms
             }
 
         }
-        public static void SwapMutation(List<int[]> population, int probabilityUpperBound)
+        private static void SwapMutation(List<int[]> population, int probabilityUpperBound)
         {
             foreach (var individual in population)
             {

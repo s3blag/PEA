@@ -153,6 +153,13 @@ namespace TSP
             textBoxTabu.Text += Environment.NewLine + "-------------------   TABU   ---------------------" + Environment.NewLine;
             textBoxTabu.Text += TabuSearch.RunAlgorithm(cities.AdjacencyMatrix, (int)Math.Ceiling((double)cities.AdjacencyMatrix.GetLength(0) / 10), cities.AdjacencyMatrix.GetLength(0));
         }
+
+        private void buttonRunGenetic_Click(object sender, EventArgs e)
+        {
+            textBoxGenetic.Text = cities.ShowCities();
+            textBoxGenetic.Text += Environment.NewLine + Genetic.RunAlgorithm(cities, 120, 1000, 1000 / 2, 20, 1, 0);
+        }
+
         #endregion
 
         #region Algorithms Tests
@@ -182,13 +189,6 @@ namespace TSP
         {
             TabuTest.RunImprovementByTimeTest(cities, textBoxOutputPathImprovementByTimeTabuTest.Text);
         }
-        #endregion
-
-        private void buttonRunGenetic_Click(object sender, EventArgs e)
-        {
-            textBoxGenetic.Text = cities.ShowCities();
-            textBoxGenetic.Text += Environment.NewLine + Genetic.RunAlgorithm(cities, 120, 1000, 1000/2, 20, 1, 0);
-        }
 
         private void buttonStartGeneticAnalyzeTest_Click(object sender, EventArgs e)
         {
@@ -201,7 +201,7 @@ namespace TSP
                 int mutationProbability = Int32.Parse(textBoxMutationProbabilityGeneticTest.Text);
                 int mutationType = RadioButtonInvertGeneticTest.Checked == true ? 0 : 1;
                 string path = textBoxOutputPathGeneticTest.Text;
-                GeneticTest.RunPerformanceOverTimeTest(cities, time, populationSize, matingPoolSize, 
+                GeneticTest.RunPerformanceOverTimeTest(cities, time, populationSize, matingPoolSize,
                                        tournamentSize, mutationProbability, mutationType, path);
             }
             catch
@@ -209,7 +209,7 @@ namespace TSP
                 MessageBox.Show("Błędne dane!");
                 return;
             }
-            
+
 
 
 
@@ -236,5 +236,8 @@ namespace TSP
                 return;
             }
         }
+
+        #endregion
+
     }
 }
