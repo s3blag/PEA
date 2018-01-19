@@ -1,0 +1,138 @@
+\documentclass{article}
+\usepackage[table,xcdraw]{xcolor} % Dla tabel
+\usepackage{siunitx} % Provides the \SI{}{} and \si{} command for typesetting SI units
+\usepackage{graphicx} % Required for the inclusion of images
+\usepackage{natbib} % Required to change bibliography style to APA
+\usepackage{amsmath} % Required for some math elements 
+\setlength\parindent{12pt} % Removes all indentation from paragraphs
+%\usepackage{times} % Uncomment to use the Times New Roman font
+\usepackage{amsmath}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+
+\usepackage{pgfplots}
+\usepackage[utf8]{inputenc} % Język polski
+\usepackage{polski}
+\usepackage[polish]{babel}
+
+\usepackage[top=1in, bottom=1.25in, left=1.25in, right=1.25in]{geometry} % Marginesy
+\usepackage{listings} % Kod programu
+\usepackage{indentfirst} % Wcięcie przy pomocy \par
+\usepackage{multicol} % Kilka kolumn dla itemize
+\usepackage{color} % Kolorowanie tekstu
+\usepackage{float}
+
+%Projektowanie Efektywnych Algorytmów \\ {\normalsize Implementacja i analiza efektywności metody podziału i ograniczeń dla problemu komiwojażera}
+
+
+%\renewcommand{\labelenumi}{\alph{enumi}.} % Zamienia litery w enumerate na a, b, c, ...
+%----------------------------------------------------------------------------------------
+%	DOCUMENT INFORMATION
+%----------------------------------------------------------------------------------------
+\title{Projektowanie Efektywnych Algorytmów \\ {\normalsize Implementacja i analiza efektywności metody Tabu Search dla problemu komiwojażera}}
+\author{Sebastian Łągiewski 226173\\Łukasz Zatorski 226172 }
+
+% Title page layout (fold)
+\makeatletter
+\renewcommand{\maketitle}{
+	\begin{titlepage}
+		\begin{center}
+			\vspace*{3cm}
+			\LARGE \@title \par
+			\vspace{2cm}
+			\textit{\small Autorzy:}\par
+			\normalsize \@author\par \normalsize
+			\vspace{3cm}
+			Prowadzący : mgr inż. Radosław Idzikowski\\
+			\vspace{3cm}
+			Wydział Elektroniki\\ III rok \par
+			\vspace{3cm}
+			\small \@date
+		\end{center}
+	\end{titlepage}
+}
+\makeatother
+\begin{document}
+	\maketitle % Insert the title, author and date
+
+%\begin{center}
+%\begin{tabular}{l r}
+%Data: & Semestr letni, 2017 \\ % Date the experiment was performed
+
+%Prowadzący:  mgr inż. Radosław Idzikowski% Instructor/supervisor
+%\end{tabular}
+%\end{center}
+\tableofcontents
+
+
+% If you wish to include an abstract, uncomment the lines below
+% \begin{abstract}
+% Abstract text
+% \end{abstract}
+
+%----------------------------------------------------------------------------------------
+%	SECTION 0
+%----------------------------------------------------------------------------------------
+
+%\newpage
+%\section{Tytuł}} 
+%\subsection{Tytuł}
+%\par Tekst
+
+%\begin{itemize}
+%	\item\textit{Tekst} - Opis
+%\end{itemize}
+
+%\begin{enumerate}
+%	\item Opis
+%\end{enumerate}
+
+%\begin{center}
+%	\includegraphics[scale=0.6, center]{Screenshot_1.png}
+%\end{center}
+
+%\begin{lstlisting}[basicstyle=\small]
+%	kod programu;
+%\end{lstlisting}
+
+%----------------------------------------------------------------------------------------
+%	SECTION 1
+%----------------------------------------------------------------------------------------
+\newpage
+\section{Opis algorytmu}
+\par Algorytm genetyczny to rodzaj heurystyki przeszukującej przestrzeń  rozwiązań problemu w celu wyszukania rozwiązania optymalnego. Problem definiuje środowisko, w którym istnieje pewna populacja osobników. Każdy z osobników ma przypisany pewien zbiór informacji stanowiących jego genotyp, czyli konkretne rozwiązanie.
+\newline
+\newline
+Pierwszym wymaganiem algorytmu genetycznego jest utworzenie populacji początkowej (losowego zbioru rozwiązań). Następnie N razy odbywa się selekcja, gdzie N oznacza rozmiar populacji rodzicielskiej - zaimplementowano wersję turniejową. W każdym turnieju bierze udział Q osobników, gdzie Q - rozmiar turnieju. W wyniku takiej selekcji otrzymujemy populację rodzicielską - grupę osobników, które będą poddawane krzyżowaniu - w zaimplementowanym algorytmi użyto operatora OX. Po skrzyżowaniu, każdy osobnik z określonym prawdopodobieństwem Pm może podlegać mutacji, czyli losowemu zdeformowaniu rozwiązania. W opisywanym algorytmie zaimplementowano dwie metody krzyżowania - swap oraz invert.
+Warunkiem zakończenia algorytmu jest upływ określonego czasu.
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	SECTION 3
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	SECTION 4
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+%\newpage
+%\bibliohystyle{apalike}
+%\begin{thebibliography}{9}
+%
+%\bibitem{wikipediacluster} 
+%Wikipedia: Computer cluster,
+%\\\texttt{https://en.wikipedia.org/wiki/Computer\_cluster}
+%	
+%\bibitem{wikipediasieve} 
+%Wikipedia: Sieve of Erastosthenes,
+%\\\texttt{https://en.wikipedia.org/wiki/Sieve\_of\_Eratosthenes}
+%
+%\end{thebibliography}
+
+%----------------------------------------------------------------------------------------
+\end{document}
