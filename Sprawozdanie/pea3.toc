@@ -1,0 +1,13 @@
+\select@language {polish}
+\contentsline {section}{\numberline {1}Opis algorytmu}{2}
+\contentsline {section}{\numberline {2}Plan eksperymentu}{3}
+\contentsline {subsection}{\numberline {2.1}G\IeC {\l }\IeC {\'o}wne za\IeC {\l }o\IeC {\.z}enia}{3}
+\contentsline {subsection}{\numberline {2.2}Dob\IeC {\'o}r parametr\IeC {\'o}w}{3}
+\contentsline {section}{\numberline {3}Wyniki}{4}
+\contentsline {subsection}{\numberline {3.1}Wp\IeC {\l }yw rozmiaru populacji na dzia\IeC {\l }anie algorytmu}{4}
+\contentsline {subsection}{\numberline {3.2}Wp\IeC {\l }yw rozmiaru populacji macierzystej na dzia\IeC {\l }anie algorytmu}{5}
+\contentsline {subsection}{\numberline {3.3}Wp\IeC {\l }yw rozmiaru turnieju na dzia\IeC {\l }anie algorytmu}{6}
+\contentsline {subsection}{\numberline {3.4}Wp\IeC {\l }yw prawdopodobie\IeC {\'n}stwa wyst\IeC {\k a}pienia mutacji na dzia\IeC {\l }anie algorytmu}{7}
+\contentsline {subsubsection}{\numberline {3.4.1}Mutacja Invert}{7}
+\contentsline {subsubsection}{\numberline {3.4.2}Mutacja Swap}{8}
+\contentsline {section}{\numberline {4}Podsumowanie}{9}
