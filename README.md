@@ -1,4 +1,4 @@
-# Shortest Path Algoirthms
+# Shortest Path Algorithms
 ## Implemented algorithms:
 - Branch and Bound
 - Tabu Search
